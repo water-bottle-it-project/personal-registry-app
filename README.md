@@ -65,7 +65,6 @@ This is an application developed for COMP30022 IT Project Semester 2 2022
   <summary>Client</summary>
   <ul>
     <li><a href="https://nodejs.org/en/">Node.js</a></li>
-    <li><a href="https://handlebarsjs.com/">Handlebars </a></li>
   </ul>
 </details>
 
