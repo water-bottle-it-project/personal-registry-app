@@ -168,7 +168,7 @@ Please read the [Code of Conduct](https://github.com/water-bottle-it-project/per
 <!-- License -->
 ## :warning: License
 
-This web app is only for use for COMP30022 Web Information Technologies 2022 Semester 2 Project
+This web app is only for use for COMP30022 IT Project 2022 Semester 2 Project
 
 
 <!-- Contact -->
