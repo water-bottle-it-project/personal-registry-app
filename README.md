@@ -135,7 +135,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd Diabetes-Management-Web-Application
+  cd personal-registry-app
 ```
 
 Install dependencies
