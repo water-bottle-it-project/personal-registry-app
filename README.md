@@ -123,7 +123,11 @@ To run this project, you will need to add the following environment variables to
 This project uses yarn as package manager
 
 ```bash
- yarn install --package here
+ # Packages used by app
+ yarn add package_name
+ 
+ # Packages used only in dev e.g. eslint plugins, code generators.
+ yarn add -D package_name
 ```
 
 <!-- Run Locally -->
@@ -148,7 +152,7 @@ Install dependencies
   yarn
 ```
 
-Start the server
+Start the app
 
 ```bash
   ## dev mode
@@ -164,7 +168,7 @@ Start the server
 
 - [] Goal 1
 - [] Goal 2
-- [] goal 3
+- [] Goal 3
 
 <!-- Code of Conduct -->
 
