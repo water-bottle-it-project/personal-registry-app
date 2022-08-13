@@ -13,7 +13,22 @@
     "lint-fix"
   ],
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@mantine/carousel": "^5.1.5",
+    "@mantine/core": "^5.1.5",
+    "@mantine/dates": "^5.1.5",
+    "@mantine/dropzone": "^5.1.5",
+    "@mantine/hooks": "^5.1.5",
+    "@mantine/modals": "^5.1.5",
+    "@mantine/next": "^5.1.5",
+    "@mantine/notifications": "^5.1.5",
+    "@mantine/nprogress": "^5.1.5",
+    "@mantine/rte": "^5.1.5",
+    "@tabler/icons": "^1.82.0",
     "cookies-next": "^2.1.1",
+    "dayjs": "^1.11.5",
+    "embla-carousel-react": "^7.0.0",
     "next": "12.2.5",
     "next-seo": "^5.5.0",
     "react": "18.2.0",
@@ -22,6 +37,7 @@
     "type-fest": "^2.18.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.10",
     "@types/node": "18.7.2",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
