@@ -2,11 +2,11 @@
 
   <!-- <img src="public/images/logo-full.png" alt="logo" width="500" height="auto" /> -->
   <h1>Personal Registry App</h1>
-  
+
   <p>
-   We are Team 055 (Water Bottle). Our team comprises of Ian, Kian, Sean, Jack and Calvin
+   We are Team 055 (Water Bottle). Our team consists of Ian, Kian, Sean, Jack and Calvin
   </p>
-   
+
 <h4>
     <a href="https://github.com/water-bottle-it-project/personal-registry-app">View Demo</a>
   <span> · </span>
@@ -19,6 +19,7 @@
 <br />
 
 <!-- Table of Contents -->
+
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
@@ -42,15 +43,15 @@
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
 
-  
-
 <!-- About the Project -->
+
 ## :star2: About the Project
 
 This is an application developed for COMP30022 IT Project Semester 2 2022
 
 
 <!-- Screenshots -->
+
 ### :camera: Screenshots
 
 <!-- <div align="center"> 
@@ -59,6 +60,7 @@ This is an application developed for COMP30022 IT Project Semester 2 2022
 
 
 <!-- TechStack -->
+
 ### :space_invader: Tech Stack
 
 <details>
@@ -84,6 +86,7 @@ This is an application developed for COMP30022 IT Project Semester 2 2022
 
 
 <!-- Features -->
+
 ### :dart: Features
 
 - Feature 1
@@ -95,16 +98,17 @@ This is an application developed for COMP30022 IT Project Semester 2 2022
 - And many more...
 
 <!-- Color Reference -->
+
 ### :art: Color Reference
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Primary Color | rgba(1, 58, 99, 1) |
+| Color           | Hex                    |
+|-----------------|------------------------|
+| Primary Color   | rgba(1, 58, 99, 1)     |
 | Secondary Color | rgba(185, 218, 235, 1) |
-| Accent Color | rgba(5, 85, 142, 1) |
-
+| Accent Color    | rgba(5, 85, 142, 1)    |
 
 <!-- Env Variables -->
+
 ### :key: Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
@@ -112,9 +116,11 @@ To run this project, you will need to add the following environment variables to
 `MONGO_URL="mongodb+srv://username:password@cluster0.gv1sn.mongodb.net/test"`
 
 <!-- Getting Started -->
-## 	:toolbox: Getting Started
+
+## :toolbox: Getting Started
 
 <!-- Prerequisites -->
+
 ### :bangbang: Prerequisites
 
 This project uses npm as package manager
@@ -124,6 +130,7 @@ This project uses npm as package manager
 ```
 
 <!-- Run Locally -->
+
 ### :running: Run Locally
 
 Clone the project
@@ -152,8 +159,8 @@ Start the server
   nodemon app.js
 ```
 
-
 <!-- Roadmap -->
+
 ## :compass: Roadmap
 
 * [] Goal 1
@@ -161,17 +168,20 @@ Start the server
 * [] goal 3
 
 <!-- Code of Conduct -->
+
 ### :scroll: Code of Conduct
 
 Please read the [Code of Conduct](https://github.com/water-bottle-it-project/personal-registry-app)
 
 <!-- License -->
+
 ## :warning: License
 
 This web app is only for use for COMP30022 IT Project 2022 Semester 2 Project
 
 
 <!-- Contact -->
+
 ## :handshake: Contact
 
 - Yi Sheon Tan - ystan@student.unimelb.edu.au
@@ -180,6 +190,7 @@ This web app is only for use for COMP30022 IT Project 2022 Semester 2 Project
 - Jack Woodman - jdwoodman@student.unimelb.edu.au
 - Qiawen Yu - qiaweny@student.unimelb.edu.au
 
-Project Link: [https://github.com/water-bottle-it-project/personal-registry-app](https://github.com/water-bottle-it-project/personal-registry-app)
+Project
+Link: [https://github.com/water-bottle-it-project/personal-registry-app](https://github.com/water-bottle-it-project/personal-registry-app)
 
 
