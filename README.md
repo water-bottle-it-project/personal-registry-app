@@ -1,4 +1,4 @@
-<div align="center">
+<div style="text-align: center">
 
   <!-- <img src="public/images/logo-full.png" alt="logo" width="500" height="auto" /> -->
   <h1>Personal Registry App</h1>
@@ -123,10 +123,10 @@ To run this project, you will need to add the following environment variables to
 
 ### :bangbang: Prerequisites
 
-This project uses npm as package manager
+This project uses yarn as package manager
 
 ```bash
- npm install --package here
+ yarn install --package here
 ```
 
 <!-- Run Locally -->
@@ -148,15 +148,17 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  npm install
+  yarn
 ```
 
 Start the server
 
 ```bash
-  node app.js
-  or
-  nodemon app.js
+  ## dev mode
+  yarn dev
+  
+  ## prod mode
+  yarn build && yarn start
 ```
 
 <!-- Roadmap -->
