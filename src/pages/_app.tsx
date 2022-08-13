@@ -3,7 +3,10 @@ import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { setCookies } from 'cookies-next';
 import type { AppProps } from 'next/app';
+import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
+
+import { SEO } from '@/components/app/seo.config';
 
 type CustomAppProps = AppProps & {
   initialColorScheme: ColorScheme;
@@ -37,6 +40,7 @@ function MyApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider theme={themeOverride} withGlobalStyles withNormalizeCSS>
         <NotificationsProvider>
+          <DefaultSeo {...SEO} />
           <Component {...pageProps} />
         </NotificationsProvider>
       </MantineProvider>
