@@ -23,21 +23,21 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-  * [Screenshots](#camera-screenshots)
-  * [Tech Stack](#space_invader-tech-stack)
-  * [Features](#dart-features)
-  * [Color Reference](#art-color-reference)
-  * [Environment Variables](#key-environment-variables)
+  - [Screenshots](#camera-screenshots)
+  - [Tech Stack](#space_invader-tech-stack)
+  - [Features](#dart-features)
+  - [Color Reference](#art-color-reference)
+  - [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
-  * [Prerequisites](#bangbang-prerequisites)
-  * [Installation](#gear-installation)
-  * [Running Tests](#test_tube-running-tests)
-  * [Run Locally](#running-run-locally)
-  * [Deployment](#triangular_flag_on_post-deployment)
+  - [Prerequisites](#bangbang-prerequisites)
+  - [Installation](#gear-installation)
+  - [Running Tests](#test_tube-running-tests)
+  - [Run Locally](#running-run-locally)
+  - [Deployment](#triangular_flag_on_post-deployment)
 - [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
-  * [Code of Conduct](#scroll-code-of-conduct)
+  - [Code of Conduct](#scroll-code-of-conduct)
 - [FAQ](#grey_question-faq)
 - [License](#warning-license)
 - [Contact](#handshake-contact)
@@ -49,15 +49,13 @@
 
 This is an application developed for COMP30022 IT Project Semester 2 2022
 
-
 <!-- Screenshots -->
 
 ### :camera: Screenshots
 
-<!-- <div align="center"> 
+<!-- <div align="center">
   <img src="public/images/readme/screenshot-homepage-1.jpg" alt="home-page" />
 </div> -->
-
 
 <!-- TechStack -->
 
@@ -84,7 +82,6 @@ This is an application developed for COMP30022 IT Project Semester 2 2022
   </ul>
 </details>
 
-
 <!-- Features -->
 
 ### :dart: Features
@@ -102,7 +99,7 @@ This is an application developed for COMP30022 IT Project Semester 2 2022
 ### :art: Color Reference
 
 | Color           | Hex                    |
-|-----------------|------------------------|
+| --------------- | ---------------------- |
 | Primary Color   | rgba(1, 58, 99, 1)     |
 | Secondary Color | rgba(185, 218, 235, 1) |
 | Accent Color    | rgba(5, 85, 142, 1)    |
@@ -156,7 +153,7 @@ Start the server
 ```bash
   ## dev mode
   yarn dev
-  
+
   ## prod mode
   yarn build && yarn start
 ```
@@ -165,9 +162,9 @@ Start the server
 
 ## :compass: Roadmap
 
-* [] Goal 1
-* [] Goal 2
-* [] goal 3
+- [] Goal 1
+- [] Goal 2
+- [] goal 3
 
 <!-- Code of Conduct -->
 
@@ -181,7 +178,6 @@ Please read the [Code of Conduct](https://github.com/water-bottle-it-project/per
 
 This web app is only for use for COMP30022 IT Project 2022 Semester 2 Project
 
-
 <!-- Contact -->
 
 ## :handshake: Contact
@@ -192,7 +188,5 @@ This web app is only for use for COMP30022 IT Project 2022 Semester 2 Project
 - Jack Woodman - jdwoodman@student.unimelb.edu.au
 - Qiawen Yu - qiaweny@student.unimelb.edu.au
 
-Project
-Link: [https://github.com/water-bottle-it-project/personal-registry-app](https://github.com/water-bottle-it-project/personal-registry-app)
-
-
+Project Link:
+[https://github.com/water-bottle-it-project/personal-registry-app](https://github.com/water-bottle-it-project/personal-registry-app)
