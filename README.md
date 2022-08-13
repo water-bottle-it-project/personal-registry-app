@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div align="center">
 
   <!-- <img src="public/images/logo-full.png" alt="logo" width="500" height="auto" /> -->
   <h1>Personal Registry App</h1>
