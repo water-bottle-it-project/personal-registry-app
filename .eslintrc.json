@@ -23,9 +23,11 @@
     "no-relative-import-paths",
     "react",
     "@typescript-eslint",
-    "sort-exports"
+    "sort-exports",
+    "import"
   ],
   "rules": {
+    "import/no-default-export": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "prettier/prettier": [
@@ -92,5 +94,15 @@
         ]
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/pages/**"
+      ],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-import type { ColorScheme, MantineThemeOverride } from '@mantine/core';
+import type { ColorScheme } from '@mantine/core';
 import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { getCookie, setCookies } from 'cookies-next';
@@ -8,25 +8,18 @@ import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
 
 import { appSeo } from '~components/app/appSeo';
+import { appTheme } from '~components/app/appThemeOverride';
 
 const COLOR_SCHEME_KEY = 'colorScheme';
-
-const themeOverride: MantineThemeOverride = {
-  components: {
-    Paper: {
-      defaultProps: { p: 'md', pt: 2, shadow: 'xl', withBorder: true },
-    },
-  },
-};
 
 type CustomAppProps = AppProps & {
   initialColorScheme: ColorScheme;
 };
 
-function MyApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
+function CustomApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
   // Dark mode support
   const [colorScheme, setColorScheme] = useState<ColorScheme>(initialColorScheme);
-  themeOverride.colorScheme = colorScheme;
+  appTheme.colorScheme = colorScheme;
 
   // Dark mode event handler
   const toggleColorScheme = (value?: ColorScheme) => {
@@ -40,7 +33,7 @@ function MyApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
   // Render top-level App component
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider theme={themeOverride} withGlobalStyles withNormalizeCSS>
+      <MantineProvider theme={appTheme} withGlobalStyles withNormalizeCSS>
         <NotificationsProvider>
           <DefaultSeo {...appSeo} />
           <Component {...pageProps} />
@@ -50,8 +43,9 @@ function MyApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
   );
 }
 
-export default MyApp;
-
-MyApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
+// Use client cookie to server-side render the stored color scheme without a flash
+CustomApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
   initialColorScheme: getCookie(COLOR_SCHEME_KEY, ctx) || 'light',
 });
+
+export default CustomApp;
