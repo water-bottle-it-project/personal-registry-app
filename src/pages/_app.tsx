@@ -11,6 +11,14 @@ import { appSeo } from '~components/app/appSeo';
 
 const COLOR_SCHEME_KEY = 'colorScheme';
 
+const themeOverride: MantineThemeOverride = {
+  components: {
+    Paper: {
+      defaultProps: { p: 'md', pt: 2, shadow: 'xl', withBorder: true },
+    },
+  },
+};
+
 type CustomAppProps = AppProps & {
   initialColorScheme: ColorScheme;
 };
@@ -18,6 +26,7 @@ type CustomAppProps = AppProps & {
 function MyApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
   // Dark mode support
   const [colorScheme, setColorScheme] = useState<ColorScheme>(initialColorScheme);
+  themeOverride.colorScheme = colorScheme;
 
   // Dark mode event handler
   const toggleColorScheme = (value?: ColorScheme) => {
@@ -26,16 +35,6 @@ function MyApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
     setCookies(COLOR_SCHEME_KEY, newColorScheme, {
       maxAge: 60 * 60 * 24 * 30,
     });
-  };
-
-  // Global theme overrides
-  const themeOverride: MantineThemeOverride = {
-    colorScheme,
-    components: {
-      Paper: {
-        defaultProps: { p: 'md', pt: 2, shadow: 'xl', withBorder: true },
-      },
-    },
   };
 
   // Render top-level App component
