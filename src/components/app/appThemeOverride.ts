@@ -4,7 +4,7 @@ import type { MantineThemeOverride } from '@mantine/core';
  * App-global component props and style overrides
  */
 const appTheme: MantineThemeOverride = {
-  primaryColor: 'violet',
+  primaryColor: 'indigo',
   components: {
     Paper: {
       defaultProps: { p: 'md', pt: 2, shadow: 'xl', withBorder: true },
