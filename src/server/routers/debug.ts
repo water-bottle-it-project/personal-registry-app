@@ -1,6 +1,6 @@
 import * as trpc from '@trpc/server';
 
-import { dbConnect } from '~server/db/dbConnect';
+import { dbReqHandler } from '~server/db/dbReqHandler';
 import { User } from '~server/db/userModel';
 
 /**
@@ -9,9 +9,10 @@ import { User } from '~server/db/userModel';
 const debugRouter = trpc
   .router()
 
+  .middleware(dbReqHandler)
+
   .query('listUsers', {
     async resolve() {
-      await dbConnect();
       const users = await User.find({});
       console.log(users);
       return {
@@ -22,7 +23,6 @@ const debugRouter = trpc
 
   .mutation('createUser', {
     async resolve() {
-      await dbConnect();
       const newUser = await User.create({
         _id: 'debug1',
         email: 'debug1@debug.com',
@@ -37,8 +37,6 @@ const debugRouter = trpc
 
   .mutation('deleteUser', {
     async resolve() {
-      await dbConnect();
-
       const result = await User.deleteOne({ _id: 'debug1' });
       if (result.deletedCount == 0) {
         throw new trpc.TRPCError({
