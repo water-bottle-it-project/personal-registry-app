@@ -14,7 +14,6 @@ const debugRouter = trpc
   .query('listUsers', {
     async resolve() {
       const users = await User.find({});
-      console.log(users);
       return {
         users,
       };
