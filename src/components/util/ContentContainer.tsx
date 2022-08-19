@@ -9,6 +9,7 @@ import { Container } from '@mantine/core';
 export function ContentContainer(props: ContainerProps) {
   return (
     <Container
+      size='xl'
       {...props}
       sx={theme => ({
         [theme.fn.smallerThan('md')]: {
