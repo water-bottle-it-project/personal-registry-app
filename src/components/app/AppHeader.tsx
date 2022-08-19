@@ -39,7 +39,7 @@ export function AppHeader({ links }: AppHeaderProps) {
 
   return (
     <Header classNames={{ root: classes.headerBase }} height={48} mb={0}>
-      <Container className={classes.headerContainer} size='lg'>
+      <Container className={classes.headerContainer} size='xl'>
         <Group spacing={6}>
           <AppHeaderLogo />
           {linkElems}
