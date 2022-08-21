@@ -34,6 +34,7 @@
     "dayjs": "^1.11.5",
     "embla-carousel-react": "^7.0.0",
     "mongoose": "^6.5.2",
+    "mongoose-geojson-schema": "^2.2.3",
     "mongoose-paginate-v2": "^1.7.0",
     "next": "12.2.5",
     "next-seo": "^5.5.0",
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@types/geojson": "^7946.0.10",
     "@types/node": "18.7.2",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",

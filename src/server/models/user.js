@@ -5,9 +5,9 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   _id: { type: String, required: true },
   email: { type: String, required: true },
-  username: { type: String, required: true },
-  avatar: String,
-  created_timestamp: { type: Date, required: true },
+  username: { type: String, required: false },
+  avatar: { type: String, required: false },
+  createdTimestamp: { type: Date, required: true },
 });
 
 /**

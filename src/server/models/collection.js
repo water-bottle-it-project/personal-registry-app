@@ -5,8 +5,26 @@ const { Schema } = mongoose;
 const collectionSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: false },
-  userid: { type: String, required: true, ref: 'User' },
-  memoryid: { type: String, enum: ['red', 'blue', 'green'] },
+  userId: { type: String, required: true, ref: 'User' },
+  color: {
+    type: String,
+    required: false,
+    enum: [
+      'gray',
+      'red',
+      'pink',
+      'grape',
+      'violet',
+      'indigo',
+      'blue',
+      'cyan',
+      'teal',
+      'green',
+      'lime',
+      'yellow',
+      'orange',
+    ],
+  },
 });
 
 /**

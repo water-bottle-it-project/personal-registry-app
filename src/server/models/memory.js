@@ -5,10 +5,17 @@ const { Schema } = mongoose;
 const memorySchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: false },
-  collections: [{ collectionId: mongoose.Schema.Types.ObjectId, collectionTitle: String }],
-  first_date: { type: Date, required: true },
-  last_date: { type: Date, required: true },
-  userid: { type: String, required: true },
+  collections: {
+    type: [
+      {
+        collectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
+        collectionTitle: { type: String, required: true },
+      },
+    ],
+  },
+  firstDate: { type: Date, required: false },
+  lastDate: { type: Date, required: true },
+  userId: { type: String, required: true },
   photos: [{ photoId: mongoose.Schema.Types.ObjectId }],
 });
 
