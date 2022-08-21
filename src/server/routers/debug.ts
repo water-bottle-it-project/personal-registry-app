@@ -13,7 +13,7 @@ const debugRouter = trpc
 
   .query('listUsers', {
     async resolve() {
-      const users = await User.find({});
+      const users = await User.find();
       return {
         users,
       };
@@ -36,7 +36,7 @@ const debugRouter = trpc
 
   .mutation('deleteUser', {
     async resolve() {
-      const result = await User.deleteOne({ _id: 'debug1' });
+      const result = await User.deleteOne({ email: 'debug1@debug.com' });
       if (result.deletedCount == 0) {
         throw new trpc.TRPCError({
           code: 'BAD_REQUEST',
