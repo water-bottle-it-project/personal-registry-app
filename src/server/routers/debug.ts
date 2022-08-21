@@ -1,7 +1,7 @@
 import * as trpc from '@trpc/server';
 
 import { dbReqHandler } from '~server/db/dbReqHandler';
-import { User } from '~server/db/userModel';
+import { User } from '~server/models/user';
 
 /**
  * Router for debug operations
