@@ -62,6 +62,9 @@ CustomApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
   initialColorScheme: getCookie(COLOR_SCHEME_KEY, ctx) || 'light',
 });
 
+/**
+ * Wraps the CustomApp component with TRPC client-side query global context
+ */
 export default withTRPC<AppRouter>({
   config() {
     return { url: '/api/trpc' };
