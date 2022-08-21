@@ -8,7 +8,7 @@ const photoSchema = new Schema({
   url: { type: String, required: false },
   userid: { type: String, required: true },
   memoryid: { type: String, required: true },
-  date: { type: Date, required: true },
+  date: { type: Date, required: false },
 });
 
 /**

@@ -3,13 +3,13 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const memorySchema = new Schema({
-  title: { type: String, required: false },
+  title: { type: String, required: true },
   description: { type: String, required: false },
-  collections: [{ collectionId: String, collectionTitle: String }],
+  collections: [{ collectionId: mongoose.Schema.Types.ObjectId, collectionTitle: String }],
   first_date: { type: Date, required: true },
   last_date: { type: Date, required: true },
   userid: { type: String, required: true },
-  photos: [{ photoId: String }],
+  photos: [{ photoId: mongoose.Schema.Types.ObjectId }],
 });
 
 /**
