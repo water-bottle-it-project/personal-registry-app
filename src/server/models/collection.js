@@ -3,10 +3,10 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const collectionSchema = new Schema({
-  title: { type: String, required: false },
-  description: { type: mongoose.Schema.Types.Point, required: false },
-  userid: { type: String, required: true },
-  memoryid: { type: String, enum: ['Red'] },
+  title: { type: String, required: true },
+  description: { type: String, required: false },
+  userid: { type: String, required: true, ref: 'User' },
+  memoryid: { type: String, enum: ['red', 'blue', 'green'] },
 });
 
 /**
