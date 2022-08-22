@@ -5,6 +5,10 @@ import Lottie from 'lottie-react';
 import heroLottie from '~components/homepage/hero-lottie.json';
 import { LinkButton } from '~components/util/LinkButton';
 
+/**
+ * The Hero banner for the homepage
+ * @constructor
+ */
 export function Hero() {
   const { classes } = useStyles();
 
@@ -12,7 +16,7 @@ export function Hero() {
     <Container size='md'>
       <Grid>
         <Grid.Col sm={6}>
-          <Space h={20} />
+          <Space h={10} />
           <Title className={classes.title}>
             The{' '}
             <Text className={classes.title} color='indigo' span>
@@ -53,7 +57,7 @@ const useStyles = createStyles(theme => ({
     lineHeight: 1.1,
     fontWeight: 900,
     [theme.fn.smallerThan('md')]: {
-      fontSize: 32,
+      fontSize: 36,
     },
   },
 

@@ -31,6 +31,7 @@ function CustomApp({ Component, pageProps, initialColorScheme }: CustomAppProps)
   // Dark mode support
   const [colorScheme, setColorScheme] = useState<ColorScheme>(initialColorScheme);
   appTheme.colorScheme = colorScheme;
+  console.log(initialColorScheme);
 
   // Dark mode event handler
   const toggleColorScheme = (value?: ColorScheme) => {

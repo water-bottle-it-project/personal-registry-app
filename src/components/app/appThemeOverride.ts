@@ -7,7 +7,7 @@ const appTheme: MantineThemeOverride = {
   primaryColor: 'indigo',
   components: {
     Paper: {
-      defaultProps: { p: 'md', pt: 2, shadow: 'xl', withBorder: true },
+      defaultProps: { p: 'sm', shadow: 'xl', withBorder: true },
     },
     ActionIcon: {
       styles: theme => ({
