@@ -1,7 +1,5 @@
 import type { ContainerProps } from '@mantine/core';
-import { Center } from '@mantine/core';
-
-import { ContentContainer } from '~components/util/ContentContainer';
+import { Center, Container } from '@mantine/core';
 
 /**
  * Container that vertically centers child elements
@@ -10,8 +8,8 @@ import { ContentContainer } from '~components/util/ContentContainer';
  */
 export function CenteredContainer(props: ContainerProps) {
   return (
-    <ContentContainer {...props} style={{ height: '100%' }}>
+    <Container {...props} style={{ height: '100%' }}>
       <Center style={{ height: '100%' }}>{props.children}</Center>
-    </ContentContainer>
+    </Container>
   );
 }

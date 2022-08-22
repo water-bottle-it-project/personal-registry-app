@@ -1,5 +1,5 @@
 import type { AppShellProps } from '@mantine/core';
-import { AppShell } from '@mantine/core';
+import { AppShell, Space } from '@mantine/core';
 
 import type { AppHeaderProps } from '~components/app/AppHeader';
 import { AppHeader } from '~components/app/AppHeader';
@@ -21,10 +21,12 @@ export function AppLayout({ children }: AppShellProps) {
     <AppShell
       fixed
       header={<AppHeader links={links} />}
+      padding={0}
       sx={theme => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[0],
       })}
     >
+      <Space h='md' />
       {children}
     </AppShell>
   );
