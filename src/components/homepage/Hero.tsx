@@ -15,16 +15,16 @@ export function Hero() {
           <Space h={20} />
           <Title className={classes.title}>
             The{' '}
-            <Text color='indigo' span>
+            <Text className={classes.title} color='indigo' span>
               Definitive
             </Text>{' '}
             Personal Registry App
           </Title>
-          <Text color='dimmed' mt='md'>
+          <Text mt='md'>
             Keep detailed records of personal artifacts, memories and events safely in this app,
             using your preferred combination of text and images.
           </Text>
-          <Group align='center' mt={20} spacing={30}>
+          <Group align='center' grow mt={20} spacing={30}>
             <LinkButton
               gradient={{ from: 'indigo', to: 'blue' }}
               href='/signin'
@@ -50,6 +50,7 @@ export function Hero() {
 const useStyles = createStyles(theme => ({
   title: {
     fontSize: 44,
+    lineHeight: 1.1,
     fontWeight: 900,
     [theme.fn.smallerThan('md')]: {
       fontSize: 32,
