@@ -9,6 +9,7 @@ import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
+import { initAuth } from '~clientUtils/initAuth';
 import { AppLayout } from '~components/app/AppLayout';
 import { appSeo } from '~components/app/appSeo';
 import { appTheme } from '~components/app/appThemeOverride';
@@ -19,6 +20,9 @@ const COLOR_SCHEME_KEY = 'colorScheme';
 type CustomAppProps = AppProps & {
   initialColorScheme: ColorScheme;
 };
+
+// Initialize Firebase auth
+initAuth();
 
 /**
  * Custom app component - the top levels of the component tree
