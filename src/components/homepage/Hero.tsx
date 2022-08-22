@@ -1,5 +1,4 @@
 import { Container, createStyles, Grid, Group, Space, Text, Title } from '@mantine/core';
-import { IconLogin, IconUserPlus } from '@tabler/icons';
 import Lottie from 'lottie-react';
 
 import heroLottie from '~components/homepage/hero-lottie.json';
@@ -17,7 +16,6 @@ export function Hero() {
       <Space h='lg' />
       <Grid>
         <Grid.Col sm={6}>
-          <Space h={10} />
           <Title className={classes.title}>
             The{' '}
             <Text className={classes.title} color='indigo' span>
@@ -25,11 +23,11 @@ export function Hero() {
             </Text>{' '}
             Personal Registry App
           </Title>
-          <Text mt='md' className={classes.heroGrid}>
+          <Text className={classes.heroGrid} mt='md'>
             Keep detailed records of personal artifacts, memories and events safely in this app,
             using your preferred combination of text and images.
           </Text>
-          <Group align='center' grow mt={20} spacing={30}>
+          <Group align='center' className={classes.heroGrid} grow mt={20} spacing={30}>
             <LinkButton
               gradient={{ from: 'indigo', to: 'cyan' }}
               href='/signin'
@@ -62,6 +60,7 @@ const useStyles = createStyles(theme => ({
   },
 
   lottie: {
+    marginTop: -60,
     maxWidth: 500,
     [theme.fn.smallerThan('md')]: {
       margin: 'auto',
@@ -70,5 +69,5 @@ const useStyles = createStyles(theme => ({
 
   heroGrid: {
     maxWidth: '75%',
-  }
+  },
 }));
