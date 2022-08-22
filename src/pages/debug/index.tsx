@@ -1,5 +1,6 @@
+import { Container } from '@mantine/core';
+
 import { DebugIndex } from '~components/debug/DebugIndex';
-import { ContentContainer } from '~components/util/ContentContainer';
 
 /**
  * Debug page
@@ -7,8 +8,8 @@ import { ContentContainer } from '~components/util/ContentContainer';
  */
 export default function Debug() {
   return (
-    <ContentContainer>
+    <Container>
       <DebugIndex />
-    </ContentContainer>
+    </Container>
   );
 }
