@@ -18,7 +18,7 @@ export function Hero() {
         <Grid.Col sm={6}>
           <Title className={classes.title}>
             The{' '}
-            <Text className={classes.title} color='indigo' span>
+            <Text className={classes.title} color='indigo' style={{fontFamily: 'Poppins, sans-serif'}} span>
               Definitive
             </Text>{' '}
             Personal Registry App

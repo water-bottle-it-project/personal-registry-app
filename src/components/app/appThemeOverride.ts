@@ -31,6 +31,8 @@ const appTheme: MantineThemeOverride = {
       }),
     },
   },
+  fontFamily: 'Roboto, sans-serif',
+  headings: { fontFamily: 'Poppins, sans-serif' },
 };
 
 export { appTheme };
