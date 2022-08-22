@@ -31,8 +31,12 @@ const appTheme: MantineThemeOverride = {
       }),
     },
   },
-  fontFamily: 'Roboto, sans-serif',
-  headings: { fontFamily: 'Poppins, sans-serif' },
+  fontFamily:
+    'Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji',
+  headings: {
+    fontFamily:
+      'Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji',
+  },
 };
 
 export { appTheme };
