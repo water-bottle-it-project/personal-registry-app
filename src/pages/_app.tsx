@@ -31,7 +31,6 @@ function CustomApp({ Component, pageProps, initialColorScheme }: CustomAppProps)
   // Dark mode support
   const [colorScheme, setColorScheme] = useState<ColorScheme>(initialColorScheme);
   appTheme.colorScheme = colorScheme;
-  console.log(initialColorScheme);
 
   // Dark mode event handler
   const toggleColorScheme = (value?: ColorScheme) => {
@@ -67,8 +66,20 @@ CustomApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
  * Wraps the CustomApp component with TRPC client-side query global context
  */
 export default withTRPC<AppRouter>({
-  config() {
-    return { url: '/api/trpc' };
+  config({ ctx }) {
+    return {
+      url: '/api/trpc',
+      headers: () => {
+        if (ctx?.req) {
+          // on ssr, forward client's headers to the server
+          return {
+            ...ctx.req.headers,
+            'x-ssr': '1',
+          };
+        }
+        return {};
+      },
+    };
   },
   ssr: false,
 })(CustomApp);
