@@ -9,7 +9,7 @@ const Home: NextPage = () => {
     <>
       <Container fluid p={0}>
         <Hero />
-        <Space h={60} />
+        <Space h={20} />
         <FeaturesTitle />
       </Container>
     </>

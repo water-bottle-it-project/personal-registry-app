@@ -1,7 +1,6 @@
 import {
   BackgroundImage,
   Button,
-  Col,
   Container,
   createStyles,
   Grid,
@@ -79,8 +78,8 @@ export function FeaturesTitle() {
   return (
     <BackgroundImage src='/gradient.svg'>
       <Container size='md'>
-        <Grid gutter={80}>
-          <Col md={5} span={12}>
+        <Grid m={0} py={30}>
+          <Grid.Col md={5} span={12}>
             <Title className={classes.title} order={2}>
               Manage your memories like no other way
             </Title>
@@ -96,12 +95,12 @@ export function FeaturesTitle() {
             <Button mt='xl' size='md' variant='default'>
               Get started
             </Button>
-          </Col>
-          <Col md={7} span={12}>
+          </Grid.Col>
+          <Grid.Col md={7} span={12}>
             <SimpleGrid breakpoints={[{ maxWidth: 'xs', cols: 1 }]} cols={2} spacing={30}>
               {items}
             </SimpleGrid>
-          </Col>
+          </Grid.Col>
         </Grid>
       </Container>
     </BackgroundImage>
