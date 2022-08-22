@@ -1,8 +1,34 @@
-import { Anchor, Badge, Card, Group, Image, Text } from '@mantine/core';
+import { Anchor, Badge, Card, Grid, Image, Text } from '@mantine/core';
 
-export function TimelineCard() {
+/**
+ * collections and photos will be list array which we can change when actually passing in
+ * the objects, unsure about if we will pass the date as string in the prop or convert to
+ * string within the component, just keeping it like this for now, will pass in the url
+ * of the image as well when it comes to it, instead of using unsplash
+ */
+interface Memory {
+  title: string;
+  description: string;
+  date: string;
+  collections: string;
+  photos: string;
+}
+
+export function TimelineCard(props: Memory) {
   return (
-    <Card p='lg' radius='sm' shadow='sm' sx={{ maxWidth: 275 }} withBorder>
+    <Card
+      p='lg'
+      radius='sm'
+      shadow='sm'
+      sx={theme => ({
+        // subscribe to color scheme changes
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+        // or use any other static values from theme
+        fontSize: theme.fontSizes.sm,
+        width: 275,
+      })}
+      withBorder
+    >
       <Card.Section>
         <Image
           alt='Norway'
@@ -12,25 +38,27 @@ export function TimelineCard() {
       </Card.Section>
 
       <Text mt='sm' size='xl' weight={600}>
-        Swiss Alps
+        {props.title}
       </Text>
 
-      <Text color='lightgrey' mb='xs' size='xs' weight={600}>
-        2021-07-02
+      <Text color='dimmed' mb='xs' size='xs' weight={600}>
+        {props.date}
       </Text>
 
-      <Text color='dimmed' size='sm'>
-        A calm picturesque holiday with friends in Switzerland
+      <Text color='light' size='sm'>
+        {props.description}
       </Text>
 
-      <Group mb='xs' mt='xl' position='left' spacing='sm'>
-        <Badge color='gray' radius='sm' size='xs' variant='filled'>
-          friends
-        </Badge>
-      </Group>
+      <Grid mb='xs' mt='lg'>
+        <Grid.Col span={4}>
+          <Badge color='gray' radius='sm' size='xs' variant='filled'>
+            {props.collections}
+          </Badge>
+        </Grid.Col>
+      </Grid>
 
-      <Anchor href='#' sx={{ fontSize: 12, fontWeight: 600 }}>
-        View 3 photos
+      <Anchor href='#' sx={{ fontSize: 14, fontWeight: 600 }}>
+        View {props.photos} photos
       </Anchor>
     </Card>
   );
