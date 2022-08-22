@@ -1,4 +1,5 @@
 import {
+  BackgroundImage,
   Button,
   Col,
   Container,
@@ -14,6 +15,7 @@ import { IconFolders, IconPhoto, IconSearch, IconTag } from '@tabler/icons';
 
 const useStyles = createStyles(theme => ({
   title: {
+    color: 'white',
     fontSize: 34,
     fontWeight: 800,
     lineHeight: 1.1,
@@ -21,6 +23,10 @@ const useStyles = createStyles(theme => ({
     [theme.fn.smallerThan('md')]: {
       fontSize: 26,
     },
+  },
+
+  whiteText: {
+    color: 'white',
   },
 }));
 
@@ -61,41 +67,43 @@ export function FeaturesTitle() {
       <ThemeIcon color={feature.color} radius='md' size={44}>
         <feature.icon size={26} stroke={1.8} />
       </ThemeIcon>
-      <Text mt='sm' size='lg' weight={500}>
+      <Text className={classes.whiteText} mt='sm' size='lg' weight={500}>
         {feature.title}
       </Text>
-      <Text color='dimmed' size='sm'>
+      <Text className={classes.whiteText} color='dimmed' size='sm'>
         {feature.description}
       </Text>
     </div>
   ));
 
   return (
-    <Container size='md'>
-      <Grid gutter={80}>
-        <Col md={5} span={12}>
-          <Title className={classes.title} order={2}>
-            Manage your memories like no other way
-          </Title>
-          <Text>
-            We offer rich features to properly store and manage your precious photos and memories.
-          </Text>
-          <Space h='md' />
-          <Text>
-            You can add textual descriptions and photos to your memories with metadata, or skip some
-            of these.
-          </Text>
+    <BackgroundImage src='/gradient.svg'>
+      <Container size='md'>
+        <Grid gutter={80}>
+          <Col md={5} span={12}>
+            <Title className={classes.title} order={2}>
+              Manage your memories like no other way
+            </Title>
+            <Text className={classes.whiteText}>
+              We offer rich features to properly store and manage your precious photos and memories.
+            </Text>
+            <Space h='md' />
+            <Text className={classes.whiteText}>
+              You can add textual descriptions and photos to your memories with metadata, or skip
+              some of these.
+            </Text>
 
-          <Button mt='xl' size='md' variant='outline'>
-            Get started
-          </Button>
-        </Col>
-        <Col md={7} span={12}>
-          <SimpleGrid breakpoints={[{ maxWidth: 'xs', cols: 1 }]} cols={2} spacing={30}>
-            {items}
-          </SimpleGrid>
-        </Col>
-      </Grid>
-    </Container>
+            <Button mt='xl' size='md' variant='default'>
+              Get started
+            </Button>
+          </Col>
+          <Col md={7} span={12}>
+            <SimpleGrid breakpoints={[{ maxWidth: 'xs', cols: 1 }]} cols={2} spacing={30}>
+              {items}
+            </SimpleGrid>
+          </Col>
+        </Grid>
+      </Container>
+    </BackgroundImage>
   );
 }
