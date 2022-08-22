@@ -1,7 +1,6 @@
-import { Button, Container, createStyles, Grid, Group, Space, Text, Title } from '@mantine/core';
+import { Container, createStyles, Grid, Group, Space, Text, Title } from '@mantine/core';
 import { IconLogin, IconUserPlus } from '@tabler/icons';
 import Lottie from 'lottie-react';
-import Link from 'next/link';
 
 import heroLottie from '~components/homepage/hero-lottie.json';
 import { LinkButton } from '~components/util/LinkButton';
@@ -13,7 +12,7 @@ export function Hero() {
     <Container size='md'>
       <Grid>
         <Grid.Col sm={6}>
-          <Space h={40} />
+          <Space h={20} />
           <Title className={classes.title}>
             The{' '}
             <Text color='indigo' span>
@@ -26,7 +25,13 @@ export function Hero() {
             using your preferred combination of text and images.
           </Text>
           <Group align='center' mt={20} spacing={30}>
-            <LinkButton href='/signin' rightIcon={<IconLogin />} size='md'>
+            <LinkButton
+              gradient={{ from: 'indigo', to: 'blue' }}
+              href='/signin'
+              rightIcon={<IconLogin />}
+              size='md'
+              variant='gradient'
+            >
               Sign in
             </LinkButton>
             <LinkButton href='/signin' rightIcon={<IconUserPlus />} size='md' variant='default'>
