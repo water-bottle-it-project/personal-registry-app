@@ -76,9 +76,9 @@ export function FeaturesTitle() {
   ));
 
   return (
-    <BackgroundImage src='/gradient.svg'>
+    <BackgroundImage src='/gradient.png'>
       <Container size='md'>
-        <Grid m={0} py={30}>
+        <Grid gutter={30} m={0} py={40}>
           <Grid.Col md={5} span={12}>
             <Title className={classes.title} order={2}>
               Manage your memories like no other way
