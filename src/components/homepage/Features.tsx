@@ -31,7 +31,7 @@ export function FeaturesTitle() {
 
   return (
     <BackgroundImage src='/gradient.png'>
-      <Container px={0} size='md'>
+      <Container px={0} size='xl'>
         <Grid gutter={30} m={0} px={0} py={30}>
           <Grid.Col md={5} span={12}>
             <Title className={classes.title} order={2}>
@@ -39,13 +39,10 @@ export function FeaturesTitle() {
             </Title>
             <Text className={classes.description}>
               We offer rich features to properly store and manage your precious photos and memories.
-            </Text>
-            <Space h='md' />
-            <Text className={classes.description}>
+              <Space h='md' />
               You can add textual descriptions and photos to your memories with metadata, or skip
               some of these.
             </Text>
-
             <Button mt='xl' size='md' variant='default'>
               Get started
             </Button>
