@@ -13,7 +13,8 @@ export function Hero() {
   const { classes } = useStyles();
 
   return (
-    <Container size='md'>
+    <Container size='xl'>
+      <Space h='lg' />
       <Grid>
         <Grid.Col sm={6}>
           <Space h={10} />
@@ -24,26 +25,25 @@ export function Hero() {
             </Text>{' '}
             Personal Registry App
           </Title>
-          <Text mt='md'>
+          <Text mt='md' className={classes.heroGrid}>
             Keep detailed records of personal artifacts, memories and events safely in this app,
             using your preferred combination of text and images.
           </Text>
           <Group align='center' grow mt={20} spacing={30}>
             <LinkButton
-              gradient={{ from: 'indigo', to: 'blue' }}
+              gradient={{ from: 'indigo', to: 'cyan' }}
               href='/signin'
-              rightIcon={<IconLogin />}
               size='md'
               variant='gradient'
             >
               Sign in
             </LinkButton>
-            <LinkButton href='/signin' rightIcon={<IconUserPlus />} size='md' variant='default'>
+            <LinkButton href='/signin' size='md' variant='default'>
               Register
             </LinkButton>
           </Group>
         </Grid.Col>
-        <Grid.Col sm={6}>
+        <Grid.Col sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
           <Lottie animationData={heroLottie} className={classes.lottie} loop />
         </Grid.Col>
       </Grid>
@@ -62,9 +62,13 @@ const useStyles = createStyles(theme => ({
   },
 
   lottie: {
-    maxWidth: 400,
+    maxWidth: 500,
     [theme.fn.smallerThan('md')]: {
       margin: 'auto',
     },
   },
+
+  heroGrid: {
+    maxWidth: '75%',
+  }
 }));
