@@ -20,9 +20,9 @@ export function FeaturesTitle() {
       <ThemeIcon color={feature.color} radius='md' size={44}>
         <feature.icon size={26} stroke={1.8} />
       </ThemeIcon>
-      <Text className={classes.heading} mt='sm' size='lg' weight={500}>
+      <Title className={classes.heading} mt='sm' order={3}>
         {feature.title}
-      </Text>
+      </Title>
       <Text className={classes.description} color='dimmed' size='sm'>
         {feature.description}
       </Text>
@@ -72,6 +72,8 @@ const useStyles = createStyles(theme => ({
 
   heading: {
     color: theme.colors.gray[0],
+    fontSize: theme.fontSizes.lg,
+    fontWeight: 600,
   },
 
   description: {
