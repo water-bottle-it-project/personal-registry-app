@@ -16,6 +16,13 @@ const appTheme: MantineThemeOverride = {
         },
       }),
     },
+    ThemeIcon: {
+      styles: theme => ({
+        root: {
+          boxShadow: theme.shadows.md,
+        },
+      }),
+    },
     Button: {
       styles: theme => ({
         root: {
