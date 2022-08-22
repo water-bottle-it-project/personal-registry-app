@@ -55,7 +55,7 @@ export function AppHeader({ links }: AppHeaderProps) {
 const useAppHeaderStyles = createStyles(theme => ({
   headerBase: {
     backgroundColor:
-      theme.colorScheme === 'dark' ? 'rgba(26, 27, 30, 0.91)' : 'rgba(255, 255, 255, 0.93)',
+      theme.colorScheme === 'dark' ? 'rgba(26, 27, 30, 0.8)' : 'rgba(255, 255, 255, 0.93)',
     backdropFilter: 'blur(3px)',
   },
 
