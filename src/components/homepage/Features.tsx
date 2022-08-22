@@ -14,7 +14,7 @@ import { IconFolders, IconPhoto, IconSearch, IconTag } from '@tabler/icons';
 
 const useStyles = createStyles(theme => ({
   title: {
-    color: 'white',
+    color: theme.colors.gray[0],
     fontSize: 34,
     fontWeight: 800,
     lineHeight: 1.1,
@@ -24,8 +24,12 @@ const useStyles = createStyles(theme => ({
     },
   },
 
-  whiteText: {
-    color: 'white',
+  heading: {
+    color: theme.colors.gray[0],
+  },
+
+  description: {
+    color: theme.colors.gray[2],
   },
 }));
 
@@ -66,10 +70,10 @@ export function FeaturesTitle() {
       <ThemeIcon color={feature.color} radius='md' size={44}>
         <feature.icon size={26} stroke={1.8} />
       </ThemeIcon>
-      <Text className={classes.whiteText} mt='sm' size='lg' weight={500}>
+      <Text className={classes.heading} mt='sm' size='lg' weight={500}>
         {feature.title}
       </Text>
-      <Text className={classes.whiteText} color='dimmed' size='sm'>
+      <Text className={classes.description} color='dimmed' size='sm'>
         {feature.description}
       </Text>
     </div>
@@ -83,11 +87,11 @@ export function FeaturesTitle() {
             <Title className={classes.title} order={2}>
               Manage your memories like no other way
             </Title>
-            <Text className={classes.whiteText}>
+            <Text className={classes.description}>
               We offer rich features to properly store and manage your precious photos and memories.
             </Text>
             <Space h='md' />
-            <Text className={classes.whiteText}>
+            <Text className={classes.description}>
               You can add textual descriptions and photos to your memories with metadata, or skip
               some of these.
             </Text>
