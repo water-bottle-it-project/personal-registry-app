@@ -7,7 +7,7 @@ import { Hero } from '~components/homepage/Hero';
 const Home: NextPage = () => {
   return (
     <>
-      <Container fluid>
+      <Container fluid p={0}>
         <Hero />
         <Space h={60} />
         <FeaturesTitle />
