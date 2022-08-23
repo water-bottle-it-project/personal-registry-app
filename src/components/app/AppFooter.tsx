@@ -1,4 +1,4 @@
-import { Anchor, Container, createStyles, Group } from '@mantine/core';
+import { Anchor, Container, createStyles, Group, Text } from '@mantine/core';
 import Link from 'next/link';
 
 import { AppHeaderLogo } from '~components/app/AppHeaderLogo';
@@ -33,6 +33,7 @@ export function AppFooter({ links }: AppFooterProps) {
     <div className={classes.footer}>
       <Container className={classes.inner} size='xl'>
         <AppHeaderLogo />
+        <Text size='xs' weight={300} color='dimmed'>Powered by water-bottle™</Text>
         <Group className={classes.links}>{items}</Group>
       </Container>
     </div>
