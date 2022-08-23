@@ -1,6 +1,5 @@
-import { Anchor, Container, createStyles, Group, Footer } from '@mantine/core';
+import { Anchor, Container, createStyles, Group } from '@mantine/core';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { AppHeaderLogo } from '~components/app/AppHeaderLogo';
 
@@ -20,13 +19,11 @@ export interface AppFooterProps {
  * @constructor
  */
 export function AppFooter({ links }: AppFooterProps) {
-  const { classes } = useStyles();
-  const router = useRouter();
-  const routeIdx = links.findIndex(link => router.pathname.startsWith(link.route));
+  const { classes, cx } = useStyles();
 
-  const items = links.map(link => (
-    <Link href={link.route} key={link.name}>
-      <Anchor<'a'> color='dimmed' href={link.route} key={link.name} size='sm'>
+  const items = links.map((link, i) => (
+    <Link href={link.route} key={link.name} passHref>
+      <Anchor color='dimmed' component='a' size='sm'>
         {link.name}
       </Anchor>
     </Link>
@@ -56,6 +53,7 @@ const useStyles = createStyles(theme => ({
     alignItems: 'center',
     paddingTop: theme.spacing.xl,
     paddingBottom: theme.spacing.xl,
+    maxWidth: '1320px',
 
     [theme.fn.smallerThan('xs')]: {
       flexDirection: 'column',
