@@ -1,6 +1,8 @@
 import type { AppShellProps } from '@mantine/core';
 import { AppShell, Space } from '@mantine/core';
 
+import type { AppFooterProps } from '~components/app/AppFooter';
+import { AppFooter } from '~components/app/AppFooter';
 import type { AppHeaderProps } from '~components/app/AppHeader';
 import { AppHeader } from '~components/app/AppHeader';
 
@@ -9,6 +11,11 @@ const links: AppHeaderProps['links'] = [
   { name: 'Images', route: '/images' },
   { name: 'Collections', route: '/collections' },
   { name: 'Create', route: '/create' },
+];
+
+const linksFooter: AppFooterProps['links'] = [
+  { name: 'About', route: '/about' },
+  { name: 'Contact', route: '/contact' },
 ];
 
 /**
@@ -20,6 +27,7 @@ export function AppLayout({ children }: AppShellProps) {
   return (
     <AppShell
       fixed
+      footer={<AppFooter links={linksFooter} />}
       header={<AppHeader links={links} />}
       padding={0}
       sx={theme => ({
