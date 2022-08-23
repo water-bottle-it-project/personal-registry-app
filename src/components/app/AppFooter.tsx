@@ -19,9 +19,9 @@ export interface AppFooterProps {
  * @constructor
  */
 export function AppFooter({ links }: AppFooterProps) {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
 
-  const items = links.map((link, i) => (
+  const items = links.map(link => (
     <Link href={link.route} key={link.name} passHref>
       <Anchor color='dimmed' component='a' size='sm'>
         {link.name}
@@ -31,7 +31,7 @@ export function AppFooter({ links }: AppFooterProps) {
 
   return (
     <div className={classes.footer}>
-      <Container className={classes.inner}>
+      <Container className={classes.inner} size='xl'>
         <AppHeaderLogo />
         <Group className={classes.links}>{items}</Group>
       </Container>
@@ -53,7 +53,6 @@ const useStyles = createStyles(theme => ({
     alignItems: 'center',
     paddingTop: theme.spacing.xl,
     paddingBottom: theme.spacing.xl,
-    maxWidth: '1320px',
 
     [theme.fn.smallerThan('xs')]: {
       flexDirection: 'column',
