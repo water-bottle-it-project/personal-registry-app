@@ -6,7 +6,7 @@ import { Anchor, Badge, Card, Grid, Image, Text } from '@mantine/core';
  * string within the component, just keeping it like this for now, will pass in the url
  * of the image as well when it comes to it, instead of using unsplash
  */
-interface Memory {
+interface TimelineCardProps {
   title: string;
   description: string;
   date: string;
@@ -14,7 +14,7 @@ interface Memory {
   photos: string;
 }
 
-export function TimelineCard(props: Memory) {
+export function TimelineCard(props: TimelineCardProps) {
   return (
     <Card
       p='lg'

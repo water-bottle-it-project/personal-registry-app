@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import { TimelineCard } from '~components/app/TimelineCard';
+import { TimelineCard } from '~components/timeline/TimelineCard';
 
 const Timeline: NextPage = () => {
   return (
