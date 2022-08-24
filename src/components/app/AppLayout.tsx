@@ -11,6 +11,7 @@ const links: AppHeaderProps['links'] = [
   { name: 'Images', route: '/images' },
   { name: 'Collections', route: '/collections' },
   { name: 'Create', route: '/create' },
+  { name: 'Profile', route: '/profile' },
 ];
 
 const linksFooter: AppFooterProps['links'] = [
