@@ -3,7 +3,7 @@ import { init } from 'next-firebase-auth';
 // Frontend and backend
 const initAuth = () => {
   init({
-    appPageURL: '/',
+    appPageURL: '/debug/authed',
     authPageURL: '/signin',
     cookies: {
       name: 'AppAuth',
