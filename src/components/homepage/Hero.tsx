@@ -20,7 +20,7 @@ export function Hero() {
           <Title className={classes.title}>
             The{' '}
             <Text color='indigo' inherit span>
-              Definitive
+
             </Text>{' '}
             Personal Registry App
           </Title>
