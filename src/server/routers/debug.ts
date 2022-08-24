@@ -1,14 +1,13 @@
 import * as trpc from '@trpc/server';
 
+import { createRouter } from '~server/createRouter';
 import { dbReqHandler } from '~server/db/dbReqHandler';
 import { User } from '~server/models/user';
 
 /**
  * Router for debug operations
  */
-const debugRouter = trpc
-  .router()
-
+const debugRouter = createRouter()
   .middleware(dbReqHandler)
 
   .query('listUsers', {
