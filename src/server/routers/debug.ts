@@ -22,14 +22,12 @@ const debugRouter = trpc
 
   .mutation('createUser', {
     async resolve() {
-      console.log('createUserTest');
       const newUser = await User.create({
         _id: 'debug1',
         email: 'debug1@debug.com',
         createdTimestamp: new Date(),
         username: 'debug1username',
       });
-      console.log(newUser);
       return {
         user: newUser,
       };
