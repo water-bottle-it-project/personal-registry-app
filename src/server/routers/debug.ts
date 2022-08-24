@@ -1,14 +1,13 @@
 import * as trpc from '@trpc/server';
 
+import { createRouter } from '~server/createRouter';
 import { dbReqHandler } from '~server/db/dbReqHandler';
 import { User } from '~server/models/user';
 
 /**
  * Router for debug operations
  */
-const debugRouter = trpc
-  .router()
-
+const debugRouter = createRouter()
   .middleware(dbReqHandler)
 
   .query('listUsers', {
@@ -25,7 +24,7 @@ const debugRouter = trpc
       const newUser = await User.create({
         _id: 'debug1',
         email: 'debug1@debug.com',
-        created_timestamp: new Date(),
+        createdTimestamp: new Date(),
         username: 'debug1username',
       });
       return {
