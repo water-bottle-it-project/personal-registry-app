@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const photoSchema = new Schema({
   caption: { type: String, required: false },
-  location: { type: mongoose.Schema.Types.Point, required: false },
+  location: { type: String, required: false },
   url: { type: String, required: true },
   userId: { type: String, required: true },
   memoryId: { type: String, required: true },

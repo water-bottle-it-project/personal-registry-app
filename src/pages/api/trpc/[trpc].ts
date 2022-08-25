@@ -5,6 +5,7 @@ import type { Context } from '~server/context';
 import { createContext } from '~server/context';
 import { debugRouter } from '~server/routers/debug';
 import { debugAuthedRouter } from '~server/routers/debugAuthed';
+import { imagesRouter } from '~server/routers/image';
 
 /**
  * Merge individual routers together to form the TRPC API router.
@@ -12,7 +13,8 @@ import { debugAuthedRouter } from '~server/routers/debugAuthed';
 const appRouter = trpc
   .router<Context>()
   .merge('debug.', debugRouter)
-  .merge('debugAuthed.', debugAuthedRouter);
+  .merge('debugAuthed.', debugAuthedRouter)
+  .merge('images.', imagesRouter);
 
 /**
  * Export type-safe route paths, inputs, and outputs
