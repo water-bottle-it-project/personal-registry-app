@@ -1,10 +1,12 @@
 import type { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
 
 import { TimelineCard } from '~components/timeline/TimelineCard';
 
 const Timeline: NextPage = () => {
   return (
     <>
+      <NextSeo description='My timeline of memories' title='Timeline' />
       <div>Hello timeline</div>
       <TimelineCard
         collections='friends'
