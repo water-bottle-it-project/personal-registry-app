@@ -18,7 +18,15 @@ export function ImagesIndex() {
     ));
 
   return (
-    <SimpleGrid cols={4} spacing='xs'>
+    <SimpleGrid
+      breakpoints={[
+        { maxWidth: 'xl', cols: 3, spacing: 'md' },
+        { maxWidth: 'md', cols: 2, spacing: 'md' },
+        { maxWidth: 'xs', cols: 1, spacing: 'xs' },
+      ]}
+      cols={4}
+      spacing='xs'
+    >
       {Images}
     </SimpleGrid>
   );

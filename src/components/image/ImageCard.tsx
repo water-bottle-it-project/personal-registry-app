@@ -1,4 +1,4 @@
-import { Card, Image, Text } from '@mantine/core';
+import { Card, Image, Space, Text } from '@mantine/core';
 
 interface ImageCardProps {
   caption: string;
@@ -21,9 +21,10 @@ export function ImageCard(props: ImageCardProps) {
         <Image alt='' height={200} src={props.url} />
       </Card.Section>
 
-      <Text align='left' mt='sm' weight={600}>
+      <Text align='center' mt='sm' weight={600}>
         {props.caption}
       </Text>
+      <Space h='xs' />
     </Card>
   );
 }
