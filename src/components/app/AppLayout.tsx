@@ -34,7 +34,7 @@ export function AppLayout({ children }: AppShellProps) {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[0],
       })}
     >
-      <Space h='md' />
+      {/* <Space h='md' /> */}
       {children}
     </AppShell>
   );
