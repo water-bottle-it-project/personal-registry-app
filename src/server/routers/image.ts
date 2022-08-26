@@ -23,8 +23,9 @@ const imagesRouter = trpc
   .mutation('AddImage', {
     async resolve() {
       const newImage = await Photo.create({
-        url: 'kian',
-        userId: '123',
+        caption: 'sus',
+        url: 'gs://register-app-40207.appspot.com/debug1/childhood.jpeg',
+        userId: 'debug1',
         memoryId: 'mem123',
         memoryDate: 'ytdy',
       });
@@ -32,21 +33,21 @@ const imagesRouter = trpc
         user: newImage,
       };
     },
-  });
+  })
 
-// .mutation('removeImage', {
-//   async resolve() {
-//     const result = await Photo.deleteOne({ email: 'debug1@debug.com' });
-//     if (result.deletedCount == 0) {
-//       throw new trpc.TRPCError({
-//         code: 'BAD_REQUEST',
-//         message: 'User _id not found.',
-//       });
-//     }
-//     return {
-//       success: true,
-//     };
-//   },
-// });
+  .mutation('removeImage', {
+    async resolve() {
+      const result = await Photo.deleteOne({ caption: 'sus' });
+      if (result.deletedCount == 0) {
+        throw new trpc.TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'User _id not found.',
+        });
+      }
+      return {
+        success: true,
+      };
+    },
+  });
 
 export { imagesRouter };
