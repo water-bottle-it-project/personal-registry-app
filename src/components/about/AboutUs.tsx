@@ -1,4 +1,4 @@
-import { Container, Grid, Space, Title } from '@mantine/core';
+import { Container, createStyles, Grid, Space, Title } from '@mantine/core';
 
 import { AboutUsCard } from './AboutUsCard';
 import { Banner } from './Banner';
@@ -42,9 +42,18 @@ const teamInfo = [
   },
 ];
 
+const useStyles = createStyles(theme => ({
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+  }
+}))
+
 export function AboutUs() {
+  const { classes, cx } = useStyles();
+
   const teamData = teamInfo.map(member => (
-    <Grid.Col key={member.name} offset={member.index > 2 ? 1 : 0} span={4}>
+    <Grid.Col key={member.name} span={4} className={classes.wrapper}>
       <AboutUsCard
         desc={member.desc}
         imgUrl={member.imgUrl}
