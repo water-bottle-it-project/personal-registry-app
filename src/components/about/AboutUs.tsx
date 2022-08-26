@@ -46,14 +46,14 @@ const useStyles = createStyles(theme => ({
   wrapper: {
     display: 'flex',
     justifyContent: 'center',
-  }
-}))
+  },
+}));
 
 export function AboutUs() {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
 
   const teamData = teamInfo.map(member => (
-    <Grid.Col key={member.name} span={4} className={classes.wrapper}>
+    <Grid.Col className={classes.wrapper} key={member.name} span={4}>
       <AboutUsCard
         desc={member.desc}
         imgUrl={member.imgUrl}
