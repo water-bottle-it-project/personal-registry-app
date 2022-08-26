@@ -1,4 +1,5 @@
-import { Card, Group, Space, Text, Title } from '@mantine/core';
+import { Anchor, Card, Group, Space, Text, Title } from '@mantine/core';
+import Link from 'next/link'
 
 interface CollectionCardProps {
   title: string;
@@ -16,20 +17,28 @@ export function CollectionCard(props: CollectionCardProps) {
       sx={theme => ({
         fontSize: theme.fontSizes.lg,
         width: 300,
-        backgroundColor: theme.colors.blue[2],
+        backgroundColor: theme.colors[props.color][2],
       })}
       withBorder
     >
       <div>
-        <Title order={3}>Gadgets</Title>
+        <Title order={3}>{props.title}</Title>
         <Space h='md' />
-        <Text>Go go gadget dsadasdasd adasd asd asd as</Text>
+        <Text>{props.description}</Text>
       </div>
       <Space h='xl' />
       <div>
         <Group position='apart'>
-          <Text>View 3 posts</Text>
-          <Text color='red'>Edit</Text>
+          <Link href='/'>
+            <Anchor>
+              <Text>View {props.postCount} posts</Text>
+            </Anchor>
+          </Link>
+          <Link href='/'>
+            <Anchor>
+            <Text color='red'>Edit</Text>
+            </Anchor>
+          </Link>
         </Group>
       </div>
     </Card>
