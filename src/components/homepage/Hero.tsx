@@ -13,7 +13,8 @@ export function Hero() {
 
   return (
     <Container size='xl'>
-      <Space h='lg' />
+      <Space h='xl' />
+      <Space h='xl' />
       <Grid>
         <Grid.Col sm={6}>
           <Title className={classes.title}>
