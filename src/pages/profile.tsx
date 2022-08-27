@@ -25,13 +25,12 @@ const Profile: NextPage = () => {
       <Container px='xs'>
         <Space h='xl' />
 
-
         <Grid>
           <Grid.Col span={7}>
             <Container>
-            <Title order={1} size={65}>
-          John Doe
-        </Title>
+              <Title order={1} size={65}>
+                John Doe
+              </Title>
               <Space h='md' />
 
               <Text size='xl' weight={700}>
@@ -111,7 +110,6 @@ const Profile: NextPage = () => {
                   borderRadius: theme.radius.lg,
                 })}
               >
-
                 <Text size='xl' weight={800}>
                   Update Password
                 </Text>
