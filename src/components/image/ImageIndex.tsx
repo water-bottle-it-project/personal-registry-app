@@ -1,4 +1,4 @@
-import { SimpleGrid } from '@mantine/core';
+import { SimpleGrid, Space } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
@@ -28,6 +28,7 @@ export function ImagesIndex() {
       spacing='xs'
     >
       {Images}
+      <Space h='xl' />
     </SimpleGrid>
   );
 }
