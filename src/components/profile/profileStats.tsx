@@ -34,7 +34,8 @@ const useStyles = createStyles(theme => ({
   description: {
     color: theme.colors[theme.primaryColor][0],
     fontSize: theme.fontSizes.sm,
-    marginTop: 5,
+    marginTop: 10,
+    marginRight: 10,
   },
 
   stat: {

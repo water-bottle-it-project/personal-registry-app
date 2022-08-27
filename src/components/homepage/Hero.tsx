@@ -18,11 +18,7 @@ export function Hero() {
       <Grid>
         <Grid.Col sm={6}>
           <Title className={classes.title}>
-            The{' '}
-            <Text color='indigo' inherit span>
-
-            </Text>{' '}
-            Personal Registry App
+            The <Text color='indigo' inherit span /> Personal Registry App
           </Title>
           <Text className={classes.heroGrid} mt='md'>
             Keep detailed records of personal artifacts, memories and events safely in this app,
