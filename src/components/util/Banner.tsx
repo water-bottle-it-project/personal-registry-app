@@ -1,5 +1,28 @@
 import { Container, createStyles, Overlay, Text, Title } from '@mantine/core';
 
+interface BannerProps {
+  title: string;
+  description: string;
+}
+
+export function Banner(props: BannerProps) {
+  const { classes } = useStyles();
+
+  return (
+    <div className={classes.wrapper}>
+      <Overlay color='#000' opacity={0.65} zIndex={1} />
+      <div className={classes.inner}>
+        <Title className={classes.title}>{props.title}</Title>
+        <Container size={640}>
+          <Text className={classes.description} size='lg'>
+            {props.description}
+          </Text>
+        </Container>
+      </div>
+    </div>
+  );
+}
+
 const useStyles = createStyles(theme => ({
   wrapper: {
     position: 'relative',
@@ -52,24 +75,3 @@ const useStyles = createStyles(theme => ({
     },
   },
 }));
-
-export function Banner() {
-  const { classes, cx } = useStyles();
-
-  return (
-    <div className={classes.wrapper}>
-      <Overlay color='#000' opacity={0.65} zIndex={1} />
-
-      <div className={classes.inner}>
-        <Title className={classes.title}>About Us</Title>
-
-        <Container size={640}>
-          <Text className={classes.description} size='lg'>
-            We are a team of developers who develop developed applications that require development,
-            while developing developer skills.
-          </Text>
-        </Container>
-      </div>
-    </div>
-  );
-}
