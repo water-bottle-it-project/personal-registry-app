@@ -1,10 +1,11 @@
-import { Container, Modal, SimpleGrid } from '@mantine/core';
-import { useState } from 'react';
+import { Container, Modal, SimpleGrid, Skeleton } from '@mantine/core';
+import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ImageCard } from './ImageCard';
 import { ImageOverlay } from './ImageOverlay';
+import { ImageSkeleton } from './ImageSkeleton';
 
 /**
  * Debug page for querying (aka GET) and mutating (aka POST) users using TRPC and Mongoose
@@ -15,6 +16,7 @@ export function ImagesIndex() {
 
   const [opened, setOpened] = useState(false);
   // const [displayPhoto, setDisplayPhoto] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const [displayPhoto, setDisplayPhoto] = useState({
     caption: '',
@@ -46,7 +48,17 @@ export function ImagesIndex() {
         </Container>
       ),
     );
-  console.log(displayPhoto);
+  // console.log(displayPhoto);
+
+  const SkeletonLoaders = Array(8).fill(<ImageSkeleton />);
+
+  useEffect(() => {
+    if (Images) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    }
+  }, [Images]);
 
   return (
     <>
@@ -73,9 +85,8 @@ export function ImagesIndex() {
         cols={4}
         spacing='xs'
       >
-        {Images}
+        {loading ? SkeletonLoaders : Images}
       </SimpleGrid>
-      );
     </>
   );
 }
