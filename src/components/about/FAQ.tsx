@@ -65,12 +65,6 @@ const useStyles = createStyles((theme, _params, getRef) => {
       } 100%)`,
     },
 
-    itemOpened: {
-      [`& .${icon}`]: {
-        transform: 'rotate(45deg)',
-      },
-    },
-
     button: {
       display: 'block',
       marginTop: theme.spacing.md,
@@ -107,26 +101,40 @@ export function FAQ() {
             chevronPosition='right'
             chevronSize={50}
             defaultValue='reset-password'
-            disableChevronRotation
+            styles={{
+              chevron: {
+                '&[data-rotate]': {
+                  transform: 'rotate(45deg)',
+                },
+              },
+            }}
             variant='separated'
           >
             <Accordion.Item className={classes.item} value='reset-password'>
-              <Accordion.Control>Why does this web app exist?</Accordion.Control>
+              <Accordion.Control>
+                <Title order={4}>Why does this web app exist?</Title>
+              </Accordion.Control>
               <Accordion.Panel>{ans1}</Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item className={classes.item} value='another-account'>
-              <Accordion.Control>What Tech stack do you use?</Accordion.Control>
+              <Accordion.Control>
+                <Title order={4}>What tech stack do you use?</Title>
+              </Accordion.Control>
               <Accordion.Panel>{ans2}</Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item className={classes.item} value='newsletter'>
-              <Accordion.Control>Do I need to pay to use this service?</Accordion.Control>
+              <Accordion.Control>
+                <Title order={4}>Do I need to pay to use this service?</Title>
+              </Accordion.Control>
               <Accordion.Panel>{ans3}</Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item className={classes.item} value='credit-card'>
-              <Accordion.Control>What is love?</Accordion.Control>
+              <Accordion.Control>
+                <Title order={4}>What is love?</Title>
+              </Accordion.Control>
               <Accordion.Panel>{ans4}</Accordion.Panel>
             </Accordion.Item>
           </Accordion>
