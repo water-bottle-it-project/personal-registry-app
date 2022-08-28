@@ -8,7 +8,7 @@ const Image: NextPage = () => {
   return (
     <Container px={30} size={1500}>
       <div>All Images hehe</div>
-      <ImageOverlay />
+      <ImagesIndex />
     </Container>
   );
 };

@@ -1,29 +1,14 @@
-import { Box, Button, Group, Overlay, SimpleGrid } from '@mantine/core';
-import type { Key } from 'react';
+import { Box, Button, Container, Group, Modal, Overlay, SimpleGrid } from '@mantine/core';
+import Link from 'next/link';
+import type { Key, SetStateAction } from 'react';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { Photo } from '~server/models/photo';
 
 import { ImageCard } from './ImageCard';
+import { ImageOverlay } from './ImageOverlay';
 
-function Demo() {
-  const [visible, setVisible] = useState(false);
-
-  return (
-    <>
-      <Box sx={{ height: 100, position: 'relative' }}>
-        {visible && <Overlay color='#000' opacity={0.6} zIndex={5} />}
-        <Button color={visible ? 'red' : 'teal'}>
-          {!visible ? 'Click as much as you like' : "Won't click, haha"}
-        </Button>
-      </Box>
-
-      <Group position='center'>
-        <Button onClick={() => setVisible(v => !v)}>Toggle overlay</Button>
-      </Group>
-    </>
-  );
-}
 /**
  * Debug page for querying (aka GET) and mutating (aka POST) users using TRPC and Mongoose
  * @constructor
@@ -31,18 +16,50 @@ function Demo() {
 export function ImagesIndex() {
   const allUsers = trpcClient.useQuery(['images.listImages']);
 
-  const [visible, setVisible] = useState(false);
+  const [opened, setOpened] = useState(false);
+  // const [displayPhoto, setDisplayPhoto] = useState('');
+
+  const [displayPhoto, setDisplayPhoto] = useState({
+    caption: '',
+    url: '',
+    userId: '',
+  });
+
+  const renderOverlay = (
+    photoUrl: string,
+    photoCaption: string,
+    userId: string,
+    value: boolean | ((prevState: boolean) => boolean),
+  ) => {
+    setOpened(value);
+    setDisplayPhoto(previousState => {
+      return { ...previousState, caption: photoCaption, url: photoUrl, userId: userId };
+    });
+  };
 
   const Images =
     allUsers.data &&
     allUsers.data.photos.map(
       (photo: { caption: string; id: Key | null | undefined; url: string; userId: string }) => (
-        <ImageCard caption={photo.caption} key={photo.id} url={photo.url} userId={photo.userId} />
+        <Container
+          key={photo.id}
+          onClick={() => renderOverlay(photo.url, photo.caption, photo.userId, true)}
+        >
+          <ImageCard caption={photo.caption} key={photo.id} url={photo.url} userId={photo.userId} />
+        </Container>
       ),
     );
+  console.log(displayPhoto);
 
   return (
     <>
+      <Modal onClose={() => setOpened(false)} opened={opened} size='50%'>
+        <ImageOverlay
+          caption={displayPhoto.caption}
+          url={displayPhoto.url}
+          userId={displayPhoto.userId}
+        />
+      </Modal>
       <SimpleGrid
         breakpoints={[
           { maxWidth: 'xl', cols: 3, spacing: 'md' },
@@ -54,15 +71,6 @@ export function ImagesIndex() {
       >
         {Images}
       </SimpleGrid>
-      <Box sx={{ height: 100, position: 'relative' }}>
-        {visible && <Overlay color='#000' opacity={0.6} zIndex={5} />}
-        <Button color={visible ? 'red' : 'teal'}>
-          {!visible ? 'Click as much as you like' : "Won't click, haha"}
-        </Button>
-      </Box>
-      <Group position='center'>
-        <Button onClick={() => setVisible(v => !v)}>Toggle overlay</Button>
-      </Group>
       );
     </>
   );
