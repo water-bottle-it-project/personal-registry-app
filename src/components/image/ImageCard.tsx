@@ -10,6 +10,9 @@ const useStyles = createStyles(theme => ({
   wrapper: {
     justifyContent: 'center',
   },
+  card: {
+    cursor: 'pointer',
+  },
 }));
 
 export function ImageCard(props: ImageCardProps) {
@@ -17,6 +20,7 @@ export function ImageCard(props: ImageCardProps) {
   return (
     <Container className={classes.wrapper}>
       <Card
+        className={classes.card}
         p={0}
         sx={theme => ({
           backgroundColor: 'transparent',
