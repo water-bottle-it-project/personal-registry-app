@@ -11,6 +11,7 @@ const links: AppHeaderProps['links'] = [
   { name: 'Images', route: '/images' },
   { name: 'Collections', route: '/collections' },
   { name: 'Create', route: '/create' },
+  { name: 'Profile', route: '/profile' },
 ];
 
 const linksFooter: AppFooterProps['links'] = [
@@ -34,7 +35,7 @@ export function AppLayout({ children }: AppShellProps) {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[0],
       })}
     >
-      <Space h='md' />
+      {/* <Space h='md' /> */}
       {children}
     </AppShell>
   );
