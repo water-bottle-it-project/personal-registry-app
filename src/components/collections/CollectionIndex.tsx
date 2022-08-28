@@ -9,13 +9,21 @@ import { CollectionCard } from './CollectionCard';
  * @constructor
  */
 export function CollectionIndex() {
-  const collectionProps = {
-    title: 'Gadgets',
-    description: 'Go go gadget!!!',
-    userId: '1234',
-    color: 'blue',
-    postCount: 3,
-  };
+  const allUsers = trpcClient.useQuery(['collections.listCollections']);
+  const postNumberTemp = 4; //HARDCODED FOR NOW, TODO: Post backend stuff
+
+  const Collections =
+    allUsers.data &&
+    allUsers.data.collections.map(collection => (
+      <CollectionCard
+        color={collection.color}
+        description={collection.description}
+        key={collection.id}
+        postCount={postNumberTemp}
+        title={collection.title}
+        userId={collection.userId}
+      />
+    ));
 
   return (
     <SimpleGrid
@@ -27,13 +35,7 @@ export function CollectionIndex() {
       cols={4}
       spacing='xs'
     >
-      <CollectionCard
-        color={collectionProps.color}
-        description={collectionProps.description}
-        postCount={collectionProps.postCount}
-        title={collectionProps.title}
-        userId={collectionProps.userId}
-      />
+      {Collections}
     </SimpleGrid>
   );
 }
