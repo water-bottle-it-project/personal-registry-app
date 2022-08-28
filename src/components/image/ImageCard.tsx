@@ -1,5 +1,4 @@
 import { Card, Image, Space, Text } from '@mantine/core';
-import { Dispatch, SetStateAction } from 'react';
 
 interface ImageCardProps {
   caption: string;

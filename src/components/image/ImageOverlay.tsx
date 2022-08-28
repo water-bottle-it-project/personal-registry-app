@@ -1,4 +1,4 @@
-import { Anchor, Badge, Box, Card, CloseButton, Grid, Group, Image, Text } from '@mantine/core';
+import { Box, Card, Grid, Image, Text } from '@mantine/core';
 
 interface ImageCardProps {
   caption: string;
