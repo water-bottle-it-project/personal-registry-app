@@ -1,14 +1,12 @@
 import { Anchor, Badge, Box, Card, CloseButton, Grid, Group, Image, Text } from '@mantine/core';
 
-interface TimelineCardProps {
-  title: string;
-  description: string;
-  date: string;
-  collections: string;
-  photos: string;
+interface ImageCardProps {
+  caption: string;
+  url: string;
+  userId: string;
 }
 
-export function ImageOverlay(props: TimelineCardProps) {
+export function ImageOverlay(props: ImageCardProps) {
   return (
     <Card
       radius='sm'
@@ -19,27 +17,21 @@ export function ImageOverlay(props: TimelineCardProps) {
         // or use any other static values from theme
         fontSize: theme.fontSizes.sm,
         width: '75%',
+        alignSelf: 'centre',
       })}
       withBorder
     >
-      <Group position='right'>
-        <CloseButton size='xl' title='Close popover' />
-      </Group>
 
       <Card.Section px='10%' py='8%'>
-        <Image
-          alt='Norway'
-          height='50%'
-          src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-        />
+        <Image alt='' height='50%' src={props.url} />
       </Card.Section>
 
       <Text size='xl' weight={600}>
-        The fking alps
+        {props.caption}
       </Text>
 
       <Text color='dimmed' mb='xs' size='sm' weight={400}>
-        Posted on {props.date}
+        Posted on
       </Text>
 
       <Grid>
@@ -59,7 +51,7 @@ export function ImageOverlay(props: TimelineCardProps) {
               Title
             </Text>
             <Text size='md' weight={400}>
-              alps btch
+              {props.caption}
             </Text>
             <Text size='md' weight={600}>
               Date
