@@ -1,10 +1,8 @@
-import { Box, Button, Container, Group, Modal, Overlay, SimpleGrid } from '@mantine/core';
-import Link from 'next/link';
-import type { Key, SetStateAction } from 'react';
+import { Container, Modal, SimpleGrid } from '@mantine/core';
+import type { Key } from 'react';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { Photo } from '~server/models/photo';
 
 import { ImageCard } from './ImageCard';
 import { ImageOverlay } from './ImageOverlay';
@@ -53,7 +51,14 @@ export function ImagesIndex() {
 
   return (
     <>
-      <Modal onClose={() => setOpened(false)} opened={opened} size='50%'>
+      <Modal
+        onClose={() => setOpened(false)}
+        opened={opened}
+        size='50%'
+        transition='fade'
+        transitionDuration={1000}
+        transitionTimingFunction='ease'
+      >
         <ImageOverlay
           caption={displayPhoto.caption}
           url={displayPhoto.url}
