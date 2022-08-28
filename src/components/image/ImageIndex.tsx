@@ -50,13 +50,13 @@ export function ImagesIndex() {
     );
   // console.log(displayPhoto);
 
-  const SkeletonLoaders = Array(8).fill(<ImageSkeleton />);
+  const SkeletonLoaders = Array(12).fill(<ImageSkeleton />);
 
   useEffect(() => {
     if (Images) {
       setTimeout(() => {
         setLoading(false);
-      }, 500);
+      }, 1000);
     }
   }, [Images]);
 
