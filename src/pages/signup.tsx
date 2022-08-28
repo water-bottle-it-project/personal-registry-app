@@ -1,4 +1,4 @@
-import { Container, Text, Title } from '@mantine/core';
+import { Anchor, Container, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
 import { withRegisterPage } from '~clientUtils/authHooks';
@@ -8,14 +8,16 @@ function SignUp() {
   return (
     <>
       <Container mt={100} size='xl'>
-        <Title
-          align='center'
-          sx={theme => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
-        >
+        <Title align='center' weight={900}>
           Welcome to Registry App
         </Title>
         <Text align='center' color='dimmed' mt={5} size='sm'>
-          Already have an account? <Link href='/signin'>Login</Link>
+          Already have an account?
+          <Link href='/signin' passHref>
+            <Anchor component='a' ml={5}>
+              Sign in
+            </Anchor>
+          </Link>
         </Text>
         <SignupForm />
       </Container>

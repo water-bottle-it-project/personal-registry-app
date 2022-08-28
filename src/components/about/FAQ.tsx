@@ -27,7 +27,6 @@ const useStyles = createStyles((theme, _params, getRef) => {
     title: {
       color: theme.white,
       fontSize: 52,
-      fontFamily: `Greycliff CF, ${theme.fontFamily}`,
       marginBottom: theme.spacing.xl * 1.5,
     },
 

@@ -11,7 +11,7 @@ import {
   PasswordInput,
   TextInput,
 } from '@mantine/core';
-import { IconArrowNarrowRight, IconCheck } from '@tabler/icons';
+import { IconArrowNarrowRight, IconAt, IconCheck, IconFingerprint } from '@tabler/icons';
 import { useForm } from 'react-hook-form';
 
 import type { SigninT } from '~types/signin';
@@ -53,6 +53,7 @@ export function SigninForm() {
         <Paper mt={30} p={30} radius='md' shadow='md' withBorder>
           <TextInput
             error={errors?.email?.message}
+            icon={<IconAt size={16} />}
             id='email'
             label='Email'
             placeholder='user@example.com'
@@ -61,6 +62,7 @@ export function SigninForm() {
             {...register('email')}
           />
           <PasswordInput
+            icon={<IconFingerprint size={16} />}
             id='password'
             label='Password'
             mt='md'
@@ -70,7 +72,7 @@ export function SigninForm() {
             error={errors?.password?.message}
           />
           <Group mt='md' position='apart'>
-            <Checkbox label='Remember me' />
+            <Checkbox defaultChecked label='Remember me' />
             <Anchor<'a'> href='#' onClick={event => event.preventDefault()} size='sm'>
               Forgot password?
             </Anchor>

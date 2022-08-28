@@ -1,17 +1,8 @@
 import { createUserWithEmailAndPassword, getAuth } from '@firebase/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { ButtonProps } from '@mantine/core';
-import {
-  Anchor,
-  Button,
-  Checkbox,
-  Container,
-  Group,
-  Paper,
-  PasswordInput,
-  TextInput,
-} from '@mantine/core';
-import { IconArrowNarrowRight, IconCheck } from '@tabler/icons';
+import { Button, Container, Paper, PasswordInput, TextInput } from '@mantine/core';
+import { IconArrowNarrowRight, IconAt, IconCheck, IconFingerprint } from '@tabler/icons';
 import { useForm } from 'react-hook-form';
 
 import type { SignupT } from '~types/signup';
@@ -61,6 +52,7 @@ export function SignupForm() {
         <Paper mt={30} p={30} radius='md' shadow='md' withBorder>
           <TextInput
             error={errors?.email?.message}
+            icon={<IconAt size={16} />}
             id='email'
             label='Email'
             placeholder='user@example.com'
@@ -69,6 +61,7 @@ export function SignupForm() {
             {...register('email')}
           />
           <PasswordInput
+            icon={<IconFingerprint size={16} />}
             id='password'
             label='Password'
             mt='md'
@@ -78,6 +71,7 @@ export function SignupForm() {
             error={errors?.password?.message}
           />
           <PasswordInput
+            icon={<IconFingerprint size={16} />}
             id='repeatPassword'
             label='Repeat Password'
             mt='md'
@@ -86,12 +80,6 @@ export function SignupForm() {
             {...register('repeatPassword')}
             error={errors?.repeatPassword?.message}
           />
-          <Group mt='md' position='apart'>
-            <Checkbox label='Remember me' />
-            <Anchor<'a'> href='#' onClick={event => event.preventDefault()} size='sm'>
-              Forgot password?
-            </Anchor>
-          </Group>
           <Button fullWidth mt='xl' type='submit' {...signupButtonProps}>
             Sign up
           </Button>

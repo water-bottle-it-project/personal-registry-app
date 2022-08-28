@@ -1,4 +1,4 @@
-import { Container, Text, Title } from '@mantine/core';
+import { Anchor, Container, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
 import { withLoginPage } from '~clientUtils/authHooks';
@@ -8,14 +8,16 @@ function SignIn() {
   return (
     <>
       <Container mt={100} size='xl'>
-        <Title
-          align='center'
-          sx={theme => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
-        >
-          Sign In
+        <Title align='center' weight={900}>
+          Sign in
         </Title>
         <Text align='center' color='dimmed' mt={5} size='sm'>
-          Do not have an account yet? <Link href='/signup'>Create account</Link>
+          Don't have an account yet?
+          <Link href='/signup' passHref>
+            <Anchor component='a' ml={5}>
+              Sign up
+            </Anchor>
+          </Link>
         </Text>
         <SigninForm />
       </Container>

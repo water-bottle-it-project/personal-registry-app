@@ -33,7 +33,7 @@ export function Hero() {
             >
               Sign in
             </LinkButton>
-            <LinkButton href='/signin' size='md' variant='default'>
+            <LinkButton href='/signup' size='md' variant='default'>
               Register
             </LinkButton>
           </Group>
