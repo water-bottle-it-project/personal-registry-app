@@ -1,9 +1,11 @@
-import { Container, Modal, SimpleGrid, Skeleton } from '@mantine/core';
+import { Container, Modal, SimpleGrid } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ImageCard } from './ImageCard';
+// import { ImageOverlay } from './ImageOverlay';
 import { ImageOverlay } from './ImageOverlay';
 import { ImageSkeleton } from './ImageSkeleton';
 
@@ -12,6 +14,7 @@ import { ImageSkeleton } from './ImageSkeleton';
  * @constructor
  */
 export function ImagesIndex() {
+  const isMobile = useMediaQuery('(max-width: 600px)');
   const allUsers = trpcClient.useQuery(['images.listImages']);
 
   const [opened, setOpened] = useState(false);
@@ -63,9 +66,10 @@ export function ImagesIndex() {
   return (
     <>
       <Modal
+        fullScreen={isMobile}
         onClose={() => setOpened(false)}
         opened={opened}
-        size='50%'
+        size='calc(100vw - 40%)'
         transition='fade'
         transitionDuration={250}
         transitionTimingFunction='ease'
@@ -79,8 +83,7 @@ export function ImagesIndex() {
       <SimpleGrid
         breakpoints={[
           { maxWidth: 'xl', cols: 3, spacing: 'md' },
-          { maxWidth: 'md', cols: 2, spacing: 'md' },
-          { maxWidth: 'xs', cols: 1, spacing: 'xs' },
+          { maxWidth: 'md', cols: 1, spacing: 'md' },
         ]}
         cols={4}
         spacing='xs'
