@@ -1,21 +1,23 @@
 import { Container, createStyles, Overlay, Text, Title } from '@mantine/core';
 
+import banner from '~components/util/banner.jpg';
+
 interface BannerProps {
   title: string;
   description: string;
 }
 
-export function Banner(props: BannerProps) {
+export function Banner({ title, description }: BannerProps) {
   const { classes } = useStyles();
 
   return (
     <div className={classes.wrapper}>
       <Overlay color='#000' opacity={0.65} zIndex={1} />
       <div className={classes.inner}>
-        <Title className={classes.title}>{props.title}</Title>
-        <Container size={640}>
+        <Title className={classes.title}>{title}</Title>
+        <Container size='xs'>
           <Text className={classes.description} size='lg'>
-            {props.description}
+            {description}
           </Text>
         </Container>
       </div>
@@ -28,12 +30,11 @@ const useStyles = createStyles(theme => ({
     position: 'relative',
     paddingTop: 180,
     paddingBottom: 130,
-    backgroundImage:
-      'url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
+    backgroundImage: `url(${banner.src})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
 
-    '@media (max-width: 520px)': {
+    [theme.fn.smallerThan('xs')]: {
       paddingTop: 80,
       paddingBottom: 50,
     },
@@ -53,9 +54,8 @@ const useStyles = createStyles(theme => ({
     color: theme.white,
     marginBottom: theme.spacing.xs,
     textAlign: 'center',
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
 
-    '@media (max-width: 520px)': {
+    [theme.fn.smallerThan('xs')]: {
       fontSize: 28,
       textAlign: 'left',
     },
@@ -69,7 +69,7 @@ const useStyles = createStyles(theme => ({
     color: theme.colors.gray[0],
     textAlign: 'center',
 
-    '@media (max-width: 520px)': {
+    [theme.fn.smallerThan('xs')]: {
       fontSize: theme.fontSizes.md,
       textAlign: 'left',
     },

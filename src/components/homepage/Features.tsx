@@ -12,6 +12,8 @@ import {
 } from '@mantine/core';
 import { IconFolders, IconPhoto, IconSearch, IconTag } from '@tabler/icons';
 
+import gradient from '~components/homepage/gradient.png';
+
 export function FeaturesTitle() {
   const { classes } = useStyles();
 
@@ -30,7 +32,7 @@ export function FeaturesTitle() {
   ));
 
   return (
-    <BackgroundImage src='/gradient.png'>
+    <BackgroundImage src={gradient.src}>
       <Container px={0} size='xl'>
         <Grid gutter={30} m={0} px={0} py={30}>
           <Grid.Col md={5} span={12}>
