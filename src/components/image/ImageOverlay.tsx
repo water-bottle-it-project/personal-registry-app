@@ -14,7 +14,6 @@ export function ImageOverlay(props: ImageCardProps) {
   return (
     <Container
       sx={theme => ({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
         fontSize: theme.fontSizes.sm,
         padding: '0',
       })}
