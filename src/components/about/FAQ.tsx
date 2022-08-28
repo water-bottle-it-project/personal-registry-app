@@ -84,14 +84,10 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-const ans1 =
-  'This is our capstone project for COMP30022 IT Project Semester 2 2022';
-const ans2 =
-'Mongo with Firebase Auth, React/NextJS, MantineUI, and NodeJS';
-const ans3 =
-'It is free to use our service until you post more than 69 images';
-const ans4 =
-"Baby don't hurt me";
+const ans1 = 'This is our capstone project for COMP30022 IT Project Semester 2 2022';
+const ans2 = 'Mongo with Firebase Auth, React/NextJS, MantineUI, and NodeJS';
+const ans3 = 'It is free to use our service until you post more than 69 images';
+const ans4 = "Baby don't hurt me";
 
 export function FAQ() {
   const { classes } = useStyles();
