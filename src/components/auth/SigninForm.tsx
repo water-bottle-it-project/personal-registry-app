@@ -1,8 +1,17 @@
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { ButtonProps } from '@mantine/core';
-import { Button, PasswordInput, Space, TextInput } from '@mantine/core';
-import { IconArrowNarrowRight, IconAt, IconCheck, IconFingerprint } from '@tabler/icons';
+import {
+  Anchor,
+  Button,
+  Checkbox,
+  Container,
+  Group,
+  Paper,
+  PasswordInput,
+  TextInput,
+} from '@mantine/core';
+import { IconArrowNarrowRight, IconCheck } from '@tabler/icons';
 import { useForm } from 'react-hook-form';
 
 import type { SigninT } from '~types/signin';
@@ -40,30 +49,37 @@ export function SigninForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(handleSignin)}>
-      <TextInput
-        error={errors?.email?.message}
-        icon={<IconAt size={16} />}
-        id='email'
-        label='Email address'
-        placeholder='user@example.com'
-        required
-        type='email'
-        {...register('email')}
-      />
-      <Space h='xs' />
-      <PasswordInput
-        error={errors?.password?.message}
-        icon={<IconFingerprint size={16} />}
-        id='password'
-        label='Password'
-        placeholder='super-secret-password'
-        required
-        {...register('password')}
-      />
-      <Space h='md' />
-      <Button type='submit' {...loginButtonProps}>
-        Log in
-      </Button>
+      <Container my={40} size={420}>
+        <Paper mt={30} p={30} radius='md' shadow='md' withBorder>
+          <TextInput
+            error={errors?.email?.message}
+            id='email'
+            label='Email'
+            placeholder='user@example.com'
+            required
+            type='email'
+            {...register('email')}
+          />
+          <PasswordInput
+            id='password'
+            label='Password'
+            mt='md'
+            placeholder='Your password'
+            required
+            {...register('password')}
+            error={errors?.password?.message}
+          />
+          <Group mt='md' position='apart'>
+            <Checkbox label='Remember me' />
+            <Anchor<'a'> href='#' onClick={event => event.preventDefault()} size='sm'>
+              Forgot password?
+            </Anchor>
+          </Group>
+          <Button fullWidth mt='xl' type='submit' {...loginButtonProps}>
+            Sign in
+          </Button>
+        </Paper>
+      </Container>
     </form>
   );
 }
