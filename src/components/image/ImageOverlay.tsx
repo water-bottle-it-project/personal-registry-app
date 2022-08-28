@@ -21,7 +21,6 @@ export function ImageOverlay(props: ImageCardProps) {
       })}
       withBorder
     >
-
       <Card.Section px='10%' py='8%'>
         <Image alt='' height='50%' src={props.url} />
       </Card.Section>
