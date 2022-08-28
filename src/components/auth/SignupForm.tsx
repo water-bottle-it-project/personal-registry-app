@@ -61,6 +61,7 @@ export function SignupForm() {
             {...register('email')}
           />
           <PasswordInput
+            description='Must be at least 6 characters long.'
             icon={<IconFingerprint size={16} />}
             id='password'
             label='Password'

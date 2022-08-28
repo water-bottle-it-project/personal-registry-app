@@ -13,6 +13,7 @@ import {
 import { IconFolders, IconPhoto, IconSearch, IconTag } from '@tabler/icons';
 
 import gradient from '~components/homepage/gradient.png';
+import { LinkButton } from '~components/util/LinkButton';
 
 export function FeaturesTitle() {
   const { classes } = useStyles();
@@ -45,9 +46,9 @@ export function FeaturesTitle() {
               You can add textual descriptions and photos to your memories with metadata, or skip
               some of these.
             </Text>
-            <Button mt='xl' size='md' variant='default'>
+            <LinkButton href='/signup' mt='xl' size='md' variant='default'>
               Get started
-            </Button>
+            </LinkButton>
           </Grid.Col>
           <Grid.Col md={7} span={12}>
             <SimpleGrid breakpoints={[{ maxWidth: 'xs', cols: 1 }]} cols={2} spacing={30}>
