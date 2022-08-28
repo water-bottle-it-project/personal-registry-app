@@ -26,12 +26,21 @@ export const withLoginPage = withAuthUser({
 });
 
 /**
- * Using SSR means server-side redirects, thus if a user is already logged in,
- * and they click 'Dashboard' (/login), they will not see the /login route in
- * their URL bar or in the page title ever.
+ * For the Registration page
  */
 export const withLoginPageSSR = () =>
   withAuthUserTokenSSR({
     whenAuthed: AuthAction.REDIRECT_TO_APP,
     // whenUnauthed: AuthAction.RENDER,
   })();
+
+/**
+ * Using SSR means server-side redirects, thus if a user is already logged in,
+ * and they click 'Dashboard' (/login), they will not see the /login route in
+ * their URL bar or in the page title ever.
+ */
+export const withRegisterPage = withAuthUser({
+  whenAuthed: AuthAction.REDIRECT_TO_APP,
+  // whenUnauthedAfterInit: AuthAction.RENDER,
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+});
