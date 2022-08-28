@@ -1,4 +1,4 @@
-import { Button, Container, createStyles, Space, Title } from '@mantine/core';
+import { Container, createStyles, Space, Title } from '@mantine/core';
 import Lottie from 'lottie-react';
 
 import { LinkButton } from '~components/util/LinkButton';

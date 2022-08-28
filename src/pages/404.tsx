@@ -6,7 +6,7 @@ import { NotFound } from '~components/util/NotFound';
 const NotFoundPage: NextPage = () => {
   return (
     <>
-      <NextSeo description='About This Website' title='About' />
+      <NextSeo description='404 Page' title='Not Found' />
       <NotFound />
     </>
   );
