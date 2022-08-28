@@ -1,5 +1,5 @@
 import { Anchor, Card, Group, Space, Text, Title } from '@mantine/core';
-import Link from 'next/link'
+import Link from 'next/link';
 
 interface CollectionCardProps {
   title: string;
@@ -36,7 +36,7 @@ export function CollectionCard(props: CollectionCardProps) {
           </Link>
           <Link href='/'>
             <Anchor>
-            <Text color='red'>Edit</Text>
+              <Text color='red'>Edit</Text>
             </Anchor>
           </Link>
         </Group>
