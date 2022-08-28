@@ -1,4 +1,4 @@
-import { Container, createStyles, Overlay, Text, Title } from '@mantine/core';
+import { createStyles, Overlay, Text, Title } from '@mantine/core';
 
 import banner from '~components/util/banner.jpg';
 

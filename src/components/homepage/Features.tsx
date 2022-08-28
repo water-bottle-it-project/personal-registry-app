@@ -1,6 +1,5 @@
 import {
   BackgroundImage,
-  Button,
   Container,
   createStyles,
   Grid,

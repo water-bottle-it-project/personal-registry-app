@@ -5,8 +5,8 @@ import { emailZ } from '~types/util';
 const signupZ = z
   .object({
     email: emailZ,
-    password: z.string().min(1),
-    repeatPassword: z.string().min(1),
+    password: z.string().min(6),
+    repeatPassword: z.string().min(6),
   })
   .required();
 
