@@ -57,7 +57,7 @@ const useStyles = createStyles(theme => ({
   },
 
   lottie: {
-    marginTop: -60,
+    marginTop: -90,
     maxWidth: 500,
     [theme.fn.smallerThan('md')]: {
       margin: 'auto',

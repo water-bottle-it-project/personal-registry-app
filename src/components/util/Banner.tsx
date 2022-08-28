@@ -15,11 +15,9 @@ export function Banner({ title, description }: BannerProps) {
       <Overlay color='#000' opacity={0.65} zIndex={1} />
       <div className={classes.inner}>
         <Title className={classes.title}>{title}</Title>
-        <Container size='xs'>
-          <Text className={classes.description} size='lg'>
-            {description}
-          </Text>
-        </Container>
+        <Text className={classes.description} size='lg'>
+          {description}
+        </Text>
       </div>
     </div>
   );
@@ -33,6 +31,7 @@ const useStyles = createStyles(theme => ({
     backgroundImage: `url(${banner.src})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    paddingLeft: theme.spacing.md,
 
     [theme.fn.smallerThan('xs')]: {
       paddingTop: 80,
@@ -49,7 +48,6 @@ const useStyles = createStyles(theme => ({
     fontWeight: 800,
     fontSize: 40,
     letterSpacing: -1,
-    paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
     color: theme.white,
     marginBottom: theme.spacing.xs,
