@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
 import { StatsGroup } from './StatsGroup';

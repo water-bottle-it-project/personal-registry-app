@@ -1,6 +1,4 @@
-import type { PasswordInputProps } from '@mantine/core';
-import { Anchor, Button, createStyles, Group, PasswordInput, Text, TextInput } from '@mantine/core';
-import { IconAlertTriangle } from '@tabler/icons';
+import { PasswordInput, TextInput } from '@mantine/core';
 
 export function ConfirmPassword() {
   return (
