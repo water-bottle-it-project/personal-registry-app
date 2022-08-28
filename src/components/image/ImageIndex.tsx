@@ -56,7 +56,7 @@ export function ImagesIndex() {
         opened={opened}
         size='50%'
         transition='fade'
-        transitionDuration={1000}
+        transitionDuration={250}
         transitionTimingFunction='ease'
       >
         <ImageOverlay
