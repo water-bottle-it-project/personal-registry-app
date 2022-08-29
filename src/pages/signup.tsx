@@ -7,7 +7,7 @@ import { SignupForm } from '~components/auth/SignupForm';
 function SignUp() {
   return (
     <>
-      <Container mt={100} size='xl'>
+      <Container mt='6vh' size='xl'>
         <Title align='center' weight={900}>
           Welcome to Registry App
         </Title>
