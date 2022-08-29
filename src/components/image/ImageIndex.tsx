@@ -1,5 +1,4 @@
 import { Container, Modal, SimpleGrid } from '@mantine/core';
-import type { Key } from 'react';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -38,7 +37,7 @@ export function ImagesIndex() {
   const Images =
     allUsers.data &&
     allUsers.data.photos.map(
-      (photo: { caption: string; id: Key | null | undefined; url: string; userId: string }) => (
+      (photo: { caption: string; id: string; url: string; userId: string }) => (
         <Container
           key={photo.id}
           onClick={() => renderOverlay(photo.url, photo.caption, photo.userId, true)}
@@ -56,7 +55,7 @@ export function ImagesIndex() {
         opened={opened}
         size='50%'
         transition='fade'
-        transitionDuration={1000}
+        transitionDuration={250}
         transitionTimingFunction='ease'
       >
         <ImageOverlay
