@@ -33,7 +33,7 @@ export function Hero() {
             >
               Sign in
             </LinkButton>
-            <LinkButton href='/signin' size='md' variant='default'>
+            <LinkButton href='/signup' size='md' variant='default'>
               Register
             </LinkButton>
           </Group>
@@ -57,7 +57,7 @@ const useStyles = createStyles(theme => ({
   },
 
   lottie: {
-    marginTop: -60,
+    marginTop: -90,
     maxWidth: 500,
     [theme.fn.smallerThan('md')]: {
       margin: 'auto',

@@ -1,4 +1,5 @@
 import { SimpleGrid } from '@mantine/core';
+import type { Key } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
@@ -14,16 +15,24 @@ export function CollectionIndex() {
 
   const Collections =
     allUsers.data &&
-    allUsers.data.collections.map(collection => (
-      <CollectionCard
-        color={collection.color}
-        description={collection.description}
-        key={collection.id}
-        postCount={postNumberTemp}
-        title={collection.title}
-        userId={collection.userId}
-      />
-    ));
+    allUsers.data.collections.map(
+      (collection: {
+        color: string;
+        description: string;
+        id: Key | null | undefined;
+        title: string;
+        userId: string;
+      }) => (
+        <CollectionCard
+          color={collection.color}
+          description={collection.description}
+          key={collection.id}
+          postCount={postNumberTemp}
+          title={collection.title}
+          userId={collection.userId}
+        />
+      ),
+    );
 
   return (
     <SimpleGrid

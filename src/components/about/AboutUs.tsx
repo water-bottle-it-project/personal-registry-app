@@ -1,7 +1,8 @@
 import { Container, createStyles, Grid, Space, Title } from '@mantine/core';
 
+import { Banner } from '~components/util/Banner';
+
 import { AboutUsCard } from './AboutUsCard';
-import { Banner } from './Banner';
 import { FAQ } from './FAQ';
 
 const teamInfo = [
@@ -66,7 +67,11 @@ export function AboutUs() {
 
   return (
     <>
-      <Banner />
+      <Banner
+        description='We are a team of developers who develop developed applications that require development,
+            while developing developer skills.'
+        title='About Us'
+      />
       <Container size='xl'>
         <Space h='lg' />
         <Title align='center' order={1}>

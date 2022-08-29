@@ -28,7 +28,6 @@ const useStyles = createStyles(theme => ({
     lineHeight: 1,
     fontWeight: 700,
     marginBottom: theme.spacing.md,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
   },
 
   description: {

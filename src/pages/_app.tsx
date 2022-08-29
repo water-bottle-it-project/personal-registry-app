@@ -1,12 +1,10 @@
 import type { ColorScheme } from '@mantine/core';
 import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { withTRPC } from '@trpc/next';
-import { getCookie, setCookies } from 'cookies-next';
-import type { GetServerSidePropsContext } from 'next';
 import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
-import { useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { initAuth } from '~clientUtils/initAuth';
@@ -16,10 +14,6 @@ import { appTheme } from '~components/app/appThemeOverride';
 import type { AppRouter } from '~pages/api/trpc/[trpc]';
 
 const COLOR_SCHEME_KEY = 'colorScheme';
-
-type CustomAppProps = AppProps & {
-  initialColorScheme: ColorScheme;
-};
 
 // Initialize Firebase auth
 initAuth();
@@ -31,18 +25,19 @@ initAuth();
  * @param initialColorScheme
  * @constructor
  */
-function CustomApp({ Component, pageProps, initialColorScheme }: CustomAppProps) {
+function CustomApp({ Component, pageProps }: AppProps) {
   // Dark mode support
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(initialColorScheme);
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: COLOR_SCHEME_KEY,
+    defaultValue: 'light',
+    getInitialValueInEffect: true,
+  });
   appTheme.colorScheme = colorScheme;
 
   // Dark mode event handler
   const toggleColorScheme = (value?: ColorScheme) => {
     const newColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
     setColorScheme(newColorScheme);
-    setCookies(COLOR_SCHEME_KEY, newColorScheme, {
-      maxAge: 60 * 60 * 24 * 30,
-    });
   };
 
   // Render top-level App component
@@ -61,28 +56,13 @@ function CustomApp({ Component, pageProps, initialColorScheme }: CustomAppProps)
   );
 }
 
-// Use client cookie to server-side render the stored color scheme without a flash
-CustomApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
-  initialColorScheme: getCookie(COLOR_SCHEME_KEY, ctx) || 'light',
-});
-
 /**
  * Wraps the CustomApp component with TRPC client-side query global context
  */
 export default withTRPC<AppRouter>({
-  config({ ctx }) {
+  config() {
     return {
       url: '/api/trpc',
-      headers: () => {
-        if (ctx?.req) {
-          // on ssr, forward client's headers to the server
-          return {
-            ...ctx.req.headers,
-            'x-ssr': '1',
-          };
-        }
-        return {};
-      },
     };
   },
   ssr: false,

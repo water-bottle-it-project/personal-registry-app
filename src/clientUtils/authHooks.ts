@@ -35,3 +35,12 @@ export const withLoginPageSSR = () =>
     whenAuthed: AuthAction.REDIRECT_TO_APP,
     // whenUnauthed: AuthAction.RENDER,
   })();
+
+/**
+ * For the Registration page
+ */
+export const withRegisterPage = withAuthUser({
+  whenAuthed: AuthAction.REDIRECT_TO_APP,
+  // whenUnauthedAfterInit: AuthAction.RENDER,
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+});

@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 
 import { FeaturesTitle } from '~components/homepage/Features';
 import { Hero } from '~components/homepage/Hero';
+import { Banner } from '~components/util/Banner';
 
 const Home: NextPage = () => {
   return (
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
         <Hero />
         <Space h={20} />
         <FeaturesTitle />
+        <Banner description='Feel free to contact us on 012 3456 789' title='Need help?' />
       </Container>
     </>
   );

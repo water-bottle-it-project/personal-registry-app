@@ -1,6 +1,5 @@
 import {
   BackgroundImage,
-  Button,
   Container,
   createStyles,
   Grid,
@@ -11,6 +10,9 @@ import {
   Title,
 } from '@mantine/core';
 import { IconFolders, IconPhoto, IconSearch, IconTag } from '@tabler/icons';
+
+import gradient from '~components/homepage/gradient.png';
+import { LinkButton } from '~components/util/LinkButton';
 
 export function FeaturesTitle() {
   const { classes } = useStyles();
@@ -30,7 +32,7 @@ export function FeaturesTitle() {
   ));
 
   return (
-    <BackgroundImage src='/gradient.png'>
+    <BackgroundImage src={gradient.src}>
       <Container px={0} size='xl'>
         <Grid gutter={30} m={0} px={0} py={30}>
           <Grid.Col md={5} span={12}>
@@ -43,9 +45,9 @@ export function FeaturesTitle() {
               You can add textual descriptions and photos to your memories with metadata, or skip
               some of these.
             </Text>
-            <Button mt='xl' size='md' variant='default'>
+            <LinkButton href='/signup' mt='xl' size='md' variant='default'>
               Get started
-            </Button>
+            </LinkButton>
           </Grid.Col>
           <Grid.Col md={7} span={12}>
             <SimpleGrid breakpoints={[{ maxWidth: 'xs', cols: 1 }]} cols={2} spacing={30}>

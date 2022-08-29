@@ -19,11 +19,11 @@ export default class _Document extends Document {
           <link href='https://fonts.googleapis.com' rel='preconnect' />
           <link crossOrigin='true' href='https://fonts.gstatic.com' rel='preconnect' />
           <link
-            href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
             rel='stylesheet'
           />
           <link
-            href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap'
             rel='stylesheet'
           />
         </Head>
