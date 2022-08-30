@@ -35,7 +35,8 @@ export function CreateFormMemoryInfo() {
             label='Description'
             maxLength={1000}
             styles={{
-              wrapper: { height: '100%', display: 'flex' },
+              root: { height: '100%', display: 'flex', flexDirection: 'column', marginTop: 2 },
+              wrapper: { display: 'flex', flexGrow: 1 },
               input: { flexGrow: 1 },
             }}
           />
