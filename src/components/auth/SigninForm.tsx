@@ -55,13 +55,11 @@ export function SigninForm() {
   return (
     <>
       <form noValidate onSubmit={handleSubmit(handleSignin)}>
-        <Container my={40} size={420}>
-          {isUnauthorized ? (
+        <Container my={10} size={420}>
+          {isUnauthorized && (
             <AlertMessage isError text='You must be signed in to access that page.' title='Error' />
-          ) : (
-            <> </>
           )}
-          <Paper mt={30} p={30} radius='md' shadow='md' withBorder>
+          <Paper mt={20} p={30} radius='md' shadow='md' withBorder>
             <TextInput
               error={errors?.email?.message}
               icon={<IconAt size={16} />}
