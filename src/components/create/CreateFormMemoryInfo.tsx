@@ -34,10 +34,19 @@ export function CreateFormMemoryInfo() {
             description='As brief as a fleeting moment, or the start of a new best-selling novel.'
             label='Description'
             maxLength={1000}
+            minRows={4}
             styles={{
-              root: { height: '100%', display: 'flex', flexDirection: 'column', marginTop: 2 },
+              root: {
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                marginTop: 1,
+                paddingTop: 1,
+                flexGrow: 1,
+              },
               wrapper: { display: 'flex', flexGrow: 1 },
               input: { flexGrow: 1 },
+              description: { paddingTop: 1 },
             }}
           />
         </Stack>
