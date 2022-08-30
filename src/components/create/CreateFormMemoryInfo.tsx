@@ -1,6 +1,6 @@
-import { Grid, Stack, Textarea, TextInput } from '@mantine/core';
+import { Grid, MultiSelect, Stack, Textarea, TextInput } from '@mantine/core';
 import { DateRangePicker } from '@mantine/dates';
-import { IconCalendar, IconPencil } from '@tabler/icons';
+import { IconCalendar, IconPencil, IconTags } from '@tabler/icons';
 
 export function CreateFormMemoryInfo() {
   return (
@@ -17,14 +17,24 @@ export function CreateFormMemoryInfo() {
           <DateRangePicker
             allowSingleDateInRange
             description='Click a date to set it as either the start or end date.
-            Click again to set the other date.'
+            Click again to set the other date. The dates can be the same.'
             dropdownPosition='bottom-start'
             firstDayOfWeek='sunday'
             icon={<IconCalendar size={16} />}
             inputFormat='D MMMM YYYY'
             label='Start and end dates'
-            placeholder='Click to choose'
+            placeholder='Click to choose a date range'
             withAsterisk
+          />
+          <MultiSelect
+            data={[
+              { value: '1a2b3c', label: 'Gadgets' },
+              { value: '4a5b6c', label: 'Family' },
+            ]}
+            description='Choose collections that this memory should be part of.'
+            icon={<IconTags size={16} />}
+            label='Collections'
+            placeholder='Click to select collections'
           />
         </Stack>
       </Grid.Col>
@@ -33,8 +43,9 @@ export function CreateFormMemoryInfo() {
           <Textarea
             description='As brief as a fleeting moment, or the start of a new best-selling novel.'
             label='Description'
-            maxLength={1000}
+            maxLength={10000}
             minRows={4}
+            placeholder={`You can write over 1000 words in here...but you don't have to!`}
             styles={{
               root: {
                 height: '100%',
