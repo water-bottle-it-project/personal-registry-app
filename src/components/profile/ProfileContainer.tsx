@@ -1,9 +1,22 @@
 import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import type { AuthUserContext } from 'next-firebase-auth';
+import { useAuthUser } from 'next-firebase-auth';
+
+import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
 import { StatsGroup } from './StatsGroup';
 
-export function ProfileContainer() {
+export function ProfileContainer(userID: any) {
+  const allUsers = trpcClient.useQuery(['profile.listUsers']);
+
+  console.log('grabbing user');
+  console.log(' ++ ');
+  if (allUsers.data.user) {
+    console.log(JSON.stringify(allUsers.data.user, null, 2));
+  }
+
+  console.log('found user');
   return (
     <Container px='xs'>
       <Space h='xl' />
@@ -18,7 +31,7 @@ export function ProfileContainer() {
       >
         <Container>
           <Title order={1} size={65}>
-            John Doe
+            dd
           </Title>
           <Space h='md' />
 
@@ -29,14 +42,14 @@ export function ProfileContainer() {
           <Text size='md' weight={600}>
             Email:{' '}
             <Text size='md' span weight={400}>
-              jdoe@student.unimelb.edu.au
+              {allUsers.email || 'No email'}
             </Text>
           </Text>
 
           <Text size='md' weight={600}>
             Account Created:{' '}
             <Text size='md' span weight={400}>
-              02/02/2014 -{' '}
+              need to -{' '}
               <Text italic size='md' span weight={400}>
                 4 years ago
               </Text>
