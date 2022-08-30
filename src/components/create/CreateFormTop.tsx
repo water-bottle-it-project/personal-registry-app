@@ -5,7 +5,7 @@ export function CreateFormTop() {
   return (
     <Group position='apart'>
       <Title>Create a memory</Title>
-      <Group>
+      <Group position='right'>
         <Button rightIcon={<IconRotateClockwise2 />} variant='default'>
           Reset
         </Button>

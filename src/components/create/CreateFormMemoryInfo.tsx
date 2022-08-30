@@ -31,7 +31,7 @@ export function CreateFormMemoryInfo() {
               { value: '1a2b3c', label: 'Gadgets' },
               { value: '4a5b6c', label: 'Family' },
             ]}
-            description='Choose collections that this memory should be part of.'
+            description='Choose collections that this memory should be a part of.'
             icon={<IconTags size={16} />}
             label='Collections'
             placeholder='Click to select collections'
