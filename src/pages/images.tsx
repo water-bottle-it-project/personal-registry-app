@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 
 import { ImagesIndex } from '~components/image/ImageIndex';
 
-const Image: NextPage = () => {
+const Images: NextPage = () => {
   return (
     <Container px={30} size={1500}>
       <div>All Images hehe</div>
@@ -12,4 +12,4 @@ const Image: NextPage = () => {
   );
 };
 
-export default Image;
+export default Images;
