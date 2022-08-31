@@ -9,13 +9,6 @@ const appTheme: MantineThemeOverride = {
     Paper: {
       defaultProps: { p: 'sm', shadow: 'xl', withBorder: true },
     },
-    ActionIcon: {
-      styles: theme => ({
-        root: {
-          boxShadow: theme.shadows.md,
-        },
-      }),
-    },
     ThemeIcon: {
       styles: theme => ({
         root: {

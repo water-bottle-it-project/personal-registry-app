@@ -12,8 +12,10 @@ import {
   TextInput,
 } from '@mantine/core';
 import { IconArrowNarrowRight, IconAt, IconCheck, IconFingerprint } from '@tabler/icons';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { AlertMessage } from '~components/util/AlertMessage';
 import type { SigninT } from '~types/signin';
 import { signinZ } from '~types/signin';
 
@@ -27,6 +29,9 @@ export function SigninForm() {
   } = useForm<SigninT>({
     resolver: zodResolver(signinZ),
   });
+
+  const router = useRouter();
+  const isUnauthorized = router.query.unauthorized;
 
   function handleSignin({ email, password }: SigninT) {
     const auth = getAuth();
@@ -48,40 +53,45 @@ export function SigninForm() {
   }
 
   return (
-    <form noValidate onSubmit={handleSubmit(handleSignin)}>
-      <Container my={40} size={420}>
-        <Paper mt={30} p={30} radius='md' shadow='md' withBorder>
-          <TextInput
-            error={errors?.email?.message}
-            icon={<IconAt size={16} />}
-            id='email'
-            label='Email'
-            placeholder='user@example.com'
-            required
-            type='email'
-            {...register('email')}
-          />
-          <PasswordInput
-            icon={<IconFingerprint size={16} />}
-            id='password'
-            label='Password'
-            mt='md'
-            placeholder='Your password'
-            required
-            {...register('password')}
-            error={errors?.password?.message}
-          />
-          <Group mt='md' position='apart'>
-            <Checkbox defaultChecked label='Remember me' />
-            <Anchor<'a'> href='#' onClick={event => event.preventDefault()} size='sm'>
-              Forgot password?
-            </Anchor>
-          </Group>
-          <Button fullWidth mt='xl' type='submit' {...loginButtonProps}>
-            Sign in
-          </Button>
-        </Paper>
-      </Container>
-    </form>
+    <>
+      <form noValidate onSubmit={handleSubmit(handleSignin)}>
+        <Container my={10} size={420}>
+          {isUnauthorized && (
+            <AlertMessage isError text='You must be signed in to access that page.' title='Error' />
+          )}
+          <Paper mt={20} p={30} radius='md' shadow='md' withBorder>
+            <TextInput
+              error={errors?.email?.message}
+              icon={<IconAt size={16} />}
+              id='email'
+              label='Email'
+              placeholder='user@example.com'
+              required
+              type='email'
+              {...register('email')}
+            />
+            <PasswordInput
+              icon={<IconFingerprint size={16} />}
+              id='password'
+              label='Password'
+              mt='md'
+              placeholder='Your password'
+              required
+              {...register('password')}
+              error={errors?.password?.message}
+            />
+            <Group mt='md' position='apart'>
+              <Checkbox defaultChecked label='Remember me' />
+              <Anchor<'a'> href='#' onClick={event => event.preventDefault()} size='sm'>
+                Forgot password?
+              </Anchor>
+            </Group>
+            <Button fullWidth mt='xl' type='submit' {...loginButtonProps}>
+              Sign in
+            </Button>
+          </Paper>
+        </Container>
+      </form>
+    </>
   );
 }

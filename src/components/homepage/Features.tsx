@@ -9,7 +9,7 @@ import {
   ThemeIcon,
   Title,
 } from '@mantine/core';
-import { IconFolders, IconPhoto, IconSearch, IconTag } from '@tabler/icons';
+import { IconFolders, IconPhoto, IconSearch, IconTags } from '@tabler/icons';
 
 import gradient from '~components/homepage/gradient.png';
 import { LinkButton } from '~components/util/LinkButton';
@@ -105,7 +105,7 @@ const features = [
     color: 'green',
   },
   {
-    icon: IconTag,
+    icon: IconTags,
     title: 'Collections',
     description: 'Group your memories into larger collections.',
     color: 'blue',

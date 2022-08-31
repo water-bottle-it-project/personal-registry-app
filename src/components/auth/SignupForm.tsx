@@ -48,8 +48,8 @@ export function SignupForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(handleSignup)}>
-      <Container my={40} size={420}>
-        <Paper mt={30} p={30} radius='md' shadow='md' withBorder>
+      <Container my={10} size={420}>
+        <Paper mt={20} p={30} radius='md' shadow='md' withBorder>
           <TextInput
             error={errors?.email?.message}
             icon={<IconAt size={16} />}

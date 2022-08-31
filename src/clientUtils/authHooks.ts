@@ -6,6 +6,7 @@ import { AuthAction, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-au
 export const withAuthedPage = withAuthUser({
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
   whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+  authPageURL: `/signin/?unauthorized=${true}`,
 });
 
 /**

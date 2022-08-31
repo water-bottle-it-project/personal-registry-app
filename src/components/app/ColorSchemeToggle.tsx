@@ -24,6 +24,7 @@ export function ColorSchemeToggle() {
           color: theme.colorScheme === 'dark' ? theme.colors.yellow[4] : theme.colors.violet[6],
           borderWidth: '1px',
           borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
+          boxShadow: theme.shadows.md,
         })}
       >
         {colorScheme === 'dark' ? <IconSun size={19} /> : <IconMoonStars size={19} />}
