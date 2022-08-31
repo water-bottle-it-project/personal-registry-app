@@ -20,6 +20,7 @@ export function CollectionCard(props: CollectionCardProps) {
         sx={theme => ({
           fontSize: theme.fontSizes.lg,
           width: 300,
+          color: theme.colors.gray,
           backgroundColor: theme.colors[props.color][2],
         })}
         withBorder
