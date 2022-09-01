@@ -1,9 +1,25 @@
 import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import { useAuthUser } from 'next-firebase-auth';
+import { stringToDate, tupleToString } from 'src/components/profile/ProfileUtils';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
 import { StatsGroup } from './StatsGroup';
 
 export function ProfileContainer() {
+  const currentUser = useAuthUser();
+
+  // grab date that user account was created
+  const loggedInDate = stringToDate(
+    currentUser?.firebaseUser?.metadata?.lastSignInTime || '1/1/2001',
+  );
+  const createdDate = stringToDate(currentUser?.firebaseUser?.metadata?.creationTime || '1/1/2001');
+
+  const date = new Date();
+  const yearSinceCreation = date.getFullYear() - createdDate[2];
+
+  // user display name if they have it, else use email username, if they don't have that use error msg.
+  const username = currentUser.displayName || currentUser?.email?.split('@')[0] || 'No Name Found';
+
   return (
     <Container px='xs'>
       <Space h='xl' />
@@ -18,7 +34,7 @@ export function ProfileContainer() {
       >
         <Container>
           <Title order={1} size={65}>
-            John Doe
+            {username}
           </Title>
           <Space h='md' />
 
@@ -29,17 +45,26 @@ export function ProfileContainer() {
           <Text size='md' weight={600}>
             Email:{' '}
             <Text size='md' span weight={400}>
-              jdoe@student.unimelb.edu.au
+              {currentUser.email || 'No email found'}
             </Text>
           </Text>
 
           <Text size='md' weight={600}>
             Account Created:{' '}
             <Text size='md' span weight={400}>
-              02/02/2014 -{' '}
+              {tupleToString(createdDate) || 'No creation date found'} -{' '}
               <Text italic size='md' span weight={400}>
-                4 years ago
+                {yearSinceCreation == 0
+                  ? 'This Year'
+                  : yearSinceCreation + ' year' + (yearSinceCreation > 1 ? 's' : '') + ' ago'}
               </Text>
+            </Text>
+          </Text>
+
+          <Text size='md' weight={600}>
+            Last Logged In:{' '}
+            <Text size='md' span weight={400}>
+              {tupleToString(loggedInDate) || 'No login date found'}
             </Text>
           </Text>
 

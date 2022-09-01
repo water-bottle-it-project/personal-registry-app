@@ -7,6 +7,7 @@ import { collectionsRouter } from '~server/routers/collections';
 import { debugRouter } from '~server/routers/debug';
 import { debugAuthedRouter } from '~server/routers/debugAuthed';
 import { imagesRouter } from '~server/routers/image';
+import { profileRouter } from '~server/routers/profile';
 
 /**
  * Merge individual routers together to form the TRPC API router.
@@ -16,8 +17,8 @@ const appRouter = trpc
   .merge('debug.', debugRouter)
   .merge('debugAuthed.', debugAuthedRouter)
   .merge('images.', imagesRouter)
+  .merge('profile.', profileRouter)
   .merge('collections.', collectionsRouter);
-
 /**
  * Export type-safe route paths, inputs, and outputs
  */

@@ -1,4 +1,5 @@
 import * as trpc from '@trpc/server';
+import { z } from 'zod';
 
 import { dbReqHandler } from '~server/db/dbReqHandler';
 import { Collection } from '~server/models/collection';
@@ -12,6 +13,11 @@ const collectionsRouter = trpc
   .middleware(dbReqHandler)
 
   .query('listCollections', {
+    input: z
+      .object({
+        name: z.string().nullish(),
+      })
+      .default({ name: 'World' }),
     async resolve() {
       const collections = await Collection.find();
       return {
