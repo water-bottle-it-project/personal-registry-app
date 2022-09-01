@@ -11,6 +11,7 @@ interface CollectionCardProps {
     title: string,
     desc: string,
     userId: string,
+    color: string,
     value: boolean | ((prevState: boolean) => boolean),
   ) => void;
 }
@@ -51,7 +52,7 @@ export function CollectionCard({
                 <Text>View {postCount} posts</Text>
               </Anchor>
             </Link>
-            <Anchor onClick={() => openModal(title, description, userId, true)}>
+            <Anchor onClick={() => openModal(title, description, userId, color, true)}>
               <Text color='red'>Edit</Text>
             </Anchor>
           </Group>
