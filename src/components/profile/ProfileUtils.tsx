@@ -14,7 +14,7 @@ export function stringToDate(dateString: any) {
 
 // convert tuple (d,m,y) into string for display
 export function tupleToString(dateTuple: any) {
-  const dateSep = "/";
+  const dateSep = '/';
   if (dateTuple == undefined) {
     return '';
   }

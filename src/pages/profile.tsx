@@ -1,6 +1,3 @@
-import type { NextPage } from 'next';
-import { useAuthUser } from 'next-firebase-auth';
-
 import { withAuthedPage } from '~clientUtils/authHooks';
 import { ProfileContainer } from '~components/profile/ProfileContainer';
 

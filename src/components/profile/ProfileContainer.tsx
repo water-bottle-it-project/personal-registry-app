@@ -1,9 +1,6 @@
 import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
-import type { AuthUserContext } from 'next-firebase-auth';
 import { useAuthUser } from 'next-firebase-auth';
 import { stringToDate, tupleToString } from 'src/components/profile/ProfileUtils';
-
-import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
 import { StatsGroup } from './StatsGroup';
@@ -12,11 +9,13 @@ export function ProfileContainer() {
   const currentUser = useAuthUser();
 
   // grab date that user account was created
-  const loggedInDate = stringToDate(currentUser?.firebaseUser?.metadata?.lastSignInTime);
-  const createdDate = stringToDate(currentUser?.firebaseUser?.metadata?.creationTime);
+  const loggedInDate = stringToDate(
+    currentUser?.firebaseUser?.metadata?.lastSignInTime || '1/1/2001',
+  );
+  const createdDate = stringToDate(currentUser?.firebaseUser?.metadata?.creationTime || '1/1/2001');
 
   const date = new Date();
-  const yearSinceCreation = 0;
+  const yearSinceCreation = date.getFullYear() - createdDate[2];
 
   // user display name if they have it, else use email username, if they don't have that use error msg.
   const username = currentUser.displayName || currentUser?.email?.split('@')[0] || 'No Name Found';
