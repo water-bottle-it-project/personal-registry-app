@@ -4,8 +4,10 @@ import type { Key } from 'react';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import collections from '~pages/collections';
 
 import { CollectionCard } from './CollectionCard';
+import { CollectionEditOverlay } from './CollectionEditOverlay';
 
 /**
  * Debug page for querying (aka GET) and mutating (aka POST) users using TRPC and Mongoose
@@ -22,17 +24,19 @@ export function CollectionIndex() {
     title: '',
     desc: '',
     userId: '',
+    color: '',
   });
 
   const renderOverlay = (
     title: string,
     desc: string,
     userId: string,
+    color: string,
     value: boolean | ((prevState: boolean) => boolean),
   ) => {
     setOpened(value);
     setEditModal(previousState => {
-      return { ...previousState, title: title, desc: desc, userId: userId };
+      return { ...previousState, title: title, desc: desc, color: color, userId: userId };
     });
   };
 
@@ -64,12 +68,17 @@ export function CollectionIndex() {
         fullScreen={isMobile}
         onClose={() => setOpened(false)}
         opened={opened}
-        size='calc(100vw - 40%)'
+        size='calc(100vw - 60%)'
         transition='fade'
         transitionDuration={250}
         transitionTimingFunction='ease'
       >
-        Hi
+        <CollectionEditOverlay
+          color={displayEditModal.color}
+          description={displayEditModal.desc}
+          title={displayEditModal.title}
+          userId={displayEditModal.userId}
+        />
       </Modal>
       <SimpleGrid
         breakpoints={[
