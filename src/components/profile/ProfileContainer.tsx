@@ -1,22 +1,26 @@
 import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import type { AuthUserContext } from 'next-firebase-auth';
 import { useAuthUser } from 'next-firebase-auth';
+import { stringToDate, tupleToString } from 'src/components/profile/ProfileUtils';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
 import { StatsGroup } from './StatsGroup';
 
-export function ProfileContainer(userID: any) {
-  const allUsers = trpcClient.useQuery(['profile.listUsers']);
+export function ProfileContainer() {
+  const currentUser = useAuthUser();
 
-  console.log('grabbing user');
-  console.log(' ++ ');
-  if (allUsers.data.user) {
-    console.log(JSON.stringify(allUsers.data.user, null, 2));
-  }
+  // grab date that user account was created
+  const loggedInDate = stringToDate(currentUser?.firebaseUser?.metadata?.lastSignInTime);
+  const createdDate = stringToDate(currentUser?.firebaseUser?.metadata?.creationTime);
 
-  console.log('found user');
+  const date = new Date();
+  const yearSinceCreation = 0;
+
+  // user display name if they have it, else use email username, if they don't have that use error msg.
+  const username = currentUser.displayName || currentUser?.email?.split('@')[0] || 'No Name Found';
+
   return (
     <Container px='xs'>
       <Space h='xl' />
@@ -31,7 +35,7 @@ export function ProfileContainer(userID: any) {
       >
         <Container>
           <Title order={1} size={65}>
-            dd
+            {username}
           </Title>
           <Space h='md' />
 
@@ -42,17 +46,26 @@ export function ProfileContainer(userID: any) {
           <Text size='md' weight={600}>
             Email:{' '}
             <Text size='md' span weight={400}>
-              {allUsers.email || 'No email'}
+              {currentUser.email || 'No email found'}
             </Text>
           </Text>
 
           <Text size='md' weight={600}>
             Account Created:{' '}
             <Text size='md' span weight={400}>
-              need to -{' '}
+              {tupleToString(createdDate) || 'No creation date found'} -{' '}
               <Text italic size='md' span weight={400}>
-                4 years ago
+                {yearSinceCreation == 0
+                  ? 'This Year'
+                  : yearSinceCreation + ' year' + (yearSinceCreation > 1 ? 's' : '') + ' ago'}
               </Text>
+            </Text>
+          </Text>
+
+          <Text size='md' weight={600}>
+            Last Logged In:{' '}
+            <Text size='md' span weight={400}>
+              {tupleToString(loggedInDate) || 'No login date found'}
             </Text>
           </Text>
 

@@ -1,13 +1,15 @@
 import type { NextPage } from 'next';
+import { useAuthUser } from 'next-firebase-auth';
 
+import { withAuthedPage } from '~clientUtils/authHooks';
 import { ProfileContainer } from '~components/profile/ProfileContainer';
 
-const Profile: NextPage = () => {
+function Profile() {
   return (
     <>
       <ProfileContainer />
     </>
   );
-};
+}
 
-export default Profile;
+export default withAuthedPage(Profile);
