@@ -40,8 +40,8 @@ linked above.
 ## :key: Environment Variables
 
 To build the app or use dev mode to see a live preview of code changes, please reach out to a team
-member (details at the bottom) for an `.env.local` file to add to your project. Otherwise, you
-cannot start the app.
+member (details at the bottom) for an `.env.local` file to add to your project. **Otherwise, you
+cannot start the app and authentication will not work.**
 
 ## :bangbang: Building the app
 
@@ -160,10 +160,10 @@ yarn
 ### :runner: Start the app
 
 ```bash
-## dev mode (for hot module reload).
+# dev mode (for hot module reload).
 yarn dev
 
-## production mode (for demos and assessment).
+# production mode (for demos and assessment).
 yarn build && yarn start
 ```
 
