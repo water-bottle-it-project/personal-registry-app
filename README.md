@@ -27,7 +27,7 @@
 - [:bangbang: Building the app](#bangbang-building-the-app)
 - [:pencil: Contributing](#pencil-contributing)
   - [:paperclip: Consistency](#paperclip-consistency)
-  - [:arrow-down: Install dependencies](#arrow-down-install-dependencies)
+  - [:arrow_down: Install dependencies](#arrow_down-install-dependencies)
   - [:runner: Start the app](#runner-start-the-app)
   - [:package: Adding package dependencies using yarn](#package-adding-package-dependencies-using-yarn)
 - [:warning: License](#warning-license)
