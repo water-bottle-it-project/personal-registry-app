@@ -164,7 +164,7 @@ To keep the codebase tidy, please ensure your editor has these extensions instal
 | ESLint       | [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)          | ""                                               |
 | Prettier     | [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)        | ""                                               |
 
-### :arrow-down: Install dependencies
+### :arrow_down: Install dependencies
 
 ```bash
   yarn
