@@ -53,6 +53,32 @@ const collectionsRouter = trpc
         success: true,
       };
     },
+  })
+
+  .mutation('editCollection', {
+    input: z.object({
+      oldTitle: z.string(),
+      title: z.string(),
+      description: z.string(),
+      userId: z.string(),
+    }),
+    async resolve({ input }) {
+      const toUpdate = { title: input.oldTitle, userId: input.userId };
+      const newValues = { $set: { title: input.title, description: input.description } };
+      const result = await Collection.updateOne(toUpdate, newValues);
+      if (result.matchedCount == 0) {
+        throw new trpc.TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Collection not found.',
+        });
+      }
+      if (result.modifiedCount == 0) {
+        throw new trpc.TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Collection not updated.',
+        });
+      }
+    },
   });
 
 export { collectionsRouter };

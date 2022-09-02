@@ -1,10 +1,9 @@
-import { Container, Modal, SimpleGrid } from '@mantine/core';
+import { Modal, SimpleGrid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import type { Key } from 'react';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import collections from '~pages/collections';
 
 import { CollectionCard } from './CollectionCard';
 import { CollectionEditOverlay } from './CollectionEditOverlay';

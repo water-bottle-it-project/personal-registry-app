@@ -3,7 +3,6 @@ import {
   ColorPicker,
   Container,
   createStyles,
-  Image,
   SimpleGrid,
   Space,
   Text,
@@ -12,8 +11,11 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core';
+import { IconRotateClockwise2, IconTrash } from '@tabler/icons';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { trpcClient } from '~clientUtils/trpcClient';
 
 export interface EditCollectionProps {
   title: string;
@@ -26,6 +28,16 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
   const theme = useMantineTheme();
   const { classes } = useStyles();
   const [value, onChange] = useState(null);
+  const [name, setName] = useState(title);
+  const [desc, setDesc] = useState(description);
+
+  const mutation = trpcClient.useMutation(['collections.editCollection']);
+
+  const handleEdit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    mutation.mutate({ oldTitle: title, title: name, description: desc, userId: userId });
+  };
+
   return (
     <Container
       sx={theme => ({
@@ -35,15 +47,22 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
     >
       <Title order={1}>Edit Collection</Title>
       <Space h='md' />
-      <form action=''>
+      <form onSubmit={handleEdit}>
         <TextInput
           id='name'
           label='Collection Name'
+          onChange={event => setName(event.currentTarget.value)}
           placeholder='Enter a collection name'
-          value={title}
+          value={name}
         />
         <Space h='xs' />
-        <Textarea label='Description' placeholder='Your comment' value={description} />
+        <Textarea
+          id='desc'
+          label='Description'
+          onChange={event => setDesc(event.currentTarget.value)}
+          placeholder='Your comment'
+          value={desc}
+        />
         <Space h='xl' />
         <Title order={1}>Customize color</Title>
         <Space h='md' />
@@ -73,18 +92,52 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
         <Space h='xs' />
         <div className={classes.colorGrid}>
           <div className={classes.colorContainer}>
-            <Text>Selected Color</Text>
+            <Text>Selected</Text>
             <div className={classes.color} style={{ backgroundColor: value }} />
           </div>
 
           <div className={classes.colorContainer}>
-            <Text>Current Color</Text>
+            <Text>Current</Text>
             <div className={classes.color} style={{ backgroundColor: theme.colors[color][2] }} />
           </div>
         </div>
 
         <Space h='xl' />
-        <Button mt='xl'>Save</Button>
+        <SimpleGrid
+          breakpoints={[
+            { maxWidth: 'lg', cols: 3, spacing: 'md' },
+            { maxWidth: 'sm', cols: 1, spacing: 'sm' },
+          ]}
+          cols={4}
+          spacing='xl'
+        >
+          <Button
+            gradient={{ from: 'indigo', to: 'cyan' }}
+            mt='xl'
+            type='submit'
+            variant='gradient'
+          >
+            Save
+          </Button>
+          <Button
+            gradient={{ from: 'indigo', to: 'cyan' }}
+            leftIcon={<IconRotateClockwise2 />}
+            mt='xl'
+            onClick={() => {
+              setName(title);
+              setDesc(description);
+            }}
+            variant='gradient'
+            variant='outline'
+          >
+            Reset
+          </Button>
+          <div />
+          <Button color='red' leftIcon={<IconTrash />} mt='xl' variant='outline'>
+            Delete
+          </Button>
+        </SimpleGrid>
+        {mutation.error && <p>Something went wrong! {mutation.error.message}</p>}
       </form>
     </Container>
   );
