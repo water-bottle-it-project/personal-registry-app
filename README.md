@@ -4,7 +4,7 @@
   <h1>Personal Registry App</h1>
 
   <p>
-   We are Team 055 (Water Bottle). Our team consists of Ian, Kian, Sean, Jack and Calvin
+   We are Team 055 (Water Bottle). Our team consists of Ian, Kian, Sean, Jack and Calvin.
   </p>
 
 <h4>
@@ -144,7 +144,7 @@ cannot start the app.
 To keep the codebase tidy, please ensure your editor has these extensions installed:
 
 | Extension    | VSCode                                                                                        | Jetbrains IDEs                                   |
-| ------------ | --------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+|--------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------|
 | EditorConfig | [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) | Included (open file and choose "Use code style") |
 | ESLint       | [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)          | ""                                               |
 | Prettier     | [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)        | ""                                               |
