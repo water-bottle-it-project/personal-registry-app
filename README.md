@@ -8,11 +8,9 @@
   </p>
 
 <h4>
-    <a href="https://github.com/water-bottle-it-project/personal-registry-app">View Demo</a>
+    <a href="https://personal-registry-app-zx936.ondigitalocean.app/">View deployed demo</a>
   <span> · </span>
-    <a href="https://github.com/water-bottle-it-project/personal-registry-app">Documentation</a>
-  <span> · </span>
-    <a href="https://github.com/water-bottle-it-project/personal-registry-app">Report Bug</a>
+    <a href="https://water-bottle.atlassian.net/wiki/spaces/DEV/pages/66440/Team+Tools">Documentation</a>
   </h4>
 </div>
 
