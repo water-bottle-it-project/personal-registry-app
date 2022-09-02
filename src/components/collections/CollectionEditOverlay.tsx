@@ -1,8 +1,11 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { NotificationProps } from '@mantine/core';
 import {
   Button,
   ColorPicker,
   Container,
   createStyles,
+  Notification,
   SimpleGrid,
   Space,
   Text,
@@ -11,11 +14,13 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core';
-import { IconRotateClockwise2, IconTrash } from '@tabler/icons';
+import { IconCheck, IconRotateClockwise2, IconTrash, IconX } from '@tabler/icons';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import type { EditCollectionT } from '~types/editCollection';
+import { editCollectionZ } from '~types/editCollection';
 
 export interface EditCollectionProps {
   title: string;
@@ -31,12 +36,28 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
   const [name, setName] = useState(title);
   const [desc, setDesc] = useState(description);
 
-  const mutation = trpcClient.useMutation(['collections.editCollection']);
+  const {
+    handleSubmit,
+    setError,
+    formState: { errors, isValidating, isSubmitting, isSubmitSuccessful },
+  } = useForm<EditCollectionT>({
+    resolver: zodResolver(editCollectionZ),
+  });
+
+  const update = trpcClient.useMutation(['collections.editCollection']);
 
   const handleEdit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    mutation.mutate({ oldTitle: title, title: name, description: desc, userId: userId });
+    update.mutate({ oldTitle: title, title: name, description: desc, userId: userId });
   };
+
+  // TODO: set up error and success messages after editing AND handle color edits
+  let notificationProps: Partial<NotificationProps> = {};
+  if (isValidating || isSubmitting) {
+    notificationProps = { loading: true, title: 'Saving changes' };
+  } else if (isSubmitSuccessful) {
+    notificationProps = { icon: <IconCheck size={18} />, color: 'teal', title: 'Successful!' };
+  }
 
   return (
     <Container
@@ -127,7 +148,6 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
               setName(title);
               setDesc(description);
             }}
-            variant='gradient'
             variant='outline'
           >
             Reset
@@ -137,7 +157,7 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
             Delete
           </Button>
         </SimpleGrid>
-        {mutation.error && <p>Something went wrong! {mutation.error.message}</p>}
+        {update.error && <p>Something went wrong! {update.error.message}</p>}
       </form>
     </Container>
   );
