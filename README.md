@@ -54,8 +54,10 @@ cannot start the app.
 4. Go to the project directory `cd personal-registry-app`
 5. Checkout the branch that has been requested to be assessed, or stay on main if none has been
    specified.
-6. Copy the provided `.env.local` file into the root folder. The root folder should look like this:
+6. Copy the provided `.env.local` file into the root folder. You need it or else the app will not 
+build and authentication will not work. The root folder should look like this:
    ```text
+   $ tree -L 1 -a
    .
    ├── .editorconfig
    ├── .env.local
@@ -152,27 +154,27 @@ To keep the codebase tidy, please ensure your editor has these extensions instal
 ### :arrow_down: Install dependencies
 
 ```bash
-  yarn
+yarn
 ```
 
 ### :runner: Start the app
 
 ```bash
-  ## dev mode (for hot module reload).
-  yarn dev
+## dev mode (for hot module reload).
+yarn dev
 
-  ## production mode (for demos and assessment).
-  yarn build && yarn start
+## production mode (for demos and assessment).
+yarn build && yarn start
 ```
 
 ### :package: Adding package dependencies using yarn
 
 ```bash
- # Packages used by app
- yarn add package_name
+# Packages used by app
+yarn add package_name
 
- # Packages used only in dev e.g. eslint plugins, code generators.
- yarn add -D package_name
+# Packages used only in dev e.g. eslint plugins, code generators.
+yarn add -D package_name
 ```
 
 ## :warning: License
