@@ -95,7 +95,7 @@ cannot start the app.
    ```
 7. Run `yarn`. This will install all the dependencies needed to test the application.
 8. Run `yarn build && yarn start`. Once this has completed, you should see a link to open the page
-9. in the browser (by default `localhost:3000`).
+in the browser (by default `localhost:3000`).
 
    ```
    info  - Generating static pages (13/13)
@@ -135,7 +135,7 @@ cannot start the app.
    info  - SWC minify release candidate enabled. https://nextjs.link/swcmin
    ```
 
-   If you have other projects running, you should close them first, or else the port might not be
+   Caution: if you have other projects running, you should close them first, or else the port might not be
    able to bind:
 
    ```bash
