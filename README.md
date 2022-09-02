@@ -16,26 +16,13 @@
 
 <br />
 
-## :notebook_with_decorative_cover: Table of Contents
-
-- [:notebook_with_decorative_cover: Table of Contents](#notebook_with_decorative_cover-table-of-contents)
-- [:star2: About the Project](#star2-about-the-project)
-- [:orange_book: Documentation](#orange_book-documentation)
-- [:key: Environment Variables](#key-environment-variables)
-- [:bangbang: Building the app](#bangbang-building-the-app)
-- [:pencil: Contributing](#pencil-contributing)
-  - [:paperclip: Consistency](#paperclip-consistency)
-  - [:arrow_down: Install dependencies](#arrow_down-install-dependencies)
-  - [:runner: Start the app](#runner-start-the-app)
-  - [:package: Adding package dependencies using yarn](#package-adding-package-dependencies-using-yarn)
-- [:warning: License](#warning-license)
-- [:handshake: Contact](#handshake-contact)
-
 ## :star2: About the Project
 
 Personal Registry App is a web app developed for COMP30022 IT Project Semester 2 2022, which allows
 users to upload memories containing optional textual descriptions and images, organise memories into
 collections, and search their memories and images.
+
+[View deployed demo](https://personal-registry-app-zx936.ondigitalocean.app/)
 
 ## :orange_book: Documentation
 
@@ -93,7 +80,7 @@ cannot start the app.
    ```
 7. Run `yarn`. This will install all the dependencies needed to test the application.
 8. Run `yarn build && yarn start`. Once this has completed, you should see a link to open the page
-in the browser (by default `localhost:3000`).
+   in the browser (by default `localhost:3000`).
 
    ```
    info  - Generating static pages (13/13)
@@ -133,8 +120,8 @@ in the browser (by default `localhost:3000`).
    info  - SWC minify release candidate enabled. https://nextjs.link/swcmin
    ```
 
-   Caution: if you have other projects running, you should close them first, or else the port might not be
-   able to bind:
+   Caution: if you have other projects running, you should close them first, or else the port might
+   not be able to bind:
 
    ```bash
    Error: listen EADDRINUSE: address already in use 0.0.0.0:3000
