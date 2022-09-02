@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { dbReqHandler } from '~server/db/dbReqHandler';
 import { Collection } from '~server/models/collection';
+import { editCollectionZ } from '~types/editCollection';
 
 /**
  * Router for debug operations
@@ -56,12 +57,7 @@ const collectionsRouter = trpc
   })
 
   .mutation('editCollection', {
-    input: z.object({
-      oldTitle: z.string(),
-      title: z.string(),
-      description: z.string(),
-      userId: z.string(),
-    }),
+    input: editCollectionZ,
     async resolve({ input }) {
       const toUpdate = { title: input.oldTitle, userId: input.userId };
       const newValues = { $set: { title: input.title, description: input.description } };
