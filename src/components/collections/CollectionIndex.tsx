@@ -1,7 +1,7 @@
 import { Modal, SimpleGrid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import type { Key } from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
