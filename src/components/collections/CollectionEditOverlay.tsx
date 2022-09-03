@@ -85,14 +85,14 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
           value={desc}
         />
         <Space h='xl' />
-        <Title order={1}>Customize color</Title>
-        <Space h='md' />
-        <TextInput disabled hidden id='color' label='Select a color' value={value || color} />
+        {/* <Title order={1}>Customize color</Title>
+        <Space h='md' /> */
+        /* <TextInput disabled hidden id='color' label='Select a color' value={value || color} />
         <ColorPicker
           focusable
           format='hex'
           fullWidth
-          onChange={onChange}
+          // onChange={onChange}
           swatches={[
             theme.colors.blue[2],
             theme.colors.violet[2],
@@ -109,9 +109,9 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
           ]}
           value={value}
           withPicker={false}
-        />
+        /> */}
         <Space h='xs' />
-        <div className={classes.colorGrid}>
+        {/* <div className={classes.colorGrid}>
           <div className={classes.colorContainer}>
             <Text>Selected</Text>
             <div className={classes.color} style={{ backgroundColor: value }} />
@@ -121,7 +121,7 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
             <Text>Current</Text>
             <div className={classes.color} style={{ backgroundColor: theme.colors[color][2] }} />
           </div>
-        </div>
+        </div> */}
 
         <Space h='xl' />
         <SimpleGrid
