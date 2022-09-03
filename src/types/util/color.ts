@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-const emailZ = z.string().email().trim().min(1);
-
 const COLORS = [
   'gray',
   'red',
@@ -20,4 +18,4 @@ const COLORS = [
 
 const colorZ = z.enum(COLORS);
 
-export { COLORS, colorZ, emailZ };
+export { COLORS, colorZ };

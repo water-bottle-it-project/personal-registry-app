@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { colorZ } from '~types/util';
+import { colorZ } from '~types/util/color';
 
 const editCollectionZ = z
   .object({
