@@ -19,8 +19,14 @@ export function ColorSwatch({ color, setSelectedColor, selected }: ColorSwatchCo
       }}
       style={
         selected === color
-          ? { backgroundColor: theme.colors[color][2], border: '1px solid black' }
-          : { backgroundColor: theme.colors[color][2] }
+          ? {
+              backgroundColor: theme.colors[color][2],
+              border: `2px solid ${theme.colors.red[5]}`,
+            }
+          : {
+              backgroundColor: theme.colors[color][2],
+              cursor: 'pointer',
+            }
       }
     />
   );
