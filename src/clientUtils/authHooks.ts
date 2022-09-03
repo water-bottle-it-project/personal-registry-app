@@ -4,7 +4,7 @@ import { AuthAction, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-au
  * For deeply-nested components which need to independently access auth state e.g. AppUserMenu
  */
 const withAuthComponent = withAuthUser({
-  whenUnauthedBeforeInit: AuthAction.RETURN_NULL,
+  whenUnauthedBeforeInit: AuthAction.RENDER,
   whenUnauthedAfterInit: AuthAction.RENDER,
   whenAuthed: AuthAction.RENDER,
 });
