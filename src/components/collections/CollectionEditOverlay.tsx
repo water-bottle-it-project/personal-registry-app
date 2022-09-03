@@ -145,20 +145,22 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
           <Space h='xl' />
           <SimpleGrid
             breakpoints={[
-              { maxWidth: 'lg', cols: 3, spacing: 'md' },
+              { maxWidth: 'lg', cols: 2, spacing: 'md' },
               { maxWidth: 'sm', cols: 1, spacing: 'sm' },
             ]}
             cols={4}
             spacing='xl'
           >
             <Button
-              gradient={{ from: 'indigo', to: 'cyan' }}
+              color='red'
+              leftIcon={<IconTrash />}
               mt='xl'
-              type='submit'
-              variant='gradient'
+              onClick={() => renderOverlay(title, true)}
+              variant='outline'
             >
-              Save
+              Delete
             </Button>
+            <div />
             <Button
               gradient={{ from: 'indigo', to: 'cyan' }}
               leftIcon={<IconRotateClockwise2 />}
@@ -172,15 +174,13 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
             >
               Reset
             </Button>
-            <div />
             <Button
-              color='red'
-              leftIcon={<IconTrash />}
+              gradient={{ from: 'indigo', to: 'cyan' }}
               mt='xl'
-              onClick={() => renderOverlay(title, true)}
-              variant='outline'
+              type='submit'
+              variant='gradient'
             >
-              Delete
+              Save
             </Button>
           </SimpleGrid>
           {update.error && <p>Something went wrong! {update.error.message}</p>}
