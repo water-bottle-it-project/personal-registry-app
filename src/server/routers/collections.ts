@@ -42,9 +42,12 @@ const collectionsRouter = trpc
   })
 
   .mutation('removeCollection', {
-    input: editCollectionZ,
+    input: z.object({
+      title: z.string().nullish(),
+      userId: z.string(),
+    }),
     async resolve({ input }) {
-      const toRemove = { title: input.oldTitle, userId: input.userId };
+      const toRemove = { title: input.title, userId: input.userId };
       const result = await Collection.deleteOne(toRemove);
       if (result.deletedCount == 0) {
         throw new trpc.TRPCError({

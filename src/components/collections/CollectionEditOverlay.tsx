@@ -41,21 +41,6 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
     title: '',
   });
 
-  useEffect(() => {
-    if (deleteConfirmation) {
-      handleDelete();
-    }
-
-    return () => setConfirmation(false);
-  }, [deleteConfirmation]);
-
-  const renderOverlay = (title: string, value: boolean | ((prevState: boolean) => boolean)) => {
-    setOpened(value);
-    setDeleteModal(previousState => {
-      return { ...previousState, title: title };
-    });
-  };
-
   const update = trpcClient.useMutation(['collections.editCollection']);
   const remove = trpcClient.useMutation(['collections.removeCollection']);
 
@@ -71,18 +56,30 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
     Router.reload();
   };
 
-  const handleDelete = async () => {
-    remove.mutate({
-      oldTitle: title,
-      title: name,
-      description: desc,
-      userId: userId,
-      color: selectedColor,
+  useEffect(() => {
+    const handleDelete = async () => {
+      remove.mutate({
+        title: name,
+        userId: userId,
+      });
+      Router.reload();
+    };
+
+    if (deleteConfirmation) {
+      handleDelete();
+    }
+
+    return () => setConfirmation(false);
+  }, [deleteConfirmation, name, remove, title, userId]);
+
+  const renderOverlay = (title: string, value: boolean | ((prevState: boolean) => boolean)) => {
+    setOpened(value);
+    setDeleteModal(previousState => {
+      return { ...previousState, title: title };
     });
-    Router.reload();
   };
 
-  // TODO: set up error and success messages after editing AND handle color edits
+  // TODO: set up error and success messages after editing/deleting
 
   return (
     <>
