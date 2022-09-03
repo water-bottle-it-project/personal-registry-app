@@ -1,4 +1,4 @@
-import { Container, Group } from '@mantine/core';
+import { Container, createStyles, Group, useMantineTheme } from '@mantine/core';
 import type { Dispatch, SetStateAction } from 'react';
 
 import { ColorSwatch } from './ColorSwatch';
@@ -9,6 +9,8 @@ interface ColorEditorProps {
 }
 
 export function ColorEditor({ selected, setSelectedColor }: ColorEditorProps) {
+  const { classes } = useStyles();
+  const theme = useMantineTheme();
   const colors = [
     'blue',
     'violet',
@@ -25,7 +27,7 @@ export function ColorEditor({ selected, setSelectedColor }: ColorEditorProps) {
   ];
 
   const Colors = colors.map(c => (
-    <ColorSwatch color={c} key={c} selected={selected} setSelectedColor={setSelectedColor} />
+    <ColorSwatch color={c} key={c} setSelectedColor={setSelectedColor} />
   ));
   return (
     <Container px='xs'>
@@ -33,3 +35,10 @@ export function ColorEditor({ selected, setSelectedColor }: ColorEditorProps) {
     </Container>
   );
 }
+
+const useStyles = createStyles(theme => ({
+  colorContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+}));
