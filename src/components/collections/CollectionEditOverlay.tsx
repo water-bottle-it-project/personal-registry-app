@@ -127,7 +127,7 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
           <Space h='md' />
           <TextInput disabled hidden id='color' label='Select a color' value={selectedColor} />
           <ColorEditor selected={selectedColor} setSelectedColor={setSelectedColor} />
-          <Space h='xs' />
+          <Space h='xl' />
           <div className={classes.colorGrid}>
             <div className={classes.colorContainer}>
               <Text>Selected</Text>
