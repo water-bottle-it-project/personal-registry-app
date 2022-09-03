@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import { COLORS } from '~types/util';
+
 const { Schema } = mongoose;
 
 const collectionSchema = new Schema({
@@ -9,21 +11,7 @@ const collectionSchema = new Schema({
   color: {
     type: String,
     required: false,
-    enum: [
-      'gray',
-      'red',
-      'pink',
-      'grape',
-      'violet',
-      'indigo',
-      'blue',
-      'cyan',
-      'teal',
-      'green',
-      'lime',
-      'yellow',
-      'orange',
-    ],
+    enum: COLORS,
   },
 });
 
