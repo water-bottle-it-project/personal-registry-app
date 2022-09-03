@@ -1,23 +1,17 @@
 import type { inferAsyncReturnType } from '@trpc/server';
 import type * as trpcNext from '@trpc/server/adapters/next';
 import type { AuthUser } from 'next-firebase-auth';
-import { verifyIdToken } from 'next-firebase-auth';
+import { getUserFromCookies } from 'next-firebase-auth';
 
 async function createContext({ req }: trpcNext.CreateNextContextOptions) {
-  async function getUserFromHeader(): Promise<AuthUser | null> {
-    if (req.headers?.authorization) {
-      let user;
-      try {
-        user = await verifyIdToken(req.headers.authorization);
-        return user;
-      } catch (e) {
-        return null;
-      }
-    }
-    return null;
-  }
+  let user: AuthUser | null = null;
 
-  const user = getUserFromHeader();
+  try {
+    user = await getUserFromCookies({ req });
+  } catch {
+    // Just in case
+    user = null;
+  }
 
   return { user };
 }
