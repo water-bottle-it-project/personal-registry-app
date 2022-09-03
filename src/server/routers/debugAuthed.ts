@@ -1,16 +1,11 @@
-import { TRPCError } from '@trpc/server';
+import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 
-import { authReqHandler } from '~server/authReqHandler';
-import { createRouter } from '~server/createRouter';
-
-const debugAuthedRouter = createRouter()
-  .middleware(authReqHandler)
-  .query('getAuthedDebug', {
-    resolve({ ctx }) {
-      return {
-        result: 12345,
-      };
-    },
-  });
+const debugAuthedRouter = createProtectedDbRouter().query('getAuthedDebug', {
+  resolve({ ctx }) {
+    return {
+      result: 12345,
+    };
+  },
+});
 
 export { debugAuthedRouter };
