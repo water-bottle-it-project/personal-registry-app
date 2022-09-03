@@ -1,19 +1,19 @@
 import type { inferAsyncReturnType } from '@trpc/server';
 import type * as trpcNext from '@trpc/server/adapters/next';
-import type { AuthUser } from 'next-firebase-auth';
 import { getUserFromCookies } from 'next-firebase-auth';
 
 async function createContext({ req }: trpcNext.CreateNextContextOptions) {
-  let user: AuthUser | null = null;
+  let userId: string | null = null;
 
   try {
-    user = await getUserFromCookies({ req });
+    const user = await getUserFromCookies({ req });
+    userId = user.id;
   } catch {
     // Just in case
-    user = null;
+    userId = null;
   }
 
-  return { user };
+  return { userId };
 }
 
 type Context = inferAsyncReturnType<typeof createContext>;
