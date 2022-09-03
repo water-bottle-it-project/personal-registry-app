@@ -42,12 +42,14 @@ const collectionsRouter = trpc
   })
 
   .mutation('removeCollection', {
-    async resolve() {
-      const result = await Collection.deleteOne({ title: 'family' });
+    input: editCollectionZ,
+    async resolve({ input }) {
+      const toRemove = { title: input.oldTitle, userId: input.userId };
+      const result = await Collection.deleteOne(toRemove);
       if (result.deletedCount == 0) {
         throw new trpc.TRPCError({
           code: 'BAD_REQUEST',
-          message: 'User _id not found.',
+          message: 'Collection failed to be deleted.',
         });
       }
       return {
