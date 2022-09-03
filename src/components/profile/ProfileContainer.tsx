@@ -1,6 +1,7 @@
 import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useAuthUser } from 'next-firebase-auth';
-import { stringToDate, tupleToString } from 'src/components/profile/ProfileUtils';
+
+import { stringToDate, tupleToString } from '~components/profile/profileUtils';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
 import { StatsGroup } from './StatsGroup';
