@@ -22,6 +22,8 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import type { EditCollectionT } from '~types/editCollection';
 import { editCollectionZ } from '~types/editCollection';
 
+import { ColorEditor } from './ColorEditor';
+
 export interface EditCollectionProps {
   title: string;
   description: string;
@@ -35,6 +37,7 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
   const [value, onChange] = useState(null);
   const [name, setName] = useState(title);
   const [desc, setDesc] = useState(description);
+  const [selectedColor, setSelectedColor] = useState(color);
 
   const {
     handleSubmit,
@@ -48,7 +51,13 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
 
   const handleEdit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    update.mutate({ oldTitle: title, title: name, description: desc, userId: userId });
+    update.mutate({
+      oldTitle: title,
+      title: name,
+      description: desc,
+      userId: userId,
+      color: selectedColor,
+    });
   };
 
   // TODO: set up error and success messages after editing AND handle color edits
@@ -85,44 +94,25 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
           value={desc}
         />
         <Space h='xl' />
-        {/* <Title order={1}>Customize color</Title>
-        <Space h='md' /> */
-        /* <TextInput disabled hidden id='color' label='Select a color' value={value || color} />
-        <ColorPicker
-          focusable
-          format='hex'
-          fullWidth
-          // onChange={onChange}
-          swatches={[
-            theme.colors.blue[2],
-            theme.colors.violet[2],
-            theme.colors.indigo[2],
-            theme.colors.cyan[2],
-            theme.colors.teal[2],
-            theme.colors.green[2],
-            theme.colors.lime[2],
-            theme.colors.yellow[2],
-            theme.colors.orange[2],
-            theme.colors.pink[2],
-            theme.colors.red[2],
-            theme.colors.gray[2],
-          ]}
-          value={value}
-          withPicker={false}
-        /> */}
+        <Title order={1}>Customize color</Title>
+        <Space h='md' />
+        <TextInput disabled hidden id='color' label='Select a color' value={selectedColor} />
+        <ColorEditor selected={color} setSelectedColor={setSelectedColor} />
         <Space h='xs' />
-        {/* <div className={classes.colorGrid}>
+        <div className={classes.colorGrid}>
           <div className={classes.colorContainer}>
             <Text>Selected</Text>
-            <div className={classes.color} style={{ backgroundColor: value }} />
+            <div
+              className={classes.color}
+              style={{ backgroundColor: theme.colors[selectedColor][2] }}
+            />
           </div>
 
           <div className={classes.colorContainer}>
             <Text>Current</Text>
             <div className={classes.color} style={{ backgroundColor: theme.colors[color][2] }} />
           </div>
-        </div> */}
-
+        </div>
         <Space h='xl' />
         <SimpleGrid
           breakpoints={[
@@ -147,6 +137,7 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
             onClick={() => {
               setName(title);
               setDesc(description);
+              setSelectedColor(color);
             }}
             variant='outline'
           >

@@ -60,7 +60,9 @@ const collectionsRouter = trpc
     input: editCollectionZ,
     async resolve({ input }) {
       const toUpdate = { title: input.oldTitle, userId: input.userId };
-      const newValues = { $set: { title: input.title, description: input.description } };
+      const newValues = {
+        $set: { title: input.title, description: input.description, color: input.color },
+      };
       const result = await Collection.updateOne(toUpdate, newValues);
       if (result.matchedCount == 0) {
         throw new trpc.TRPCError({
