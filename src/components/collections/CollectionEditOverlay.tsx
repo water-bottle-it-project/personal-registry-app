@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { NotificationProps } from '@mantine/core';
 import {
   Button,
+  ColorPicker,
   Container,
   createStyles,
   Notification,
@@ -33,6 +34,7 @@ export interface EditCollectionProps {
 export function CollectionEditOverlay({ title, description, userId, color }: EditCollectionProps) {
   const theme = useMantineTheme();
   const { classes } = useStyles();
+  const [value, onChange] = useState(null);
   const [name, setName] = useState(title);
   const [desc, setDesc] = useState(description);
   const [selectedColor, setSelectedColor] = useState(color);
@@ -95,7 +97,7 @@ export function CollectionEditOverlay({ title, description, userId, color }: Edi
         <Title order={1}>Customize color</Title>
         <Space h='md' />
         <TextInput disabled hidden id='color' label='Select a color' value={selectedColor} />
-        <ColorEditor selected={selectedColor} setSelectedColor={setSelectedColor} />
+        <ColorEditor selected={color} setSelectedColor={setSelectedColor} />
         <Space h='xs' />
         <div className={classes.colorGrid}>
           <div className={classes.colorContainer}>
