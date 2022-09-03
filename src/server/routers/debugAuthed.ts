@@ -1,16 +1,12 @@
 import { TRPCError } from '@trpc/server';
 
+import { authReqHandler } from '~server/authReqHandler';
 import { createRouter } from '~server/createRouter';
 
 const debugAuthedRouter = createRouter()
-  .middleware(async ({ ctx, next }) => {
-    if (!ctx.user) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-    return next();
-  })
+  .middleware(authReqHandler)
   .query('getAuthedDebug', {
-    resolve() {
+    resolve({ ctx }) {
       return {
         result: 12345,
       };
