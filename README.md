@@ -55,7 +55,8 @@ cannot start the app and authentication will not work.**
 5. Checkout the branch that has been requested to be assessed, or stay on main if none has been
    specified.
 6. Copy the provided `.env.local` file into the root folder. You need it or else the app will not 
-build and authentication will not work. The root folder should look like this:
+build and authentication will not work. Please make sure it is `.env.local`, **not** `env.local`
+or anything else. The root folder should look like this:
    ```text
    $ tree -L 1 -a
    .
