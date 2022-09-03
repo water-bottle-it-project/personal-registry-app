@@ -6,6 +6,7 @@ const editCollectionZ = z
     title: z.string(),
     description: z.string(),
     userId: z.string(),
+    color: z.string(),
   })
   .required();
 
