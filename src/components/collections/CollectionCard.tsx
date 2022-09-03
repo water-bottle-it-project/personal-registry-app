@@ -7,9 +7,23 @@ interface CollectionCardProps {
   userId: string;
   color: string;
   postCount: number;
+  openModal: (
+    title: string,
+    desc: string,
+    userId: string,
+    color: string,
+    value: boolean | ((prevState: boolean) => boolean),
+  ) => void;
 }
 
-export function CollectionCard(props: CollectionCardProps) {
+export function CollectionCard({
+  color,
+  description,
+  postCount,
+  title,
+  userId,
+  openModal,
+}: CollectionCardProps) {
   const { classes } = useStyles();
 
   return (
@@ -21,28 +35,26 @@ export function CollectionCard(props: CollectionCardProps) {
           fontSize: theme.fontSizes.lg,
           width: 300,
           color: theme.colors.gray,
-          backgroundColor: theme.colors[props.color][2],
+          backgroundColor: theme.colors[color][2],
         })}
         withBorder
       >
         <div>
-          <Title order={3}>{props.title}</Title>
+          <Title order={3}>{title}</Title>
           <Space h='md' />
-          <Text>{props.description}</Text>
+          <Text>{description}</Text>
         </div>
         <Space h='xl' />
         <div>
           <Group position='apart'>
             <Link href='/'>
               <Anchor>
-                <Text>View {props.postCount} posts</Text>
+                <Text>View {postCount} posts</Text>
               </Anchor>
             </Link>
-            <Link href='/'>
-              <Anchor>
-                <Text color='red'>Edit</Text>
-              </Anchor>
-            </Link>
+            <Anchor onClick={() => openModal(title, description, userId, color, true)}>
+              <Text color='red'>Edit</Text>
+            </Anchor>
           </Group>
         </div>
       </Card>
