@@ -8,7 +8,7 @@ import { dbConnect } from '~server/db/dbConnect';
  * @param next
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const dbReqHandler: MiddlewareFunction<any, Context, any> = async ({ next }) => {
+export const dbReqHandler: MiddlewareFunction<Context, Context, any> = async ({ next }) => {
   await dbConnect();
   return next();
 };
