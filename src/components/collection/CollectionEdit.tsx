@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { Button, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -10,6 +11,7 @@ import type { collectionOmitIdT } from '~types/collection/collectionOmitId';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
 
 export function CollectionEdit(props: collectionIdOnlyT) {
+  const router = useRouter();
   const mutation = trpcClient.useMutation(['collection.UpdateCollection']);
   const trpcUtils = trpcClient.useContext();
   const { data, isLoading, isError, error } = trpcClient.useQuery([
@@ -31,16 +33,25 @@ export function CollectionEdit(props: collectionIdOnlyT) {
     );
   }
 
-  if (isLoading || !data?.collection) {
-    return <Text>Loading collection details...</Text>;
-  }
-
   if (isError) {
     return <Text>Error loading collection details: {error?.message}</Text>;
   }
 
+  if (isLoading || !data?.collection) {
+    return <Text>Loading collection details...</Text>;
+  }
+
   return (
-    <CollectionEditForm collection={data.collection} handleCollectionEdit={handleCollectionEdit} />
+    <>
+      <Text color='dimmed' size='xs'>
+        Collection id: {props._id}
+      </Text>
+      <Space h='sm' />
+      <CollectionEditForm
+        collection={data.collection}
+        handleCollectionEdit={handleCollectionEdit}
+      />
+    </>
   );
 }
 
