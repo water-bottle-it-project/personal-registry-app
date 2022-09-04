@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { useScrollLock } from '@mantine/hooks';
 import { IconDeviceFloppy, IconRotateClockwise2, IconTrash } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
@@ -12,6 +13,7 @@ import type { collectionOmitIdT } from '~types/collection/collectionOmitId';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
 
 export function CollectionEdit(props: collectionIdOnlyT) {
+  useScrollLock(true);
   const router = useRouter();
   const mutation = trpcClient.useMutation(['collection.UpdateCollection']);
   const trpcUtils = trpcClient.useContext();
@@ -30,11 +32,11 @@ export function CollectionEdit(props: collectionIdOnlyT) {
         description: description,
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           // Auto-refresh without reload
-          void router.push('/collections2', undefined, { shallow: true });
-          void trpcUtils.invalidateQueries(['collection.GetCollections']);
-          void trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
+          await trpcUtils.invalidateQueries(['collection.GetCollections']);
+          await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
+          await router.push('/collections2', undefined, { shallow: true });
         },
       },
     );
