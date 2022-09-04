@@ -1,6 +1,7 @@
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
 
+import { createRouter } from '~server/createRouter';
 import { dbReqHandler } from '~server/db/dbReqHandler';
 import { Collection } from '~server/models/collection';
 import { editCollectionZ } from '~types/editCollection';
@@ -8,9 +9,7 @@ import { editCollectionZ } from '~types/editCollection';
 /**
  * Router for debug operations
  */
-const collectionsRouter = trpc
-  .router()
-
+const collectionsRouter = createRouter()
   .middleware(dbReqHandler)
 
   .query('listCollections', {

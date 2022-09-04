@@ -4,8 +4,8 @@ import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Collection } from '~server/models/collection';
 import type { collectionT } from '~types/collection/collection';
 import { collectionZ } from '~types/collection/collection';
-import { createCollectionZ } from '~types/collection/createCollection';
-import { deleteCollectionZ } from '~types/collection/deleteCollection';
+import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
+import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
 
 const collectionRouter = createProtectedDbRouter()
   .query('GetCollections', {
@@ -22,7 +22,7 @@ const collectionRouter = createProtectedDbRouter()
   })
 
   .query('GetCollection', {
-    input: deleteCollectionZ,
+    input: collectionIdOnlyZ,
     async resolve({ ctx, input }) {
       const collection: collectionT | null = await Collection.findOne({
         _id: input._id,
@@ -40,7 +40,7 @@ const collectionRouter = createProtectedDbRouter()
   })
 
   .query('DeleteCollection', {
-    input: deleteCollectionZ,
+    input: collectionIdOnlyZ,
     async resolve({ ctx, input }) {
       await Collection.deleteOne({ _id: input._id, userId: ctx.userId });
     },
@@ -67,7 +67,7 @@ const collectionRouter = createProtectedDbRouter()
   })
 
   .query('CreateCollection', {
-    input: createCollectionZ,
+    input: collectionOmitIdZ,
     async resolve({ ctx, input }) {
       const collection: collectionT = await Collection.create({
         title: input.title,
