@@ -17,7 +17,7 @@ export function ColorControl({ value, label, onChange, ...others }: ColorControl
         component='button'
         onClick={() => onChange(color)}
         radius='xl'
-        size={48}
+        size={46}
         sx={{
           cursor: 'pointer',
           display: 'flex',
