@@ -15,7 +15,11 @@ export function ColorControl({ value, label, onChange, ...others }: ColorControl
       <ColorSwatch
         color={theme.colorScheme === 'dark' ? theme.colors[color][7] : theme.colors[color][5]}
         component='button'
-        onClick={() => onChange(color)}
+        onClick={(e: React.MouseEvent<HTMLElement>) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onChange(color);
+        }}
         radius='xl'
         size={46}
         sx={{
