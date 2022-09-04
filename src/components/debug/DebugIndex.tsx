@@ -1,6 +1,7 @@
 import { Button, Code, Title } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { ColorControl } from '~components/collection/ColorControl';
 
 /**
  * Debug page for querying (aka GET) and mutating (aka POST) users using TRPC and Mongoose
@@ -22,6 +23,7 @@ export function DebugIndex() {
   return (
     <>
       <Title>Debug index page</Title>
+      <ColorControl label='hi' onChange={() => console.log('hi')} value='lime' />
       <Button onClick={() => createUser.mutate()}>Create user debug1</Button>
       <Button color='red' onClick={() => deleteUser.mutate()} variant='light'>
         Delete user debug1
