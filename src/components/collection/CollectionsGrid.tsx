@@ -1,9 +1,7 @@
 import { Grid, Modal, Text } from '@mantine/core';
-import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CollectionCard } from '~components/collection/CollectionCard';
-import { CollectionEdit } from '~components/collection/CollectionEdit';
 
 export function CollectionsGrid() {
   const { data, isError, isLoading, error } = trpcClient.useQuery(['collection.GetCollections']);
