@@ -17,6 +17,7 @@ export interface ImageCardProps {
   url: string;
   userId: string;
   handleNext: (event: React.MouseEvent<HTMLElement>) => void;
+  handlePrev: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export function ImageOverlay(props: ImageCardProps) {
@@ -40,11 +41,11 @@ export function ImageOverlay(props: ImageCardProps) {
           cols={2}
           spacing='lg'
         >
-          {/* <ImageOverlayInfo caption={props.caption} url={props.url} userId={props.userId} />
-          <ImageOverlayMetadata caption={props.caption} url={props.url} userId={props.userId} /> */}
+          <ImageOverlayInfo caption={props.caption} url={props.url} userId={props.userId} />
+          <ImageOverlayMetadata caption={props.caption} url={props.url} userId={props.userId} />
         </SimpleGrid>
       </Container>
-      <Button>prev</Button>
+      <Button onClick={props.handlePrev}>prev</Button>
       <Button onClick={props.handleNext}>next</Button>
     </Container>
   );

@@ -3,57 +3,69 @@ import { useMediaQuery } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { Photo } from '~server/models/photo';
 
 import { ImageCard } from './ImageCard';
 import { ImageOverlay } from './ImageOverlay';
 import { ImageSkeleton } from './ImageSkeleton';
 
 /**
- * Debug page for querying (aka GET) and mutating (aka POST) users using TRPC and Mongoose
+ * Image page querying images from mongoDB
  * @constructor
  */
 
 export function ImagesIndex() {
   const isMobile = useMediaQuery('(max-width: 600px)');
-  const allUsers = trpcClient.useQuery(['images.listImages']);
+  const allImages = trpcClient.useQuery(['images.listImages']);
 
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [imageArr, setImageArr] = useState<
-    { id: number; caption: string; url: string; userId: string }[]
+    { index: number; caption: string; url: string; userId: string }[]
   >([]);
 
-  const [state, setState] = useState({
+  const [displayImage, setDisplayImage] = useState({
     currentImage: '',
     caption: '',
     url: '',
     userId: '',
   });
 
-  // let j = 0;
-  const data = allUsers.data && allUsers.data.photos;
-  // const data2 =
-  //   allUsers.data &&
-  //   allUsers.data.photos.map((photo) => {
-  //     id= j++, (caption = photo.caption), (url = photo.url), (userId = photo.userId);
-  //   });
-
   useEffect(() => {
-    setImageArr(data);
-  }, [data]);
+    setImageArr(allImages.data?.photos);
+  }, [allImages.data?.photos]);
+
+  // add index to the images on the page, which is used for next and prev image functionality
+  let idx = 0;
+  imageArr?.forEach(element => {
+    element.index = idx;
+    idx++;
+  });
 
   const handleNextProject = () => {
-    console.log(state.currentImage);
-    const idx = parseInt(state.currentImage) + 1;
+    // console.log(displayImage.currentImage);
+    if (displayImage.currentImage.toString() != (imageArr.length - 1).toString()) {
+      const idx = parseInt(displayImage.currentImage) + 1;
+      setDisplayImage(previousState => ({
+        ...previousState,
+        currentImage: idx.toString(),
+        caption: imageArr[idx].caption,
+        url: imageArr[idx].url,
+      }));
+    }
+  };
 
-    setState(previousState => ({
-      ...previousState,
-      currentImage: idx.toString(),
-      caption: imageArr[idx].caption,
-      url: imageArr[idx].url,
-    }));
+  const handlePrevProject = () => {
+    console.log('current image is', displayImage.currentImage);
+    if (displayImage.currentImage.toString() != '0') {
+      const idx = parseInt(displayImage.currentImage) - 1;
+      setDisplayImage(previousState => ({
+        ...previousState,
+        currentImage: idx.toString(),
+        caption: imageArr[idx].caption,
+        url: imageArr[idx].url,
+      }));
+    }
   };
 
   const renderOverlay = (
@@ -64,7 +76,7 @@ export function ImagesIndex() {
     value: boolean | ((prevState: boolean) => boolean),
   ) => {
     setOpened(value);
-    setState(previousState => {
+    setDisplayImage(previousState => {
       return {
         ...previousState,
         caption: photoCaption,
@@ -75,21 +87,23 @@ export function ImagesIndex() {
     });
   };
 
-  let i = 0;
-  const Images =
-    allUsers.data &&
-    allUsers.data.photos.map(
-      (photo: { caption: string; id: string; url: string; userId: string }) => (
-        <Container
-          key={photo.id}
-          onClick={() =>
-            renderOverlay(photo.url, photo.caption, photo.userId, (i++).toString(), true)
-          }
-        >
-          <ImageCard caption={photo.caption} key={photo.id} url={photo.url} userId={photo.userId} />
-        </Container>
-      ),
-    );
+  const Images = imageArr?.map(
+    (photo: { index: number; caption: string; url: string; userId: string }) => (
+      <Container
+        key={photo.index}
+        onClick={() =>
+          renderOverlay(photo.url, photo.caption, photo.userId, photo.index.toString(), true)
+        }
+      >
+        <ImageCard
+          caption={photo.caption}
+          key={photo.index}
+          url={photo.url}
+          userId={photo.userId}
+        />
+      </Container>
+    ),
+  );
 
   const SkeletonLoaders = Array(12).fill(<ImageSkeleton />);
 
@@ -113,10 +127,11 @@ export function ImagesIndex() {
         transitionTimingFunction='ease'
       >
         <ImageOverlay
-          caption={state.caption}
+          caption={displayImage.caption}
           handleNext={handleNextProject}
-          url={state.url}
-          userId={state.userId}
+          handlePrev={handlePrevProject}
+          url={displayImage.url}
+          userId={displayImage.userId}
         />
       </Modal>
       <SimpleGrid
