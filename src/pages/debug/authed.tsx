@@ -3,6 +3,7 @@ import { useAuthUser } from 'next-firebase-auth';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
 import { trpcClient } from '~clientUtils/trpcClient';
+import { CollectionEdit } from '~components/collection/CollectionEdit';
 
 function DebugAuth() {
   const user = useAuthUser();
@@ -13,6 +14,7 @@ function DebugAuth() {
     <Container size='xl'>
       <Title>Debug Page - auth required</Title>
       <Text>If you can see this, you are authed!</Text>
+      <CollectionEdit _id='63135d35f6eac3dca09ade38' />
       <Button color='red' onClick={user.signOut} variant='light'>
         Sign out
       </Button>

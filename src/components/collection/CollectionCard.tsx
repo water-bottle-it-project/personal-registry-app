@@ -1,4 +1,4 @@
-import { Anchor, Card, Group, Overlay, Stack, Text, Title } from '@mantine/core';
+import { Anchor, Card, Group, Stack, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
 import type { collectionT } from '~types/collection/collection';

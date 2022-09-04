@@ -16,7 +16,8 @@ export function ColorControl({ value, label, onChange, ...others }: ColorControl
       component='button'
       key={color}
       onClick={() => onChange(color)}
-      radius='sm'
+      radius='xl'
+      size={48}
       sx={{
         cursor: 'pointer',
         display: 'flex',
@@ -31,7 +32,7 @@ export function ColorControl({ value, label, onChange, ...others }: ColorControl
 
   return (
     <Input.Wrapper label={upperFirst(label)} labelElement='div' {...others}>
-      <Group mt={5} spacing={2}>
+      <Group mt={5} spacing={8}>
         {colors}
       </Group>
     </Input.Wrapper>
