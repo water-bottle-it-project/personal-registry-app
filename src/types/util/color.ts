@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const COLORS = [
+  'dark',
   'gray',
   'red',
   'pink',

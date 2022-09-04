@@ -13,7 +13,7 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
       sx={theme => ({
         height: '100%',
         backgroundColor:
-          theme.colorScheme === 'dark' ? theme.colors[color][5] : theme.colors[color][1],
+          theme.colorScheme === 'dark' ? theme.colors[color][5] : theme.colors[color][2],
         // Sort of a trick to darken the card in dark mode
         boxShadow: theme.colorScheme === 'dark' ? 'inset 0px 0px 0 2000px rgba(0,0,0,0.7)' : '0',
       })}
