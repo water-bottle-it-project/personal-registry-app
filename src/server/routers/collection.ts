@@ -40,14 +40,14 @@ const collectionRouter = createProtectedDbRouter()
     },
   })
 
-  .query('DeleteCollection', {
+  .mutation('DeleteCollection', {
     input: collectionIdOnlyZ,
     async resolve({ ctx, input }) {
       await Collection.deleteOne({ _id: input._id, userId: ctx.userId });
     },
   })
 
-  .query('UpdateCollection', {
+  .mutation('UpdateCollection', {
     input: collectionZ,
     async resolve({ ctx, input }) {
       const collection: collectionT | null = await Collection.findOneAndUpdate(
@@ -67,7 +67,7 @@ const collectionRouter = createProtectedDbRouter()
     },
   })
 
-  .query('CreateCollection', {
+  .mutation('CreateCollection', {
     input: collectionOmitIdZ,
     async resolve({ ctx, input }) {
       const collection: collectionT = await Collection.create({
