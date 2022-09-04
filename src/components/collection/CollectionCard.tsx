@@ -29,7 +29,7 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
               <Text>View posts</Text>
             </Anchor>
           </Link>
-          <Link href={`/collections2?edit=${_id}`} passHref shallow>
+          <Link href={`/collections2?edit=${_id}`} passHref>
             <Anchor color='red' component='a'>
               <Text>Edit</Text>
             </Anchor>
