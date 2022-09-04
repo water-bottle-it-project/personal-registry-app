@@ -1,4 +1,4 @@
-import { Anchor, Card, Group, Overlay, Space, Text, Title } from '@mantine/core';
+import { Anchor, Card, Group, Overlay, Stack, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
 import type { collectionT } from '~types/collection/collection';
@@ -11,21 +11,26 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
   return (
     <Card
       sx={theme => ({
+        height: '100%',
         backgroundColor:
           theme.colorScheme === 'dark' ? theme.colors[color][6] : theme.colors[color][1],
-        boxShadow: theme.colorScheme === 'dark' ? 'inset 0px 0px 0 2000px rgba(0,0,0,0.6)' : '0',
+        // Sort of a trick to darken the card in dark mode
+        boxShadow: theme.colorScheme === 'dark' ? 'inset 0px 0px 0 2000px rgba(0,0,0,0.7)' : '0',
       })}
     >
-      <Title order={4}>{title}</Title>
-      <Space h='sm' />
-      <Text lineClamp={4}>{description}</Text>
-      <Group position='apart'>
-        <Link href='/'>
-          <Anchor>
-            <Text>View posts</Text>
-          </Anchor>
-        </Link>
-      </Group>
+      <Stack spacing='sm' sx={{ height: '100%' }}>
+        <Title order={4}>{title}</Title>
+        <Text lineClamp={4} sx={{ flexGrow: 1 }}>
+          {description}
+        </Text>
+        <Group position='apart'>
+          <Link href='/'>
+            <Anchor>
+              <Text>View posts</Text>
+            </Anchor>
+          </Link>
+        </Group>
+      </Stack>
     </Card>
   );
 }
