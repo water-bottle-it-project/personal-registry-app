@@ -13,7 +13,7 @@ const Collections = () => {
   if (editId && !Array.isArray(editId)) {
     modal = (
       <Modal
-        centered
+        lockScroll
         onClose={() => router.push('/collections2', undefined, { shallow: true })}
         opened
         size='lg'

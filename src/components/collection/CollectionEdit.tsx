@@ -30,8 +30,9 @@ export function CollectionEdit(props: collectionIdOnlyT) {
       },
       {
         onSuccess: () => {
+          // Auto-refresh without reload
           void trpcUtils.invalidateQueries(['collection.GetCollections']);
-          // void router.push('/collections2', undefined, { shallow: true });
+          void router.push('/collections2', undefined, { shallow: true });
         },
       },
     );
@@ -68,7 +69,8 @@ interface CollectionEditFormProps {
  * Only render form if collection is known to exist
  * Note this takes a copy of the data (does not reflect background changes)
  * https://tkdodo.eu/blog/react-query-and-forms
- * (I couldn't get the background controlled form to work properly yet).
+ * (I couldn't get the background controlled form to work properly yet with the TextInput and
+ * TextArea).
  * @param collection
  * @param handleCollectionEdit
  * @constructor
@@ -88,15 +90,17 @@ function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEdit
     <form noValidate onSubmit={handleSubmit(handleCollectionEdit)}>
       <Stack spacing='sm'>
         <TextInput
+          description='Displayed front and centre.'
+          error={errors?.title?.message}
           label='Title'
           required
           {...register('title')}
-          description='Displayed front and centre.'
-          error={errors?.title?.message}
         />
         <Textarea
+          autosize
           description='Add some more detail.'
           label='Description'
+          maxRows={12}
           placeholder={`There's still space to add a description!`}
           {...register('description')}
         />
