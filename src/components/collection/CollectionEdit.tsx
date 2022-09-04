@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { Button, Group, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { IconDeviceFloppy, IconRotateClockwise2, IconTrash } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -31,8 +32,9 @@ export function CollectionEdit(props: collectionIdOnlyT) {
       {
         onSuccess: () => {
           // Auto-refresh without reload
-          void trpcUtils.invalidateQueries(['collection.GetCollections']);
           void router.push('/collections2', undefined, { shallow: true });
+          void trpcUtils.invalidateQueries(['collection.GetCollections']);
+          void trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
         },
       },
     );
@@ -111,7 +113,19 @@ function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEdit
             <ColorControl {...field} label='Colour' onChange={onChange} value={value} />
           )}
         />
-        <Button type='submit'>Save</Button>
+        <Group position='apart'>
+          <Button leftIcon={<IconDeviceFloppy />} type='submit'>
+            Save
+          </Button>
+          <Group>
+            <Button color='red' leftIcon={<IconTrash />}>
+              Delete
+            </Button>
+            <Button leftIcon={<IconRotateClockwise2 />} variant='default'>
+              Reset
+            </Button>
+          </Group>
+        </Group>
       </Stack>
     </form>
   );
