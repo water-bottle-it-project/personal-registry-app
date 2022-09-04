@@ -1,6 +1,8 @@
 import { Container, createStyles, Grid, Group, Space, Text, Title } from '@mantine/core';
 import Lottie from 'lottie-react';
+import { useAuthUser } from 'next-firebase-auth';
 
+import { withAuthComponent } from '~clientUtils/authHooks';
 import heroLottie from '~components/homepage/hero-lottie.json';
 import { LinkButton } from '~components/util/LinkButton';
 
@@ -8,8 +10,10 @@ import { LinkButton } from '~components/util/LinkButton';
  * The Hero banner for the homepage
  * @constructor
  */
-export function Hero() {
+function HeroBase() {
   const { classes } = useStyles();
+
+  const { id } = useAuthUser();
 
   return (
     <Container size='xl'>
@@ -31,9 +35,14 @@ export function Hero() {
               size='md'
               variant='gradient'
             >
-              Sign in
+              {id ? 'Your timeline' : 'Sign in'}
             </LinkButton>
-            <LinkButton href='/signup' size='md' variant='default'>
+            <LinkButton
+              href='/signup'
+              size='md'
+              style={{ visibility: id ? 'hidden' : 'visible' }}
+              variant='default'
+            >
               Register
             </LinkButton>
           </Group>
@@ -68,3 +77,7 @@ const useStyles = createStyles(theme => ({
     maxWidth: '75%',
   },
 }));
+
+const Hero = withAuthComponent(HeroBase);
+
+export { Hero };

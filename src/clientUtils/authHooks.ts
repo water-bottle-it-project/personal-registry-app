@@ -1,9 +1,18 @@
 import { AuthAction, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-auth';
 
 /**
+ * For deeply-nested components which need to independently access auth state e.g. AppUserMenu
+ */
+const withAuthComponent = withAuthUser({
+  whenUnauthedBeforeInit: AuthAction.RENDER,
+  whenUnauthedAfterInit: AuthAction.RENDER,
+  whenAuthed: AuthAction.RENDER,
+});
+
+/**
  * For any page which needs to be authed
  */
-export const withAuthedPage = withAuthUser({
+const withAuthedPage = withAuthUser({
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
   whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
   authPageURL: `/signin/?unauthorized=${true}`,
@@ -12,7 +21,7 @@ export const withAuthedPage = withAuthUser({
 /**
  * Returns a new function each time. For server-side rendered auth.
  */
-export const withAuthedPageSSR = () =>
+const withAuthedPageSSR = () =>
   withAuthUserTokenSSR({
     whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
   })();
@@ -20,7 +29,7 @@ export const withAuthedPageSSR = () =>
 /**
  * For the login page
  */
-export const withLoginPage = withAuthUser({
+const withLoginPage = withAuthUser({
   whenAuthed: AuthAction.REDIRECT_TO_APP,
   // whenUnauthedAfterInit: AuthAction.RENDER,
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
@@ -31,7 +40,7 @@ export const withLoginPage = withAuthUser({
  * and they click 'Dashboard' (/login), they will not see the /login route in
  * their URL bar or in the page title ever.
  */
-export const withLoginPageSSR = () =>
+const withLoginPageSSR = () =>
   withAuthUserTokenSSR({
     whenAuthed: AuthAction.REDIRECT_TO_APP,
     // whenUnauthed: AuthAction.RENDER,
@@ -40,8 +49,17 @@ export const withLoginPageSSR = () =>
 /**
  * For the Registration page
  */
-export const withRegisterPage = withAuthUser({
+const withRegisterPage = withAuthUser({
   whenAuthed: AuthAction.REDIRECT_TO_APP,
   // whenUnauthedAfterInit: AuthAction.RENDER,
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
 });
+
+export {
+  withAuthComponent,
+  withAuthedPage,
+  withAuthedPageSSR,
+  withLoginPage,
+  withLoginPageSSR,
+  withRegisterPage,
+};

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { AppHeaderLogo } from '~components/app/AppHeaderLogo';
+import { AppUserMenu } from '~components/app/AppUserMenu';
 import { ColorSchemeToggle } from '~components/app/ColorSchemeToggle';
 
 interface AppLink {
@@ -45,6 +46,7 @@ export function AppHeader({ links }: AppHeaderProps) {
           {linkElems}
         </Group>
         <Group spacing={6}>
+          <AppUserMenu />
           <ColorSchemeToggle />
         </Group>
       </Container>
