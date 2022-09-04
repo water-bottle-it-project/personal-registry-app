@@ -20,6 +20,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
   ]);
 
   function handleCollectionEdit({ title, color, description }: collectionOmitIdT) {
+    console.log('submitted');
     mutation.mutate(
       {
         _id: props._id,
@@ -28,7 +29,10 @@ export function CollectionEdit(props: collectionIdOnlyT) {
         description: description,
       },
       {
-        onSuccess: () => trpcUtils.invalidateQueries(['collection.GetCollections']),
+        onSuccess: () => {
+          void trpcUtils.invalidateQueries(['collection.GetCollections']);
+          // void router.push('/collections2', undefined, { shallow: true });
+        },
       },
     );
   }
@@ -99,8 +103,8 @@ function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEdit
         <Controller
           control={control}
           name='color'
-          render={({ field: { value, onChange } }) => (
-            <ColorControl label='Colour' onChange={onChange} value={value} />
+          render={({ field: { value, onChange, ...field } }) => (
+            <ColorControl {...field} label='Colour' onChange={onChange} value={value} />
           )}
         />
         <Button type='submit'>Save</Button>
