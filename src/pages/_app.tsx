@@ -1,5 +1,6 @@
 import type { ColorScheme } from '@mantine/core';
 import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { withTRPC } from '@trpc/next';
@@ -44,13 +45,15 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider theme={appTheme} withGlobalStyles withNormalizeCSS>
-        <NotificationsProvider>
-          <DefaultSeo {...appSeo} />
-          <AppLayout>
-            <Component {...pageProps} />
-          </AppLayout>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </NotificationsProvider>
+        <ModalsProvider>
+          <NotificationsProvider>
+            <DefaultSeo {...appSeo} />
+            <AppLayout>
+              <Component {...pageProps} />
+            </AppLayout>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </NotificationsProvider>
+        </ModalsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );
