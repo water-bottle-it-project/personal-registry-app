@@ -1,8 +1,10 @@
 import { Box, createStyles, Group, Space, Text, Title, UnstyledButton } from '@mantine/core';
 import { IconDownload, IconEdit, IconTrash } from '@tabler/icons';
-
-import type { ImageCardProps } from './ImageOverlay';
-
+interface ImageCardProps {
+  caption: string;
+  url: string;
+  userId: string;
+}
 export function ImageOverlayInfo(props: ImageCardProps) {
   const { classes } = useStyles();
   return (

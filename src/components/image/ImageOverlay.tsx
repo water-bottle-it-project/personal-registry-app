@@ -1,4 +1,13 @@
-import { Container, createStyles, Image, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import {
+  Button,
+  Container,
+  createStyles,
+  Image,
+  SimpleGrid,
+  Space,
+  Text,
+  Title,
+} from '@mantine/core';
 
 import { ImageOverlayInfo } from './ImageOverlayInfo';
 import { ImageOverlayMetadata } from './ImageOverlayMetadata';
@@ -7,6 +16,8 @@ export interface ImageCardProps {
   caption: string;
   url: string;
   userId: string;
+  handleNext: (event: React.MouseEvent<HTMLElement>) => void;
+  handlePrev: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export function ImageOverlay(props: ImageCardProps) {
@@ -34,6 +45,8 @@ export function ImageOverlay(props: ImageCardProps) {
           <ImageOverlayMetadata caption={props.caption} url={props.url} userId={props.userId} />
         </SimpleGrid>
       </Container>
+      <Button onClick={props.handlePrev}>prev</Button>
+      <Button onClick={props.handleNext}>next</Button>
     </Container>
   );
 }
