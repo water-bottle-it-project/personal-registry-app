@@ -1,4 +1,4 @@
-import { Grid, SimpleGrid, Text } from '@mantine/core';
+import { Grid, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconX } from '@tabler/icons';
 

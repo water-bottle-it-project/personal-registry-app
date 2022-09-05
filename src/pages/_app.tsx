@@ -45,7 +45,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider theme={appTheme} withGlobalStyles withNormalizeCSS>
-        <ModalsProvider>
+        <ModalsProvider modalProps={{ transitionDuration: 250 }}>
           <NotificationsProvider>
             <DefaultSeo {...appSeo} />
             <AppLayout>
