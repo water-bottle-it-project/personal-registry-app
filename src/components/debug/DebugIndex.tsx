@@ -23,7 +23,6 @@ export function DebugIndex() {
   return (
     <>
       <Title>Debug index page</Title>
-      <ColorControl label='hi' onChange={() => console.log('hi')} value='lime' />
       <Button onClick={() => createUser.mutate()}>Create user debug1</Button>
       <Button color='red' onClick={() => deleteUser.mutate()} variant='light'>
         Delete user debug1

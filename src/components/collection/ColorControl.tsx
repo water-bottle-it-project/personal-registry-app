@@ -1,13 +1,15 @@
 import { CheckIcon, ColorSwatch, Group, Input, Tooltip, useMantineTheme } from '@mantine/core';
 import { upperFirst } from '@mantine/hooks';
+import type { RefCallBack } from 'react-hook-form';
 
 interface ColorControlProps {
   value: string;
   label: string;
   onChange(value: string): void;
+  inputRef: RefCallBack;
 }
 
-export function ColorControl({ value, label, onChange, ...others }: ColorControlProps) {
+export function ColorControl({ value, label, onChange, inputRef, ...others }: ColorControlProps) {
   const theme = useMantineTheme();
 
   const colors = Object.keys(theme.colors).map(color => (
@@ -36,7 +38,7 @@ export function ColorControl({ value, label, onChange, ...others }: ColorControl
   ));
 
   return (
-    <Input.Wrapper label={upperFirst(label)} labelElement='div' {...others}>
+    <Input.Wrapper label={upperFirst(label)} labelElement='div' ref={inputRef} {...others}>
       <Group mt={5} spacing={8}>
         {colors}
       </Group>

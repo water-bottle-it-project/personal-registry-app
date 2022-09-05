@@ -165,8 +165,14 @@ function CollectionEditForm({
         <Controller
           control={control}
           name='color'
-          render={({ field: { value, onChange, ...field } }) => (
-            <ColorControl {...field} label='Colour' onChange={onChange} value={value} />
+          render={({ field: { value, onChange, ref, ...field } }) => (
+            <ColorControl
+              {...field}
+              inputRef={ref}
+              label='Colour'
+              onChange={onChange}
+              value={value}
+            />
           )}
         />
         <Group position='apart'>
