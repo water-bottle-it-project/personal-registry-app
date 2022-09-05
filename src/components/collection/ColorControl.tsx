@@ -11,7 +11,7 @@ export function ColorControl({ value, label, onChange, ...others }: ColorControl
   const theme = useMantineTheme();
 
   const colors = Object.keys(theme.colors).map(color => (
-    <Tooltip key={color} label={color.charAt(0).toUpperCase() + color.slice(1)}>
+    <Tooltip key={color} label={upperFirst(label)}>
       <ColorSwatch
         color={theme.colorScheme === 'dark' ? theme.colors[color][7] : theme.colors[color][5]}
         component='button'
@@ -43,5 +43,3 @@ export function ColorControl({ value, label, onChange, ...others }: ColorControl
     </Input.Wrapper>
   );
 }
-
-ColorControl.initialValue = 'blue';

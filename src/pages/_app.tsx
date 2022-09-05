@@ -1,7 +1,7 @@
 import type { ColorScheme } from '@mantine/core';
 import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
-import { ModalsProvider } from '@mantine/modals';
 import { useLocalStorage } from '@mantine/hooks';
+import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { withTRPC } from '@trpc/next';
 import type { AppProps } from 'next/app';
