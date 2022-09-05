@@ -16,8 +16,8 @@ export interface ImageCardProps {
   caption: string;
   url: string;
   userId: string;
-  handleNext: (event: React.MouseEvent<HTMLElement>) => void;
-  handlePrev: (event: React.MouseEvent<HTMLElement>) => void;
+  handleNext?: (event: React.MouseEvent<HTMLElement>) => void;
+  handlePrev?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export function ImageOverlay(props: ImageCardProps) {
