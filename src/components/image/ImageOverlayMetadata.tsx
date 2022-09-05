@@ -1,6 +1,10 @@
 import { Box, createStyles, Space, Text, Title } from '@mantine/core';
 
-import type { ImageCardProps } from './ImageOverlay';
+interface ImageCardProps {
+  caption: string;
+  url: string;
+  userId: string;
+}
 
 export function ImageOverlayMetadata(props: ImageCardProps) {
   const { classes } = useStyles();
