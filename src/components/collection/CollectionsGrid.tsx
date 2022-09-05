@@ -27,7 +27,7 @@ export function CollectionsGrid() {
       color: 'red',
       icon: <IconX />,
       title: 'Error!',
-      message: 'An error occured while loading collections.',
+      message: 'An error occurred while loading collections.',
     });
     return <Text>Error loading collections: {error?.message}</Text>;
   }
