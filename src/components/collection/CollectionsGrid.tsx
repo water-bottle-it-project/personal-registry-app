@@ -11,20 +11,15 @@ export function CollectionsGrid() {
   const { data, isError, isLoading, error } = trpcClient.useQuery(['collection.GetCollections']);
 
   if (isLoading) {
-    const SkeletonLoaders = Array(12).fill(<CollectionSkeleton />);
-    // return <Text>Loading collections... (replace with skeleton)</Text>;
-    return (
-      <SimpleGrid
-        breakpoints={[
-          { maxWidth: 'xl', cols: 3, spacing: 'md' },
-          { maxWidth: 'md', cols: 1, spacing: 'md' },
-        ]}
-        cols={4}
-        spacing='xs'
-      >
-        {SkeletonLoaders}
-      </SimpleGrid>
-    );
+    // Need to provide a key for React components when mapping over an array (check devtools console).
+    // Use same grid as the data grid to have consistent sizing.
+    const skeletonLoaders = Array.from({ length: 10 }, (_, i) => (
+      <Grid.Col key={i} md={3} sm={4} xs={6}>
+        <CollectionSkeleton />
+      </Grid.Col>
+    ));
+
+    return <Grid>{skeletonLoaders}</Grid>;
   }
 
   if (isError) {
