@@ -1,16 +1,12 @@
 import * as trpc from '@trpc/server';
 
-import { dbReqHandler } from '~server/db/dbReqHandler';
+import { createUnauthedDbRouter } from '~server/createUnauthedDbRouter';
 import { Photo } from '~server/models/photo';
 
 /**
  * Router for debug operations
  */
-const imagesRouter = trpc
-  .router()
-
-  .middleware(dbReqHandler)
-
+const imagesRouter = createUnauthedDbRouter()
   .query('listImages', {
     async resolve() {
       const photos = await Photo.find();

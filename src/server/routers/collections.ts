@@ -1,17 +1,14 @@
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
 
-import { createRouter } from '~server/createRouter';
-import { dbReqHandler } from '~server/db/dbReqHandler';
+import { createUnauthedDbRouter } from '~server/createUnauthedDbRouter';
 import { Collection } from '~server/models/collection';
 import { editCollectionZ } from '~types/editCollection';
 
 /**
  * Router for debug operations
  */
-const collectionsRouter = createRouter()
-  .middleware(dbReqHandler)
-
+const collectionsRouter = createUnauthedDbRouter()
   .query('listCollections', {
     input: z
       .object({
