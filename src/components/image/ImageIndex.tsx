@@ -107,7 +107,7 @@ export function ImagesIndex() {
     ),
   );
 
-  const SkeletonLoaders = Array(12).fill(<ImageSkeleton />);
+  const skeletonLoaders = Array.from({ length: 10 }, (_, i) => <ImageSkeleton key={i} />);
 
   useEffect(() => {
     if (Images) {
@@ -144,7 +144,7 @@ export function ImagesIndex() {
         cols={4}
         spacing='xs'
       >
-        {loading ? SkeletonLoaders : Images}
+        {loading ? skeletonLoaders : Images}
       </SimpleGrid>
     </>
   );
