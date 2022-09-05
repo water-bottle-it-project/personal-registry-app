@@ -6,8 +6,8 @@ import { colorZ } from '~types/util/color';
 const collectionZ = z
   .object({
     _id: z.string().min(1),
-    title: z.string().min(1),
-    description: z.string().optional(),
+    title: z.string().trim().min(1),
+    description: z.string().trim().optional(),
     color: colorZ.optional(),
   })
   .required();
