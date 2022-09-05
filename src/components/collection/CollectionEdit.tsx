@@ -36,7 +36,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
           // Auto-refresh without reload
           await trpcUtils.invalidateQueries(['collection.GetCollections']);
           await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
-          await router.push('/collections2', undefined, { shallow: true });
+          await router.push('/collections', undefined, { shallow: true });
         },
       },
     );
@@ -84,6 +84,7 @@ function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEdit
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<collectionOmitIdT>({
     resolver: zodResolver(collectionOmitIdZ),
@@ -123,7 +124,13 @@ function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEdit
             <Button color='red' leftIcon={<IconTrash />}>
               Delete
             </Button>
-            <Button leftIcon={<IconRotateClockwise2 />} variant='default'>
+            <Button
+              leftIcon={<IconRotateClockwise2 />}
+              onClick={() => {
+                reset();
+              }}
+              variant='default'
+            >
               Reset
             </Button>
           </Group>

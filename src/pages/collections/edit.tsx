@@ -7,8 +7,9 @@ import { CollectionEdit } from '~components/collection/CollectionEdit';
 function CollectionEditPage() {
   const router = useRouter();
   const id = router.query.id;
+  console.log(id);
   if (!id || Array.isArray(id)) {
-    void router.replace('/collections2');
+    void router.replace('/collections');
     return (
       <Container size='xl'>
         <Text>No collection id provided; redirecting...</Text>;
@@ -19,7 +20,7 @@ function CollectionEditPage() {
   return (
     <Modal
       centered
-      onClose={() => router.push('/collections2')}
+      onClose={() => router.push('/collections')}
       opened
       size='lg'
       title={<Title order={3}>Edit collection</Title>}

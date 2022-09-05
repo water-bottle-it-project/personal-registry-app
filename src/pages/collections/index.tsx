@@ -14,7 +14,7 @@ const Collections = () => {
     modal = (
       <Modal
         lockScroll
-        onClose={() => router.push('/collections2', undefined, { shallow: true })}
+        onClose={() => router.push('/collections', undefined, { shallow: true })}
         opened
         size='lg'
         title={<Title order={3}>Edit collection</Title>}
