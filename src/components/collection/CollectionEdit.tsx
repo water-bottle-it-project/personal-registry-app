@@ -1,7 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
 import { useScrollLock } from '@mantine/hooks';
-import { IconDeviceFloppy, IconRotateClockwise2, IconTrash } from '@tabler/icons';
+import { showNotification } from '@mantine/notifications';
+import { IconCheck, IconDeviceFloppy, IconRotateClockwise2, IconTrash, IconX } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -37,12 +38,23 @@ export function CollectionEdit(props: collectionIdOnlyT) {
           await trpcUtils.invalidateQueries(['collection.GetCollections']);
           await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
           await router.push('/collections', undefined, { shallow: true });
+          showNotification({
+            icon: <IconCheck />,
+            title: 'Success!',
+            message: 'Collection successfully saved.',
+          });
         },
       },
     );
   }
 
   if (isError) {
+    showNotification({
+      icon: <IconX />,
+      color: 'red',
+      title: 'Error!',
+      message: 'Error loading collection details.',
+    });
     return <Text>Error loading collection details: {error?.message}</Text>;
   }
 
