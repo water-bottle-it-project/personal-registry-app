@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
 import { useScrollLock } from '@mantine/hooks';
+import { closeAllModals, openConfirmModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconDeviceFloppy, IconRotateClockwise2, IconTrash, IconX } from '@tabler/icons';
 import { useRouter } from 'next/router';
@@ -17,6 +18,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
   useScrollLock(true);
   const router = useRouter();
   const mutation = trpcClient.useMutation(['collection.UpdateCollection']);
+  const deletion = trpcClient.useMutation(['collection.DeleteCollection']);
   const trpcUtils = trpcClient.useContext();
   const { data, isLoading, isError, error } = trpcClient.useQuery([
     'collection.GetCollection',
@@ -48,6 +50,27 @@ export function CollectionEdit(props: collectionIdOnlyT) {
     );
   }
 
+  function handleCollectionDelete() {
+    console.log('deletion attempted');
+    closeAllModals();
+    deletion.mutate(
+      { _id: props._id },
+      {
+        onSuccess: async () => {
+          // Auto-refresh without reload
+          await trpcUtils.invalidateQueries(['collection.GetCollections']);
+          await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
+          await router.push('/collections', undefined, { shallow: true });
+          showNotification({
+            icon: <IconCheck />,
+            title: 'Success!',
+            message: 'Collection successfully deleted.',
+          });
+        },
+      },
+    );
+  }
+
   if (isError) {
     showNotification({
       icon: <IconX />,
@@ -70,6 +93,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
       <Space h='sm' />
       <CollectionEditForm
         collection={data.collection}
+        handleCollectionDelete={handleCollectionDelete}
         handleCollectionEdit={handleCollectionEdit}
       />
     </>
@@ -79,6 +103,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
 interface CollectionEditFormProps {
   collection: collectionT;
   handleCollectionEdit: ({ title, color, description }: collectionOmitIdT) => void;
+  handleCollectionDelete: () => void;
 }
 
 /**
@@ -91,7 +116,11 @@ interface CollectionEditFormProps {
  * @param handleCollectionEdit
  * @constructor
  */
-function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEditFormProps) {
+function CollectionEditForm({
+  collection,
+  handleCollectionEdit,
+  handleCollectionDelete,
+}: CollectionEditFormProps) {
   const {
     register,
     handleSubmit,
@@ -102,6 +131,18 @@ function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEdit
     resolver: zodResolver(collectionOmitIdZ),
     defaultValues: collection,
   });
+
+  const openModal = () =>
+    openConfirmModal({
+      title: 'Warning',
+      children: (
+        <Text size='sm'>Are you sure you want to delete the collection {collection.title}?</Text>
+      ),
+      labels: { confirm: 'Delete Collection', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      onConfirm: () => handleCollectionDelete(),
+      zIndex: '999',
+    });
 
   return (
     <form noValidate onSubmit={handleSubmit(handleCollectionEdit)}>
@@ -133,7 +174,7 @@ function CollectionEditForm({ collection, handleCollectionEdit }: CollectionEdit
             Save
           </Button>
           <Group>
-            <Button color='red' leftIcon={<IconTrash />}>
+            <Button color='red' leftIcon={<IconTrash />} onClick={openModal}>
               Delete
             </Button>
             <Button
