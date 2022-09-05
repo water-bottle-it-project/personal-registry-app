@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
 import { useScrollLock } from '@mantine/hooks';
-import { closeAllModals, openConfirmModal } from '@mantine/modals';
+import { openConfirmModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconDeviceFloppy, IconRotateClockwise2, IconTrash, IconX } from '@tabler/icons';
 import { useRouter } from 'next/router';
@@ -113,6 +113,7 @@ interface CollectionEditFormProps {
  * TextArea).
  * @param collection
  * @param handleCollectionEdit
+ * @param handleCollectionDelete
  * @constructor
  */
 function CollectionEditForm({

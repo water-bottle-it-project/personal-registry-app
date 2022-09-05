@@ -27,7 +27,7 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
         <Group position='apart'>
           <Link href='/' passHref>
             <Anchor component='a'>
-              <Text>View posts</Text>
+              <Text>View memories</Text>
             </Anchor>
           </Link>
           <Link href={`/collections?edit=${_id}`} passHref>
