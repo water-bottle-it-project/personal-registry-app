@@ -1,15 +1,12 @@
 import * as trpc from '@trpc/server';
 
-import { createRouter } from '~server/createRouter';
-import { dbReqHandler } from '~server/db/dbReqHandler';
+import { createUnauthedDbRouter } from '~server/createUnauthedDbRouter';
 import { User } from '~server/models/user';
 
 /**
  * Router for debug operations
  */
-const debugRouter = createRouter()
-  .middleware(dbReqHandler)
-
+const debugRouter = createUnauthedDbRouter()
   .query('listUsers', {
     async resolve() {
       const users = await User.find();
