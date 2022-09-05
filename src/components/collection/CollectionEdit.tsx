@@ -52,14 +52,13 @@ export function CollectionEdit(props: collectionIdOnlyT) {
 
   function handleCollectionDelete() {
     console.log('deletion attempted');
-    closeAllModals();
     deletion.mutate(
       { _id: props._id },
       {
         onSuccess: async () => {
           // Auto-refresh without reload
           await trpcUtils.invalidateQueries(['collection.GetCollections']);
-          await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
+          // await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
           await router.push('/collections', undefined, { shallow: true });
           showNotification({
             icon: <IconCheck />,
