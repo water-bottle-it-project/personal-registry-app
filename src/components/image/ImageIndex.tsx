@@ -1,5 +1,6 @@
 import { Container, Modal, SimpleGrid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -14,14 +15,18 @@ import { ImageSkeleton } from './ImageSkeleton';
  */
 
 export function ImagesIndex() {
+  const router = useRouter();
+  let modal: React.ReactNode = null;
+  const editId = router.query.edit;
+
   const isMobile = useMediaQuery('(max-width: 600px)');
+  // const { allImages, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
   const allImages = trpcClient.useQuery(['images.listImages']);
 
-  const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [imageArr, setImageArr] = useState<
-    { index: number; caption: string; url: string; userId: string }[]
+    { _id: string; index: number; caption: string; url: string; userId: string }[]
   >([]);
 
   const [displayImage, setDisplayImage] = useState({
@@ -73,9 +78,7 @@ export function ImagesIndex() {
     photoCaption: string,
     userId: string,
     currentImage: string,
-    value: boolean | ((prevState: boolean) => boolean),
   ) => {
-    setOpened(value);
     setDisplayImage(previousState => {
       return {
         ...previousState,
@@ -88,14 +91,15 @@ export function ImagesIndex() {
   };
 
   const Images = imageArr?.map(
-    (photo: { index: number; caption: string; url: string; userId: string }) => (
+    (photo: { _id: string; index: number; caption: string; url: string; userId: string }) => (
       <Container
         key={photo.index}
         onClick={() =>
-          renderOverlay(photo.url, photo.caption, photo.userId, photo.index.toString(), true)
+          renderOverlay(photo.url, photo.caption, photo.userId, photo.index.toString())
         }
       >
         <ImageCard
+          _id={photo._id}
           caption={photo.caption}
           key={photo.index}
           url={photo.url}
@@ -115,12 +119,12 @@ export function ImagesIndex() {
     }
   }, [Images]);
 
-  return (
-    <>
+  if (editId && !Array.isArray(editId)) {
+    modal = (
       <Modal
         fullScreen={isMobile}
-        onClose={() => setOpened(false)}
-        opened={opened}
+        onClose={() => router.push('/images', undefined, { shallow: true })}
+        opened
         size='calc(100vw - 40%)'
         transition='fade'
         transitionDuration={250}
@@ -134,6 +138,12 @@ export function ImagesIndex() {
           userId={displayImage.userId}
         />
       </Modal>
+    );
+  }
+
+  return (
+    <>
+      {modal}
       <SimpleGrid
         breakpoints={[
           { maxWidth: 'xl', cols: 3, spacing: 'md' },
