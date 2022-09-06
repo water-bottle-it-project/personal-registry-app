@@ -1,13 +1,12 @@
-import { Container, Text } from '@mantine/core';
-import { useRouter } from 'next/router';
-
 import { withAuthedPage } from '~clientUtils/authHooks';
-import { CollectionEditModal } from '~components/collection/CollectionEditModal';
+import { CollectionCreateModal } from '~components/collection/CollectionCreateModal';
 
 function CollectionCreatePage() {
-  const router = useRouter();
-
-  return <></>;
+  return (
+    <>
+      <CollectionCreateModal />
+    </>
+  );
 }
 
 export default withAuthedPage(CollectionCreatePage);
