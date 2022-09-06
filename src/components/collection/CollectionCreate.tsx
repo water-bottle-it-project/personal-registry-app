@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Group, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { Button, Group, Space, Stack, Textarea, TextInput } from '@mantine/core';
+import { useScrollLock } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconDeviceFloppy, IconRotateClockwise2 } from '@tabler/icons';
 import { useRouter } from 'next/router';
@@ -7,11 +8,11 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { ColorControl } from '~components/collection/ColorControl';
-import type { collectionT } from '~types/collection/collection';
 import type { collectionOmitIdT } from '~types/collection/collectionOmitId';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
 
-export function CollectionAdd() {
+export function CollectionCreate() {
+  useScrollLock(true);
   const router = useRouter();
   const trpcUtils = trpcClient.useContext();
   const creation = trpcClient.useMutation(['collection.CreateCollection']);
@@ -32,7 +33,7 @@ export function CollectionAdd() {
           showNotification({
             icon: <IconCheck />,
             title: 'Success!',
-            message: `Collection ${title} successfully created.`,
+            message: `${title} successfully created.`,
           });
         },
       },
@@ -72,6 +73,7 @@ function CollectionCreateForm({ handleCollectionCreate }: CollectionCreateFormPr
           description='Displayed front and centre.'
           error={errors?.title?.message}
           label='Title'
+          placeholder='Add a title.'
           required
           {...register('title')}
         />
@@ -80,11 +82,12 @@ function CollectionCreateForm({ handleCollectionCreate }: CollectionCreateFormPr
           description='Add some more detail.'
           label='Description'
           maxRows={12}
-          placeholder={`There's still space to add a description!`}
+          placeholder='Describe your collection.'
           {...register('description')}
         />
         <Controller
           control={control}
+          defaultValue='dark'
           name='color'
           render={({ field: { value, onChange, ref, ...field } }) => (
             <ColorControl
