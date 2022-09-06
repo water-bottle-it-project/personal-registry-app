@@ -1,8 +1,8 @@
 import { Container, createStyles, Space, Title } from '@mantine/core';
 import Lottie from 'lottie-react';
 
+import notFoundLottie from '~components/util/404-lottie.json';
 import { LinkButton } from '~components/util/LinkButton';
-import notFoundLottie from '~components/util/not-found-lottie.json';
 
 export function NotFound() {
   const { classes } = useStyles();
