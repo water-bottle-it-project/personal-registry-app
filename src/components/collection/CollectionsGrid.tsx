@@ -4,6 +4,7 @@ import { IconX } from '@tabler/icons';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CollectionCard } from '~components/collection/CollectionCard';
+import { CollectionsHeader } from '~components/collection/CollectionsHeader';
 
 import { CollectionSkeleton } from './CollectionSkeleton';
 
@@ -42,6 +43,7 @@ export function CollectionsGrid() {
 
   return (
     <>
+      <CollectionsHeader />
       <Grid>{collections}</Grid>
     </>
   );
