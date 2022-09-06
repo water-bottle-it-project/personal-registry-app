@@ -64,6 +64,7 @@ function CollectionCreateForm({ handleCollectionCreate }: CollectionCreateFormPr
     formState: { errors },
   } = useForm<collectionOmitIdT>({
     resolver: zodResolver(collectionOmitIdZ),
+    defaultValues: { color: 'indigo', description: '', title: '' },
   });
 
   return (
