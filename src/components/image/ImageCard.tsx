@@ -21,7 +21,7 @@ export function ImageCard(props: ImageCardProps) {
   const { classes } = useStyles();
   return (
     <Container className={classes.wrapper}>
-      <Link href={`/images?edit=${props._id}`} passHref>
+      <Link href={`/images?view=${props._id}`} passHref>
         <Card
           className={classes.card}
           p={0}

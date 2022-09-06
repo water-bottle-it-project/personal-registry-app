@@ -17,13 +17,12 @@ import { ImageSkeleton } from './ImageSkeleton';
 export function ImagesIndex() {
   const router = useRouter();
   let modal: React.ReactNode = null;
-  const editId = router.query.edit;
+  const viewId = router.query.view;
 
   const isMobile = useMediaQuery('(max-width: 600px)');
-  // const { allImages, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
-  const allImages = trpcClient.useQuery(['images.listImages']);
+  const { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const [imageArr, setImageArr] = useState<
     { _id: string; index: number; caption: string; url: string; userId: string }[]
@@ -37,10 +36,8 @@ export function ImagesIndex() {
   });
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    setImageArr(allImages.data?.photos);
-  }, [allImages.data?.photos]);
+    setImageArr(data?.photos);
+  }, [data?.photos]);
 
   // add index to the images on the page, which is used for next and prev image functionality
   let idx = 0;
@@ -111,17 +108,21 @@ export function ImagesIndex() {
     ),
   );
 
-  const skeletonLoaders = Array.from({ length: 10 }, (_, i) => <ImageSkeleton key={i} />);
+  const SkeletonLoaders = Array(12).fill(<ImageSkeleton />);
+  // if (isLoading) {
+  //   return <Grid>{skeletonLoaders}</Grid>;
+  //   return Array(12).fill(<ImageSkeleton />);
+  // }
 
-  useEffect(() => {
-    if (Images) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  }, [Images]);
+  // useEffect(() => {
+  //   if (Images) {
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1000);
+  //   }
+  // }, [Images]);
 
-  if (editId && !Array.isArray(editId)) {
+  if (viewId && !Array.isArray(viewId)) {
     modal = (
       <Modal
         fullScreen={isMobile}
@@ -154,7 +155,7 @@ export function ImagesIndex() {
         cols={4}
         spacing='xs'
       >
-        {loading ? skeletonLoaders : Images}
+        {isLoading ? SkeletonLoaders : Images}
       </SimpleGrid>
     </>
   );
