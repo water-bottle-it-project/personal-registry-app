@@ -1,11 +1,14 @@
 import { z } from 'zod';
 
+import { colorZ } from '~types/util/color';
+
 const editCollectionZ = z
   .object({
     oldTitle: z.string(),
     title: z.string(),
     description: z.string(),
     userId: z.string(),
+    color: colorZ,
   })
   .required();
 
