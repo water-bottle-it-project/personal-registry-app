@@ -1,14 +1,19 @@
 import {
   Button,
+  Center,
   Container,
   createStyles,
+  Grid,
+  Group,
   Image,
   SimpleGrid,
   Space,
   Text,
   Title,
+  UnstyledButton,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons';
 import { useRouter } from 'next/router';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -61,35 +66,51 @@ export function ImageOverlay(props: ImageCardProps) {
   }
 
   return (
-    <Container
-      sx={theme => ({
-        fontSize: theme.fontSizes.sm,
-        padding: '0',
-      })}
-    >
-      <Image alt='' height='50%' src={data?.image.url} />
-      <Space h='md' />
-      <Title order={1}>{data?.image.caption}</Title>
-      <Text>Posted on August 12 2022</Text>
-
-      <Space h='md' />
-      <Container className={classes.wrapper}>
-        <SimpleGrid
-          breakpoints={[{ maxWidth: 'md', cols: 1, spacing: 'sm' }]}
-          cols={2}
-          spacing='lg'
+    <Grid>
+      <Grid.Col span={1}>
+        <Group py={250}>
+          <UnstyledButton onClick={props.handlePrev}>
+            <IconChevronLeft size={60} />
+          </UnstyledButton>
+        </Group>
+      </Grid.Col>
+      <Grid.Col span={10}>
+        <Container
+          sx={theme => ({
+            fontSize: theme.fontSizes.sm,
+            padding: '0',
+          })}
         >
-          {info}
-          <ImageOverlayMetadata
-            caption={data?.image.caption}
-            url={data?.image.url}
-            userId={data?.image.userId}
-          />
-        </SimpleGrid>
-      </Container>
-      <Button onClick={props.handlePrev}>prev</Button>
-      <Button onClick={props.handleNext}>next</Button>
-    </Container>
+          <Image alt='' height='40%' src={data?.image.url} width='100%' />
+          <Space h='md' />
+          <Title order={1}>{data?.image.caption}</Title>
+          <Text>Posted on August 12 2022</Text>
+
+          <Space h='md' />
+          <Container className={classes.wrapper}>
+            <SimpleGrid
+              breakpoints={[{ maxWidth: 'md', cols: 1, spacing: 'sm' }]}
+              cols={2}
+              spacing='lg'
+            >
+              {info}
+              <ImageOverlayMetadata
+                caption={data?.image.caption}
+                url={data?.image.url}
+                userId={data?.image.userId}
+              />
+            </SimpleGrid>
+          </Container>
+        </Container>
+      </Grid.Col>
+      <Grid.Col span={1}>
+        <Group py={250}>
+          <UnstyledButton onClick={props.handleNext}>
+            <IconChevronRight size={60} />
+          </UnstyledButton>
+        </Group>
+      </Grid.Col>
+    </Grid>
   );
 }
 
