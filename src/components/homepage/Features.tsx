@@ -34,6 +34,8 @@ export function FeaturesTitle() {
   return (
     <BackgroundImage src={gradient.src}>
       <Container px={0} size='xl'>
+        <Space h='xl' />
+        <Space h='xl' />
         <Grid gutter={30} m={0} px={0} py={30}>
           <Grid.Col md={5} span={12}>
             <Title className={classes.title} order={2}>
@@ -55,6 +57,8 @@ export function FeaturesTitle() {
             </SimpleGrid>
           </Grid.Col>
         </Grid>
+        <Space h='xl' />
+        <Space h='xl' />
       </Container>
     </BackgroundImage>
   );
