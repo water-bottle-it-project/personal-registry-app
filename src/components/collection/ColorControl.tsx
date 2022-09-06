@@ -13,7 +13,7 @@ export function ColorControl({ value, label, onChange, inputRef, ...others }: Co
   const theme = useMantineTheme();
 
   const colors = Object.keys(theme.colors).map(color => (
-    <Tooltip key={color} label={upperFirst(label)}>
+    <Tooltip key={color} label={upperFirst(color)}>
       <ColorSwatch
         color={theme.colorScheme === 'dark' ? theme.colors[color][7] : theme.colors[color][5]}
         component='button'
