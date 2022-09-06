@@ -1,4 +1,4 @@
-import { Anchor, Card, Group, Stack, Text, Title } from '@mantine/core';
+import { Anchor, Card, createStyles, Group, Stack, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
 import type { collectionT } from '~types/collection/collection';
@@ -8,6 +8,8 @@ interface CollectionCardProps extends collectionT {
 }
 
 export function CollectionCard({ _id, description, title, color }: CollectionCardProps) {
+  const { classes } = useStyles();
+
   return (
     <Card
       sx={theme => ({
@@ -19,8 +21,16 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
       })}
     >
       <Stack spacing='xs' sx={{ height: '100%' }}>
-        <Title order={4}>{title}</Title>
-        <Text italic={!description} lineClamp={4} size='sm' sx={{ flexGrow: 1 }}>
+        <Title className={classes.text} lineClamp={3} order={4}>
+          {title}
+        </Title>
+        <Text
+          className={classes.text}
+          italic={!description}
+          lineClamp={5}
+          size='sm'
+          sx={{ flexGrow: 1 }}
+        >
           {description || 'no description provided'}
         </Text>
         <Group position='apart'>
@@ -39,3 +49,9 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
     </Card>
   );
 }
+
+const useStyles = createStyles({
+  text: {
+    overflowWrap: 'break-word',
+  },
+});
