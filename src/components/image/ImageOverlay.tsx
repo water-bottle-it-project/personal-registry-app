@@ -9,10 +9,12 @@ import {
   Title,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
+import { useRouter } from 'next/router';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ImageOverlayInfo } from './ImageOverlayInfo';
+import { ImageOverlayInfoEdit } from './ImageOverlayInfoEdit';
 import { ImageOverlayMetadata } from './ImageOverlayMetadata';
 
 export interface ImageCardProps {
@@ -25,6 +27,10 @@ export interface ImageCardProps {
 }
 
 export function ImageOverlay(props: ImageCardProps) {
+  const router = useRouter();
+  const editId = router.query.edit;
+  let info: React.ReactNode = null;
+
   const { classes } = useStyles();
 
   const { data, isLoading, isError, error, isSuccess } = trpcClient.useQuery([
@@ -32,24 +38,27 @@ export function ImageOverlay(props: ImageCardProps) {
     { _id: props._id },
   ]);
 
-  // if (isError) {
-  //   showNotification({
-  //     color: 'red',
-  //     title: 'Error!',
-  //     message: 'Error loading collection details.',
-  //   });
-  //   return <Text>Error loading collection details: {error?.message}</Text>;
-  // }
+  data && console.log(data.image);
 
-  // if (isLoading || !data?.image) {
-  //   console.log("data bitches", data);
-  //   return <Text>Loading image details...</Text>;
-  // }
-
-  // if (isSuccess) {
-  //   data && console.log("data bitches", data.image);
-  // }
-  console.log(props._id);
+  if (editId && !Array.isArray(editId)) {
+    info = (
+      <ImageOverlayInfoEdit
+        _id={props._id}
+        caption={data?.image.caption}
+        url={data?.image.url}
+        userId={data?.image.userId}
+      />
+    );
+  } else {
+    info = (
+      <ImageOverlayInfo
+        _id={props._id}
+        caption={data?.image.caption}
+        url={data?.image.url}
+        userId={data?.image.userId}
+      />
+    );
+  }
 
   return (
     <Container
@@ -58,9 +67,9 @@ export function ImageOverlay(props: ImageCardProps) {
         padding: '0',
       })}
     >
-      <Image alt='' height='50%' src={props.url} />
+      <Image alt='' height='50%' src={data?.image.url} />
       <Space h='md' />
-      <Title order={1}>{props.caption}</Title>
+      <Title order={1}>{data?.image.caption}</Title>
       <Text>Posted on August 12 2022</Text>
 
       <Space h='md' />
@@ -70,8 +79,12 @@ export function ImageOverlay(props: ImageCardProps) {
           cols={2}
           spacing='lg'
         >
-          <ImageOverlayInfo caption={props.caption} url={props.url} userId={props.userId} />
-          <ImageOverlayMetadata caption={props.caption} url={props.url} userId={props.userId} />
+          {info}
+          <ImageOverlayMetadata
+            caption={data?.image.caption}
+            url={data?.image.url}
+            userId={data?.image.userId}
+          />
         </SimpleGrid>
       </Container>
       <Button onClick={props.handlePrev}>prev</Button>

@@ -19,7 +19,7 @@ export function DebugIndex() {
     onSuccess: () => trpcUtils.invalidateQueries(['debug.listUsers']),
   });
 
-  const image = trpcClient.useQuery(['images.getImage']);
+  const image = trpcClient.useQuery(['images.getImage', {_id: '63078e0686951fb0881c5c14'}]);
 
   return (
     <>

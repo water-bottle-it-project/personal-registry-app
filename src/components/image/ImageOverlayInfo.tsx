@@ -1,6 +1,8 @@
 import { Box, createStyles, Group, Space, Text, Title, UnstyledButton } from '@mantine/core';
 import { IconDownload, IconEdit, IconTrash } from '@tabler/icons';
+import Link from 'next/link';
 interface ImageCardProps {
+  _id: string;
   caption: string;
   url: string;
   userId: string;
@@ -32,10 +34,12 @@ export function ImageOverlayInfo(props: ImageCardProps) {
       </div>
       <div className={classes.buttonGroup}>
         <UnstyledButton className={classes.button}>
-          <Group spacing={5}>
-            <IconEdit />
-            <Text>Edit</Text>
-          </Group>
+          <Link href={`/images?edit=${props._id}`} passHref>
+            <Group spacing={5}>
+              <IconEdit />
+              <Text>Edit</Text>
+            </Group>
+          </Link>
         </UnstyledButton>
         <UnstyledButton className={classes.button}>
           <Group className={classes.delete} spacing={5}>

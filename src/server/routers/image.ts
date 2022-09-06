@@ -22,12 +22,12 @@ const imagesRouter = createProtectedDbRouter()
   })
 
   .query('getImage', {
-    // input: z.object({
-    //   _id: z.string().min(1),
-    // }),
-    async resolve({ ctx }) {
+    input: z.object({
+      _id: z.string().min(1),
+    }),
+    async resolve({ ctx, input }) {
       const image = await Photo.findOne({
-        _id: '6308a49ab3b2b466112558ec',
+        _id: input._id,
         userId: ctx.userId,
       }); // findById('6308a49ab3b2b466112558ec');
 

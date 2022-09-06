@@ -18,6 +18,7 @@ export function ImagesIndex() {
   const router = useRouter();
   let modal: React.ReactNode = null;
   const viewId = router.query.view;
+  const editId = router.query.edit;
 
   const isMobile = useMediaQuery('(max-width: 600px)');
   const { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
@@ -114,6 +115,29 @@ export function ImagesIndex() {
   const SkeletonLoaders = Array(12).fill(<ImageSkeleton />);
 
   if (viewId && !Array.isArray(viewId)) {
+    modal = (
+      <Modal
+        fullScreen={isMobile}
+        onClose={() => router.push('/images', undefined, { shallow: true })}
+        opened
+        size='calc(100vw - 40%)'
+        transition='fade'
+        transitionDuration={250}
+        transitionTimingFunction='ease'
+      >
+        <ImageOverlay
+          _id={displayImage._id}
+          caption={displayImage.caption}
+          handleNext={handleNextProject}
+          handlePrev={handlePrevProject}
+          url={displayImage.url}
+          userId={displayImage.userId}
+        />
+      </Modal>
+    );
+  }
+
+  if (editId && !Array.isArray(editId)) {
     modal = (
       <Modal
         fullScreen={isMobile}
