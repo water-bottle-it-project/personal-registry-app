@@ -39,7 +39,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
           // Auto-refresh without reload
           await trpcUtils.invalidateQueries(['collection.GetCollections']);
           await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
-          await router.push('/collections', undefined, { shallow: true });
+          await router.push('/collections');
           showNotification({
             icon: <IconCheck />,
             title: 'Success!',
@@ -59,7 +59,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
           // Auto-refresh without reload
           await trpcUtils.invalidateQueries(['collection.GetCollections']);
           // await trpcUtils.invalidateQueries(['collection.GetCollection', { _id: props._id }]);
-          await router.push('/collections', undefined, { shallow: true });
+          await router.push('/collections');
           showNotification({
             icon: <IconCheck />,
             title: 'Success!',

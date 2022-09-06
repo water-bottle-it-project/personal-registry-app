@@ -1,7 +1,6 @@
 import { Button, Code, Title } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { ColorControl } from '~components/collection/ColorControl';
 
 /**
  * Debug page for querying (aka GET) and mutating (aka POST) users using TRPC and Mongoose

@@ -30,7 +30,7 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
               <Text>View memories</Text>
             </Anchor>
           </Link>
-          <Link href={`/collections?edit=${_id}`} passHref>
+          <Link as={`/collections/edit?id=${_id}`} href={`/collections?edit=${_id}`} passHref>
             <Anchor color='red' component='a'>
               <Text>Edit</Text>
             </Anchor>
