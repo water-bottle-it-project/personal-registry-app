@@ -8,7 +8,6 @@ interface CollectionCardProps extends collectionT {
 }
 
 export function CollectionCard({ _id, description, title, color }: CollectionCardProps) {
-  const isEmptyDesc = description.length === 0;
   return (
     <Card
       sx={theme => ({
@@ -21,8 +20,8 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
     >
       <Stack spacing='xs' sx={{ height: '100%' }}>
         <Title order={4}>{title}</Title>
-        <Text italic={isEmptyDesc} lineClamp={4} size='sm' sx={{ flexGrow: 1 }}>
-          {isEmptyDesc ? 'no description provided' : description}
+        <Text italic={!description} lineClamp={4} size='sm' sx={{ flexGrow: 1 }}>
+          {description ? description : 'no description provided'}
         </Text>
         <Group position='apart'>
           <Link href='/' passHref>
