@@ -175,6 +175,7 @@ function CollectionEditForm({
             />
           )}
         />
+        <Space h='xl' />
         <Group position='apart'>
           <Button leftIcon={<IconDeviceFloppy />} type='submit'>
             Save
