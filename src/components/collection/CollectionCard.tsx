@@ -21,7 +21,7 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
       <Stack spacing='xs' sx={{ height: '100%' }}>
         <Title order={4}>{title}</Title>
         <Text italic={!description} lineClamp={4} size='sm' sx={{ flexGrow: 1 }}>
-          {description ? description : 'no description provided'}
+          {description || 'no description provided'}
         </Text>
         <Group position='apart'>
           <Link href='/' passHref>
