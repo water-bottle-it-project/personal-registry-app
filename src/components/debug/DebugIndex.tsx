@@ -20,6 +20,8 @@ export function DebugIndex() {
     onSuccess: () => trpcUtils.invalidateQueries(['debug.listUsers']),
   });
 
+  const image = trpcClient.useQuery(['images.getImage']);
+
   return (
     <>
       <Title>Debug index page</Title>
@@ -29,7 +31,7 @@ export function DebugIndex() {
       </Button>
       <Title order={2}>All users</Title>
       <Code block color='indigo'>
-        {allUsers.data && JSON.stringify(allUsers.data.users, null, 2)}
+        {image.data && JSON.stringify(image.data.image, null, 2)}
       </Code>
     </>
   );

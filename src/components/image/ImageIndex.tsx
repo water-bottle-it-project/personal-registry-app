@@ -22,13 +22,12 @@ export function ImagesIndex() {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
 
-  // const [loading, setLoading] = useState(true);
-
   const [imageArr, setImageArr] = useState<
     { _id: string; index: number; caption: string; url: string; userId: string }[]
   >([]);
 
   const [displayImage, setDisplayImage] = useState({
+    _id: '',
     currentImage: '',
     caption: '',
     url: '',
@@ -52,6 +51,7 @@ export function ImagesIndex() {
       const idx = parseInt(displayImage.currentImage) + 1;
       setDisplayImage(previousState => ({
         ...previousState,
+        _id: imageArr[idx]._id,
         currentImage: idx.toString(),
         caption: imageArr[idx].caption,
         url: imageArr[idx].url,
@@ -65,6 +65,7 @@ export function ImagesIndex() {
       const idx = parseInt(displayImage.currentImage) - 1;
       setDisplayImage(previousState => ({
         ...previousState,
+        _id: imageArr[idx]._id,
         currentImage: idx.toString(),
         caption: imageArr[idx].caption,
         url: imageArr[idx].url,
@@ -73,6 +74,7 @@ export function ImagesIndex() {
   };
 
   const renderOverlay = (
+    _id: string,
     photoUrl: string,
     photoCaption: string,
     userId: string,
@@ -81,6 +83,7 @@ export function ImagesIndex() {
     setDisplayImage(previousState => {
       return {
         ...previousState,
+        _id: _id,
         caption: photoCaption,
         currentImage: currentImage,
         url: photoUrl,
@@ -94,7 +97,7 @@ export function ImagesIndex() {
       <Container
         key={photo.index}
         onClick={() =>
-          renderOverlay(photo.url, photo.caption, photo.userId, photo.index.toString())
+          renderOverlay(photo._id, photo.url, photo.caption, photo.userId, photo.index.toString())
         }
       >
         <ImageCard
@@ -109,18 +112,6 @@ export function ImagesIndex() {
   );
 
   const SkeletonLoaders = Array(12).fill(<ImageSkeleton />);
-  // if (isLoading) {
-  //   return <Grid>{skeletonLoaders}</Grid>;
-  //   return Array(12).fill(<ImageSkeleton />);
-  // }
-
-  // useEffect(() => {
-  //   if (Images) {
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1000);
-  //   }
-  // }, [Images]);
 
   if (viewId && !Array.isArray(viewId)) {
     modal = (
@@ -134,6 +125,7 @@ export function ImagesIndex() {
         transitionTimingFunction='ease'
       >
         <ImageOverlay
+          _id={displayImage._id}
           caption={displayImage.caption}
           handleNext={handleNextProject}
           handlePrev={handlePrevProject}

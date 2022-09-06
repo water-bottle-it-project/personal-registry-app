@@ -8,15 +8,11 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-
-import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ImageOverlayInfo } from './ImageOverlayInfo';
 import { ImageOverlayMetadata } from './ImageOverlayMetadata';
 
 export interface ImageCardProps {
-  _id: string;
   caption: string;
   url: string;
   userId: string;
@@ -26,31 +22,6 @@ export interface ImageCardProps {
 
 export function ImageOverlay(props: ImageCardProps) {
   const { classes } = useStyles();
-
-  const { data, isLoading, isError, error, isSuccess } = trpcClient.useQuery([
-    'images.getImage',
-    { _id: props._id },
-  ]);
-
-  // if (isError) {
-  //   showNotification({
-  //     color: 'red',
-  //     title: 'Error!',
-  //     message: 'Error loading collection details.',
-  //   });
-  //   return <Text>Error loading collection details: {error?.message}</Text>;
-  // }
-
-  // if (isLoading || !data?.image) {
-  //   console.log("data bitches", data);
-  //   return <Text>Loading image details...</Text>;
-  // }
-
-  // if (isSuccess) {
-  //   data && console.log("data bitches", data.image);
-  // }
-  console.log(props._id);
-
   return (
     <Container
       sx={theme => ({
