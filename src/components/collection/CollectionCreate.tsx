@@ -29,7 +29,7 @@ export function CollectionCreate() {
         onSuccess: async () => {
           // Auto-refresh without reload
           await trpcUtils.invalidateQueries(['collection.GetCollections']);
-          await router.push('/collections');
+          await router.push('/collections', undefined, { shallow: true });
           showNotification({
             icon: <IconCheck />,
             title: 'Success!',

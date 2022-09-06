@@ -15,7 +15,7 @@ export function CollectionEditModal({ _id }: collectionIdOnlyT) {
       <NextSeo description='Editing a collection' title='Edit collection' />
       <Modal
         lockScroll
-        onClose={() => router.push('/collections')}
+        onClose={() => router.push('/collections', undefined, { shallow: true })}
         opened
         size='lg'
         title={<Title order={3}>Edit collection</Title>}

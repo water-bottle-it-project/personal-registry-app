@@ -12,7 +12,7 @@ export function CollectionCreateModal() {
       <NextSeo description='Creating a collection' title='Create collection' />
       <Modal
         lockScroll
-        onClose={() => router.push('/collections')}
+        onClose={() => router.push('/collections', undefined, { shallow: true })}
         opened
         size='lg'
         title={<Title order={3}>Create collection</Title>}
