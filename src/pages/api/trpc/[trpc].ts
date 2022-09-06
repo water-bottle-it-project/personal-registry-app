@@ -4,7 +4,6 @@ import * as trpcNext from '@trpc/server/adapters/next';
 import type { Context } from '~server/context';
 import { createContext } from '~server/context';
 import { collectionRouter } from '~server/routers/collection';
-import { collectionsRouter } from '~server/routers/collections';
 import { debugRouter } from '~server/routers/debug';
 import { debugAuthedRouter } from '~server/routers/debugAuthed';
 import { imagesRouter } from '~server/routers/image';
@@ -19,8 +18,7 @@ const appRouter = trpc
   .merge('debug.', debugRouter)
   .merge('debugAuthed.', debugAuthedRouter)
   .merge('images.', imagesRouter)
-  .merge('profile.', profileRouter)
-  .merge('collections.', collectionsRouter);
+  .merge('profile.', profileRouter);
 /**
  * Export type-safe route paths, inputs, and outputs
  */
