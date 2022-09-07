@@ -3,10 +3,10 @@ import { useViewportSize } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { AppDrawer } from '~components/app/AppDrawer';
 import { AppHeaderLogo } from '~components/app/AppHeaderLogo';
 import { AppUserMenu } from '~components/app/AppUserMenu';
 import { ColorSchemeToggle } from '~components/app/ColorSchemeToggle';
-import { MenuDrawer } from '~components/util/Drawer';
 
 interface AppLink {
   name: string;
@@ -14,14 +14,10 @@ interface AppLink {
 }
 
 export interface AppHeaderProps {
-  [x: string]: any;
   links: AppLink[];
 }
 
-function PageWidth() {
-  const { width } = useViewportSize();
-  return width;
-}
+const HAMBURGER_BREAKPOINT = 650;
 
 /**
  * The header for the entire app
@@ -30,12 +26,11 @@ function PageWidth() {
  */
 export function AppHeader({ links }: AppHeaderProps) {
   const { classes, cx } = useAppHeaderStyles();
-  const HAMBURGER_BOUND = 650;
 
   const router = useRouter();
   const routeIdx = links.findIndex(link => router.pathname.startsWith(link.route));
 
-  const pageWidth = PageWidth();
+  const { width } = useViewportSize();
   const linkElems = links.map((link, i) => (
     <Link href={link.route} key={link.name}>
       <a
@@ -53,11 +48,17 @@ export function AppHeader({ links }: AppHeaderProps) {
       <Container className={classes.headerContainer} size='xl'>
         <Group spacing={6}>
           <AppHeaderLogo />
-          {pageWidth > HAMBURGER_BOUND && linkElems}
+          {width > HAMBURGER_BREAKPOINT && linkElems}
         </Group>
         <Group spacing={6}>
-          {pageWidth > HAMBURGER_BOUND ? <AppUserMenu /> : <MenuDrawer links={links} />}
-          {pageWidth > HAMBURGER_BOUND && <ColorSchemeToggle />}
+          {width > HAMBURGER_BREAKPOINT ? (
+            <>
+              <AppUserMenu />
+              <ColorSchemeToggle />
+            </>
+          ) : (
+            <AppDrawer links={links} />
+          )}
         </Group>
       </Container>
     </Header>
@@ -91,6 +92,10 @@ const useAppHeaderStyles = createStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2],
     },
+
+    [`@media (max-width: ${HAMBURGER_BREAKPOINT}px)`]: {
+      padding: '14px 14px',
+    },
   },
 
   linkActive: {
@@ -103,3 +108,5 @@ const useAppHeaderStyles = createStyles(theme => ({
     },
   },
 }));
+
+export { useAppHeaderStyles };

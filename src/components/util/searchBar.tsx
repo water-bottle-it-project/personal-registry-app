@@ -8,8 +8,6 @@ interface SearchBarProps {
 }
 
 export function SearchBar(props: SearchBarProps) {
-  props.searchFilters.map(filter => console.log(filter));
-
   const filters = props.searchFilters && (
     <Radio.Group label='Search by'>
       {props.searchFilters.map((filter: string) => (
