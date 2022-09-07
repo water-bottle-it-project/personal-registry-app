@@ -1,5 +1,6 @@
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
+import superjson from 'superjson';
 
 import type { Context } from '~server/context';
 import { createContext } from '~server/context';
@@ -14,6 +15,7 @@ import { profileRouter } from '~server/routers/profile';
  */
 const appRouter = trpc
   .router<Context>()
+  .transformer(superjson)
   .merge('collection.', collectionRouter)
   .merge('debug.', debugRouter)
   .merge('debugAuthed.', debugAuthedRouter)

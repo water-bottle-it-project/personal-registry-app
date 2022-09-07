@@ -7,6 +7,7 @@ import { withTRPC } from '@trpc/next';
 import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import superjson from 'superjson';
 
 import { initAuth } from '~clientUtils/initAuth';
 import { AppLayout } from '~components/app/AppLayout';
@@ -66,6 +67,7 @@ export default withTRPC<AppRouter>({
   config() {
     return {
       url: '/api/trpc',
+      transformer: superjson,
     };
   },
   ssr: false,
