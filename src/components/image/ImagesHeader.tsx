@@ -23,7 +23,7 @@ export function ImagesHeader() {
             color='red'
             radius='md'
             styles={{
-              label: { backgroundColor: `${theme.colors.red[2]} !important` },
+              label: { color: 'black', backgroundColor: `${theme.colors.red[2]} !important` },
             }}
             variant='filled'
           >
@@ -33,7 +33,7 @@ export function ImagesHeader() {
             color='teal'
             radius='md'
             styles={{
-              label: { backgroundColor: `${theme.colors.teal[2]} !important` },
+              label: { color: 'black', backgroundColor: `${theme.colors.teal[2]} !important` },
             }}
             variant='filled'
           >
@@ -43,7 +43,7 @@ export function ImagesHeader() {
             color='indigo'
             radius='md'
             styles={{
-              label: { backgroundColor: `${theme.colors.indigo[2]} !important` },
+              label: { color: 'black', backgroundColor: `${theme.colors.indigo[2]} !important` },
             }}
             variant='filled'
           >
@@ -53,7 +53,7 @@ export function ImagesHeader() {
             color='gray'
             radius='md'
             styles={{
-              label: { backgroundColor: `${theme.colors.gray[2]} !important` },
+              label: { color: 'black', backgroundColor: `${theme.colors.gray[2]} !important` },
             }}
             variant='filled'
           >
