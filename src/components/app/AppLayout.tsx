@@ -1,5 +1,5 @@
 import type { AppShellProps } from '@mantine/core';
-import { AppShell, Space } from '@mantine/core';
+import { AppShell } from '@mantine/core';
 
 import type { AppFooterProps } from '~components/app/AppFooter';
 import { AppFooter } from '~components/app/AppFooter';
@@ -35,7 +35,6 @@ export function AppLayout({ children }: AppShellProps) {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[0],
       })}
     >
-      <Space h='sm' />
       {children}
     </AppShell>
   );
