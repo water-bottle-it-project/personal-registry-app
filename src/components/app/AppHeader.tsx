@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { AppHeaderLogo } from '~components/app/AppHeaderLogo';
 import { AppUserMenu } from '~components/app/AppUserMenu';
 import { ColorSchemeToggle } from '~components/app/ColorSchemeToggle';
+import { MenuDrawer } from '~components/util/Drawer';
 
 interface AppLink {
   name: string;
@@ -48,6 +49,7 @@ export function AppHeader({ links }: AppHeaderProps) {
         <Group spacing={6}>
           <AppUserMenu />
           <ColorSchemeToggle />
+          <MenuDrawer />
         </Group>
       </Container>
     </Header>
