@@ -40,11 +40,13 @@ export function MenuDrawer({ links }: AppHeaderProps) {
   return (
     <>
       <Drawer
+        closeButtonLabel='Close drawer'
         onClose={() => setOpened(false)}
         opened={opened}
         padding='xl'
         position='right'
         size='xl'
+        styles={{ closeButton: { '& svg': { width: '30px', height: '30px' } } }}
       >
         {/* Drawer content */}
         <Text size='xl' weight={800}>
