@@ -180,11 +180,11 @@ function CollectionEditForm({
           name='color'
           render={({ field: { value, onChange, ref, ...field } }) => (
             <ColorControl
-              {...field}
               inputRef={ref}
               label='Colour'
               onChange={onChange}
               value={value}
+              {...field}
             />
           )}
         />

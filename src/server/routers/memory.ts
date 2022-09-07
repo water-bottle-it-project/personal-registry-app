@@ -3,7 +3,8 @@ import { TRPCError } from '@trpc/server';
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Memory } from '~server/models/memory';
 import type { memoryT } from '~types/memory/memory';
-import { memoryIdOnlyZ, memoryOmitIdZ } from '~types/memory/memory';
+import { memoryIdOnlyZ } from '~types/memory/memory';
+import { memoryFormOmitIdZ } from '~types/memory/memoryForm';
 
 const memoryRouter = createProtectedDbRouter()
   .query('GetMemories', {
@@ -35,13 +36,13 @@ const memoryRouter = createProtectedDbRouter()
   })
 
   .mutation('CreateMemory', {
-    input: memoryOmitIdZ,
+    input: memoryFormOmitIdZ,
     async resolve({ ctx, input }) {
       const memory: memoryT = await Memory.create({
         title: input.title,
         description: input.description,
-        firstDate: input.firstDate,
-        lastDate: input.lastDate,
+        firstDate: input.date[0],
+        lastDate: input.date[1],
         userId: ctx.userId,
       });
 
