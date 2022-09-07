@@ -48,8 +48,6 @@ export function ImageOverlayInfoEdit(props: ImageCardProps) {
       })}
     >
       <form onSubmit={onSubmit}>
-        <label>Last Name</label>
-
         <div>
           <Title order={2}>Information</Title>
           <Space h='lg' />

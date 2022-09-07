@@ -18,19 +18,22 @@ import { SearchBar } from '~components/util/searchBar';
 export function ImagesHeader() {
   return (
     <>
-      <BackgroundImage component="a" src={gradient.src}>
+      <BackgroundImage component='a' src={gradient.src}>
         <Container mx={0} px='5%'>
           <Space h='xl' />
-          <Title order={1}>All your Images</Title>
-          <Space h='md' />
-          <SearchBar />
+          <SearchBar
+            searchFilters={['Title', 'Description', 'Collection']}
+            searchPlaceHolder='search for an image'
+            searchTitle='All Image'
+          />
           <Space h='xl' />
-          <Text size="xl">All your Images</Text>
+          <Text size='md'>Collections</Text>
+          <Space h='xs' />
           <Group>
-            <Badge color='purple'>Indigo cyan</Badge>
-            <Badge color='purple'>Indigo cyan</Badge>
-            <Badge color='purple'>Indigo cyan</Badge>
-            <Badge color='purple'>Indigo cyan</Badge>
+            <Badge color='purple'>Indigo</Badge>
+            <Badge color='purple'>cyan</Badge>
+            <Badge color='purple'>Indigo</Badge>
+            <Badge color='purple'>cyan</Badge>
           </Group>
           <Space h='xl' />
         </Container>
