@@ -1,13 +1,4 @@
-import {
-  ActionIcon,
-  BackgroundImage,
-  Radio,
-  Space,
-  Stack,
-  TextInput,
-  Title,
-  useMantineTheme,
-} from '@mantine/core';
+import { ActionIcon, Radio, Space, Stack, TextInput, Title } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight, IconSearch } from '@tabler/icons';
 interface searchBarProps {
   searchTitle: string;
@@ -16,8 +7,6 @@ interface searchBarProps {
 }
 
 export function SearchBar(props: searchBarProps) {
-  const theme = useMantineTheme();
-
   props.searchFilters.map(filter => console.log(filter));
 
   const filters = props.searchFilters && (
@@ -38,12 +27,8 @@ export function SearchBar(props: searchBarProps) {
           placeholder={props.searchPlaceHolder}
           radius='lg'
           rightSection={
-            <ActionIcon color={theme.primaryColor} radius='lg' size={32} variant='filled'>
-              {theme.dir === 'ltr' ? (
-                <IconArrowRight size={18} stroke={1.5} />
-              ) : (
-                <IconArrowLeft size={18} stroke={1.5} />
-              )}
+            <ActionIcon color='indigo' radius='lg' size={32} variant='filled'>
+              <IconArrowRight size={18} stroke={1.5} />
             </ActionIcon>
           }
           rightSectionWidth={42}

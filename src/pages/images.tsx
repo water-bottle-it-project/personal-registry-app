@@ -7,8 +7,8 @@ import { ImagesHeader } from '~components/image/ImagesHeader';
 const Images: NextPage = () => {
   return (
     <>
-      <ImagesHeader />
-      <Container px={30} size={1500}>
+      <Container size='xl'>
+        <ImagesHeader />
         <Space h='xl' />
         <ImagesIndex />
       </Container>
