@@ -12,6 +12,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import { IconArrowNarrowRight, IconAt, IconCheck, IconFingerprint } from '@tabler/icons';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
@@ -82,9 +83,9 @@ export function SigninForm() {
             />
             <Group mt='md' position='apart'>
               <Checkbox defaultChecked label='Remember me' />
-              <Anchor<'a'> href='#' onClick={event => event.preventDefault()} size='sm'>
-                Forgot password?
-              </Anchor>
+              <Link href='/forgotpassword' passHref>
+                <Anchor<'a'> size='sm'>Forgot password?</Anchor>
+              </Link>
             </Group>
             <Button fullWidth mt='xl' type='submit' {...loginButtonProps}>
               Sign in
