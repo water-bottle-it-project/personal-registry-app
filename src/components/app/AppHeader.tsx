@@ -30,6 +30,7 @@ function PageWidth() {
  */
 export function AppHeader({ links }: AppHeaderProps) {
   const { classes, cx } = useAppHeaderStyles();
+  const HAMBURGER_BOUND = 650;
 
   const router = useRouter();
   const routeIdx = links.findIndex(link => router.pathname.startsWith(link.route));
@@ -52,11 +53,11 @@ export function AppHeader({ links }: AppHeaderProps) {
       <Container className={classes.headerContainer} size='xl'>
         <Group spacing={6}>
           <AppHeaderLogo />
-          {pageWidth > 650 && linkElems}
+          {pageWidth > HAMBURGER_BOUND && linkElems}
         </Group>
         <Group spacing={6}>
-          {pageWidth > 650 ? <AppUserMenu /> : <MenuDrawer links={links} />}
-          {pageWidth > 650 && <ColorSchemeToggle />}
+          {pageWidth > HAMBURGER_BOUND ? <AppUserMenu /> : <MenuDrawer links={links} />}
+          {pageWidth > HAMBURGER_BOUND && <ColorSchemeToggle />}
         </Group>
       </Container>
     </Header>
