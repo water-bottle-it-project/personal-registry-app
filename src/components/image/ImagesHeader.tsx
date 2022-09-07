@@ -16,7 +16,7 @@ export function ImagesHeader() {
         <Space h='xl' />
         <Text size='md'>Collections</Text>
         <Space h='xs' />
-        <Group>
+        <Chip.Group multiple>
           {/* Only way I know how to change chip color is by using !imporant, but bad practice
           Not too sure of any other way, as the gray seems to be programmed to override anything else */}
           <Chip
@@ -25,6 +25,7 @@ export function ImagesHeader() {
             styles={{
               label: { color: 'black', backgroundColor: `${theme.colors.red[2]} !important` },
             }}
+            value='1'
             variant='filled'
           >
             Gadgets
@@ -35,6 +36,7 @@ export function ImagesHeader() {
             styles={{
               label: { color: 'black', backgroundColor: `${theme.colors.teal[2]} !important` },
             }}
+            value='2'
             variant='filled'
           >
             Friends
@@ -45,6 +47,7 @@ export function ImagesHeader() {
             styles={{
               label: { color: 'black', backgroundColor: `${theme.colors.indigo[2]} !important` },
             }}
+            value='3'
             variant='filled'
           >
             Family
@@ -55,11 +58,12 @@ export function ImagesHeader() {
             styles={{
               label: { color: 'black', backgroundColor: `${theme.colors.gray[2]} !important` },
             }}
+            value='4'
             variant='filled'
           >
             Travel
           </Chip>
-        </Group>
+        </Chip.Group>
         <Space h='xl' />
       </Container>
     </>
