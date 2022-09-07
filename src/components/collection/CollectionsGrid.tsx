@@ -9,7 +9,9 @@ import { CollectionsHeader } from '~components/collection/CollectionsHeader';
 import { CollectionSkeleton } from './CollectionSkeleton';
 
 export function CollectionsGrid() {
-  const { data, isError, isLoading, error } = trpcClient.useQuery(['collection.GetCollections']);
+  const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
+    'collection.GetCollections',
+  ]);
 
   if (isLoading) {
     // Need to provide a key for React components when mapping over an array (check devtools console).
@@ -23,7 +25,7 @@ export function CollectionsGrid() {
     return <Grid>{skeletonLoaders}</Grid>;
   }
 
-  if (isError) {
+  if (isLoadingError) {
     showNotification({
       color: 'red',
       icon: <IconX />,

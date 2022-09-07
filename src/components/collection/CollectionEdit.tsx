@@ -20,7 +20,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
   const mutation = trpcClient.useMutation(['collection.UpdateCollection']);
   const deletion = trpcClient.useMutation(['collection.DeleteCollection']);
   const trpcUtils = trpcClient.useContext();
-  const { data, isLoading, isError, error } = trpcClient.useQuery([
+  const { data, isLoading, isLoadingError, error } = trpcClient.useQuery([
     'collection.GetCollection',
     { _id: props._id },
   ]);
@@ -70,7 +70,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
     );
   }
 
-  if (isError) {
+  if (isLoadingError) {
     showNotification({
       icon: <IconX />,
       color: 'red',
