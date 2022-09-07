@@ -36,7 +36,11 @@ export function ImagesIndex() {
   });
 
   useEffect(() => {
-    setImageArr(data?.photos);
+    if (data?.photos) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      setImageArr(data.photos);
+    }
   }, [data?.photos]);
 
   // add index to the images on the page, which is used for next and prev image functionality
