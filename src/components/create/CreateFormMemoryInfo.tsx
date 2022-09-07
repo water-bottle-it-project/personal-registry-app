@@ -2,13 +2,15 @@ import { createStyles, Grid, MultiSelect, Stack, Textarea, TextInput } from '@ma
 import { DateRangePicker } from '@mantine/dates';
 import { IconCalendar, IconPencil, IconTags } from '@tabler/icons';
 import type { UseFormReturn } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
-import type { memoryOmitIdT } from '~types/memory/memory';
+import type { memoryFormOmitId } from '~types/memory/memoryForm';
 
 export function CreateFormMemoryInfo({
   register,
+  control,
   formState: { errors },
-}: UseFormReturn<memoryOmitIdT>) {
+}: UseFormReturn<memoryFormOmitId>) {
   const { classes } = useDescriptionStyles();
 
   return (
@@ -24,18 +26,31 @@ export function CreateFormMemoryInfo({
             required
             {...register('title')}
           />
-          <DateRangePicker
-            allowSingleDateInRange
-            description='Click a date to set it as either the start or end date.
+
+          <Controller
+            control={control}
+            name='date'
+            render={({ field: { value, onChange, ref, ...field }, fieldState: { error } }) => (
+              <DateRangePicker
+                allowSingleDateInRange
+                description='Click a date to set it as either the start or end date.
             Click again to set the other date. The dates can be the same.'
-            dropdownPosition='bottom-start'
-            firstDayOfWeek='sunday'
-            icon={<IconCalendar size={16} />}
-            inputFormat='D MMMM YYYY'
-            label='Start and end dates'
-            placeholder='Click to choose a date range'
-            withAsterisk
+                dropdownPosition='bottom-start'
+                error={error?.message}
+                firstDayOfWeek='sunday'
+                icon={<IconCalendar size={16} />}
+                inputFormat='D MMMM YYYY'
+                label='Start and end dates'
+                onChange={onChange}
+                placeholder='Click to choose a date range'
+                ref={ref}
+                value={value}
+                withAsterisk
+                {...field}
+              />
+            )}
           />
+
           <MultiSelect
             data={[
               { value: '1a2b3c', label: 'Gadgets' },
