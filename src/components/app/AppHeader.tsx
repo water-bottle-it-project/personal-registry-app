@@ -19,7 +19,7 @@ export interface AppHeaderProps {
 }
 
 function PageWidth() {
-  const { height, width } = useViewportSize();
+  const { width } = useViewportSize();
   return width;
 }
 
