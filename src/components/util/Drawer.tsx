@@ -31,6 +31,7 @@ export function MenuDrawer({ links }: AppHeaderProps) {
         className={cx(classes.link, {
           [classes.linkActive]: i === routeIdx,
         })}
+        onClick={() => setOpened(false)}
       >
         {link.name}
       </a>
