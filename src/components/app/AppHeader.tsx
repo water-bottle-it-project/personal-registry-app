@@ -23,7 +23,6 @@ function PageWidth() {
   return width;
 }
 
-
 /**
  * The header for the entire app
  * @param links
@@ -34,7 +33,6 @@ export function AppHeader({ links }: AppHeaderProps) {
 
   const router = useRouter();
   const routeIdx = links.findIndex(link => router.pathname.startsWith(link.route));
-
 
   const pageWidth = PageWidth();
   const linkElems = links.map((link, i) => (
