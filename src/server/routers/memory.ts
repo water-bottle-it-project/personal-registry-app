@@ -34,7 +34,7 @@ const memoryRouter = createProtectedDbRouter()
     },
   })
 
-  .query('CreateMemory', {
+  .mutation('CreateMemory', {
     input: memoryOmitIdZ,
     async resolve({ ctx, input }) {
       const memory: memoryT = await Memory.create({
