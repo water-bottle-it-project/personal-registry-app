@@ -2,22 +2,40 @@ import {
   ActionIcon,
   BackgroundImage,
   Radio,
+  Space,
   Stack,
   TextInput,
+  Title,
   useMantineTheme,
 } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight, IconSearch } from '@tabler/icons';
+interface searchBarProps {
+  searchTitle: string;
+  searchPlaceHolder: string;
+  searchFilters: string[];
+}
 
-import gradient from '~components/homepage/gradient.png';
-
-export function SearchBar() {
+export function SearchBar(props: searchBarProps) {
   const theme = useMantineTheme();
+
+  props.searchFilters.map(filter => console.log(filter));
+
+  const filters = props.searchFilters && (
+    <Radio.Group label='Search by'>
+      {props.searchFilters.map((filter: string) => (
+        <Radio key={filter} label={filter} value={filter} />
+      ))}
+    </Radio.Group>
+  );
+
   return (
     <>
-      <Stack spacing='xs'>
+      <Title order={1}>{props.searchTitle}</Title>
+      <Space h='md' />
+      <Stack spacing='sm'>
         <TextInput
           icon={<IconSearch size={18} stroke={1.5} />}
-          placeholder='Enter a ... name.'
+          placeholder={props.searchPlaceHolder}
           radius='lg'
           rightSection={
             <ActionIcon color={theme.primaryColor} radius='lg' size={32} variant='filled'>
@@ -31,11 +49,9 @@ export function SearchBar() {
           rightSectionWidth={42}
           size='md'
         />
-        <Radio.Group label='Search by'>
-          <Radio checked label='Title' value='title' />
-          <Radio label='Description' value='description' />
-        </Radio.Group>
       </Stack>
+      <Space h='md' />
+      {filters}
     </>
   );
 }
