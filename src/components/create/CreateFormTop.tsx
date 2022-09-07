@@ -9,7 +9,9 @@ export function CreateFormTop() {
         <Button rightIcon={<IconRotateClockwise2 />} variant='default'>
           Reset
         </Button>
-        <Button rightIcon={<IconPlus />}>Create</Button>
+        <Button rightIcon={<IconPlus />} type='submit'>
+          Create
+        </Button>
       </Group>
     </Group>
   );
