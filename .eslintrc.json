@@ -33,7 +33,8 @@
     "prettier/prettier": [
       "error",
       {
-        "usePrettierrc": true
+        "usePrettierrc": true,
+        "endOfLine": "auto"
       }
     ],
     "no-relative-import-paths/no-relative-import-paths": [
@@ -49,28 +50,15 @@
         "ignoreCase": true
       }
     ],
-    "@typescript-eslint/consistent-type-imports": [
-      "error"
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "warn"
-    ],
-    "react/self-closing-comp": [
-      "error"
-    ],
-    "react/jsx-boolean-value": [
-      "error"
-    ],
-    "react/jsx-curly-brace-presence": [
-      "warn"
-    ],
+    "@typescript-eslint/consistent-type-imports": ["error"],
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "react/self-closing-comp": ["error"],
+    "react/jsx-boolean-value": ["error"],
+    "react/jsx-curly-brace-presence": ["warn"],
     "react/no-unescaped-entities": [
       0,
       {
-        "forbid": [
-          ">",
-          "}"
-        ]
+        "forbid": [">", "}"]
       }
     ],
     "sort-exports/sort-exports": [
@@ -84,21 +72,14 @@
     "react/function-component-definition": [
       "error",
       {
-        "namedComponents": [
-          "function-declaration",
-          "arrow-function"
-        ],
-        "unnamedComponents": [
-          "arrow-function"
-        ]
+        "namedComponents": ["function-declaration", "arrow-function"],
+        "unnamedComponents": ["arrow-function"]
       }
     ]
   },
   "overrides": [
     {
-      "files": [
-        "src/pages/**"
-      ],
+      "files": ["src/pages/**"],
       "rules": {
         "import/no-default-export": "off"
       }
