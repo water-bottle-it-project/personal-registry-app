@@ -4,15 +4,19 @@ import { useScrollLock } from '@mantine/hooks';
 import { openConfirmModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconDeviceFloppy, IconRotateClockwise2, IconTrash, IconX } from '@tabler/icons';
+import Lottie from 'lottie-react';
 import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { ColorControl } from '~components/collection/ColorControl';
+import errorLottie from '~components/util/error-lottie.json';
 import type { collectionT } from '~types/collection/collection';
 import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
 import type { collectionOmitIdT } from '~types/collection/collectionOmitId';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
+
+import { CollectionFormSkeleton } from './CollectionFormSkeleton';
 
 export function CollectionEdit(props: collectionIdOnlyT) {
   useScrollLock(true);
@@ -77,18 +81,27 @@ export function CollectionEdit(props: collectionIdOnlyT) {
       title: 'Error!',
       message: 'Error loading collection details.',
     });
-    return <Text>Error loading collection details: {error?.message}</Text>;
+    return (
+      <Stack align='center' justify='center'>
+        <Lottie animationData={errorLottie} loop={false} style={{ width: '30%', height: '30%' }} />
+        <Text>Error loading collection details: {error?.message}</Text>
+      </Stack>
+    );
   }
 
   if (isLoading || !data?.collection) {
-    return <Text>Loading collection details...</Text>;
+    return (
+      <>
+        <CollectionFormSkeleton />
+      </>
+    );
   }
 
   return (
     <>
-      <Text color='dimmed' size='xs'>
+      {/* <Text color='dimmed' size='xs'>
         Collection id: {props._id}
-      </Text>
+      </Text> */}
       <Space h='sm' />
       <CollectionEditForm
         collection={data.collection}
