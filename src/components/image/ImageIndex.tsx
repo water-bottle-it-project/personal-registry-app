@@ -1,5 +1,6 @@
 import { Container, Modal, SimpleGrid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -14,6 +15,11 @@ import { ImageSkeleton } from './ImageSkeleton';
  */
 
 export function ImagesIndex() {
+  const router = useRouter();
+  let modal: React.ReactNode = null;
+  const viewId = router.query.view;
+  const editId = router.query.edit;
+
   const isMobile = useMediaQuery('(max-width: 600px)');
   const allImages = trpcClient.useQuery(['images.listImages']);
 
@@ -70,7 +76,33 @@ export function ImagesIndex() {
     }
   };
 
+  useEffect(() => {
+    setImageArr(data?.photos);
+  }, [data?.photos]);
+
+  // add index to the images on the page, which is used for next and prev image functionality
+  let idx = 0;
+  imageArr?.forEach(element => {
+    element.index = idx;
+    idx++;
+  });
+
+  const handleNextProject = () => {
+    // console.log(displayImage.currentImage);
+    if (displayImage.currentImage.toString() != (imageArr.length - 1).toString()) {
+      const idx = parseInt(displayImage.currentImage) + 1;
+      setDisplayImage(previousState => ({
+        ...previousState,
+        _id: imageArr[idx]._id,
+        currentImage: idx.toString(),
+        caption: imageArr[idx].caption,
+        url: imageArr[idx].url,
+      }));
+    }
+  };
+
   const renderOverlay = (
+    _id: string,
     photoUrl: string,
     photoCaption: string,
     userId: string,
@@ -109,20 +141,35 @@ export function ImagesIndex() {
 
   const skeletonLoaders = Array.from({ length: 10 }, (_, i) => <ImageSkeleton key={i} />);
 
-  useEffect(() => {
-    if (Images) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  }, [Images]);
-
-  return (
-    <>
+  if (viewId && !Array.isArray(viewId)) {
+    modal = (
       <Modal
         fullScreen={isMobile}
-        onClose={() => setOpened(false)}
-        opened={opened}
+        onClose={() => router.push('/images', undefined, { shallow: true })}
+        opened
+        size='calc(100vw - 40%)'
+        transition='fade'
+        transitionDuration={250}
+        transitionTimingFunction='ease'
+      >
+        <ImageOverlay
+          _id={displayImage._id}
+          caption={displayImage.caption}
+          handleNext={handleNextProject}
+          handlePrev={handlePrevProject}
+          url={displayImage.url}
+          userId={displayImage.userId}
+        />
+      </Modal>
+    );
+  }
+
+  if (editId && !Array.isArray(editId)) {
+    modal = (
+      <Modal
+        fullScreen={isMobile}
+        onClose={() => router.push('/images', undefined, { shallow: true })}
+        opened
         size='calc(100vw - 40%)'
         transition='fade'
         transitionDuration={250}
@@ -136,6 +183,12 @@ export function ImagesIndex() {
           userId={displayImage.userId}
         />
       </Modal>
+    );
+  }
+
+  return (
+    <>
+      {modal}
       <SimpleGrid
         breakpoints={[
           { maxWidth: 'xl', cols: 3, spacing: 'md' },
