@@ -1,12 +1,14 @@
 import { Box, createStyles, Group, Space, Text, Title, UnstyledButton } from '@mantine/core';
 import { IconDownload, IconEdit, IconTrash } from '@tabler/icons';
 import Link from 'next/link';
+
 interface ImageCardProps {
   _id: string;
   caption: string;
   url: string;
   userId: string;
 }
+
 export function ImageOverlayInfo(props: ImageCardProps) {
   const { classes } = useStyles();
   return (

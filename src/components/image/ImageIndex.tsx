@@ -104,7 +104,6 @@ export function ImagesIndex() {
         onClick={() =>
           renderOverlay(photo._id, photo.url, photo.caption, photo.userId, photo.index.toString())
         }
-        px={0}
       >
         <ImageCard
           _id={photo._id}
@@ -175,7 +174,6 @@ export function ImagesIndex() {
         ]}
         cols={4}
         spacing='xs'
-        px={0}
       >
         {isLoading ? SkeletonLoaders : Images}
       </SimpleGrid>

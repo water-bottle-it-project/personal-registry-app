@@ -1,6 +1,4 @@
 import {
-  Button,
-  Center,
   Container,
   createStyles,
   Grid,
@@ -12,7 +10,6 @@ import {
   Title,
   UnstyledButton,
 } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons';
 import { useRouter } from 'next/router';
 

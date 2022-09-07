@@ -1,11 +1,11 @@
-import { Chip, Container, createStyles, Group, Space, Text } from '@mantine/core';
+import { Chip, Container, Group, Space, Text } from '@mantine/core';
 
 import { SearchBar } from '~components/util/searchBar';
 
 export function ImagesHeader() {
   return (
     <>
-      <Container mx={0} px={0}>
+      <Container size='xl'>
         <Space h='xl' />
         <SearchBar
           searchFilters={['Title', 'Description', 'Collection']}
