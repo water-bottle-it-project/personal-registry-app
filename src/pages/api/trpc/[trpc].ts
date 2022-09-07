@@ -8,6 +8,7 @@ import { collectionRouter } from '~server/routers/collection';
 import { debugRouter } from '~server/routers/debug';
 import { debugAuthedRouter } from '~server/routers/debugAuthed';
 import { imagesRouter } from '~server/routers/image';
+import { memoryRouter } from '~server/routers/memory';
 import { profileRouter } from '~server/routers/profile';
 
 /**
@@ -20,7 +21,8 @@ const appRouter = trpc
   .merge('debug.', debugRouter)
   .merge('debugAuthed.', debugAuthedRouter)
   .merge('images.', imagesRouter)
-  .merge('profile.', profileRouter);
+  .merge('profile.', profileRouter)
+  .merge('memory.', memoryRouter);
 /**
  * Export type-safe route paths, inputs, and outputs
  */
