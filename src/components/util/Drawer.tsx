@@ -1,6 +1,5 @@
-import { Burger, Button, Drawer, Group, Space, Text } from '@mantine/core';
-import { Container, createStyles, Header } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
+import { Burger, Drawer, Group, Space, Text } from '@mantine/core';
+import { createStyles } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -60,7 +59,6 @@ export function MenuDrawer({ links }: AppHeaderProps) {
           <AppUserMenu />
           <ColorSchemeToggle />
         </Group>
-
       </Drawer>
 
       <Group position='center'>
