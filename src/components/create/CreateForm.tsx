@@ -18,6 +18,7 @@ import { memoryFormOmitIdZ } from '~types/memory/memoryForm';
 export function CreateForm() {
   const formMethods = useForm<memoryFormOmitId>({
     resolver: zodResolver(memoryFormOmitIdZ),
+    defaultValues: { date: [undefined, undefined] },
   });
 
   const trpcUtils = trpcClient.useContext();
@@ -34,7 +35,7 @@ export function CreateForm() {
           await trpcUtils.invalidateQueries('memory.GetMemories');
           showNotification({
             title: 'Success!',
-            message: `Memory '${data.title}' successfully created`,
+            message: `Memory '${data.title}' successfully created.`,
             icon: <IconCheck />,
           });
           await router.push('/timeline');
@@ -55,7 +56,7 @@ export function CreateForm() {
     <>
       <form noValidate onSubmit={formMethods.handleSubmit(handleMemoryCreate)}>
         <Stack spacing='sm'>
-          <CreateFormTop />
+          <CreateFormTop {...formMethods} />
           <CreateFormMemoryInfo {...formMethods} />
         </Stack>
       </form>
