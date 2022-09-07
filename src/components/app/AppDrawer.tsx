@@ -56,7 +56,7 @@ export function AppDrawer({ links }: AppHeaderProps) {
       </Drawer>
 
       <Group position='center'>
-        <Burger onClick={() => setOpened(o => !o)} opened={opened} title={title} />
+        <Burger onClick={() => setOpened(o => !o)} opened={opened} size='sm' title={title} />
       </Group>
     </>
   );
