@@ -1,4 +1,5 @@
 import { Container, createStyles, Group, Header } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -13,8 +14,15 @@ interface AppLink {
 }
 
 export interface AppHeaderProps {
+  [x: string]: any;
   links: AppLink[];
 }
+
+function PageWidth() {
+  const { height, width } = useViewportSize();
+  return width;
+}
+
 
 /**
  * The header for the entire app
@@ -27,6 +35,8 @@ export function AppHeader({ links }: AppHeaderProps) {
   const router = useRouter();
   const routeIdx = links.findIndex(link => router.pathname.startsWith(link.route));
 
+
+  const pageWidth = PageWidth();
   const linkElems = links.map((link, i) => (
     <Link href={link.route} key={link.name}>
       <a
@@ -44,12 +54,11 @@ export function AppHeader({ links }: AppHeaderProps) {
       <Container className={classes.headerContainer} size='xl'>
         <Group spacing={6}>
           <AppHeaderLogo />
-          {linkElems}
+          {pageWidth > 650 && linkElems}
         </Group>
         <Group spacing={6}>
-          <AppUserMenu />
-          <ColorSchemeToggle />
-          <MenuDrawer />
+          {pageWidth > 650 ? <AppUserMenu /> : <MenuDrawer links={links} />}
+          {pageWidth > 650 && <ColorSchemeToggle />}
         </Group>
       </Container>
     </Header>
