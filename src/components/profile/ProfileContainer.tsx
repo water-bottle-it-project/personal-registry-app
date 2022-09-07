@@ -1,6 +1,7 @@
 import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useAuthUser } from 'next-firebase-auth';
 
+import { trpcClient } from '~clientUtils/trpcClient';
 import { stringToDate, tupleToString } from '~components/profile/profileUtils';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
@@ -20,6 +21,11 @@ export function ProfileContainer() {
 
   // user display name if they have it, else use email username, if they don't have that use error msg.
   const username = currentUser.displayName || currentUser?.email?.split('@')[0] || 'No Name Found';
+
+  // user profile stats
+  const photo_count = trpcClient.useQuery(['images.listImages'])?.data?.photos?.length || 0;
+  const collection_count = trpcClient.useQuery(['collection.GetCollections'])?.data?.collections?.length || 0;
+  const memory_count = 123;
 
   return (
     <Container px='xs'>
@@ -75,17 +81,17 @@ export function ProfileContainer() {
             data={[
               {
                 title: 'Photos Uploaded',
-                stats: '456,133',
+                stats: photo_count.toString(),
                 description: '',
               },
               {
                 title: 'Memories Made',
-                stats: '2,175',
+                stats: memory_count.toString(),
                 description: '',
               },
               {
                 title: 'Collections Created',
-                stats: '1,994',
+                stats: collection_count.toString(),
                 description: '',
               },
             ]}
