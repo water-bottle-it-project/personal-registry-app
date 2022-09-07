@@ -1,9 +1,19 @@
-import { Container, createStyles, Grid, Group, Space, Text, Title } from '@mantine/core';
+import {
+  Container,
+  createStyles,
+  Grid,
+  Group,
+  Space,
+  Text,
+  Title,
+  useMantineTheme,
+} from '@mantine/core';
 import Lottie from 'lottie-react';
 import { useAuthUser } from 'next-firebase-auth';
 
 import { withAuthComponent } from '~clientUtils/authHooks';
 import heroLottie from '~components/homepage/hero-lottie.json';
+import heroLottieDark from '~components/homepage/hero-lottie-dark.json';
 import { LinkButton } from '~components/util/LinkButton';
 
 /**
@@ -12,7 +22,7 @@ import { LinkButton } from '~components/util/LinkButton';
  */
 function HeroBase() {
   const { classes } = useStyles();
-
+  const theme = useMantineTheme();
   const { id } = useAuthUser();
 
   return (
@@ -48,7 +58,11 @@ function HeroBase() {
           </Group>
         </Grid.Col>
         <Grid.Col sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Lottie animationData={heroLottie} className={classes.lottie} loop />
+          <Lottie
+            animationData={theme.colorScheme === 'dark' ? heroLottieDark : heroLottie}
+            className={classes.lottie}
+            loop
+          />
         </Grid.Col>
       </Grid>
     </Container>
