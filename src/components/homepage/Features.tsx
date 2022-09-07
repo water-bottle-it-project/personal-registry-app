@@ -8,15 +8,17 @@ import {
   Text,
   ThemeIcon,
   Title,
+  useMantineTheme,
 } from '@mantine/core';
 import { IconFolders, IconPhoto, IconSearch, IconTags } from '@tabler/icons';
 
 import gradient from '~components/homepage/gradient.png';
+import gradientDark from '~components/homepage/gradient-dark.png';
 import { LinkButton } from '~components/util/LinkButton';
 
 export function FeaturesTitle() {
   const { classes } = useStyles();
-
+  const theme = useMantineTheme();
   const items = features.map(feature => (
     <div key={feature.title}>
       <ThemeIcon color={feature.color} radius='md' size={44}>
@@ -32,7 +34,7 @@ export function FeaturesTitle() {
   ));
 
   return (
-    <BackgroundImage src={gradient.src}>
+    <BackgroundImage src={theme.colorScheme === 'dark' ? gradientDark.src : gradient.src}>
       <Container px={0} size='xl'>
         <Space h='xl' />
         <Space h='xl' />
