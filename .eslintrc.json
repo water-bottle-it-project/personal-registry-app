@@ -33,8 +33,7 @@
     "prettier/prettier": [
       "error",
       {
-        "usePrettierrc": true,
-        "endOfLine": "auto"
+        "usePrettierrc": true
       }
     ],
     "no-relative-import-paths/no-relative-import-paths": [
