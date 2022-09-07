@@ -20,7 +20,7 @@ const useStyles = createStyles(theme => ({
 export function ImageCard(props: ImageCardProps) {
   const { classes } = useStyles();
   return (
-    <Container className={classes.wrapper} px={0}>
+    <Container className={classes.wrapper}>
       <Link href={`/images?view=${props._id}`} passHref>
         <Card
           className={classes.card}
