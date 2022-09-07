@@ -1,6 +1,6 @@
 import { Chip, Container, Space, Text, useMantineTheme } from '@mantine/core';
 
-import { SearchBar } from '~components/util/SearchBar';
+import { SearchBar } from '~components/util/searchBar';
 
 export function ImagesHeader() {
   const theme = useMantineTheme();
@@ -17,8 +17,8 @@ export function ImagesHeader() {
         <Text size='md'>Collections</Text>
         <Space h='xs' />
         <Chip.Group multiple>
-          {/* Only way I know how to change chip color is by using !imporant, but bad practice
-          Not too sure of any other way, as the gray seems to be programmed to override anything else */}
+          {/* Only way I know how to change chip color is by using !important, but bad practice.
+          Not sure of any other way, as the gray seems to be programmed to override anything else */}
           <Chip
             color='red'
             radius='md'
