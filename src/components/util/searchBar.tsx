@@ -1,12 +1,13 @@
 import { ActionIcon, Radio, Space, Stack, TextInput, Title } from '@mantine/core';
-import { IconArrowLeft, IconArrowRight, IconSearch } from '@tabler/icons';
-interface searchBarProps {
+import { IconArrowRight, IconSearch } from '@tabler/icons';
+
+interface SearchBarProps {
   searchTitle: string;
   searchPlaceHolder: string;
   searchFilters: string[];
 }
 
-export function SearchBar(props: searchBarProps) {
+export function SearchBar(props: SearchBarProps) {
   props.searchFilters.map(filter => console.log(filter));
 
   const filters = props.searchFilters && (
