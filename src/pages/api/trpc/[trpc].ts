@@ -23,6 +23,7 @@ const appRouter = trpc
   .merge('images.', imagesRouter)
   .merge('profile.', profileRouter)
   .merge('memory.', memoryRouter);
+
 /**
  * Export type-safe route paths, inputs, and outputs
  */
