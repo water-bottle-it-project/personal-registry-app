@@ -2,7 +2,7 @@ import { Affix, Button, createStyles, Group, Text, Transition } from '@mantine/c
 import type { DropzoneProps } from '@mantine/dropzone';
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { useWindowScroll } from '@mantine/hooks';
-import { IconArrowUp, IconCloudUpload, IconDownload, IconPhoto, IconX } from '@tabler/icons';
+import { IconCloudUpload, IconDownload, IconPhoto, IconX } from '@tabler/icons';
 import { useRef } from 'react';
 
 const useStyles = createStyles(theme => ({

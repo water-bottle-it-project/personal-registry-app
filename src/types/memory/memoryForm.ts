@@ -7,7 +7,7 @@ const memoryFormZ = z.object({
   title: z.string().trim().min(1),
   description: z.string().trim().optional(),
   date: z.tuple([z.date(), z.date()]),
-  photos: photoFormCreateZ.array(),
+  photos: photoFormCreateZ.array().default([]),
 });
 
 const memoryFormOmitIdZ = memoryFormZ.omit({ _id: true });
