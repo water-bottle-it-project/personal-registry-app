@@ -1,16 +1,29 @@
 import { z } from 'zod';
 
+// The photo in a database
 const photoZ = z.object({
   _id: z.string().min(1),
   caption: z.string().optional(),
   location: z.string().optional(),
   url: z.string().url(),
-  photoDate: z.date().optional(),
+  photoDate: z.date().nullable(),
   memoryId: z.string(),
   memoryDate: z.date(),
 });
 
-const photoFormCreateZ = photoZ.omit({ _id: true, memoryId: true });
+// The photo as part of a create form - used for input and validation.
+// _file is any for now (File type is not supported in Node.js, only in the browser).
+const photoFormCreateZ = photoZ
+  .pick({
+    caption: true,
+    location: true,
+    photoDate: true,
+  })
+  .extend({
+    _file: z.any(),
+    _dir: z.string(),
+    _thumbnail: z.string(),
+  });
 
 type photoT = z.infer<typeof photoZ>;
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;

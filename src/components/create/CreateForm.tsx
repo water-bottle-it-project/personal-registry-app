@@ -10,16 +10,20 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { CreateFormMemoryInfo } from '~components/create/CreateFormMemoryInfo';
 import { CreateFormPhotos } from '~components/create/CreateFormPhotos';
 import { CreateFormTop } from '~components/create/CreateFormTop';
-import type { memoryFormOmitId } from '~types/memory/memoryForm';
-import { memoryFormOmitIdZ } from '~types/memory/memoryForm';
+import type { memoryCreateFormT } from '~types/memory/memoryForm';
+import { memoryCreateForm } from '~types/memory/memoryForm';
 
 /**
  * Uses prop-drilling instead of useFormContext for simplicity in reducing # of re-renders.
  * @constructor
  */
 export function CreateForm() {
-  const formMethods = useForm<memoryFormOmitId>({
-    resolver: zodResolver(memoryFormOmitIdZ),
+  const formMethods = useForm<memoryCreateFormT>({
+    resolver: async (data, context, options) => {
+      console.log('form data', data);
+      console.log('validation result', await zodResolver(memoryCreateForm)(data, context, options));
+      return zodResolver(memoryCreateForm)(data, context, options);
+    },
     defaultValues: { date: [undefined, undefined] },
   });
 
@@ -29,7 +33,7 @@ export function CreateForm() {
   const router = useRouter();
   const [scroll, scrollTo] = useWindowScroll();
 
-  function handleMemoryCreate(memory: memoryFormOmitId) {
+  function handleMemoryCreate(memory: memoryCreateFormT) {
     console.log(memory);
     creation.mutate(
       { ...memory },

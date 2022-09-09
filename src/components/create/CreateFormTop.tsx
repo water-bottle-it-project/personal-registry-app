@@ -2,9 +2,9 @@ import { Button, Group, Title } from '@mantine/core';
 import { IconPlus, IconRotateClockwise2 } from '@tabler/icons';
 import type { UseFormReturn } from 'react-hook-form';
 
-import type { memoryFormOmitId } from '~types/memory/memoryForm';
+import type { memoryCreateFormT } from '~types/memory/memoryForm';
 
-export function CreateFormTop({ reset }: UseFormReturn<memoryFormOmitId>) {
+export function CreateFormTop({ reset }: UseFormReturn<memoryCreateFormT>) {
   return (
     <Group position='apart'>
       <Title>Create a memory</Title>

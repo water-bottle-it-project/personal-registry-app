@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { photoFormCreateZ } from '~types/photo/photo';
 
-const memoryFormZ = z.object({
+const memoryEditForm = z.object({
   _id: z.string().trim().min(1),
   title: z.string().trim().min(1),
   description: z.string().trim().optional(),
@@ -10,10 +10,10 @@ const memoryFormZ = z.object({
   photos: photoFormCreateZ.array().default([]),
 });
 
-const memoryFormOmitIdZ = memoryFormZ.omit({ _id: true });
+const memoryCreateForm = memoryEditForm.omit({ _id: true });
 
-type memoryFormT = z.infer<typeof memoryFormZ>;
-type memoryFormOmitId = z.infer<typeof memoryFormOmitIdZ>;
+type memoryEditFormT = z.infer<typeof memoryEditForm>;
+type memoryCreateFormT = z.infer<typeof memoryCreateForm>;
 
-export type { memoryFormOmitId, memoryFormT };
-export { memoryFormOmitIdZ, memoryFormZ };
+export type { memoryCreateFormT, memoryEditFormT };
+export { memoryCreateForm, memoryEditForm };

@@ -4,13 +4,13 @@ import { IconCalendar, IconPencil, IconTags } from '@tabler/icons';
 import type { UseFormReturn } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
-import type { memoryFormOmitId } from '~types/memory/memoryForm';
+import type { memoryCreateFormT } from '~types/memory/memoryForm';
 
 export function CreateFormMemoryInfo({
   register,
   control,
   formState: { errors },
-}: UseFormReturn<memoryFormOmitId>) {
+}: UseFormReturn<memoryCreateFormT>) {
   const { classes } = useDescriptionStyles();
 
   return (

@@ -4,7 +4,7 @@ import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Memory } from '~server/models/memory';
 import type { memoryT } from '~types/memory/memory';
 import { memoryIdOnlyZ } from '~types/memory/memory';
-import { memoryFormOmitIdZ } from '~types/memory/memoryForm';
+import { memoryCreateForm } from '~types/memory/memoryForm';
 
 const memoryRouter = createProtectedDbRouter()
   .query('GetMemories', {
@@ -36,7 +36,7 @@ const memoryRouter = createProtectedDbRouter()
   })
 
   .mutation('CreateMemory', {
-    input: memoryFormOmitIdZ,
+    input: memoryCreateForm,
     async resolve({ ctx, input }) {
       const memory: memoryT = await Memory.create({
         title: input.title,
