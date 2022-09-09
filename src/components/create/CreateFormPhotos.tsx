@@ -1,9 +1,10 @@
-import { createStyles, Title } from '@mantine/core';
+import type { DropResult } from '@hello-pangea/dnd';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
+import { createStyles, Paper, Text, Title } from '@mantine/core';
 import type { DropzoneProps } from '@mantine/dropzone';
+import { IconGripVertical } from '@tabler/icons';
 import { nanoid } from 'nanoid';
 import { useCallback } from 'react';
-import type { DropResult } from 'react-beautiful-dnd';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import type { UseFormReturn } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 
@@ -21,7 +22,8 @@ export function CreateFormPhotos({ control }: UseFormReturn<memoryCreateFormT>) 
 
   const onDrop = useCallback<DropzoneProps['onDrop']>(
     acceptedFiles => {
-      // Generate id and thumbnails for the photos.
+      // Generate directory ids and thumbnails for the photos.
+      // Photos will be stored in the Firebase storage bucket at /username/_dir/original_file_name.
       const photos: photoFormCreateT[] = acceptedFiles.map(p => ({
         _file: p,
         _thumbnail: URL.createObjectURL(p),
@@ -46,7 +48,22 @@ export function CreateFormPhotos({ control }: UseFormReturn<memoryCreateFormT>) 
     [move],
   );
 
-  console.log(fields);
+  const photoCards = fields.map((p, index) => (
+    <Draggable draggableId={p._dir} index={index} key={p._dir}>
+      {(provided, snapshot) => (
+        <Paper
+          className={cx({ [classes.itemDragging]: snapshot.isDragging })}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+        >
+          <div {...provided.dragHandleProps} className={classes.dragHandle}>
+            <IconGripVertical size={18} stroke={1.5} />
+          </div>
+          <Text>A card</Text>
+        </Paper>
+      )}
+    </Draggable>
+  ));
 
   return (
     <>
@@ -54,7 +71,12 @@ export function CreateFormPhotos({ control }: UseFormReturn<memoryCreateFormT>) 
       <CreateFormDropzone onDrop={onDrop} />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='droppable'>
-          {provided => <div {...provided.droppableProps} ref={provided.innerRef} />}
+          {provided => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {photoCards}
+              {provided.placeholder}
+            </div>
+          )}
         </Droppable>
       </DragDropContext>
     </>
@@ -64,5 +86,16 @@ export function CreateFormPhotos({ control }: UseFormReturn<memoryCreateFormT>) 
 const useStyles = createStyles(theme => ({
   itemDragging: {
     boxShadow: theme.shadows.sm,
+  },
+
+  dragHandle: {
+    ...theme.fn.focusStyles(),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[6],
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.md,
   },
 }));
