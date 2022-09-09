@@ -14,6 +14,7 @@ const useStyles = createStyles(theme => ({
   dropzone: {
     borderWidth: 1,
     paddingBottom: 50,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
   },
 
   icon: {
@@ -68,7 +69,7 @@ export function CreateFormDropzone({ onDrop }: CreateFormDropzoneProps) {
               </Dropzone.Idle>
             </Group>
 
-            <Text align='center' mt='xl' size='lg' weight={700}>
+            <Text align='center' mt='sm' size='lg' weight={700}>
               <Dropzone.Accept>Drop photos here</Dropzone.Accept>
               <Dropzone.Reject>Each file must be an photo at most 20 MB in size</Dropzone.Reject>
               <Dropzone.Idle>Upload photos</Dropzone.Idle>

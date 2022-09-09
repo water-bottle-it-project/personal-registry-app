@@ -1,9 +1,10 @@
-import { createStyles, Grid, MultiSelect, Stack, Textarea, TextInput } from '@mantine/core';
+import { Grid, MultiSelect, Stack, Textarea, TextInput } from '@mantine/core';
 import { DateRangePicker } from '@mantine/dates';
 import { IconCalendar, IconPencil, IconTags } from '@tabler/icons';
 import type { UseFormReturn } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
+import { useTextareaStyles } from '~components/create/textareaStyles';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 
 export function CreateFormMemoryInfo({
@@ -11,7 +12,7 @@ export function CreateFormMemoryInfo({
   control,
   formState: { errors },
 }: UseFormReturn<memoryCreateFormT>) {
-  const { classes } = useDescriptionStyles();
+  const { classes } = useTextareaStyles();
 
   return (
     <Grid grow>
@@ -79,17 +80,3 @@ export function CreateFormMemoryInfo({
     </Grid>
   );
 }
-
-const useDescriptionStyles = createStyles({
-  root: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: 1,
-    paddingTop: 1,
-    flexGrow: 1,
-  },
-  wrapper: { display: 'flex', flexGrow: 1 },
-  input: { flexGrow: 1 },
-  description: { paddingTop: 1 },
-});

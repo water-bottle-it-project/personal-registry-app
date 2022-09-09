@@ -3,8 +3,8 @@ import { z } from 'zod';
 // The photo in a database
 const photoZ = z.object({
   _id: z.string().min(1),
-  caption: z.string().optional(),
-  location: z.string().optional(),
+  caption: z.string().trim().optional(),
+  location: z.string().trim().optional(),
   url: z.string().url(),
   photoDate: z.date().nullable(),
   memoryId: z.string(),
