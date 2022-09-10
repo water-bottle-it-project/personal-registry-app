@@ -68,7 +68,14 @@ export function CreateFormPhotoCardDemo() {
           <Center sx={{ width: '100%' }}>
             <Stack spacing={2} sx={{ width: '100%' }}>
               <Input.Label>Preview: #1/n</Input.Label>
-              <Image fit='cover' height={180} radius='sm' src={gradient.src} width='100%' />
+              <Image
+                alt='Demo photo card preview'
+                fit='cover'
+                height={180}
+                radius='sm'
+                src={gradient.src}
+                width='100%'
+              />
             </Stack>
           </Center>
         </Grid.Col>

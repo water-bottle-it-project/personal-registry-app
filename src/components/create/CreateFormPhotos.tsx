@@ -107,7 +107,14 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
                 <Stack spacing={2} sx={{ width: '100%' }}>
                   <Input.Label>{`${index + 1}/${fields.length}`}</Input.Label>
                   <Zoom>
-                    <Image fit='cover' height={180} radius='sm' src={p._thumbnail} width='100%' />
+                    <Image
+                      alt={`Photo ${index + 1}/${fields.length}`}
+                      fit='cover'
+                      height={180}
+                      radius='sm'
+                      src={p._thumbnail}
+                      width='100%'
+                    />
                   </Zoom>
                 </Stack>
               </Center>
