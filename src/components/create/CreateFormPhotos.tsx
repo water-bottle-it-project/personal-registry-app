@@ -21,11 +21,18 @@ import {
 } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import type { DropzoneProps } from '@mantine/dropzone';
-import { IconGripVertical, IconReplace, IconTrash, IconZoomIn } from '@tabler/icons';
+import {
+  IconCalendarPlus,
+  IconGripVertical,
+  IconLocation,
+  IconReplace,
+  IconTrash,
+  IconZoomIn,
+} from '@tabler/icons';
 import { nanoid } from 'nanoid';
 import { useCallback, useState } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
-import { useFieldArray } from 'react-hook-form';
+import { Controller, useFieldArray } from 'react-hook-form';
 import Zoom from 'react-medium-image-zoom';
 
 import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
@@ -132,14 +139,30 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
               />
             </Grid.Col>
             <Grid.Col sm={4}>
-              <DatePicker
-                description='Date of this particular photo'
-                label='Photo date'
-                placeholder='Click to add a date.'
+              <Controller
+                control={control}
+                name={`photos.${index}.photoDate`}
+                render={({ field: { value, onChange, ref, ...field }, fieldState: { error } }) => (
+                  <DatePicker
+                    description='Date of this particular photo'
+                    dropdownPosition='bottom-start'
+                    error={error?.message}
+                    firstDayOfWeek='sunday'
+                    icon={<IconCalendarPlus size={16} />}
+                    inputFormat='D MMMM YYYY'
+                    label='Photo date'
+                    onChange={onChange}
+                    placeholder='Click to add a date.'
+                    ref={ref}
+                    value={value}
+                    {...field}
+                  />
+                )}
               />
               <Space h='md' />
               <TextInput
                 description='Just text for now.'
+                icon={<IconLocation size={16} />}
                 label='Location'
                 placeholder='Gravity Falls'
                 {...register(`photos.${index}.location`)}
