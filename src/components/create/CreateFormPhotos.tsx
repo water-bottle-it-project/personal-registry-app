@@ -27,7 +27,6 @@ import { useFieldArray } from 'react-hook-form';
 import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { CreateFormPhotoCardDemo } from '~components/create/CreateFormPhotoCardDemo';
 import { useTextareaStyles } from '~components/create/textareaStyles';
-import gradient from '~components/homepage/gradient.png';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 import type { photoFormCreateT } from '~types/photo/photo';
 
