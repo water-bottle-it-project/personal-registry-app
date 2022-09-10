@@ -13,6 +13,7 @@ import {
   Paper,
   Space,
   Stack,
+  Switch,
   Textarea,
   TextInput,
   Title,
@@ -22,7 +23,7 @@ import { DatePicker } from '@mantine/dates';
 import type { DropzoneProps } from '@mantine/dropzone';
 import { IconGripVertical, IconReplace, IconTrash, IconZoomIn } from '@tabler/icons';
 import { nanoid } from 'nanoid';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 import Zoom from 'react-medium-image-zoom';
@@ -70,6 +71,8 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
     [move],
   );
 
+  const [contained, setContained] = useState(false);
+
   const photoCards = fields.map((p, index) => (
     <Draggable draggableId={p._dir} index={index} key={p._dir}>
       {provided => (
@@ -109,7 +112,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
                   <Zoom>
                     <Image
                       alt={`Photo ${index + 1}/${fields.length}`}
-                      fit='cover'
+                      fit={contained ? 'contain' : 'cover'}
                       height={180}
                       radius='sm'
                       src={p._thumbnail}
@@ -156,6 +159,13 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
     <>
       <Title order={2}>Add photos</Title>
       <CreateFormDropzone onDrop={onDrop} />
+      <Switch
+        checked={contained}
+        label={`Photo preview mode: ${
+          contained ? 'contain photo within frame' : 'fill photo frame'
+        }`}
+        onChange={event => setContained(event.target.checked)}
+      />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='droppable'>
           {provided => (
