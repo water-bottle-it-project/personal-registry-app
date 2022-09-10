@@ -12,6 +12,8 @@ const photoSchema = new Schema({
   photoDate: { type: Date, required: false },
 });
 
+photoSchema.index({ userId: 'hashed', memoryDate: -1 });
+
 /**
  * Only bind model to schema if it has not been previously created: supports Next.js Hot Reload
  */

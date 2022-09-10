@@ -12,6 +12,8 @@ const memorySchema = new Schema({
   photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
 });
 
+memorySchema.index({ userId: 'hashed', lastDate: -1 });
+
 /**
  * Only bind model to schema if it has not been previously created: supports Next.js Hot Reload
  */
