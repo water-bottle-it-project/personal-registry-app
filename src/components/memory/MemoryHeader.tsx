@@ -1,18 +1,38 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Container,
-  Grid,
-  Group,
-  Select,
-  Space,
-  Text,
-  Title,
-} from '@mantine/core';
+import { Badge, Box, Button, Container, Group, Select, Space, Text, Title } from '@mantine/core';
 import { IconDownload } from '@tabler/icons';
 
-export function MemoryHeader() {
+import { trpcClient } from '~clientUtils/trpcClient';
+import type { memoryT } from '~types/memory/memory';
+
+interface MemoryHeaderProps extends memoryT {
+  imageCount?: number;
+}
+
+export function MemoryHeader({
+  _id,
+  title,
+  description,
+  firstDate,
+  lastDate,
+  collections,
+}: MemoryHeaderProps) {
+  const collectionsArr = new Array(collections?.length);
+
+  for (let i = 0; i < collections?.length; i++) {
+    const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
+      'collection.GetCollection',
+      { _id: collections[i].collectionId },
+    ]);
+
+    collectionsArr[i] = data?.collection.title;
+  }
+
+  // console.log(collectionsArr);
+  const collectionBadges = collectionsArr.map(c => (
+    <Badge key={c} radius='xs'>
+      {c}
+    </Badge>
+  ));
   return (
     <Box
       sx={theme => ({
@@ -22,35 +42,33 @@ export function MemoryHeader() {
     >
       <Container size='xl'>
         <Group>
-          <Title order={1}>Memory Name</Title>
+          <Title order={1}>{title || 'Memory Name'}</Title>
           <Button variant='outline'>Edit</Button>
         </Group>
+        <Space h='xs' />
+        <Text>{description || 'Description here'}</Text>
         <Space h='md' />
         <Title order={4}>Memory creation date</Title>
         <Text>1 August 2022</Text>
         <Space h='sm' />
         <Title order={4}>Memory range</Title>
-        <Text>1 July 2022 to 1 August 2022</Text>
+        <Text>
+          {firstDate || 'FirstDate'} to {lastDate || 'LastDate'}
+        </Text>
         <Space h='xl' />
         <Title order={4}>Collections</Title>
         <Space h='sm' />
-        <Group>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
-        </Group>
+        <Group>{collectionBadges}</Group>
         <Space h='xl' />
         <Group position='apart'>
           <Group>
             <Title order={4}>Sort by</Title>
             <Select
-              placeholder='Default'
               data={[
                 { value: 'newToOld', label: 'Newest to Oldest' },
                 { value: 'oldToNew', label: 'Oldest to Newest' },
               ]}
+              placeholder='Default'
             />
           </Group>
           <div>
