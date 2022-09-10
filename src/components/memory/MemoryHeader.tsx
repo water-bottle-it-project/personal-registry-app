@@ -32,6 +32,16 @@ export function MemoryHeader() {
         <Title order={4}>Memory range</Title>
         <Text>1 July 2022 to 1 August 2022</Text>
         <Space h='xl' />
+        <Title order={4}>Collections</Title>
+        <Space h='sm' />
+        <Group>
+          <Badge radius='xs'>Gadgets</Badge>
+          <Badge radius='xs'>Gadgets</Badge>
+          <Badge radius='xs'>Gadgets</Badge>
+          <Badge radius='xs'>Gadgets</Badge>
+          <Badge radius='xs'>Gadgets</Badge>
+        </Group>
+        <Space h='xl' />
         <Group position='apart'>
           <Group>
             <Title order={4}>Sort by</Title>
@@ -48,16 +58,6 @@ export function MemoryHeader() {
               Download
             </Button>
           </div>
-        </Group>
-        <Space h='xl' />
-        <Title order={4}>Collections</Title>
-        <Space h='sm' />
-        <Group>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
-          <Badge radius='xs'>Gadgets</Badge>
         </Group>
       </Container>
     </Box>
