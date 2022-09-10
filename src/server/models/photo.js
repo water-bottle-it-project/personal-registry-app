@@ -8,7 +8,7 @@ const photoSchema = new Schema({
   url: { type: String, required: true },
   userId: { type: String, required: true },
   memoryId: { type: Schema.Types.ObjectId, required: true, ref: 'Memory' },
-  memoryDate: { type: String, required: true },
+  memoryDate: { type: Date, required: true },
   photoDate: { type: Date, required: false },
 });
 
