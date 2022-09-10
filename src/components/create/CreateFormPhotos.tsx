@@ -8,12 +8,14 @@ import {
   createStyles,
   FileButton,
   Grid,
+  Group,
   Image,
   Input,
   Paper,
   Space,
   Stack,
   Switch,
+  Text,
   Textarea,
   TextInput,
   Title,
@@ -27,7 +29,6 @@ import {
   IconLocation,
   IconReplace,
   IconTrash,
-  IconZoomIn,
 } from '@tabler/icons';
 import { nanoid } from 'nanoid';
 import { useCallback, useState } from 'react';
@@ -45,7 +46,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
   const { classes } = useDragDropStyles();
   const { classes: textareaClasses } = useTextareaStyles();
 
-  const { fields, append, remove, move } = useFieldArray({
+  const { fields, append, remove, move, update } = useFieldArray({
     name: 'photos',
     control,
   });
@@ -89,12 +90,12 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
           </div>
           <Stack pl='xs' pr='md'>
             <Tooltip label='Delete photo' position='right'>
-              <ActionIcon color='red' size='lg' variant='light'>
+              <ActionIcon color='red' onClick={() => remove(index)} size='lg' variant='light'>
                 <IconTrash />
               </ActionIcon>
             </Tooltip>
 
-            <FileButton accept={IMAGE_MIME_TYPES_FILE_BUTTON} onChange={setFile}>
+            <FileButton accept={IMAGE_MIME_TYPES_FILE_BUTTON} onChange={setFile(index)}>
               {props => (
                 <Tooltip label='Replace photo' position='right'>
                   <ActionIcon color='indigo' size='lg' variant='light' {...props}>
@@ -103,12 +104,6 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
                 </Tooltip>
               )}
             </FileButton>
-
-            <Tooltip label='View zoomed in' position='right'>
-              <ActionIcon color='green' size='lg' variant='light'>
-                <IconZoomIn />
-              </ActionIcon>
-            </Tooltip>
           </Stack>
 
           <Grid sx={{ flexGrow: 1 }}>
@@ -174,21 +169,36 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
     </Draggable>
   ));
 
-  function setFile() {
-    console.log('set individual file');
-  }
+  // Curried function for updating a file for a photo card already in the list
+  const setFile = (index: number) => (file: File) => {
+    // Get old thumbnail blob link to clean up later
+    const _thumbnailOld = fields[index]._thumbnail;
+
+    // Insert new image
+    update(index, {
+      ...fields[index],
+      _file: file,
+      _thumbnail: URL.createObjectURL(file),
+    });
+
+    // Make sure to clean up old thumbnail to prevent memory leak.
+    URL.revokeObjectURL(_thumbnailOld);
+  };
 
   return (
     <>
       <Title order={2}>Add photos</Title>
       <CreateFormDropzone onDrop={onDrop} />
-      <Switch
-        checked={contained}
-        label={`Photo preview mode: ${
-          contained ? 'contain photo within frame' : 'fill photo frame'
-        }`}
-        onChange={event => setContained(event.target.checked)}
-      />
+      <Group position='apart'>
+        <Switch
+          checked={contained}
+          label={`Photo preview mode: ${
+            contained ? 'contain photo within frame' : 'fill photo frame'
+          }`}
+          onChange={event => setContained(event.target.checked)}
+        />
+        <Text className={classes.helpText}>Tap any photo to zoom in</Text>
+      </Group>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='droppable'>
           {provided => (
@@ -228,5 +238,10 @@ export const useDragDropStyles = createStyles(theme => ({
     height: '100%',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[6],
     paddingRight: 0,
+  },
+
+  helpText: {
+    color: theme.colorScheme === 'dark' ? theme.colors.gray[6] : theme.colors.dark[3],
+    fontSize: theme.fontSizes.sm,
   },
 }));
