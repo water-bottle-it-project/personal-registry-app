@@ -90,7 +90,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
           </div>
           <Stack pl='xs' pr='md'>
             <Tooltip label='Delete photo' position='right'>
-              <ActionIcon color='red' onClick={() => remove(index)} size='lg' variant='light'>
+              <ActionIcon color='red' onClick={removePhoto(index)} size='lg' variant='light'>
                 <IconTrash />
               </ActionIcon>
             </Tooltip>
@@ -183,6 +183,12 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
 
     // Make sure to clean up old thumbnail to prevent memory leak.
     URL.revokeObjectURL(_thumbnailOld);
+  };
+
+  const removePhoto = (index: number) => () => {
+    const thumbnail = fields[index]._thumbnail;
+    remove(index);
+    URL.revokeObjectURL(thumbnail);
   };
 
   return (
