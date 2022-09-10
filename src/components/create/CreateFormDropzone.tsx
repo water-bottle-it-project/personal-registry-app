@@ -1,6 +1,6 @@
 import { Affix, Button, createStyles, Group, Text, Transition } from '@mantine/core';
 import type { DropzoneProps } from '@mantine/dropzone';
-import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
+import { Dropzone } from '@mantine/dropzone';
 import { useWindowScroll } from '@mantine/hooks';
 import { IconCloudUpload, IconDownload, IconPhoto, IconX } from '@tabler/icons';
 import { useRef } from 'react';
@@ -45,7 +45,7 @@ export function CreateFormDropzone({ onDrop }: CreateFormDropzoneProps) {
     <>
       <div className={classes.wrapper}>
         <Dropzone
-          accept={IMAGE_MIME_TYPE}
+          accept={{ 'image/*': [] }}
           className={classes.dropzone}
           maxSize={20 * 1024 ** 2}
           onDrop={onDrop}
