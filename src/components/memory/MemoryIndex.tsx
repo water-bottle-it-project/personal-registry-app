@@ -4,9 +4,9 @@ import { MemoryHeader } from './MemoryHeader';
 
 export function MemoryIndex() {
   return (
-    <Container size='xl'>
+    <>
       <MemoryHeader />
-      {/* Insert images here */}
-    </Container>
+      <Container size='xl'>{/* Insert images here */}</Container>
+    </>
   );
 }
