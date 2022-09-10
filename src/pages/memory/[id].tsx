@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
 import { trpcClient } from '~clientUtils/trpcClient';
+import { MemoryIndex } from '~components/memory/MemoryIndex';
 
 function Memory() {
   const router = useRouter();
@@ -23,6 +24,7 @@ function Memory() {
   collections && console.log(collections);
   return (
     <>
+      <MemoryIndex />
       <h1>{title}</h1>
       <p>Description: {description}</p>
       <p>Collections:</p>
