@@ -25,8 +25,16 @@ const photoFormCreateZ = photoZ
     _thumbnail: z.string(),
   });
 
+const photoFormCreateRequestZ = photoZ.pick({
+  caption: true,
+  location: true,
+  photoDate: true,
+  url: true,
+});
+
 type photoT = z.infer<typeof photoZ>;
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
+type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
 
-export type { photoFormCreateT, photoT };
-export { photoFormCreateZ, photoZ };
+export type { photoFormCreateRequestT, photoFormCreateT, photoT };
+export { photoFormCreateRequestZ, photoFormCreateZ, photoZ };

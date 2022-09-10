@@ -4,7 +4,7 @@ import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Memory } from '~server/models/memory';
 import type { memoryT } from '~types/memory/memory';
 import { memoryIdOnlyZ } from '~types/memory/memory';
-import { memoryCreateForm } from '~types/memory/memoryForm';
+import { memoryCreateFormRequest } from '~types/memory/memoryForm';
 
 const memoryRouter = createProtectedDbRouter()
   .query('GetMemories', {
@@ -36,13 +36,13 @@ const memoryRouter = createProtectedDbRouter()
   })
 
   .mutation('CreateMemory', {
-    input: memoryCreateForm,
+    input: memoryCreateFormRequest,
     async resolve({ ctx, input }) {
       const memory: memoryT = await Memory.create({
         title: input.title,
         description: input.description,
-        firstDate: input.date[0],
-        lastDate: input.date[1],
+        firstDate: input.firstDate,
+        lastDate: input.lastDate,
         userId: ctx.userId,
       });
 
