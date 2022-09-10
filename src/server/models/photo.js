@@ -7,7 +7,7 @@ const photoSchema = new Schema({
   location: { type: String, required: false },
   url: { type: String, required: true },
   userId: { type: String, required: true },
-  memoryId: { type: String, required: true },
+  memoryId: { type: String, required: true, ref: 'Memory' },
   memoryDate: { type: String, required: true },
   photoDate: { type: Date, required: false },
 });

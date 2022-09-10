@@ -7,7 +7,7 @@ const { Schema } = mongoose;
 const collectionSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: false },
-  userId: { type: String, required: true, ref: 'User' },
+  userId: { type: String, required: true },
   color: {
     type: String,
     required: false,
