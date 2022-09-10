@@ -2,7 +2,8 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Affix, Button, Stack, Transition } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
-import { IconArrowUp } from '@tabler/icons';
+import { showNotification } from '@mantine/notifications';
+import { IconArrowUp, IconCheck, IconX } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { useAuthUser } from 'next-firebase-auth';
 import { useForm } from 'react-hook-form';
@@ -22,11 +23,7 @@ import type { photoFormCreateRequestT } from '~types/photo/photo';
  */
 export function CreateForm() {
   const formMethods = useForm<memoryCreateFormT>({
-    resolver: async (data, context, options) => {
-      console.log('form data', data);
-      console.log('validation result', await zodResolver(memoryCreateForm)(data, context, options));
-      return zodResolver(memoryCreateForm)(data, context, options);
-    },
+    resolver: zodResolver(memoryCreateForm),
     defaultValues: {
       date: [undefined, undefined],
       // Prevent undefined access of photos when calling reset on an empty form
@@ -43,7 +40,6 @@ export function CreateForm() {
   const { id: userId } = useAuthUser();
 
   async function handleMemoryCreate(memory: memoryCreateFormT) {
-    console.log('handleMemoryCreate', memory);
     if (!userId) {
       formMethods.setError('title', {
         type: 'custom',
@@ -82,7 +78,26 @@ export function CreateForm() {
       photos: newPhotos,
     };
 
-    console.log(newMemory);
+    // Store memory and photo with urls in DB.
+    creation.mutate(newMemory, {
+      onSuccess: async data => {
+        await trpcUtils.invalidateQueries('memory.GetMemories');
+        showNotification({
+          title: 'Success!',
+          message: `Memory '${data.title}' successfully created.`,
+          icon: <IconCheck />,
+        });
+        await router.push('/timeline');
+      },
+      onError: () => {
+        showNotification({
+          icon: <IconX />,
+          color: 'red',
+          title: 'Error!',
+          message: 'Error creating memory.',
+        });
+      },
+    });
   }
 
   return (

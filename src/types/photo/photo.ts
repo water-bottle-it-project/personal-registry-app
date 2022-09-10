@@ -32,9 +32,12 @@ const photoFormCreateRequestZ = photoZ.pick({
   url: true,
 });
 
+const photoIdOnlyZ = photoZ.pick({ _id: true });
+
 type photoT = z.infer<typeof photoZ>;
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
 type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
+type photoIdOnlyT = z.infer<typeof photoIdOnlyZ>;
 
-export type { photoFormCreateRequestT, photoFormCreateT, photoT };
+export type { photoFormCreateRequestT, photoFormCreateT, photoIdOnlyT, photoT };
 export { photoFormCreateRequestZ, photoFormCreateZ, photoZ };
