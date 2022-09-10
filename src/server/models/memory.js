@@ -9,11 +9,10 @@ const memorySchema = new Schema({
     type: [
       {
         collectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
-        collectionTitle: { type: String, required: true },
       },
     ],
   },
-  firstDate: { type: Date, required: false },
+  firstDate: { type: Date, required: true },
   lastDate: { type: Date, required: true },
   userId: { type: String, required: true },
   photos: [{ photoId: mongoose.Schema.Types.ObjectId }],

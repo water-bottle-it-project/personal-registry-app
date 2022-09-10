@@ -6,6 +6,12 @@ const memoryZ = z.object({
   description: z.string().trim().optional(),
   firstDate: z.date(),
   lastDate: z.date(),
+  collections: z.array(
+    z.object({
+      collectionId: z.string().trim().min(1),
+    }),
+  ),
+  photos: z.array(z.object({ photoId: z.string().trim().min(1) })),
 });
 
 const memoryIdOnlyZ = memoryZ.pick({ _id: true });
