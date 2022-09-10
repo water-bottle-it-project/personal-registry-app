@@ -9,10 +9,8 @@ import {
   Image,
   Input,
   Paper,
-  SimpleGrid,
   Space,
   Stack,
-  Text,
   Textarea,
   TextInput,
   Title,
@@ -27,14 +25,13 @@ import type { UseFormReturn } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 
 import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
+import { CreateFormPhotoCardDemo } from '~components/create/CreateFormPhotoCardDemo';
 import { useTextareaStyles } from '~components/create/textareaStyles';
 import gradient from '~components/homepage/gradient.png';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 import type { photoFormCreateT } from '~types/photo/photo';
 
-const IMAGE_MIME_TYPES_FILE_BUTTON = 'image/png,image/gif,image/jpeg,image/webp';
-
-export function CreateFormPhotos({ control }: UseFormReturn<memoryCreateFormT>) {
+export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCreateFormT>) {
   const { classes } = useDragDropStyles();
   const { classes: textareaClasses } = useTextareaStyles();
 
@@ -77,29 +74,64 @@ export function CreateFormPhotos({ control }: UseFormReturn<memoryCreateFormT>) 
         <Paper className={classes.item} ref={provided.innerRef} {...provided.draggableProps}>
           <div {...provided.dragHandleProps} className={classes.dragHandle}>
             <IconGripVertical size={18} stroke={1.5} />
-            <Stack px='xs'>
-              <Tooltip label='Delete photo' position='right'>
-                <ActionIcon color='red' size='lg' variant='light'>
-                  <IconTrash />
-                </ActionIcon>
-              </Tooltip>
-              <Tooltip label='Replace photo'>
-                <ActionIcon color='indigo' size='lg' variant='light'>
-                  <IconReplace />
-                </ActionIcon>
-              </Tooltip>
-              <Tooltip label='View zoomed in'>
-                <ActionIcon color='green' size='lg' variant='light'>
-                  <IconZoomIn />
-                </ActionIcon>
-              </Tooltip>
-            </Stack>
           </div>
-          <SimpleGrid>
-            <Text>A card</Text>
-            <Text>A card</Text>
-            <Text>A card</Text>
-          </SimpleGrid>
+          <Stack pl='xs' pr='md'>
+            <Tooltip label='Delete photo' position='right'>
+              <ActionIcon color='red' size='lg' variant='light'>
+                <IconTrash />
+              </ActionIcon>
+            </Tooltip>
+
+            <FileButton accept={IMAGE_MIME_TYPES_FILE_BUTTON} onChange={setFile}>
+              {props => (
+                <Tooltip label='Replace photo' position='right'>
+                  <ActionIcon color='indigo' size='lg' variant='light' {...props}>
+                    <IconReplace />
+                  </ActionIcon>
+                </Tooltip>
+              )}
+            </FileButton>
+
+            <Tooltip label='View zoomed in' position='right'>
+              <ActionIcon color='green' size='lg' variant='light'>
+                <IconZoomIn />
+              </ActionIcon>
+            </Tooltip>
+          </Stack>
+
+          <Grid sx={{ flexGrow: 1 }}>
+            <Grid.Col sm={4}>
+              <Center sx={{ width: '100%' }}>
+                <Stack spacing={2} sx={{ width: '100%' }}>
+                  <Input.Label>{`${index + 1}/${fields.length}`}</Input.Label>
+                  <Image fit='cover' height={180} radius='sm' src={p._thumbnail} width='100%' />
+                </Stack>
+              </Center>
+            </Grid.Col>
+            <Grid.Col sm={4}>
+              <Textarea
+                classNames={textareaClasses}
+                description='Just for this photo.'
+                label='Caption'
+                placeholder='Write a few extra details...'
+                {...register(`photos.${index}.caption`)}
+              />
+            </Grid.Col>
+            <Grid.Col sm={4}>
+              <DatePicker
+                description='Date of this particular photo'
+                label='Photo date'
+                placeholder='Click to add a date.'
+              />
+              <Space h='md' />
+              <TextInput
+                description='Just text for now.'
+                label='Location'
+                placeholder='Gravity Falls'
+                {...register(`photos.${index}.location`)}
+              />
+            </Grid.Col>
+          </Grid>
         </Paper>
       )}
     </Draggable>
@@ -123,73 +155,14 @@ export function CreateFormPhotos({ control }: UseFormReturn<memoryCreateFormT>) 
           )}
         </Droppable>
       </DragDropContext>
-
-      {/* Placeholder Photo create card */}
-      <Paper className={classes.item}>
-        <div className={classes.dragHandle}>
-          <IconGripVertical size={18} stroke={1.5} />
-          <Stack px='xs'>
-            <Tooltip label='Delete photo' position='right'>
-              <ActionIcon color='red' size='lg' variant='light'>
-                <IconTrash />
-              </ActionIcon>
-            </Tooltip>
-
-            <FileButton accept={IMAGE_MIME_TYPES_FILE_BUTTON} onChange={setFile}>
-              {props => (
-                <Tooltip label='Replace photo' position='right'>
-                  <ActionIcon color='indigo' size='lg' variant='light' {...props}>
-                    <IconReplace />
-                  </ActionIcon>
-                </Tooltip>
-              )}
-            </FileButton>
-
-            <Tooltip label='View zoomed in' position='right'>
-              <ActionIcon color='green' size='lg' variant='light'>
-                <IconZoomIn />
-              </ActionIcon>
-            </Tooltip>
-          </Stack>
-        </div>
-
-        <Grid sx={{ flexGrow: 1 }}>
-          <Grid.Col sm={4}>
-            <Center sx={{ width: '100%' }}>
-              <Stack spacing={2} sx={{ width: '100%' }}>
-                <Input.Label>Preview: #1/n</Input.Label>
-                <Image fit='cover' height={180} src={gradient.src} width='100%' />
-              </Stack>
-            </Center>
-          </Grid.Col>
-          <Grid.Col sm={4}>
-            <Textarea
-              classNames={textareaClasses}
-              description='Just for this photo.'
-              label='Caption'
-              placeholder='Write a few extra details...'
-            />
-          </Grid.Col>
-          <Grid.Col sm={4}>
-            <DatePicker
-              description='Date of this particular photo'
-              label='Photo date'
-              placeholder='Click to add a date.'
-            />
-            <Space h='md' />
-            <TextInput
-              description='Just text for now.'
-              label='Location'
-              placeholder='Gravity Falls'
-            />
-          </Grid.Col>
-        </Grid>
-      </Paper>
+      <CreateFormPhotoCardDemo />
     </>
   );
 }
 
-const useDragDropStyles = createStyles(theme => ({
+export const IMAGE_MIME_TYPES_FILE_BUTTON = 'image/png,image/gif,image/jpeg,image/webp';
+
+export const useDragDropStyles = createStyles(theme => ({
   item: {
     display: 'flex',
     alignItems: 'center',
@@ -210,7 +183,6 @@ const useDragDropStyles = createStyles(theme => ({
     justifyContent: 'center',
     height: '100%',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[6],
-    paddingLeft: 0,
-    paddingRight: theme.spacing.xs,
+    paddingRight: 0,
   },
 }));
