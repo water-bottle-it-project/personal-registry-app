@@ -51,6 +51,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.34.2",
+    "react-medium-image-zoom": "^5.0.2",
     "react-query": "3",
     "sharp": "^0.30.7",
     "superjson": "^1.9.1",

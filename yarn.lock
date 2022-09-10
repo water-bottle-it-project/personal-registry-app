@@ -4264,6 +4264,11 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-medium-image-zoom@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/react-medium-image-zoom/-/react-medium-image-zoom-5.0.2.tgz#2ec051205e7bfc53759f8a3a1bfd1c594f96100c"
+  integrity sha512-DGdsNaixDgXnEFFpCV6YHJYG4VQOvzs3PHS3h+nfIV82GO0cWetXrBQFGA77DMGODe6DuBX2SQPqZAQVKpLdcw==
+
 react-property@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-property/-/react-property-2.0.0.tgz#2156ba9d85fa4741faf1918b38efc1eae3c6a136"

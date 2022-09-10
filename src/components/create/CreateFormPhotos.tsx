@@ -1,3 +1,5 @@
+import 'react-medium-image-zoom/dist/styles.css';
+
 import type { DropResult } from '@hello-pangea/dnd';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import {
@@ -23,6 +25,7 @@ import { nanoid } from 'nanoid';
 import { useCallback } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
+import Zoom from 'react-medium-image-zoom';
 
 import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { CreateFormPhotoCardDemo } from '~components/create/CreateFormPhotoCardDemo';
@@ -103,7 +106,9 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
               <Center sx={{ width: '100%' }}>
                 <Stack spacing={2} sx={{ width: '100%' }}>
                   <Input.Label>{`${index + 1}/${fields.length}`}</Input.Label>
-                  <Image fit='cover' height={180} radius='sm' src={p._thumbnail} width='100%' />
+                  <Zoom>
+                    <Image fit='cover' height={180} radius='sm' src={p._thumbnail} width='100%' />
+                  </Zoom>
                 </Stack>
               </Center>
             </Grid.Col>
