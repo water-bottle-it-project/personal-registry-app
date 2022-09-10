@@ -1,8 +1,14 @@
 import { Container } from '@mantine/core';
 
+import type { memoryT } from '~types/memory/memory';
+
 import { MemoryHeader } from './MemoryHeader';
 
-export function MemoryIndex() {
+interface MemoryIndexProps extends memoryT {
+  imageCount?: number;
+}
+
+export function MemoryIndex(props: MemoryIndexProps) {
   return (
     <>
       <MemoryHeader />
