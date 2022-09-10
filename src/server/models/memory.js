@@ -9,7 +9,6 @@ const memorySchema = new Schema({
     type: [
       {
         collectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
-        collectionTitle: { type: String, required: true },
       },
     ],
   },

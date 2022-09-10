@@ -1,4 +1,7 @@
-import { Anchor, Badge, Card, Grid, Image, Text } from '@mantine/core';
+import { Anchor, Card, Grid, Image, Text } from '@mantine/core';
+import Link from 'next/link';
+
+import { TimelineTag } from '~components/timeline/TimelineTag';
 
 /**
  * collections and photos will be list array which we can change when actually passing in
@@ -6,12 +9,22 @@ import { Anchor, Badge, Card, Grid, Image, Text } from '@mantine/core';
  * string within the component, just keeping it like this for now, will pass in the url
  * of the image as well when it comes to it, instead of using unsplash
  */
+interface Collection {
+  collectionId: string;
+}
+
+interface Photo {
+  photoId: string;
+}
+
 interface TimelineCardProps {
+  _id: string;
   title: string;
   description: string;
-  date: string;
-  collections: string;
-  photos: string;
+  firstDate: Date;
+  lastDate: Date;
+  collections: Array<Collection>;
+  photos: Array<Photo>;
 }
 
 export function TimelineCard(props: TimelineCardProps) {
@@ -42,7 +55,7 @@ export function TimelineCard(props: TimelineCardProps) {
       </Text>
 
       <Text color='dimmed' mb='xs' size='xs' weight={600}>
-        {props.date}
+        {props.firstDate.toDateString()}
       </Text>
 
       <Text color='light' size='sm'>
@@ -50,16 +63,11 @@ export function TimelineCard(props: TimelineCardProps) {
       </Text>
 
       <Grid mb='xs' mt='lg'>
-        <Grid.Col span={4}>
-          <Badge color='gray' radius='sm' size='xs' variant='filled'>
-            {props.collections}
-          </Badge>
-        </Grid.Col>
+        {props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))}
       </Grid>
-
-      <Anchor href='#' sx={{ fontSize: 14, fontWeight: 600 }}>
-        View {props.photos} photos
-      </Anchor>
+      <Link href={'memory/' + props._id}>
+        <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>View {props.photos.length} photos</Anchor>
+      </Link>
     </Card>
   );
 }
