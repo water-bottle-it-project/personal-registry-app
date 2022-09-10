@@ -7,7 +7,6 @@ import { Photo } from '~server/models/photo';
 import type { memoryT } from '~types/memory/memory';
 import { memoryIdOnlyZ } from '~types/memory/memory';
 import { memoryCreateFormRequest } from '~types/memory/memoryForm';
-import type { photoIdOnlyT } from '~types/photo/photo';
 
 const memoryRouter = createProtectedDbRouter()
   .query('GetMemories', {

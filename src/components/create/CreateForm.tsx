@@ -88,6 +88,9 @@ export function CreateForm() {
           icon: <IconCheck />,
         });
         await router.push('/timeline');
+        memory.photos.forEach(p => {
+          URL.revokeObjectURL(p._thumbnail);
+        });
       },
       onError: () => {
         showNotification({
