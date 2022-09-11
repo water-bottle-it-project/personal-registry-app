@@ -1,4 +1,4 @@
-import { Anchor, Card, Grid, Image, Text } from '@mantine/core';
+import { Anchor, Box, Card, Grid, Image, ScrollArea, Space, Text } from '@mantine/core';
 import Link from 'next/link';
 
 import { TimelineTag } from '~components/timeline/TimelineTag';
@@ -39,6 +39,8 @@ export function TimelineCard(props: TimelineCardProps) {
         // or use any other static values from theme
         fontSize: theme.fontSizes.sm,
         width: 275,
+        minHeight: 400,
+        maxHeight: 500,
       })}
       withBorder
     >
@@ -58,11 +60,13 @@ export function TimelineCard(props: TimelineCardProps) {
         {props.firstDate.toDateString()}
       </Text>
 
-      <Text color='light' size='sm'>
-        {props.description}
-      </Text>
-
-      <Grid mb='xs' mt='lg'>
+      <ScrollArea style={{ height: 100 }}>
+        <Text color='light' size='sm'>
+          {props.description}
+        </Text>
+      </ScrollArea>
+      <Space h='md' />
+      <Grid gutter='xs' mb='xs'>
         {props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))}
       </Grid>
       <Link href={'memory/' + props._id}>
