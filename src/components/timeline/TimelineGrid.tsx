@@ -37,11 +37,11 @@ export function TimelineGrid() {
       <Grid.Col key={c._id} md={3} sm={4} xs={6}>
         <TimelineCard
           _id={c._id}
-          collections={c.collections}
+          // collections={c.collections}
           description={c.description ? c.description : ''}
           firstDate={new Date(c.firstDate)}
           lastDate={new Date(c.lastDate)}
-          photos={c.photos}
+          // photos={c.photos}
           title={c.title}
         />
       </Grid.Col>

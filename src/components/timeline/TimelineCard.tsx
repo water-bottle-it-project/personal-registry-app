@@ -24,8 +24,8 @@ interface TimelineCardProps {
   description: string;
   firstDate: Date;
   lastDate: Date;
-  collections: Array<Collection>;
-  photos: Array<Photo>;
+  collections?: Array<Collection>;
+  photos?: Array<Photo>;
 }
 
 export function TimelineCard(props: TimelineCardProps) {
@@ -53,7 +53,7 @@ export function TimelineCard(props: TimelineCardProps) {
         />
       </Card.Section> */}
       <Card.Section>
-        <Carousel sx={{ maxWidth: 300 }} mx='auto' withIndicators height={180} align='center'>
+        <Carousel align='center' height={180} mx='auto' sx={{ maxWidth: 300 }} withIndicators>
           <Carousel.Slide>
             <Image
               alt='Norway'
@@ -92,10 +92,13 @@ export function TimelineCard(props: TimelineCardProps) {
       </ScrollArea>
       <Space h='md' />
       <Grid gutter='xs' mb='xs'>
-        {props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))}
+        {props.collections &&
+          props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))}
       </Grid>
       <Link href={'memory/' + props._id}>
-        <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>View {props.photos.length} photos</Anchor>
+        <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>
+          View {props.photos?.length || 0} photos
+        </Anchor>
       </Link>
     </Card>
   );
