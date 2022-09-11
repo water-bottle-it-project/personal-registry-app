@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import { COLORS } from '~types/util/color';
+
 const { Schema } = mongoose;
 
 const memorySchema = new Schema({
@@ -10,6 +12,11 @@ const memorySchema = new Schema({
       {
         collectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
         collectionTitle: { type: String, required: true },
+        collectionColor: {
+          type: String,
+          required: false,
+          enum: COLORS,
+        },
       },
     ],
   },

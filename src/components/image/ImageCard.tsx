@@ -36,8 +36,8 @@ export function ImageCard(props: ImageCardProps) {
             <Image alt='' height={200} src={props.url} />
           </Card.Section>
 
-          <Text align='center' mt='sm' weight={600}>
-            {props.caption}
+          <Text align='center' italic={!props.caption} mt='sm' weight={600}>
+            {props.caption || 'No caption provided'}
           </Text>
           <Space h='xs' />
         </Card>
