@@ -1,7 +1,8 @@
 import { Container } from '@mantine/core';
 
-import { MemoryHeader } from './MemoryHeader';
 import { trpcClient } from '~clientUtils/trpcClient';
+
+import { MemoryHeader } from './MemoryHeader';
 
 interface MemoryIndexProps {
   _id: string;
@@ -23,12 +24,12 @@ export function MemoryIndex(props: MemoryIndexProps) {
     <>
       <MemoryHeader
         _id={props._id}
-        title={title}
         collections={collections}
-        photos={photos}
+        description={description}
         firstDate={firstDate}
         lastDate={lastDate}
-        description={description}
+        photos={photos}
+        title={title}
       />
       <Container size='xl'>{/* Insert images here */}</Container>
     </>

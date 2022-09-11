@@ -1,4 +1,15 @@
-import { Badge, Box, Button, Container, Group, Select, Space, Text, Title } from '@mantine/core';
+import {
+  Badge,
+  Box,
+  Button,
+  Container,
+  Group,
+  Select,
+  Space,
+  Text,
+  Title,
+  useMantineTheme,
+} from '@mantine/core';
 import { IconDownload } from '@tabler/icons';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -17,6 +28,7 @@ export function MemoryHeader({
   collections,
 }: MemoryHeaderProps) {
   const collectionsArr = new Array(collections?.length);
+  const theme = useMantineTheme();
 
   for (let i = 0; i < collections?.length; i++) {
     const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
@@ -24,13 +36,13 @@ export function MemoryHeader({
       { _id: collections[i].collectionId },
     ]);
 
-    collectionsArr[i] = data?.collection.title;
+    collectionsArr[i] = { title: data?.collection.title, color: data?.collection.color };
   }
 
   // console.log(collectionsArr);
   const collectionBadges = collectionsArr.map(c => (
-    <Badge key={c} radius='xs'>
-      {c}
+    <Badge color={c.color} key={c.title} radius='xs'>
+      {c.title}
     </Badge>
   ));
   return (

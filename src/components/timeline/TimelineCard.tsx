@@ -1,3 +1,4 @@
+import { Carousel } from '@mantine/carousel';
 import { Anchor, Box, Card, Grid, Image, ScrollArea, Space, Text } from '@mantine/core';
 import Link from 'next/link';
 
@@ -44,14 +45,38 @@ export function TimelineCard(props: TimelineCardProps) {
       })}
       withBorder
     >
-      <Card.Section>
+      {/* <Card.Section>
         <Image
           alt='Norway'
           height={180}
           src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
         />
+      </Card.Section> */}
+      <Card.Section>
+        <Carousel sx={{ maxWidth: 300 }} mx='auto' withIndicators height={180} align='center'>
+          <Carousel.Slide>
+            <Image
+              alt='Norway'
+              height={180}
+              src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
+            />
+          </Carousel.Slide>
+          <Carousel.Slide>
+            <Image
+              alt='Norway'
+              height={180}
+              src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
+            />
+          </Carousel.Slide>
+          <Carousel.Slide>
+            <Image
+              alt='Norway'
+              height={180}
+              src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
+            />
+          </Carousel.Slide>
+        </Carousel>
       </Card.Section>
-
       <Text mt='sm' size='xl' weight={600}>
         {props.title}
       </Text>
