@@ -13,7 +13,7 @@ import { CreateFormMemoryInfo } from '~components/create/CreateFormMemoryInfo';
 import { CreateFormPhotos } from '~components/create/CreateFormPhotos';
 import { CreateFormTop } from '~components/create/CreateFormTop';
 import type { memoryCreateFormRequestT, memoryCreateFormT } from '~types/memory/memoryForm';
-import { memoryCreateForm } from '~types/memory/memoryForm';
+import { memoryCreateFormZ } from '~types/memory/memoryForm';
 import type { photoFormCreateRequestT } from '~types/photo/photo';
 
 /**
@@ -23,7 +23,7 @@ import type { photoFormCreateRequestT } from '~types/photo/photo';
  */
 export function CreateForm() {
   const formMethods = useForm<memoryCreateFormT>({
-    resolver: zodResolver(memoryCreateForm),
+    resolver: zodResolver(memoryCreateFormZ),
     defaultValues: {
       date: [undefined, undefined],
       // Prevent undefined access of photos when calling reset on an empty form

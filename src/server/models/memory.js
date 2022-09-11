@@ -5,11 +5,19 @@ const { Schema } = mongoose;
 const memorySchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: false },
-  collections: [{ type: Schema.Types.ObjectId, ref: 'Collection' }],
+  collections: {
+    type: [
+      {
+        collectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
+        collectionTitle: { type: String, required: true },
+      },
+    ],
+  },
   firstDate: { type: Date, required: true },
   lastDate: { type: Date, required: true },
   userId: { type: String, required: true },
   photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
+  photoPreviewUrl: { type: String, required: false },
 });
 
 memorySchema.index({ userId: 'hashed', lastDate: -1 });
