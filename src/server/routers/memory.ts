@@ -61,7 +61,7 @@ const memoryRouter = createProtectedDbRouter()
       const photosInserted = await Photo.insertMany(photosToInsert);
       const photoIdsInserted = photosInserted.map(p => p._id);
 
-      const photoPreviewUrl = input.photos && input.photos[0].url;
+      const photoPreviewUrl: string | undefined = input.photos?.[0]?.url;
 
       const memory: memoryCreateFormRequestT = await Memory.create({
         _id: memoryId,
