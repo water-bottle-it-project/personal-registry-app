@@ -49,7 +49,6 @@ export function TimelineCard(props: TimelineCardProps) {
         // or use any other static values from theme
         fontSize: theme.fontSizes.sm,
         width: 275,
-        minHeight: 400,
         maxHeight: 500,
       })}
       withBorder
@@ -66,7 +65,14 @@ export function TimelineCard(props: TimelineCardProps) {
           withIndicators={indicator}
         >
           <Carousel.Slide>
-            <Image alt={props.title} height={180} src={props.photoPreviewUrl} />
+            <Image
+              alt={props.title}
+              height={180}
+              src={
+                props.photoPreviewUrl ||
+                'https://firebasestorage.googleapis.com/v0/b/register-app-40207.appspot.com/o/wlDYrCXpN7ewycECJTQJiLHtE4e2%2FDdrGVSwaHggCoqsN-Guy7%2Fno-image.png?alt=media&token=19761ace-69f8-495f-b390-155d5de7d5a1'
+              }
+            />
           </Carousel.Slide>
         </Carousel>
       </Card.Section>
