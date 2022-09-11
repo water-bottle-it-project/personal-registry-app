@@ -1,5 +1,17 @@
-import { Badge, Box, Button, Container, Group, Select, Space, Text, Title } from '@mantine/core';
+import {
+  Anchor,
+  Badge,
+  Box,
+  Button,
+  Container,
+  Group,
+  Select,
+  Space,
+  Text,
+  Title,
+} from '@mantine/core';
 import { IconDownload } from '@tabler/icons';
+import Link from 'next/link';
 
 import type { memoryWithPhotosT } from '~types/memory/memoryForm';
 
@@ -27,7 +39,16 @@ export function MemoryHeader({
         color: 'black',
       })}
     >
-      {c.collectionTitle}
+      <Link
+        as={`/collections/edit?id=${c.collectionId}`}
+        href={`/collections?edit=${c.collectionId}`}
+        passHref
+        shallow
+      >
+        <Anchor component='a' variant='text'>
+          {c.collectionTitle}
+        </Anchor>
+      </Link>
     </Badge>
   ));
   return (
