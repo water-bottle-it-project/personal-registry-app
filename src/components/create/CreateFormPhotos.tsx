@@ -37,6 +37,7 @@ import { Controller, useFieldArray } from 'react-hook-form';
 import Zoom from 'react-medium-image-zoom';
 
 import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
+import { CreateFormPhotoCardDemo } from '~components/create/CreateFormPhotoCardDemo';
 import { useTextareaStyles } from '~components/create/textareaStyles';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 import type { photoFormCreateT } from '~types/photo/photo';
@@ -89,7 +90,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
           </div>
           <Stack pl='xs' pr='md'>
             <Tooltip label='Delete photo' position='right'>
-              <ActionIcon color='red' onClick={removePhoto(index)} size='lg' variant='light'>
+              <ActionIcon color='red' onClick={() => remove(index)} size='lg' variant='light'>
                 <IconTrash />
               </ActionIcon>
             </Tooltip>
@@ -184,12 +185,6 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
     URL.revokeObjectURL(_thumbnailOld);
   };
 
-  const removePhoto = (index: number) => () => {
-    const thumbnail = fields[index]._thumbnail;
-    remove(index);
-    URL.revokeObjectURL(thumbnail);
-  };
-
   return (
     <>
       <Title order={2}>Add photos</Title>
@@ -214,6 +209,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
           )}
         </Droppable>
       </DragDropContext>
+      <CreateFormPhotoCardDemo />
     </>
   );
 }

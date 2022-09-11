@@ -37,7 +37,7 @@ export function CreateFormMemoryInfo({
                 description='Click a date to set it as either the start or end date.
             Click again to set the other date. The dates can be the same.'
                 dropdownPosition='bottom-start'
-                error={error && 'Start and end dates are required.'}
+                error={error?.message}
                 firstDayOfWeek='sunday'
                 icon={<IconCalendar size={16} />}
                 inputFormat='D MMMM YYYY'

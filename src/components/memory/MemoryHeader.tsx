@@ -13,30 +13,38 @@ import {
 import { IconDownload } from '@tabler/icons';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import type { memoryWithPhotosT } from '~types/memory/memoryForm';
+import type { memoryT } from '~types/memory/memory';
 
-interface MemoryHeaderProps extends memoryWithPhotosT {
+interface MemoryHeaderProps extends memoryT {
   imageCount?: number;
 }
 
-export function MemoryHeader({ _id, title, description, firstDate, lastDate }: MemoryHeaderProps) {
-  // const collectionsArr = new Array(collections?.length);
+export function MemoryHeader({
+  _id,
+  title,
+  description,
+  firstDate,
+  lastDate,
+  collections,
+}: MemoryHeaderProps) {
+  const collectionsArr = new Array(collections?.length);
   const theme = useMantineTheme();
-  // for (let i = 0; i < collections?.length; i++) {
-  //   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
-  //     'collection.GetCollection',
-  //     { _id: collections[i].collectionId },
-  //   ]);
-  //
-  //   collectionsArr[i] = { title: data?.collection.title, color: data?.collection.color };
-  // }
+
+  for (let i = 0; i < collections?.length; i++) {
+    const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
+      'collection.GetCollection',
+      { _id: collections[i].collectionId },
+    ]);
+
+    collectionsArr[i] = { title: data?.collection.title, color: data?.collection.color };
+  }
 
   // console.log(collectionsArr);
-  // const collectionBadges = collectionsArr.map(c => (
-  //   <Badge color={c.color} key={c.title} radius='xs'>
-  //     {c.title}
-  //   </Badge>
-  // ));
+  const collectionBadges = collectionsArr.map(c => (
+    <Badge color={c.color} key={c.title} radius='xs'>
+      {c.title}
+    </Badge>
+  ));
   return (
     <Box
       sx={theme => ({
@@ -56,11 +64,13 @@ export function MemoryHeader({ _id, title, description, firstDate, lastDate }: M
         <Text>1 August 2022</Text>
         <Space h='sm' />
         <Title order={4}>Memory range</Title>
-        <Text>{`${firstDate || 'FirstDate'} to ${lastDate || 'LastDate'}`}</Text>
+        <Text>
+          {firstDate || 'FirstDate'} to {lastDate || 'LastDate'}
+        </Text>
         <Space h='xl' />
         <Title order={4}>Collections</Title>
         <Space h='sm' />
-        {/*<Group>{collectionBadges}</Group>*/}
+        <Group>{collectionBadges}</Group>
         <Space h='xl' />
         <Group position='apart'>
           <Group>
