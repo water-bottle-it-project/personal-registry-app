@@ -19,12 +19,12 @@ export function MemoryIndex(props: MemoryIndexProps) {
   if (isLoadingError) {
     return <div>Error loading memory</div>;
   }
-  const { title, description, firstDate, lastDate, photos, collections } = data.memory;
+  const { title, description, firstDate, lastDate, photos } = data.memory;
   return (
     <>
       <MemoryHeader
         _id={props._id}
-        collections={collections}
+        // collections={collections}
         description={description}
         firstDate={firstDate}
         lastDate={lastDate}

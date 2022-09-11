@@ -4,7 +4,11 @@ import type { UseFormReturn } from 'react-hook-form';
 
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 
-export function CreateFormTop({ reset, getValues }: UseFormReturn<memoryCreateFormT>) {
+export function CreateFormTop({
+  reset,
+  getValues,
+  formState: { isSubmitting },
+}: UseFormReturn<memoryCreateFormT>) {
   function resetWithCleanup() {
     const photos = getValues('photos');
     reset();
@@ -17,10 +21,15 @@ export function CreateFormTop({ reset, getValues }: UseFormReturn<memoryCreateFo
     <Group position='apart'>
       <Title>Create a memory</Title>
       <Group position='right'>
-        <Button onClick={resetWithCleanup} rightIcon={<IconRotateClockwise2 />} variant='default'>
+        <Button
+          disabled={isSubmitting}
+          onClick={resetWithCleanup}
+          rightIcon={<IconRotateClockwise2 />}
+          variant='default'
+        >
           Reset
         </Button>
-        <Button rightIcon={<IconPlus />} type='submit'>
+        <Button loading={isSubmitting} rightIcon={<IconPlus />} type='submit'>
           Create
         </Button>
       </Group>
