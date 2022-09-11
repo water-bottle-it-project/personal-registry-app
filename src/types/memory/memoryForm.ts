@@ -34,6 +34,7 @@ const memoryCreateFormRequestZ = memoryBase.merge(dateSeparate).extend({
   photos: photoFormCreateRequestZ.array().default([]),
 });
 
+// For querying a single memory.
 const memoryIdOnlyZ = z.object({
   _id: objectIdZ,
 });

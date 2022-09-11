@@ -37,7 +37,6 @@ import { Controller, useFieldArray } from 'react-hook-form';
 import Zoom from 'react-medium-image-zoom';
 
 import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
-import { CreateFormPhotoCardDemo } from '~components/create/CreateFormPhotoCardDemo';
 import { useTextareaStyles } from '~components/create/textareaStyles';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 import type { photoFormCreateT } from '~types/photo/photo';
@@ -215,7 +214,6 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
           )}
         </Droppable>
       </DragDropContext>
-      <CreateFormPhotoCardDemo />
     </>
   );
 }

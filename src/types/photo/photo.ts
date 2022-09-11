@@ -3,12 +3,18 @@ import { z } from 'zod';
 import { objectIdZ } from '~types/util/objectId';
 import { urlZ } from '~types/util/url';
 
+/**
+ * Building blocks
+ */
 const photoBase = z.object({
   caption: z.string().trim().optional(),
   location: z.string().trim().optional(),
   photoDate: z.date().nullable(),
 });
 
+/**
+ * Photo types used in the app.
+ */
 // The photo as part of a create form - used for input and validation.
 // _file is any for now (File type is not supported in Node.js, only in the browser).
 const photoFormCreateZ = photoBase.extend({
@@ -17,10 +23,12 @@ const photoFormCreateZ = photoBase.extend({
   _thumbnail: z.string(),
 });
 
+// Gets combined with form create request.
 const photoFormCreateRequestZ = photoBase.extend({
   url: urlZ,
 });
 
+// Gets combined with memory to return a single memory with all the photos populated.
 const photoWithIdZ = photoBase.extend({
   url: urlZ,
   _id: objectIdZ,
