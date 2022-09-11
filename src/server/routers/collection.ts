@@ -1,4 +1,5 @@
 import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Collection } from '~server/models/collection';
@@ -6,6 +7,8 @@ import type { collectionT } from '~types/collection/collection';
 import { collectionZ } from '~types/collection/collection';
 import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
+
+export { collectionRouter };
 
 const collectionRouter = createProtectedDbRouter()
   .query('GetCollections', {
@@ -35,6 +38,25 @@ const collectionRouter = createProtectedDbRouter()
 
       return {
         collection,
+      };
+    },
+  })
+
+  .query('SearchCollectionTitle', {
+    input: z.string().trim().min(1),
+    async resolve({ ctx, input }) {
+      const re = new RegExp(`${input}`, 'i');
+      const collections: collectionT[] | null = await Collection.find({
+        title: re,
+        userId: ctx.userId,
+      });
+
+      if (!collections) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find collection by id.' });
+      }
+
+      return {
+        collections,
       };
     },
   })
@@ -80,4 +102,4 @@ const collectionRouter = createProtectedDbRouter()
     },
   });
 
-export { collectionRouter };
+export const urlZ = z.string().url();

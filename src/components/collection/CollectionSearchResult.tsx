@@ -1,21 +1,24 @@
-import { Grid, Text } from '@mantine/core';
+import { Anchor, Button, Container, Grid, Space, Text, Title } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconX } from '@tabler/icons';
-import { useState } from 'react';
+import { IconPlus, IconX } from '@tabler/icons';
+import Link from 'next/link';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { CollectionCard } from '~components/collection/CollectionCard';
-import { CollectionsHeader } from '~components/collection/CollectionsHeader';
 
-import { CollectionSearchResult } from './CollectionSearchResult';
+import { CollectionCard } from './CollectionCard';
+import { CollectionSearchForm } from './CollectionSearch';
 import { CollectionSkeleton } from './CollectionSkeleton';
 
-export function CollectionsGrid() {
+interface CollectionSearchResultProps {
+  searchText: string;
+}
+
+export function CollectionSearchResult(props: CollectionSearchResultProps) {
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
-    'collection.GetCollections',
+    'collection.SearchCollectionTitle',
+    props.searchText,
   ]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchText, setSearchText] = useState('');
+
   if (isLoading) {
     // Need to provide a key for React components when mapping over an array (check devtools console).
     // Use same grid as the data grid to have consistent sizing.
@@ -45,19 +48,6 @@ export function CollectionsGrid() {
         <CollectionCard _id={c._id} color={c.color} description={c.description} title={c.title} />
       </Grid.Col>
     ));
-  console.log(searchText);
-  return (
-    <>
-      <CollectionsHeader
-        searchText={searchText}
-        setIsSearching={setIsSearching}
-        setSearchText={setSearchText}
-      />
-      {isSearching ? (
-        <CollectionSearchResult searchText={searchText} />
-      ) : (
-        <Grid>{collections}</Grid>
-      )}
-    </>
-  );
+
+  return <Grid>{collections}</Grid>;
 }

@@ -4,14 +4,24 @@ import Link from 'next/link';
 
 import { CollectionSearchForm } from './CollectionSearch';
 
-export function CollectionsHeader() {
+interface CollectionHeaderProps {
+  setIsSearching: (event: React.MouseEvent<HTMLElement>) => void;
+  setSearchText: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  searchText: string;
+}
+
+export function CollectionsHeader(props: CollectionHeaderProps) {
   return (
     <>
       <Container mx={0} px={0}>
         <Space h='xl' />
         <Title order={1}>Your Collections</Title>
         <Space h='md' />
-        <CollectionSearchForm />
+        <CollectionSearchForm
+          setIsSearching={props.setIsSearching}
+          setSearchText={props.setSearchText}
+          searchText={props.searchText}
+        />
         <Space h='xl' />
         <Link as='/collections/create' href='/collections?create=true' passHref>
           <Anchor color='red' component='a'>
