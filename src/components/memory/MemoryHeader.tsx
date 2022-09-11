@@ -1,42 +1,35 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Container,
-  Group,
-  Select,
-  Space,
-  Text,
-  Title,
-  useMantineTheme,
-} from '@mantine/core';
+import { Badge, Box, Button, Container, Group, Select, Space, Text, Title } from '@mantine/core';
 import { IconDownload } from '@tabler/icons';
 
-import { trpcClient } from '~clientUtils/trpcClient';
 import type { memoryWithPhotosT } from '~types/memory/memoryForm';
 
 interface MemoryHeaderProps extends memoryWithPhotosT {
   imageCount?: number;
 }
 
-export function MemoryHeader({ _id, title, description, firstDate, lastDate }: MemoryHeaderProps) {
-  // const collectionsArr = new Array(collections?.length);
-  const theme = useMantineTheme();
-  // for (let i = 0; i < collections?.length; i++) {
-  //   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
-  //     'collection.GetCollection',
-  //     { _id: collections[i].collectionId },
-  //   ]);
-  //
-  //   collectionsArr[i] = { title: data?.collection.title, color: data?.collection.color };
-  // }
-
-  // console.log(collectionsArr);
-  // const collectionBadges = collectionsArr.map(c => (
-  //   <Badge color={c.color} key={c.title} radius='xs'>
-  //     {c.title}
-  //   </Badge>
-  // ));
+export function MemoryHeader({
+  _id,
+  title,
+  collections,
+  description,
+  firstDate,
+  lastDate,
+}: MemoryHeaderProps) {
+  const collectionBadges = collections.map(c => (
+    <Badge
+      key={c.collectionTitle}
+      radius='xs'
+      sx={theme => ({
+        backgroundColor:
+          theme.colorScheme === 'dark'
+            ? theme.colors[c.collectionColor][5]
+            : theme.colors[c.collectionColor][2],
+        color: 'black',
+      })}
+    >
+      {c.collectionTitle}
+    </Badge>
+  ));
   return (
     <Box
       sx={theme => ({
@@ -60,7 +53,7 @@ export function MemoryHeader({ _id, title, description, firstDate, lastDate }: M
         <Space h='xl' />
         <Title order={4}>Collections</Title>
         <Space h='sm' />
-        {/*<Group>{collectionBadges}</Group>*/}
+        <Group>{collectionBadges}</Group>
         <Space h='xl' />
         <Group position='apart'>
           <Group>

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { collectionMemoryZ } from '~types/collection/collectionMemory';
 import { photoFormCreateRequestZ, photoFormCreateZ, photoWithIdZ } from '~types/photo/photo';
 import { objectIdZ } from '~types/util/objectId';
 import { urlZ } from '~types/util/url';
@@ -43,12 +44,14 @@ const memoryIdOnlyZ = z.object({
 const memoryCardZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photoPreviewUrl: urlZ.nullish(),
+  collections: collectionMemoryZ.array().default([]),
 });
 
 // For viewing a single memory
 const memoryWithPhotosZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photos: photoWithIdZ.array().default([]),
+  collections: collectionMemoryZ.array().default([]),
 });
 
 /**

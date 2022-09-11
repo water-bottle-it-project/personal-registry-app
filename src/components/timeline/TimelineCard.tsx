@@ -1,8 +1,9 @@
 import { Carousel } from '@mantine/carousel';
-import { Anchor, Box, Card, Grid, Image, ScrollArea, Space, Text } from '@mantine/core';
+import { Anchor, Badge, Box, Card, Grid, Image, ScrollArea, Space, Text } from '@mantine/core';
 import Link from 'next/link';
+import { useState } from 'react';
 
-import { TimelineTag } from '~components/timeline/TimelineTag';
+import type { memoryCardT } from '~types/memory/memoryForm';
 
 /**
  * collections and photos will be list array which we can change when actually passing in
@@ -10,25 +11,33 @@ import { TimelineTag } from '~components/timeline/TimelineTag';
  * string within the component, just keeping it like this for now, will pass in the url
  * of the image as well when it comes to it, instead of using unsplash
  */
-interface Collection {
-  collectionId: string;
-}
+// interface Collection {
+//   collectionId: string;
+// }
 
-interface Photo {
-  photoId: string;
-}
+// interface Photo {
+//   photoId: string;
+// }
 
-interface TimelineCardProps {
-  _id: string;
-  title: string;
-  description: string;
-  firstDate: Date;
-  lastDate: Date;
-  collections?: Array<Collection>;
-  photos?: Array<Photo>;
-}
+type TimelineCardProps = memoryCardT;
 
 export function TimelineCard(props: TimelineCardProps) {
+  const [indicator, setIndicator] = useState(false);
+  const collectionBadges = props.collections?.map(c => (
+    <Grid.Col key={c.collectionTitle} span={3}>
+      <Badge color={c.collectionColor} radius='sm' size='xs' variant='filled'>
+        <Text>{c.collectionTitle}</Text>
+      </Badge>
+    </Grid.Col>
+  ));
+
+  // preview n photos in carousel
+  // const n = 3;
+  // const photoPreview = props.photos?.slice(0, n).map(c => (
+  //   <Carousel.Slide key={c._id}>
+  //     <Image alt={c.caption} height={180} src={c.url} />
+  //   </Carousel.Slide>
+  // ));
   return (
     <Card
       p='lg'
@@ -45,32 +54,20 @@ export function TimelineCard(props: TimelineCardProps) {
       })}
       withBorder
     >
-      {/* <Card.Section>
-        <Image
-          alt='Norway'
-          height={180}
-          src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-        />
-      </Card.Section> */}
       <Card.Section>
-        <Carousel align='center' height={180} mx='auto' sx={{ maxWidth: 300 }} withIndicators>
+        <Carousel
+          align='center'
+          height={180}
+          mx='auto'
+          onMouseEnter={() => setIndicator(true)}
+          onMouseLeave={() => setIndicator(false)}
+          sx={{ maxWidth: 300, transition: 'indicator 1s, control 1s' }}
+          withControls={indicator}
+          withIndicators={indicator}
+        >
           <Carousel.Slide>
             <Image
-              alt='Norway'
-              height={180}
-              src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-            />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Image
-              alt='Norway'
-              height={180}
-              src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-            />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Image
-              alt='Norway'
+              alt='alps'
               height={180}
               src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
             />
@@ -92,12 +89,14 @@ export function TimelineCard(props: TimelineCardProps) {
       </ScrollArea>
       <Space h='md' />
       <Grid gutter='xs' mb='xs'>
-        {props.collections &&
-          props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))}
+        {/* {props.collections &&
+          props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))} */}
+        {collectionBadges}
       </Grid>
       <Link href={'memory/' + props._id}>
         <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>
-          View {props.photos?.length || 0} photos
+          View 0 photos
+          {/* View {props.photos?.length || 0} photos */}
         </Anchor>
       </Link>
     </Card>
