@@ -15,8 +15,11 @@ const memorySchema = new Schema({
   firstDate: { type: Date, required: true },
   lastDate: { type: Date, required: true },
   userId: { type: String, required: true },
-  photos: [{ photoId: mongoose.Schema.Types.ObjectId }],
+  photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
+  photoPreviewUrl: { type: String, required: false },
 });
+
+memorySchema.index({ userId: 'hashed', lastDate: -1 });
 
 /**
  * Only bind model to schema if it has not been previously created: supports Next.js Hot Reload
