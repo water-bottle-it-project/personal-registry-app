@@ -1,16 +1,13 @@
-import { Container } from '@mantine/core';
 import { NextSeo } from 'next-seo';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
-import { TimelineGrid } from '~components/timeline/TimelineGrid';
+import { TimelineIndex } from '~components/timeline/TimelineIndex';
 
 function Timeline() {
   return (
     <>
       <NextSeo description='My timeline of memories' title='Timeline' />
-      <Container size='xl'>
-        <TimelineGrid />
-      </Container>
+      <TimelineIndex />
     </>
   );
 }
