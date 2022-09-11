@@ -1,8 +1,12 @@
-import { Container } from '@mantine/core';
+import { Container, Space } from '@mantine/core';
+import { useRouter } from 'next/router';
+import { Key } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import type { photoIdOnlyT } from '~types/photo/photo';
 
 import { MemoryHeader } from './MemoryHeader';
+import { MemoryImage } from './MemoryImage';
 
 interface MemoryIndexProps {
   _id: string;
@@ -20,6 +24,10 @@ export function MemoryIndex(props: MemoryIndexProps) {
     return <div>Error loading memory</div>;
   }
   const { title, collections, description, firstDate, lastDate, photos } = data.memory;
+
+  const MemoryPhotos =
+    photos && photos.map((c: photoIdOnlyT) => <MemoryImage _id={c._id} key={c._id} />);
+
   return (
     <>
       <MemoryHeader
@@ -31,7 +39,9 @@ export function MemoryIndex(props: MemoryIndexProps) {
         photos={photos}
         title={title}
       />
-      <Container size='xl'>{/* Insert images here */}</Container>
+      {/* <Container size='xl'>{photos && photos.map(c => <div>{c._id}</div>)}</Container> */}
+      <Space h='xl' />
+      {MemoryPhotos}
     </>
   );
 }

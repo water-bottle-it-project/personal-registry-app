@@ -34,9 +34,14 @@ const photoWithIdZ = photoBase.extend({
   _id: objectIdZ,
 });
 
+const photoIdOnly = z.object({
+  _id: objectIdZ,
+});
+
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
 type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
 type photoWithIdT = z.infer<typeof photoWithIdZ>;
+type photoIdOnlyT = z.infer<typeof photoIdOnly>;
 
-export type { photoFormCreateRequestT, photoFormCreateT, photoWithIdT };
-export { photoFormCreateRequestZ, photoFormCreateZ, photoWithIdZ };
+export type { photoFormCreateRequestT, photoFormCreateT, photoIdOnlyT, photoWithIdT };
+export { photoFormCreateRequestZ, photoFormCreateZ, photoIdOnly, photoWithIdZ };
