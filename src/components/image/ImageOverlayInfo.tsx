@@ -34,6 +34,7 @@ export function ImageOverlayInfo(props: ImageCardProps) {
         <Text className={classes.infoHeader}>Location</Text>
         <Text className={classes.infoText}>Here</Text>
       </div>
+      <Space h='md' />
       <div className={classes.buttonGroup}>
         <UnstyledButton className={classes.button}>
           <Link href={`/images?edit=${props._id}`} passHref>
