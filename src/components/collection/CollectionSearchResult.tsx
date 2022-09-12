@@ -1,22 +1,20 @@
-import { Anchor, Button, Container, Grid, Space, Text, Title } from '@mantine/core';
+import { Grid, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconPlus, IconX } from '@tabler/icons';
-import Link from 'next/link';
+import { IconX } from '@tabler/icons';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
 import { CollectionCard } from './CollectionCard';
-import { CollectionSearchForm } from './CollectionSearch';
 import { CollectionSkeleton } from './CollectionSkeleton';
 
 interface CollectionSearchResultProps {
-  searchText: string;
+  searchQuery: { text: string; searchType: string };
 }
 
 export function CollectionSearchResult(props: CollectionSearchResultProps) {
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
-    'collection.SearchCollectionTitle',
-    props.searchText,
+    'collection.SearchCollections',
+    props.searchQuery,
   ]);
 
   if (isLoading) {

@@ -5,9 +5,8 @@ import Link from 'next/link';
 import { CollectionSearchForm } from './CollectionSearch';
 
 interface CollectionHeaderProps {
-  setIsSearching: (event: React.MouseEvent<HTMLElement>) => void;
-  setSearchText: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  searchText: string;
+  setIsSearching: any;
+  setSearchQuery: any;
 }
 
 export function CollectionsHeader(props: CollectionHeaderProps) {
@@ -19,8 +18,7 @@ export function CollectionsHeader(props: CollectionHeaderProps) {
         <Space h='md' />
         <CollectionSearchForm
           setIsSearching={props.setIsSearching}
-          setSearchText={props.setSearchText}
-          searchText={props.searchText}
+          setSearchQuery={props.setSearchQuery}
         />
         <Space h='xl' />
         <Link as='/collections/create' href='/collections?create=true' passHref>

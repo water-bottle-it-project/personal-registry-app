@@ -15,7 +15,7 @@ export function CollectionsGrid() {
     'collection.GetCollections',
   ]);
   const [isSearching, setIsSearching] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [searchQuery, setSearchQuery] = useState({ text: '', searchType: 'title' });
   if (isLoading) {
     // Need to provide a key for React components when mapping over an array (check devtools console).
     // Use same grid as the data grid to have consistent sizing.
@@ -45,16 +45,11 @@ export function CollectionsGrid() {
         <CollectionCard _id={c._id} color={c.color} description={c.description} title={c.title} />
       </Grid.Col>
     ));
-  console.log(searchText);
   return (
     <>
-      <CollectionsHeader
-        searchText={searchText}
-        setIsSearching={setIsSearching}
-        setSearchText={setSearchText}
-      />
+      <CollectionsHeader setIsSearching={setIsSearching} setSearchQuery={setSearchQuery} />
       {isSearching ? (
-        <CollectionSearchResult searchText={searchText} />
+        <CollectionSearchResult searchQuery={searchQuery} />
       ) : (
         <Grid>{collections}</Grid>
       )}
