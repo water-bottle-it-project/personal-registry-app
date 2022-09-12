@@ -27,6 +27,8 @@ export function MemoryHeader({
   firstDate,
   lastDate,
 }: MemoryHeaderProps) {
+  const fDate = new Date(firstDate).toDateString();
+  const lDate = new Date(lastDate).toDateString();
   const collectionBadges = collections.map(c => (
     <Badge
       key={c.collectionTitle}
@@ -67,10 +69,10 @@ export function MemoryHeader({
         <Text>{description || 'Description here'}</Text>
         <Space h='md' />
         <Title order={4}>Memory creation date</Title>
-        <Text>1 August 2022</Text>
+        <Text>35 February 2090</Text>
         <Space h='sm' />
         <Title order={4}>Memory range</Title>
-        <Text>{`${firstDate || 'FirstDate'} to ${lastDate || 'LastDate'}`}</Text>
+        <Text>{`${fDate || 'FirstDate'} to ${lDate || 'LastDate'}`}</Text>
         <Space h='xl' />
         <Title order={4}>Collections</Title>
         <Space h='sm' />

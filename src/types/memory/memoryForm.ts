@@ -44,6 +44,7 @@ const memoryIdOnlyZ = z.object({
 const memoryCardZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photoPreviewUrl: urlZ.nullish(),
+  photos: photoWithIdZ.array().default([]),
   collections: collectionMemoryZ.array().default([]),
 });
 

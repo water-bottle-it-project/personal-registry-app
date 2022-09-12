@@ -97,8 +97,7 @@ export function TimelineCard(props: TimelineCardProps) {
       </Grid>
       <Link href={'memory/' + props._id}>
         <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>
-          View 0 photos
-          {/* View {props.photos?.length || 0} photos */}
+          View {props.photos?.length || 0} photos
         </Anchor>
       </Link>
     </Card>
