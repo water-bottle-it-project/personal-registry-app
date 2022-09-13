@@ -1,4 +1,6 @@
 // convert firebase auth string output of dates into date tuple (list ig)
+
+// convert tuple (d,m,y) into string for display
 export function stringToDate(dateString: string) {
   if (dateString == undefined) {
     return [1, 1, 2001];
@@ -12,7 +14,7 @@ export function stringToDate(dateString: string) {
   return [day, month, year];
 }
 
-// convert tuple (d,m,y) into string for display
+// pluralise strings as required
 export function tupleToString(dateTuple: number[]) {
   const dateSep = '/';
   if (dateTuple == undefined) {
