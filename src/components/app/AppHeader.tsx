@@ -1,7 +1,9 @@
 import { Container, createStyles, Group, Header } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { AppDrawer } from '~components/app/AppDrawer';
 import { AppHeaderLogo } from '~components/app/AppHeaderLogo';
 import { AppUserMenu } from '~components/app/AppUserMenu';
 import { ColorSchemeToggle } from '~components/app/ColorSchemeToggle';
@@ -15,6 +17,8 @@ export interface AppHeaderProps {
   links: AppLink[];
 }
 
+const HAMBURGER_BREAKPOINT = 650;
+
 /**
  * The header for the entire app
  * @param links
@@ -26,6 +30,7 @@ export function AppHeader({ links }: AppHeaderProps) {
   const router = useRouter();
   const routeIdx = links.findIndex(link => router.pathname.startsWith(link.route));
 
+  const { width } = useViewportSize();
   const linkElems = links.map((link, i) => (
     <Link href={link.route} key={link.name}>
       <a
@@ -43,11 +48,17 @@ export function AppHeader({ links }: AppHeaderProps) {
       <Container className={classes.headerContainer} size='xl'>
         <Group spacing={6}>
           <AppHeaderLogo />
-          {linkElems}
+          {width > HAMBURGER_BREAKPOINT && linkElems}
         </Group>
         <Group spacing={6}>
-          <AppUserMenu />
-          <ColorSchemeToggle />
+          {width > HAMBURGER_BREAKPOINT ? (
+            <>
+              <AppUserMenu />
+              <ColorSchemeToggle />
+            </>
+          ) : (
+            <AppDrawer links={links} />
+          )}
         </Group>
       </Container>
     </Header>
@@ -81,6 +92,10 @@ const useAppHeaderStyles = createStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2],
     },
+
+    [`@media (max-width: ${HAMBURGER_BREAKPOINT}px)`]: {
+      padding: '14px 14px',
+    },
   },
 
   linkActive: {
@@ -93,3 +108,5 @@ const useAppHeaderStyles = createStyles(theme => ({
     },
   },
 }));
+
+export { useAppHeaderStyles };

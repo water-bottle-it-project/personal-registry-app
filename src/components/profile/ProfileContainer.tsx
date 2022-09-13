@@ -43,6 +43,7 @@ export function ProfileContainer() {
           <Title order={1} size={65}>
             {username}
           </Title>
+
           <Space h='md' />
 
           <Text size='xl' weight={700}>

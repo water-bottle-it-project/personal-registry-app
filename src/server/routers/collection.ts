@@ -10,7 +10,6 @@ import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
 const collectionRouter = createProtectedDbRouter()
   .query('GetCollections', {
     async resolve({ ctx }) {
-      console.log(ctx.userId);
       const collections: collectionT[] = await Collection.find(
         { userId: ctx.userId },
         { userId: 0 },

@@ -1,14 +1,18 @@
-import { Container } from '@mantine/core';
+import { Container, Space } from '@mantine/core';
 import type { NextPage } from 'next';
 
 import { ImagesIndex } from '~components/image/ImageIndex';
+import { ImagesHeader } from '~components/image/ImagesHeader';
 
 const Images: NextPage = () => {
   return (
-    <Container px={30} size={1500}>
-      <div>All Images hehe</div>
-      <ImagesIndex />
-    </Container>
+    <>
+      <Container size='xl'>
+        <ImagesHeader />
+        <Space h='xl' />
+        <ImagesIndex />
+      </Container>
+    </>
   );
 };
 

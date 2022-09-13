@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import { COLORS } from '~types/util/color';
+
 const { Schema } = mongoose;
 
 const memorySchema = new Schema({
@@ -10,14 +12,22 @@ const memorySchema = new Schema({
       {
         collectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
         collectionTitle: { type: String, required: true },
+        collectionColor: {
+          type: String,
+          required: false,
+          enum: COLORS,
+        },
       },
     ],
   },
-  firstDate: { type: Date, required: false },
+  firstDate: { type: Date, required: true },
   lastDate: { type: Date, required: true },
   userId: { type: String, required: true },
-  photos: [{ photoId: mongoose.Schema.Types.ObjectId }],
+  photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
+  photoPreviewUrl: { type: String, required: false },
 });
+
+memorySchema.index({ userId: 'hashed', lastDate: -1 });
 
 /**
  * Only bind model to schema if it has not been previously created: supports Next.js Hot Reload

@@ -1,4 +1,9 @@
-import { Anchor, Badge, Card, Grid, Image, Text } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
+import { Anchor, Badge, Box, Card, Grid, Image, ScrollArea, Space, Text } from '@mantine/core';
+import Link from 'next/link';
+import { useState } from 'react';
+
+import type { memoryCardT } from '~types/memory/memoryForm';
 
 /**
  * collections and photos will be list array which we can change when actually passing in
@@ -6,15 +11,33 @@ import { Anchor, Badge, Card, Grid, Image, Text } from '@mantine/core';
  * string within the component, just keeping it like this for now, will pass in the url
  * of the image as well when it comes to it, instead of using unsplash
  */
-interface TimelineCardProps {
-  title: string;
-  description: string;
-  date: string;
-  collections: string;
-  photos: string;
-}
+// interface Collection {
+//   collectionId: string;
+// }
+
+// interface Photo {
+//   photoId: string;
+// }
+
+type TimelineCardProps = memoryCardT;
 
 export function TimelineCard(props: TimelineCardProps) {
+  const [indicator, setIndicator] = useState(false);
+  const collectionBadges = props.collections?.map(c => (
+    <Grid.Col key={c.collectionTitle} span={3}>
+      <Badge color={c.collectionColor} radius='sm' size='xs' variant='filled'>
+        <Text>{c.collectionTitle}</Text>
+      </Badge>
+    </Grid.Col>
+  ));
+
+  // preview n photos in carousel
+  // const n = 3;
+  // const photoPreview = props.photos?.slice(0, n).map(c => (
+  //   <Carousel.Slide key={c._id}>
+  //     <Image alt={c.caption} height={180} src={c.url} />
+  //   </Carousel.Slide>
+  // ));
   return (
     <Card
       p='lg'
@@ -26,40 +49,56 @@ export function TimelineCard(props: TimelineCardProps) {
         // or use any other static values from theme
         fontSize: theme.fontSizes.sm,
         width: 275,
+        maxHeight: 500,
       })}
       withBorder
     >
       <Card.Section>
-        <Image
-          alt='Norway'
+        <Carousel
+          align='center'
           height={180}
-          src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-        />
+          mx='auto'
+          onMouseEnter={() => setIndicator(true)}
+          onMouseLeave={() => setIndicator(false)}
+          sx={{ maxWidth: 300, transition: 'indicator 1s, control 1s' }}
+          withControls={indicator}
+          withIndicators={indicator}
+        >
+          <Carousel.Slide>
+            <Image
+              alt={props.title}
+              height={180}
+              placeholder={<Text align='center'>Image preview not available.</Text>}
+              src={props.photoPreviewUrl}
+              withPlaceholder
+            />
+          </Carousel.Slide>
+        </Carousel>
       </Card.Section>
-
       <Text mt='sm' size='xl' weight={600}>
         {props.title}
       </Text>
 
       <Text color='dimmed' mb='xs' size='xs' weight={600}>
-        {props.date}
+        {props.firstDate.toDateString()}
       </Text>
 
-      <Text color='light' size='sm'>
-        {props.description}
-      </Text>
-
-      <Grid mb='xs' mt='lg'>
-        <Grid.Col span={4}>
-          <Badge color='gray' radius='sm' size='xs' variant='filled'>
-            {props.collections}
-          </Badge>
-        </Grid.Col>
+      <ScrollArea style={{ height: 100 }}>
+        <Text color='light' size='sm'>
+          {props.description}
+        </Text>
+      </ScrollArea>
+      <Space h='md' />
+      <Grid gutter='xs' mb='xs'>
+        {/* {props.collections &&
+          props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))} */}
+        {collectionBadges}
       </Grid>
-
-      <Anchor href='#' sx={{ fontSize: 14, fontWeight: 600 }}>
-        View {props.photos} photos
-      </Anchor>
+      <Link href={'memory/' + props._id}>
+        <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>
+          View {props.photos?.length || 0} photos
+        </Anchor>
+      </Link>
     </Card>
   );
 }

@@ -1,7 +1,13 @@
 import { Box, createStyles, Group, Space, Text, Title, UnstyledButton } from '@mantine/core';
 import { IconDownload, IconEdit, IconTrash } from '@tabler/icons';
+import Link from 'next/link';
 
-import type { ImageCardProps } from './ImageOverlay';
+interface ImageCardProps {
+  _id: string;
+  caption: string;
+  url: string;
+  userId: string;
+}
 
 export function ImageOverlayInfo(props: ImageCardProps) {
   const { classes } = useStyles();
@@ -28,12 +34,15 @@ export function ImageOverlayInfo(props: ImageCardProps) {
         <Text className={classes.infoHeader}>Location</Text>
         <Text className={classes.infoText}>Here</Text>
       </div>
+      <Space h='md' />
       <div className={classes.buttonGroup}>
         <UnstyledButton className={classes.button}>
-          <Group spacing={5}>
-            <IconEdit />
-            <Text>Edit</Text>
-          </Group>
+          <Link href={`/images?edit=${props._id}`} passHref>
+            <Group spacing={5}>
+              <IconEdit />
+              <Text>Edit</Text>
+            </Group>
+          </Link>
         </UnstyledButton>
         <UnstyledButton className={classes.button}>
           <Group className={classes.delete} spacing={5}>

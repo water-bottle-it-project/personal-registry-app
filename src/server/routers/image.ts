@@ -1,47 +1,45 @@
 import * as trpc from '@trpc/server';
+import { resolve } from 'path';
+import { string } from 'zod';
+import { z } from 'zod';
 
-import { createUnauthedDbRouter } from '~server/createUnauthedDbRouter';
+import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Photo } from '~server/models/photo';
+import { collectionZ } from '~types/collection/collection';
+import type { imageT } from '~types/image/image';
 
 /**
  * Router for debug operations
  */
-const imagesRouter = createUnauthedDbRouter()
+const imagesRouter = createProtectedDbRouter()
   .query('listImages', {
-    async resolve() {
-      const photos = await Photo.find();
+    async resolve({ ctx }) {
+      const photos: imageT[] = await Photo.find({ userId: ctx.userId });
       return {
         photos,
       };
     },
   })
 
-  .mutation('AddImage', {
-    async resolve() {
-      const newImage = await Photo.create({
-        caption: 'sus',
-        url: 'gs://register-app-40207.appspot.com/debug1/childhood.jpeg',
-        userId: 'debug1',
-        memoryId: 'mem123',
-        memoryDate: 'ytdy',
-      });
-      return {
-        user: newImage,
-      };
-    },
-  })
+  .query('getImage', {
+    input: z.object({
+      _id: z.string().min(1),
+    }),
+    async resolve({ ctx, input }) {
+      const image = await Photo.findOne({
+        _id: input._id,
+        userId: ctx.userId,
+      }); // findById('6308a49ab3b2b466112558ec');
 
-  .mutation('removeImage', {
-    async resolve() {
-      const result = await Photo.deleteOne({ caption: 'sus' });
-      if (result.deletedCount == 0) {
+      if (!image) {
         throw new trpc.TRPCError({
-          code: 'BAD_REQUEST',
-          message: 'User _id not found.',
+          code: 'NOT_FOUND',
+          message: 'Image not found by ID.',
         });
       }
+
       return {
-        success: true,
+        image,
       };
     },
   });

@@ -1,22 +1,15 @@
-import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 
-import { TimelineCard } from '~components/timeline/TimelineCard';
+import { withAuthedPage } from '~clientUtils/authHooks';
+import { TimelineIndex } from '~components/timeline/TimelineIndex';
 
-const Timeline: NextPage = () => {
+function Timeline() {
   return (
     <>
       <NextSeo description='My timeline of memories' title='Timeline' />
-      <div>Hello timeline</div>
-      <TimelineCard
-        collections='friends'
-        date='2021-07-02'
-        description='A calm picturesque holiday with friends in Switzerland'
-        photos='3'
-        title='Swiss Alps'
-      />
+      <TimelineIndex />
     </>
   );
-};
+}
 
-export default Timeline;
+export default withAuthedPage(Timeline);

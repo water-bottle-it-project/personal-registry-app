@@ -1,85 +1,172 @@
 import { Container, Modal, SimpleGrid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
 import { ImageCard } from './ImageCard';
-// import { ImageOverlay } from './ImageOverlay';
 import { ImageOverlay } from './ImageOverlay';
 import { ImageSkeleton } from './ImageSkeleton';
 
 /**
- * Debug page for querying (aka GET) and mutating (aka POST) users using TRPC and Mongoose
+ * Image page querying images from mongoDB
  * @constructor
  */
+
 export function ImagesIndex() {
+  const router = useRouter();
+  let modal: React.ReactNode = null;
+  const viewId = router.query.view;
+  const editId = router.query.edit;
+
   const isMobile = useMediaQuery('(max-width: 600px)');
-  const allUsers = trpcClient.useQuery(['images.listImages']);
+  const { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
 
-  const [opened, setOpened] = useState(false);
-  // const [displayPhoto, setDisplayPhoto] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [imageArr, setImageArr] = useState<
+    { _id: string; index: number; caption: string; url: string; userId: string }[]
+  >([]);
 
-  const [displayPhoto, setDisplayPhoto] = useState({
+  const [displayImage, setDisplayImage] = useState({
+    _id: '',
+    currentImage: '',
     caption: '',
     url: '',
     userId: '',
   });
 
+  useEffect(() => {
+    if (data?.photos) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      setImageArr(data.photos);
+    }
+  }, [data?.photos]);
+
+  // add index to the images on the page, which is used for next and prev image functionality
+  let idx = 0;
+  imageArr?.forEach(element => {
+    element.index = idx;
+    idx++;
+  });
+
+  const handleNextProject = () => {
+    // console.log(displayImage.currentImage);
+    if (displayImage.currentImage.toString() != (imageArr.length - 1).toString()) {
+      const idx = parseInt(displayImage.currentImage) + 1;
+      setDisplayImage(previousState => ({
+        ...previousState,
+        _id: imageArr[idx]._id,
+        currentImage: idx.toString(),
+        caption: imageArr[idx].caption,
+        url: imageArr[idx].url,
+      }));
+    }
+  };
+
+  const handlePrevProject = () => {
+    console.log('current image is', displayImage.currentImage);
+    if (displayImage.currentImage.toString() != '0') {
+      const idx = parseInt(displayImage.currentImage) - 1;
+      setDisplayImage(previousState => ({
+        ...previousState,
+        _id: imageArr[idx]._id,
+        currentImage: idx.toString(),
+        caption: imageArr[idx].caption,
+        url: imageArr[idx].url,
+      }));
+    }
+  };
+
   const renderOverlay = (
+    _id: string,
     photoUrl: string,
     photoCaption: string,
     userId: string,
-    value: boolean | ((prevState: boolean) => boolean),
+    currentImage: string,
   ) => {
-    setOpened(value);
-    setDisplayPhoto(previousState => {
-      return { ...previousState, caption: photoCaption, url: photoUrl, userId: userId };
+    setDisplayImage(previousState => {
+      return {
+        ...previousState,
+        _id: _id,
+        caption: photoCaption,
+        currentImage: currentImage,
+        url: photoUrl,
+        userId: userId,
+      };
     });
   };
 
-  const Images =
-    allUsers.data &&
-    allUsers.data.photos.map(
-      (photo: { caption: string; id: string; url: string; userId: string }) => (
-        <Container
-          key={photo.id}
-          onClick={() => renderOverlay(photo.url, photo.caption, photo.userId, true)}
-        >
-          <ImageCard caption={photo.caption} key={photo.id} url={photo.url} userId={photo.userId} />
-        </Container>
-      ),
-    );
-  // console.log(displayPhoto);
+  const Images = imageArr?.map(
+    (photo: { _id: string; index: number; caption: string; url: string; userId: string }) => (
+      <Container
+        key={photo.index}
+        onClick={() =>
+          renderOverlay(photo._id, photo.url, photo.caption, photo.userId, photo.index.toString())
+        }
+      >
+        <ImageCard
+          _id={photo._id}
+          caption={photo.caption}
+          key={photo.index}
+          url={photo.url}
+          userId={photo.userId}
+        />
+      </Container>
+    ),
+  );
 
   const SkeletonLoaders = Array(12).fill(<ImageSkeleton />);
 
-  useEffect(() => {
-    if (Images) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  }, [Images]);
-
-  return (
-    <>
+  if (viewId && !Array.isArray(viewId)) {
+    modal = (
       <Modal
         fullScreen={isMobile}
-        onClose={() => setOpened(false)}
-        opened={opened}
+        onClose={() => router.push('/images', undefined, { shallow: true })}
+        opened
         size='calc(100vw - 40%)'
         transition='fade'
         transitionDuration={250}
         transitionTimingFunction='ease'
       >
         <ImageOverlay
-          caption={displayPhoto.caption}
-          url={displayPhoto.url}
-          userId={displayPhoto.userId}
+          _id={displayImage._id}
+          caption={displayImage.caption}
+          handleNext={handleNextProject}
+          handlePrev={handlePrevProject}
+          url={displayImage.url}
+          userId={displayImage.userId}
         />
       </Modal>
+    );
+  }
+
+  if (editId && !Array.isArray(editId)) {
+    modal = (
+      <Modal
+        fullScreen={isMobile}
+        onClose={() => router.push('/images', undefined, { shallow: true })}
+        opened
+        size='calc(100vw - 40%)'
+        transition='fade'
+        transitionDuration={250}
+        transitionTimingFunction='ease'
+      >
+        <ImageOverlay
+          _id={displayImage._id}
+          caption={displayImage.caption}
+          handleNext={handleNextProject}
+          handlePrev={handlePrevProject}
+          url={displayImage.url}
+          userId={displayImage.userId}
+        />
+      </Modal>
+    );
+  }
+
+  return (
+    <>
+      {modal}
       <SimpleGrid
         breakpoints={[
           { maxWidth: 'xl', cols: 3, spacing: 'md' },
@@ -88,7 +175,7 @@ export function ImagesIndex() {
         cols={4}
         spacing='xs'
       >
-        {loading ? SkeletonLoaders : Images}
+        {isLoading ? SkeletonLoaders : Images}
       </SimpleGrid>
     </>
   );

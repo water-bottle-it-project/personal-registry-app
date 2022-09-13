@@ -1,5 +1,6 @@
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
+import superjson from 'superjson';
 
 import type { Context } from '~server/context';
 import { createContext } from '~server/context';
@@ -7,6 +8,7 @@ import { collectionRouter } from '~server/routers/collection';
 import { debugRouter } from '~server/routers/debug';
 import { debugAuthedRouter } from '~server/routers/debugAuthed';
 import { imagesRouter } from '~server/routers/image';
+import { memoryRouter } from '~server/routers/memory';
 import { profileRouter } from '~server/routers/profile';
 
 /**
@@ -14,11 +16,14 @@ import { profileRouter } from '~server/routers/profile';
  */
 const appRouter = trpc
   .router<Context>()
+  .transformer(superjson)
   .merge('collection.', collectionRouter)
   .merge('debug.', debugRouter)
   .merge('debugAuthed.', debugAuthedRouter)
   .merge('images.', imagesRouter)
-  .merge('profile.', profileRouter);
+  .merge('profile.', profileRouter)
+  .merge('memory.', memoryRouter);
+
 /**
  * Export type-safe route paths, inputs, and outputs
  */
