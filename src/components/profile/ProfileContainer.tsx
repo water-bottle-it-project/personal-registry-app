@@ -10,22 +10,24 @@ import { StatsGroup } from './StatsGroup';
 export function ProfileContainer() {
   const currentUser = useAuthUser();
 
-  // grab date that user account was created
+  // grab date that user account was created and last accessed
   const loggedInDate = stringToDate(
     currentUser?.firebaseUser?.metadata?.lastSignInTime || '1/1/2001',
   );
   const createdDate = stringToDate(currentUser?.firebaseUser?.metadata?.creationTime || '1/1/2001');
 
+  // calculate years since creation
   const date = new Date();
   const yearSinceCreation = date.getFullYear() - createdDate[2];
 
   // user display name if they have it, else use email username, if they don't have that use error msg.
   const username = currentUser.displayName || currentUser?.email?.split('@')[0] || 'No Name Found';
 
-  // user profile stats
+  // user profile stats - grab length of returned query
   const photo_count = trpcClient.useQuery(['images.listImages'])?.data?.photos?.length || 0;
-  const collection_count = trpcClient.useQuery(['collection.GetCollections'])?.data?.collections?.length || 0;
-  const memory_count = 123;
+  const collection_count =
+    trpcClient.useQuery(['collection.GetCollections'])?.data?.collections?.length || 0;
+  const memory_count = trpcClient.useQuery(['memory.GetMemories'])?.data?.memories?.length || 0;
 
   return (
     <Container px='xs'>
@@ -43,7 +45,6 @@ export function ProfileContainer() {
           <Title order={1} size={65}>
             {username}
           </Title>
-
           <Space h='md' />
 
           <Text size='xl' weight={700}>
@@ -81,17 +82,17 @@ export function ProfileContainer() {
           <StatsGroup
             data={[
               {
-                title: 'Photos Uploaded',
+                title: (photo_count == 1 ? 'Photo' : 'Photos') + ' Uploaded',
                 stats: photo_count.toString(),
                 description: '',
               },
               {
-                title: 'Memories Made',
+                title: (memory_count == 1 ? 'Memory' : 'Memories') + ' Made',
                 stats: memory_count.toString(),
                 description: '',
               },
               {
-                title: 'Collections Created',
+                title: (collection_count == 1 ? 'Collection' : 'Collections') + ' Created',
                 stats: collection_count.toString(),
                 description: '',
               },
