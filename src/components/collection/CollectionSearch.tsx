@@ -1,13 +1,14 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { ActionIcon, Radio, Stack, TextInput, useMantineTheme } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight, IconSearch } from '@tabler/icons';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { z } from 'zod';
+import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 interface CollectionSearchFormProps {
   setIsSearching: Dispatch<SetStateAction<boolean>>;
-  setSearchQuery: Dispatch<SetStateAction<{ text: string; searchType: string; }>>;
+  setSearchQuery: Dispatch<SetStateAction<{ text: string; searchType: string }>>;
 }
 
 const collectionSearchZ = z
@@ -19,10 +20,7 @@ const collectionSearchZ = z
 type CollectionSearchT = z.infer<typeof collectionSearchZ>;
 
 export function CollectionSearchForm(props: CollectionSearchFormProps) {
-  const {
-    register,
-    handleSubmit,
-  } = useForm<CollectionSearchT>({
+  const { register, handleSubmit } = useForm<CollectionSearchT>({
     resolver: zodResolver(collectionSearchZ),
   });
 
@@ -45,8 +43,8 @@ export function CollectionSearchForm(props: CollectionSearchFormProps) {
               color={theme.primaryColor}
               radius='lg'
               size={32}
-              variant='filled'
               type='submit'
+              variant='filled'
             >
               {theme.dir === 'ltr' ? (
                 <IconArrowRight size={18} stroke={1.5} />

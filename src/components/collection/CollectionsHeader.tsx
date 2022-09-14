@@ -1,13 +1,13 @@
 import { Anchor, Button, Container, Space, Title } from '@mantine/core';
 import { IconPlus } from '@tabler/icons';
 import Link from 'next/link';
+import type { Dispatch, SetStateAction } from 'react';
 
 import { CollectionSearchForm } from './CollectionSearch';
-import { Dispatch, SetStateAction } from 'react';
 
 interface CollectionHeaderProps {
   setIsSearching: Dispatch<SetStateAction<boolean>>;
-  setSearchQuery: Dispatch<SetStateAction<{ text: string; searchType: string; }>>;
+  setSearchQuery: Dispatch<SetStateAction<{ text: string; searchType: string }>>;
 }
 
 export function CollectionsHeader(props: CollectionHeaderProps) {
