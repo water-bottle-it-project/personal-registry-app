@@ -57,7 +57,7 @@ function HeroBase() {
             </LinkButton>
           </Group>
         </Grid.Col>
-        <Grid.Col sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid.Col sm={6}>
           <Lottie
             animationData={theme.colorScheme === 'dark' ? heroLottieDark : heroLottie}
             className={classes.lottie}

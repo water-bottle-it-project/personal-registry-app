@@ -39,10 +39,10 @@ import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { useDragDropStyles } from '~components/create/dragDropStyles';
 import { IMAGE_MIME_TYPES_FILE_BUTTON } from '~components/create/mimeTypes';
 import { useTextareaStyles } from '~components/create/textareaStyles';
-import type { memoryCreateFormT } from '~types/memory/memoryForm';
-import type { photoFormCreateT } from '~types/photo/photo';
+import type { memoryEditFormT } from '~types/memory/memoryForm';
+import type { photoFormEditT } from '~types/photo/photo';
 
-export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCreateFormT>) {
+export function EditFormPhotos({ control, register }: UseFormReturn<memoryEditFormT>) {
   const { classes } = useDragDropStyles();
   const { classes: textareaClasses } = useTextareaStyles();
 
@@ -55,7 +55,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
     acceptedFiles => {
       // Generate directory ids and thumbnails for the photos.
       // Photos will be stored in the Firebase storage bucket at /username/_dir/original_file_name.
-      const photos: photoFormCreateT[] = acceptedFiles.map(p => ({
+      const photos: photoFormEditT[] = acceptedFiles.map(p => ({
         _file: p,
         _thumbnail: URL.createObjectURL(p),
         _dir: nanoid(),
@@ -64,6 +64,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
         location: '',
       }));
 
+      console.log('append', photos);
       append(photos);
     },
     [append],
@@ -117,7 +118,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
                       fit={contained ? 'contain' : 'cover'}
                       height={180}
                       radius='sm'
-                      src={p._thumbnail}
+                      src={p.url || p._thumbnail}
                       width='100%'
                     />
                   </Zoom>
@@ -174,21 +175,28 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
     // Get old thumbnail blob link to clean up later
     const _thumbnailOld = fields[index]._thumbnail;
 
-    // Insert new image
+    // Insert new image - requires new nanoid just in case.
     update(index, {
       ...fields[index],
       _file: file,
+      _dir: nanoid(),
       _thumbnail: URL.createObjectURL(file),
+      _id: undefined,
+      url: undefined,
     });
 
     // Make sure to clean up old thumbnail to prevent memory leak.
-    URL.revokeObjectURL(_thumbnailOld);
+    if (_thumbnailOld) {
+      URL.revokeObjectURL(_thumbnailOld);
+    }
   };
 
   const removePhoto = (index: number) => () => {
     const thumbnail = fields[index]._thumbnail;
     remove(index);
-    URL.revokeObjectURL(thumbnail);
+    if (thumbnail) {
+      URL.revokeObjectURL(thumbnail);
+    }
   };
 
   return (

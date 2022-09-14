@@ -28,6 +28,19 @@ const photoFormCreateRequestZ = photoBase.extend({
   url: urlZ,
 });
 
+const photoFormEditZ = photoBase.extend({
+  _file: z.any().optional(),
+  _dir: z.string(),
+  _thumbnail: z.string().optional(),
+  _id: objectIdZ.optional(),
+  url: urlZ.optional(),
+});
+
+const photoFormEditRequestZ = photoBase.extend({
+  _id: objectIdZ.optional(),
+  url: urlZ,
+});
+
 // Gets combined with memory to return a single memory with all the photos populated.
 const photoWithIdZ = photoBase.extend({
   url: urlZ,
@@ -42,6 +55,22 @@ type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
 type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
 type photoWithIdT = z.infer<typeof photoWithIdZ>;
 type photoIdOnlyT = z.infer<typeof photoIdOnly>;
+type photoFormEditT = z.infer<typeof photoFormEditZ>;
+type photoFormEditRequestT = z.infer<typeof photoFormEditRequestZ>;
 
-export type { photoFormCreateRequestT, photoFormCreateT, photoIdOnlyT, photoWithIdT };
-export { photoFormCreateRequestZ, photoFormCreateZ, photoIdOnly, photoWithIdZ };
+export type {
+  photoFormCreateRequestT,
+  photoFormCreateT,
+  photoFormEditRequestT,
+  photoFormEditT,
+  photoIdOnlyT,
+  photoWithIdT,
+};
+export {
+  photoFormCreateRequestZ,
+  photoFormCreateZ,
+  photoFormEditRequestZ,
+  photoFormEditZ,
+  photoIdOnly,
+  photoWithIdZ,
+};
