@@ -22,34 +22,31 @@ export function MemoryImage(props: photoIdOnlyT) {
 
   return (
     <>
-      <Container size='xl'>
-        <Space h='xl' />
-        <Grid justify='center'>
-          <Grid.Col lg={8} md={8}>
-            <Image alt='' height='40%' src={data?.image.url} width='100%' />
+      <Grid justify='center'>
+        <Grid.Col lg={8} md={8}>
+          <Image alt='' height='40%' src={data?.image.url} width='100%' />
+          <Space h='md' />
+          <Title order={1}>{data?.image.caption}</Title>
+        </Grid.Col>
+        <Grid.Col lg={4} md={8}>
+          <Stack spacing='xs'>
+            <ImageOverlayInfo
+              _id={props._id}
+              caption={data?.image.caption}
+              url={data?.image.url}
+              userId={data?.image.userId}
+            />
             <Space h='md' />
-            <Title order={1}>{data?.image.caption}</Title>
-          </Grid.Col>
-          <Grid.Col lg={4} md={8}>
-            <Stack spacing='xs'>
-              <ImageOverlayInfo
-                _id={props._id}
-                caption={data?.image.caption}
-                url={data?.image.url}
-                userId={data?.image.userId}
-              />
-              <Space h='md' />
-              <ImageOverlayMetadata
-                caption={data?.image.caption}
-                url={data?.image.url}
-                userId={data?.image.userId}
-              />
-            </Stack>
-          </Grid.Col>
-        </Grid>
-        <Space h='xl' />
-        <Divider size='lg' />
-      </Container>
+            <ImageOverlayMetadata
+              caption={data?.image.caption}
+              url={data?.image.url}
+              userId={data?.image.userId}
+            />
+          </Stack>
+        </Grid.Col>
+      </Grid>
+      <Space h='xl' />
+      <Divider size='lg' />
     </>
   );
 }

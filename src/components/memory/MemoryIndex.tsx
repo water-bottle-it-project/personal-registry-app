@@ -1,5 +1,4 @@
 import { Container, Grid, Space, Stack, Switch } from '@mantine/core';
-import { IconStack2, IconLayoutDashboard } from '@tabler/icons';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
