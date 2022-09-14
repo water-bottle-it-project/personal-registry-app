@@ -30,13 +30,14 @@ export function MemoryIndex(props: MemoryIndexProps) {
   // Distribute images on the masonry grid evenly
   // My approach:
   // Every nth photo in the photos array, switch columns and populate that column
-  // This is a very naive attempt and does not respect image order.
+  // This is a very naive attempt and does not respect image order (in mobile view)
   let colCount = 1;
   const photoCol1: React.ReactElement[] = [];
   const photoCol2: React.ReactElement[] = [];
   const photoCol3: React.ReactElement[] = [];
 
   for (let i = 0; i < photos.length; i++) {
+    // every nth index (where n = 2), switch to adjacent column and populate
     if ((i - 1) % 2 == 0 && i !== 0) {
       switch (colCount) {
         case 1:
