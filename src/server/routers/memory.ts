@@ -7,9 +7,14 @@ import { Photo } from '~server/models/photo';
 import type {
   memoryCardT,
   memoryCreateFormRequestT,
+  memoryEditFormRequestT,
   memoryWithPhotosT,
 } from '~types/memory/memoryForm';
-import { memoryCreateFormRequestZ, memoryIdOnlyZ } from '~types/memory/memoryForm';
+import {
+  memoryCreateFormRequestZ,
+  memoryEditFormRequestZ,
+  memoryIdOnlyZ,
+} from '~types/memory/memoryForm';
 
 const memoryRouter = createProtectedDbRouter()
   .query('GetMemories', {
@@ -73,6 +78,59 @@ const memoryRouter = createProtectedDbRouter()
         photos: photoIdsInserted,
         photoPreviewUrl,
       });
+
+      return memory;
+    },
+  })
+
+  .mutation('UpdateMemory', {
+    input: memoryEditFormRequestZ,
+    async resolve({ ctx, input }) {
+      // Get old photos in memory from database.
+      const prev = await Memory.findOne(
+        {
+          _id: input._id,
+          userId: ctx.userId,
+        },
+        { photos: 1 },
+      );
+
+      // Delete all previous photos data from database (not from Firebase yet).
+      if (prev?.photos) {
+        await Photo.deleteMany({ _id: { $in: prev?.photos } });
+      }
+
+      // Insert photos of edited memory into database.
+      const photosToInsert = input.photos.map(p => ({
+        ...p,
+        userId: ctx.userId,
+        memoryId: input._id,
+        memoryDate: input.lastDate,
+      }));
+
+      const photosInserted = await Photo.insertMany(photosToInsert);
+      const photoIdsInserted = photosInserted.map(p => p._id);
+
+      // Update memory (in overwrite mode to update photo preview url when going to n to 0 photos).
+      const photoPreviewUrl: string | undefined = input.photos?.[0]?.url;
+
+      const memory: memoryEditFormRequestT | null = await Memory.findByIdAndUpdate(
+        input._id,
+        {
+          title: input.title,
+          description: input.description,
+          firstDate: input.firstDate,
+          lastDate: input.lastDate,
+          userId: ctx.userId,
+          photos: photoIdsInserted,
+          photoPreviewUrl,
+        },
+        { overwrite: true },
+      );
+
+      if (!memory) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find memory ID to edit' });
+      }
 
       return memory;
     },

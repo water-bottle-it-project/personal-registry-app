@@ -15,10 +15,8 @@ import {
 import { DatePicker } from '@mantine/dates';
 import { IconGripVertical, IconReplace, IconTrash, IconZoomIn } from '@tabler/icons';
 
-import {
-  IMAGE_MIME_TYPES_FILE_BUTTON,
-  useDragDropStyles,
-} from '~components/create/CreateFormPhotos';
+import { useDragDropStyles } from '~components/create/dragDropStyles';
+import { IMAGE_MIME_TYPES_FILE_BUTTON } from '~components/create/mimeTypes';
 import { useTextareaStyles } from '~components/create/textareaStyles';
 import gradient from '~components/homepage/gradient.png';
 
