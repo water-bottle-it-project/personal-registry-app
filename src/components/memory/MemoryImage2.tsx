@@ -1,5 +1,6 @@
-import { createStyles, Image, Text } from '@mantine/core';
+import { ActionIcon, createStyles, Group, Image, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
+import { IconArrowNarrowDown } from '@tabler/icons';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -32,9 +33,14 @@ export function MemoryImage2(props: photoIdOnlyT) {
         width='100%'
       />
       {hovered && (
-        <Text className={classes.imgCaption} size='lg' weight={400}>
-          {data?.image.caption}
-        </Text>
+        <Group position='apart'>
+          <Text className={classes.imgCaption} size='lg' weight={400}>
+            {data?.image.caption}
+          </Text>
+          <ActionIcon className={classes.imgDownload} variant='filled'>
+            <IconArrowNarrowDown size={36} />
+          </ActionIcon>
+        </Group>
       )}
       {info && (
         <ImageOverlayInfo
@@ -57,8 +63,15 @@ const useStyles = createStyles(theme => ({
     color: 'white',
     position: 'relative',
     top: '-30px',
-    right: '-15px',
-    marginBottom: '-26px',
+    right: '-12px',
+    marginBottom: '-28px',
+  },
+  imgDownload: {
+    color: 'white',
+    position: 'relative',
+    top: '-34px',
+    left: '-12px',
+    marginBottom: '-28px',
   },
   dimmed: {
     filter: 'brightness(70%)',

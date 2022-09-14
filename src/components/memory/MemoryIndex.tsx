@@ -30,9 +30,9 @@ export function MemoryIndex(props: MemoryIndexProps) {
   // Every nth photo in the photos array, switch columns and populate that column
   // This is a very naive attempt and does not respect image order.
   let colCount = 1;
-  const photoCol1: any[] = [];
-  const photoCol2: any[] = [];
-  const photoCol3: any[] = [];
+  const photoCol1: React.ReactElement[] = [];
+  const photoCol2: React.ReactElement[] = [];
+  const photoCol3: React.ReactElement[] = [];
 
   for (let i = 0; i < photos.length; i++) {
     if ((i - 1) % 2 == 0 && i !== 0) {
