@@ -7,8 +7,8 @@ import type { photoIdOnlyT } from '~types/photo/photo';
 
 import { MemoryHeader } from './MemoryHeader';
 import { MemoryImage } from './MemoryImage';
-import { MemoryImageGrid } from './MemoryImageGrid'
-import { MemoryImageGrid2 } from './MemoryImageGrid2'
+import { MemoryImageGrid } from './MemoryImageGrid';
+import { MemoryImageGrid2 } from './MemoryImageGrid2';
 
 interface MemoryIndexProps {
   _id: string;
@@ -46,9 +46,15 @@ export function MemoryIndex(props: MemoryIndexProps) {
       {/* {MemoryPhotos} */}
       <Container size='xl'>
         <Grid>
-          <Grid.Col span={4}><MemoryImageGrid2 /></Grid.Col>
-          <Grid.Col span={4}><MemoryImageGrid /></Grid.Col>
-          <Grid.Col span={4}><MemoryImageGrid /></Grid.Col>
+          <Grid.Col span={4}>
+            <MemoryImageGrid2 />
+          </Grid.Col>
+          <Grid.Col span={4}>
+            <MemoryImageGrid />
+          </Grid.Col>
+          <Grid.Col span={4}>
+            <MemoryImageGrid />
+          </Grid.Col>
         </Grid>
       </Container>
     </>
