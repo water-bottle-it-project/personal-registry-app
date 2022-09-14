@@ -3,10 +3,11 @@ import { IconPlus } from '@tabler/icons';
 import Link from 'next/link';
 
 import { CollectionSearchForm } from './CollectionSearch';
+import { Dispatch, SetStateAction } from 'react';
 
 interface CollectionHeaderProps {
-  setIsSearching: any;
-  setSearchQuery: any;
+  setIsSearching: Dispatch<SetStateAction<boolean>>;
+  setSearchQuery: Dispatch<SetStateAction<object>>;
 }
 
 export function CollectionsHeader(props: CollectionHeaderProps) {
