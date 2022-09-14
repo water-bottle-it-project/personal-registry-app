@@ -1,4 +1,6 @@
-import { Container, Grid, Space, Stack } from '@mantine/core';
+import { Container, Grid, Space, Stack, Switch } from '@mantine/core';
+import { IconStack2, IconLayoutDashboard } from '@tabler/icons';
+import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import type { photoIdOnlyT } from '~types/photo/photo';
@@ -12,6 +14,7 @@ interface MemoryIndexProps {
 }
 
 export function MemoryIndex(props: MemoryIndexProps) {
+  const [gridView, setGridView] = useState(false);
   const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'memory.GetMemory',
     { _id: props._id },
@@ -49,14 +52,15 @@ export function MemoryIndex(props: MemoryIndexProps) {
       }
     }
     if (colCount === 1) {
-      photoCol1.push(<MemoryImage2 _id={photos[i]._id} />);
+      photoCol1.push(<MemoryImage2 _id={photos[i]._id} key={i} />);
     } else if (colCount === 2) {
-      photoCol2.push(<MemoryImage2 _id={photos[i]._id} />);
+      photoCol2.push(<MemoryImage2 _id={photos[i]._id} key={i} />);
     } else {
-      photoCol3.push(<MemoryImage2 _id={photos[i]._id} />);
+      photoCol3.push(<MemoryImage2 _id={photos[i]._id} key={i} />);
     }
   }
 
+  // we are doing double the queries here, we should combine
   const MemoryPhotos =
     photos && photos.map((c: photoIdOnlyT) => <MemoryImage _id={c._id} key={c._id} />);
 
@@ -71,28 +75,36 @@ export function MemoryIndex(props: MemoryIndexProps) {
         photos={photos}
         title={title}
       />
-      {/* <Container size='xl'>{photos && photos.map(c => <div>{c._id}</div>)}</Container> */}
-      {/* <Space h='xl' />
-      {MemoryPhotos} */}
       <Space h='xl' />
       <Container size='xl'>
-        <Grid>
-          <Grid.Col lg={4} md={6}>
-            <Stack align='flex-start' justify='flex-start' spacing='xs'>
-              {photoCol1}
-            </Stack>
-          </Grid.Col>
-          <Grid.Col lg={4} md={6}>
-            <Stack align='flex-start' justify='flex-start' spacing='xs'>
-              {photoCol2}
-            </Stack>
-          </Grid.Col>
-          <Grid.Col lg={4} md={6}>
-            <Stack align='flex-start' justify='flex-start' spacing='xs'>
-              {photoCol3}
-            </Stack>
-          </Grid.Col>
-        </Grid>
+        <Switch
+          checked={gridView}
+          label={`${gridView ? 'Grid View' : 'Stacked View'}`}
+          onChange={event => setGridView(event.target.checked)}
+          size='md'
+        />
+        <Space h='xl' />
+        {gridView ? (
+          <Grid>
+            <Grid.Col lg={4} md={6}>
+              <Stack align='flex-start' justify='flex-start' spacing='xs'>
+                {photoCol1}
+              </Stack>
+            </Grid.Col>
+            <Grid.Col lg={4} md={6}>
+              <Stack align='flex-start' justify='flex-start' spacing='xs'>
+                {photoCol2}
+              </Stack>
+            </Grid.Col>
+            <Grid.Col lg={4} md={6}>
+              <Stack align='flex-start' justify='flex-start' spacing='xs'>
+                {photoCol3}
+              </Stack>
+            </Grid.Col>
+          </Grid>
+        ) : (
+          MemoryPhotos
+        )}
       </Container>
     </>
   );

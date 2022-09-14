@@ -1,6 +1,6 @@
-import { ActionIcon, createStyles, Group, Image, Text } from '@mantine/core';
+import { ActionIcon, createStyles, Group, Image, Tooltip, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
-import { IconArrowNarrowDown } from '@tabler/icons';
+import { IconDownload } from '@tabler/icons';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -37,9 +37,11 @@ export function MemoryImage2(props: photoIdOnlyT) {
           <Text className={classes.imgCaption} size='lg' weight={400}>
             {data?.image.caption}
           </Text>
-          <ActionIcon className={classes.imgDownload} variant='filled'>
-            <IconArrowNarrowDown size={36} />
-          </ActionIcon>
+          <Tooltip label='Download'>
+            <ActionIcon className={classes.imgDownload} variant='filled'>
+              <IconDownload size={36} />
+            </ActionIcon>
+          </Tooltip>
         </Group>
       )}
       {info && (
