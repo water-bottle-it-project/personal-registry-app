@@ -1,4 +1,4 @@
-import { Container, Space } from '@mantine/core';
+import { Container, Grid, Space } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { Key } from 'react';
 
@@ -7,6 +7,8 @@ import type { photoIdOnlyT } from '~types/photo/photo';
 
 import { MemoryHeader } from './MemoryHeader';
 import { MemoryImage } from './MemoryImage';
+import { MemoryImageGrid } from './MemoryImageGrid'
+import { MemoryImageGrid2 } from './MemoryImageGrid2'
 
 interface MemoryIndexProps {
   _id: string;
@@ -41,7 +43,14 @@ export function MemoryIndex(props: MemoryIndexProps) {
       />
       {/* <Container size='xl'>{photos && photos.map(c => <div>{c._id}</div>)}</Container> */}
       <Space h='xl' />
-      {MemoryPhotos}
+      {/* {MemoryPhotos} */}
+      <Container size='xl'>
+        <Grid>
+          <Grid.Col span={4}><MemoryImageGrid2 /></Grid.Col>
+          <Grid.Col span={4}><MemoryImageGrid /></Grid.Col>
+          <Grid.Col span={4}><MemoryImageGrid /></Grid.Col>
+        </Grid>
+      </Container>
     </>
   );
 }
