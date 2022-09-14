@@ -78,23 +78,9 @@ export function MemoryHeader({
         <Space h='sm' />
         <Group>{collectionBadges}</Group>
         <Space h='xl' />
-        <Group position='apart'>
-          <Group>
-            <Title order={4}>Sort by</Title>
-            <Select
-              data={[
-                { value: 'newToOld', label: 'Newest to Oldest' },
-                { value: 'oldToNew', label: 'Oldest to Newest' },
-              ]}
-              placeholder='Default'
-            />
-          </Group>
-          <div>
-            <Button leftIcon={<IconDownload />} variant='outline'>
-              Download
-            </Button>
-          </div>
-        </Group>
+        <Button leftIcon={<IconDownload />} variant='outline'>
+          Download Collection
+        </Button>
       </Container>
     </Box>
   );
