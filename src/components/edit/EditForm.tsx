@@ -1,6 +1,8 @@
-import { getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage';
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Stack, Text } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
+import { IconCheck } from '@tabler/icons';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/router';
 import { useAuthUser } from 'next-firebase-auth';
@@ -37,11 +39,13 @@ export function EditForm({ _id }: memoryIdOnlyT) {
     return { ...p, _dir: nanoid(), photoDate: p.photoDate ? new Date(p.photoDate) : null };
   });
 
+  // Transform existing memory to form format.
   const existingMemory: memoryWithPhotosToEditT = {
     ...data.memory,
     date: [new Date(data.memory.firstDate), new Date(data.memory.lastDate)],
     photos: existingPhotos,
   };
+
   return <EditFormPopulated memory={existingMemory} />;
 }
 
@@ -52,6 +56,8 @@ interface EditFormPopulatedProps {
 function EditFormPopulated({ memory }: EditFormPopulatedProps) {
   const { id: userId } = useAuthUser();
   const mutation = trpcClient.useMutation(['memory.UpdateMemory']);
+  const trpcUtils = trpcClient.useContext();
+  const router = useRouter();
 
   async function handleMemoryEdit(memory: memoryEditFormT) {
     if (!userId) {
@@ -93,7 +99,29 @@ function EditFormPopulated({ memory }: EditFormPopulatedProps) {
     };
 
     console.log(editedMemory);
-    mutation.mutate(editedMemory);
+    mutation.mutate(editedMemory, {
+      onSuccess: async data => {
+        // Delete files from Firebase Storage.
+        const fileDeleteRequests = data.map(async del => {
+          const fileRef = ref(getStorage(), del);
+          return deleteObject(fileRef);
+        });
+        await Promise.all(fileDeleteRequests);
+
+        await trpcUtils.invalidateQueries('memory.GetMemories');
+        showNotification({
+          title: 'Success!',
+          message: `Memory successfully edited.`,
+          icon: <IconCheck />,
+        });
+        await router.push('/timeline');
+        memory.photos.forEach(p => {
+          if (p._thumbnail) {
+            URL.revokeObjectURL(p._thumbnail);
+          }
+        });
+      },
+    });
   }
 
   const formMethods = useForm<memoryEditFormT>({
