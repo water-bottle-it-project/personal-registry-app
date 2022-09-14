@@ -22,35 +22,35 @@ export function MemoryImageGrid2() {
 
   return (
     <>
-        <Space h='xl' />
-        <Stack align='flex-start' justify='flex-start'>
-          <Image
-            alt=''
-            height='40%'
-            src='https://images.unsplash.com/photo-1663076128090-ca2a82da1a5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1828&q=80'
-            width='100%'
-          />
-          <Image
-            alt=''
-            height='40%'
-            src='https://images.unsplash.com/photo-1663081692819-bcc628d5c9b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80'
-            width='100%'
-          />
-          <Image
-            alt=''
-            height='40%'
-            src='https://images.unsplash.com/photo-1663050005485-77458fefea02?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=836&q=80'
-            width='100%'
-          />
-          <Image
-            alt=''
-            height='40%'
-            src='https://images.unsplash.com/photo-1663052666136-9f9409b2ff90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-            width='100%'
-          />
-        </Stack>
-        <Space h='xl' />
-        <Divider size='lg' />
+      <Space h='xl' />
+      <Stack align='flex-start' justify='flex-start'>
+        <Image
+          alt=''
+          height='40%'
+          src='https://images.unsplash.com/photo-1663076128090-ca2a82da1a5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1828&q=80'
+          width='100%'
+        />
+        <Image
+          alt=''
+          height='40%'
+          src='https://images.unsplash.com/photo-1663081692819-bcc628d5c9b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80'
+          width='100%'
+        />
+        <Image
+          alt=''
+          height='40%'
+          src='https://images.unsplash.com/photo-1663050005485-77458fefea02?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=836&q=80'
+          width='100%'
+        />
+        <Image
+          alt=''
+          height='40%'
+          src='https://images.unsplash.com/photo-1663052666136-9f9409b2ff90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+          width='100%'
+        />
+      </Stack>
+      <Space h='xl' />
+      <Divider size='lg' />
     </>
   );
 }
