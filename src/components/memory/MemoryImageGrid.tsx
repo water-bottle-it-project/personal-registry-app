@@ -1,4 +1,4 @@
-import { ActionIcon, createStyles, Group, Image, Tooltip, Text } from '@mantine/core';
+import { ActionIcon, createStyles, Group, Image, Text, Tooltip } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconDownload } from '@tabler/icons';
 import { useState } from 'react';
@@ -7,7 +7,7 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { ImageOverlayInfo } from '~components/image/ImageOverlayInfo';
 import type { photoIdOnlyT } from '~types/photo/photo';
 
-export function MemoryImage2(props: photoIdOnlyT) {
+export function MemoryImageGrid(props: photoIdOnlyT) {
   const { hovered, ref } = useHover();
   const [info, setInfo] = useState(false);
   const { classes, cx } = useStyles();
