@@ -6,7 +6,7 @@ import type { photoIdOnlyT } from '~types/photo/photo';
 
 import { MemoryHeader } from './MemoryHeader';
 import { MemoryImage } from './MemoryImage';
-import { MemoryImage2 } from './MemoryImage2';
+import { MemoryImageGrid } from './MemoryImageGrid';
 
 interface MemoryIndexProps {
   _id: string;
@@ -52,11 +52,11 @@ export function MemoryIndex(props: MemoryIndexProps) {
       }
     }
     if (colCount === 1) {
-      photoCol1.push(<MemoryImage2 _id={photos[i]._id} key={i} />);
+      photoCol1.push(<MemoryImageGrid _id={photos[i]._id} key={i} />);
     } else if (colCount === 2) {
-      photoCol2.push(<MemoryImage2 _id={photos[i]._id} key={i} />);
+      photoCol2.push(<MemoryImageGrid _id={photos[i]._id} key={i} />);
     } else {
-      photoCol3.push(<MemoryImage2 _id={photos[i]._id} key={i} />);
+      photoCol3.push(<MemoryImageGrid _id={photos[i]._id} key={i} />);
     }
   }
 
