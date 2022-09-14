@@ -7,12 +7,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 interface CollectionSearchFormProps {
   setIsSearching: Dispatch<SetStateAction<boolean>>;
-  setSearchQuery: Dispatch<SetStateAction<object>>;
+  setSearchQuery: Dispatch<SetStateAction<{ text: string; searchType: string; }>>;
 }
 
 const collectionSearchZ = z
   .object({
-    text: z.string().trim().min(1).max(100),
+    text: z.string().trim().max(100),
   })
   .required();
 
