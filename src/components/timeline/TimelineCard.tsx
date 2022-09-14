@@ -68,10 +68,9 @@ export function TimelineCard(props: TimelineCardProps) {
             <Image
               alt={props.title}
               height={180}
-              src={
-                props.photoPreviewUrl ||
-                'https://firebasestorage.googleapis.com/v0/b/register-app-40207.appspot.com/o/wlDYrCXpN7ewycECJTQJiLHtE4e2%2FDdrGVSwaHggCoqsN-Guy7%2Fno-image.png?alt=media&token=19761ace-69f8-495f-b390-155d5de7d5a1'
-              }
+              placeholder={<Text align='center'>Image preview not available.</Text>}
+              src={props.photoPreviewUrl}
+              withPlaceholder
             />
           </Carousel.Slide>
         </Carousel>
@@ -97,8 +96,7 @@ export function TimelineCard(props: TimelineCardProps) {
       </Grid>
       <Link href={'memory/' + props._id}>
         <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>
-          View 0 photos
-          {/* View {props.photos?.length || 0} photos */}
+          View {props.photos?.length || 0} photos
         </Anchor>
       </Link>
     </Card>

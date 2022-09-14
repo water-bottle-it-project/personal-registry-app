@@ -42,6 +42,7 @@ export function TimelineGrid() {
           firstDate={new Date(c.firstDate)}
           lastDate={new Date(c.lastDate)}
           photoPreviewUrl={c.photoPreviewUrl}
+          photos={c.photos}
           title={c.title}
         />
       </Grid.Col>
