@@ -3,15 +3,24 @@ import { IconPlus } from '@tabler/icons';
 import Link from 'next/link';
 
 import { CollectionSearchForm } from './CollectionSearch';
+import { Dispatch, SetStateAction } from 'react';
 
-export function CollectionsHeader() {
+interface CollectionHeaderProps {
+  setIsSearching: Dispatch<SetStateAction<boolean>>;
+  setSearchQuery: Dispatch<SetStateAction<object>>;
+}
+
+export function CollectionsHeader(props: CollectionHeaderProps) {
   return (
     <>
       <Container mx={0} px={0}>
         <Space h='xl' />
         <Title order={1}>Your Collections</Title>
         <Space h='md' />
-        <CollectionSearchForm />
+        <CollectionSearchForm
+          setIsSearching={props.setIsSearching}
+          setSearchQuery={props.setSearchQuery}
+        />
         <Space h='xl' />
         <Link as='/collections/create' href='/collections?create=true' passHref>
           <Anchor color='red' component='a'>

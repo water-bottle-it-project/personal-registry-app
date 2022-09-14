@@ -6,6 +6,9 @@ import type { collectionT } from '~types/collection/collection';
 import { collectionZ } from '~types/collection/collection';
 import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
+import { collectionSearchZ } from '~types/collection/collectionSearch';
+
+export { collectionRouter };
 
 const collectionRouter = createProtectedDbRouter()
   .query('GetCollections', {
@@ -35,6 +38,33 @@ const collectionRouter = createProtectedDbRouter()
 
       return {
         collection,
+      };
+    },
+  })
+
+  .query('SearchCollections', {
+    input: collectionSearchZ,
+    async resolve({ ctx, input }) {
+      let collections: collectionT[] = [];
+      const re = new RegExp(`${input.text}`, 'i');
+      if (input.searchType === 'title') {
+        collections = await Collection.find({
+          title: re,
+          userId: ctx.userId,
+        });
+      } else if (input.searchType === 'description') {
+        collections = await Collection.find({
+          description: re,
+          userId: ctx.userId,
+        });
+      }
+
+      if (!collections) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find collection by id.' });
+      }
+
+      return {
+        collections,
       };
     },
   })
@@ -79,5 +109,3 @@ const collectionRouter = createProtectedDbRouter()
       return collection;
     },
   });
-
-export { collectionRouter };

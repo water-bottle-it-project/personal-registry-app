@@ -13,6 +13,11 @@ function DebugAuth() {
     { enabled: !!memoriesData },
   );
 
+  const { data: collectionsSearch, error: collectionsSearchError } = trpcClient.useQuery([
+    'collection.SearchCollectionTitle',
+    ' ',
+  ]);
+
   return (
     <Container size='xl'>
       <Title>Debug Page - auth required</Title>
@@ -28,9 +33,9 @@ function DebugAuth() {
       <Code block color='green'>
         {JSON.stringify(memoriesData?.memories, null, 2)}
       </Code>
-      <Text>Most recent memory for this user</Text>
+      <Text>your search qeury for collections</Text>
       <Code block color='yellow'>
-        {JSON.stringify(memoryData?.memory, null, 2)}
+        {JSON.stringify(collectionsSearch?.collections, null, 2)}
       </Code>
     </Container>
   );

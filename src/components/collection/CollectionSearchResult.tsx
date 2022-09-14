@@ -1,21 +1,22 @@
 import { Grid, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconX } from '@tabler/icons';
-import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { CollectionCard } from '~components/collection/CollectionCard';
-import { CollectionsHeader } from '~components/collection/CollectionsHeader';
 
-import { CollectionSearchResult } from './CollectionSearchResult';
+import { CollectionCard } from './CollectionCard';
 import { CollectionSkeleton } from './CollectionSkeleton';
 
-export function CollectionsGrid() {
+interface CollectionSearchResultProps {
+  searchQuery: { text: string; searchType: string };
+}
+
+export function CollectionSearchResult(props: CollectionSearchResultProps) {
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
-    'collection.GetCollections',
+    'collection.SearchCollections',
+    props.searchQuery,
   ]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchQuery, setSearchQuery] = useState({ text: '', searchType: 'title' });
+
   if (isLoading) {
     // Need to provide a key for React components when mapping over an array (check devtools console).
     // Use same grid as the data grid to have consistent sizing.
@@ -45,14 +46,6 @@ export function CollectionsGrid() {
         <CollectionCard _id={c._id} color={c.color} description={c.description} title={c.title} />
       </Grid.Col>
     ));
-  return (
-    <>
-      <CollectionsHeader setIsSearching={setIsSearching} setSearchQuery={setSearchQuery} />
-      {isSearching ? (
-        <CollectionSearchResult searchQuery={searchQuery} />
-      ) : (
-        <Grid>{collections}</Grid>
-      )}
-    </>
-  );
+
+  return <Grid>{collections}</Grid>;
 }
