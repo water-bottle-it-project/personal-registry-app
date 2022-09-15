@@ -48,7 +48,7 @@ export function CollectionsGrid() {
   return (
     <>
       <CollectionsHeader setIsSearching={setIsSearching} setSearchQuery={setSearchQuery} />
-      {isSearching ? (
+      {isSearching && searchQuery.text ? (
         <CollectionSearchResult searchQuery={searchQuery} />
       ) : (
         <Grid>{collections}</Grid>

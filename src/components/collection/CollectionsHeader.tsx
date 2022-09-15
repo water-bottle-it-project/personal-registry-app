@@ -7,7 +7,7 @@ import { CollectionSearchForm } from './CollectionSearch';
 
 interface CollectionHeaderProps {
   setIsSearching: Dispatch<SetStateAction<boolean>>;
-  setSearchQuery: Dispatch<SetStateAction<object>>;
+  setSearchQuery: Dispatch<SetStateAction<{ text: string; searchType: string }>>;
 }
 
 export function CollectionsHeader(props: CollectionHeaderProps) {

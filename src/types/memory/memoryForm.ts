@@ -1,7 +1,13 @@
 import { z } from 'zod';
 
 import { collectionMemoryZ } from '~types/collection/collectionMemory';
-import { photoFormCreateRequestZ, photoFormCreateZ, photoWithIdZ } from '~types/photo/photo';
+import {
+  photoFormCreateRequestZ,
+  photoFormCreateZ,
+  photoFormEditRequestZ,
+  photoFormEditZ,
+  photoWithIdZ,
+} from '~types/photo/photo';
 import { objectIdZ } from '~types/util/objectId';
 import { urlZ } from '~types/util/url';
 
@@ -35,6 +41,16 @@ const memoryCreateFormRequestZ = memoryBase.merge(dateSeparate).extend({
   photos: photoFormCreateRequestZ.array().default([]),
 });
 
+const memoryEditFormZ = memoryBase.merge(dateTuple).extend({
+  _id: objectIdZ,
+  photos: photoFormEditZ.array().default([]),
+});
+
+const memoryEditFormRequestZ = memoryBase.merge(dateSeparate).extend({
+  _id: objectIdZ,
+  photos: photoFormEditRequestZ.array().default([]),
+});
+
 // For querying a single memory.
 const memoryIdOnlyZ = z.object({
   _id: objectIdZ,
@@ -55,6 +71,13 @@ const memoryWithPhotosZ = memoryBase.merge(dateSeparate).extend({
   collections: collectionMemoryZ.array().default([]),
 });
 
+// For getting memory details with photos to edit
+const memoryWithPhotosToEditZ = memoryBase.merge(dateTuple).extend({
+  _id: objectIdZ,
+  photos: photoWithIdZ.array().default([]),
+  collections: collectionMemoryZ.array().default([]),
+});
+
 /**
  * Inferred types
  */
@@ -64,6 +87,10 @@ type memoryCreateFormRequestT = z.infer<typeof memoryCreateFormRequestZ>;
 type memoryIdOnlyT = z.infer<typeof memoryIdOnlyZ>;
 type memoryWithPhotosT = z.infer<typeof memoryWithPhotosZ>;
 
+type memoryEditFormRequestT = z.infer<typeof memoryEditFormRequestZ>;
+type memoryEditFormT = z.infer<typeof memoryEditFormZ>;
+type memoryWithPhotosToEditT = z.infer<typeof memoryWithPhotosToEditZ>;
+
 /**
  * Exports
  */
@@ -71,13 +98,18 @@ export type {
   memoryCardT,
   memoryCreateFormRequestT,
   memoryCreateFormT,
+  memoryEditFormRequestT,
+  memoryEditFormT,
   memoryIdOnlyT,
   memoryWithPhotosT,
+  memoryWithPhotosToEditT,
 };
 export {
   memoryCardZ,
   memoryCreateFormRequestZ,
   memoryCreateFormZ,
+  memoryEditFormRequestZ,
+  memoryEditFormZ,
   memoryIdOnlyZ,
   memoryWithPhotosZ,
 };
