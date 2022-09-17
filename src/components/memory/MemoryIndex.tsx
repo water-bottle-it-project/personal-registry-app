@@ -1,5 +1,8 @@
+import 'react-image-lightbox/style.css';
+
 import { Container, Grid, Space, Stack, Switch } from '@mantine/core';
 import { useState } from 'react';
+import Lightbox from 'react-image-lightbox';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import type { photoIdOnlyT } from '~types/photo/photo';
@@ -14,6 +17,8 @@ interface MemoryIndexProps {
 
 export function MemoryIndex(props: MemoryIndexProps) {
   const [gridView, setGridView] = useState(false);
+  const [isOpen, setLightbox] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
   const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'memory.GetMemory',
     { _id: props._id },
@@ -25,6 +30,8 @@ export function MemoryIndex(props: MemoryIndexProps) {
     return <div>Error loading memory</div>;
   }
   const { title, collections, description, firstDate, lastDate, photos } = data.memory;
+
+  const lightboxPhotos = photos.map(photo => ({ url: photo.url, caption: photo.caption }));
 
   // What im trying to achieve:
   // Distribute images on the masonry grid evenly
@@ -52,11 +59,38 @@ export function MemoryIndex(props: MemoryIndexProps) {
       }
     }
     if (colCount === 1) {
-      photoCol1.push(<MemoryImageGrid _id={photos[i]._id} key={i} />);
+      photoCol1.push(
+        <div
+          onClick={() => {
+            setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
+            setLightbox(true);
+          }}
+        >
+          <MemoryImageGrid _id={photos[i]._id} key={i} />
+        </div>,
+      );
     } else if (colCount === 2) {
-      photoCol2.push(<MemoryImageGrid _id={photos[i]._id} key={i} />);
+      photoCol2.push(
+        <div
+          onClick={() => {
+            setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
+            setLightbox(true);
+          }}
+        >
+          <MemoryImageGrid _id={photos[i]._id} key={i} />
+        </div>,
+      );
     } else {
-      photoCol3.push(<MemoryImageGrid _id={photos[i]._id} key={i} />);
+      photoCol3.push(
+        <div
+          onClick={() => {
+            setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
+            setLightbox(true);
+          }}
+        >
+          <MemoryImageGrid _id={photos[i]._id} key={i} />
+        </div>,
+      );
     }
   }
 
@@ -106,6 +140,21 @@ export function MemoryIndex(props: MemoryIndexProps) {
           MemoryPhotos
         )}
       </Container>
+      {isOpen && (
+        <Lightbox
+          imageTitle={lightboxPhotos[photoIndex].caption}
+          mainSrc={lightboxPhotos[photoIndex].url}
+          nextSrc={lightboxPhotos[(photoIndex + 1) % lightboxPhotos.length].url}
+          onCloseRequest={() => setLightbox(false)}
+          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % lightboxPhotos.length)}
+          onMovePrevRequest={() =>
+            setPhotoIndex((photoIndex + lightboxPhotos.length - 1) % lightboxPhotos.length)
+          }
+          prevSrc={
+            lightboxPhotos[(photoIndex + lightboxPhotos.length - 1) % lightboxPhotos.length].url
+          }
+        />
+      )}
     </>
   );
 }
