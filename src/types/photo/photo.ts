@@ -56,12 +56,18 @@ const photoIdOnly = z.object({
   _id: objectIdZ,
 });
 
+const photoWithMemoryZ = photoWithIdZ.extend({
+  memoryId: z.string().min(1),
+  memoryDate: z.string().min(1),
+});
+
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
 type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
 type photoWithIdT = z.infer<typeof photoWithIdZ>;
 type photoIdOnlyT = z.infer<typeof photoIdOnly>;
 type photoFormEditT = z.infer<typeof photoFormEditZ>;
 type photoFormEditRequestT = z.infer<typeof photoFormEditRequestZ>;
+type photoWithMemoryT = z.infer<typeof photoWithMemoryZ>;
 
 export type {
   photoFormCreateRequestT,
@@ -70,6 +76,7 @@ export type {
   photoFormEditT,
   photoIdOnlyT,
   photoWithIdT,
+  photoWithMemoryT,
 };
 export {
   photoFormCreateRequestZ,
@@ -78,4 +85,5 @@ export {
   photoFormEditZ,
   photoIdOnly,
   photoWithIdZ,
+  photoWithMemoryZ,
 };
