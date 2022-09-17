@@ -4237,6 +4237,14 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-18-image-lightbox@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/react-18-image-lightbox/-/react-18-image-lightbox-5.1.4.tgz#714361b10e78919f5bba564b39ca0de63bd299c6"
+  integrity sha512-P9yDkGfpeCIIDCIWv4VHzMju8EgxilKNNonaJlSjcZPEInCSLNsvrtNo1Nij+SocOQ3utLcGN/iOJ8RVQnufGw==
+  dependencies:
+    prop-types "^15.7.2"
+    react-modal "^3.11.1"
+
 react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
@@ -4258,14 +4266,6 @@ react-hook-form@^7.34.2:
   version "7.34.2"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.34.2.tgz#9ac6d1a309a7c4aaa369d1269357a70e9e9bf4de"
   integrity sha512-1lYWbEqr0GW7HHUjMScXMidGvV0BE2RJV3ap2BL7G0EJirkqpccTaawbsvBO8GZaB3JjCeFBEbnEWI1P8ZoLRQ==
-
-react-image-lightbox@^5.1.4:
-  version "5.1.4"
-  resolved "https://registry.yarnpkg.com/react-image-lightbox/-/react-image-lightbox-5.1.4.tgz#5b847dcb79e9efdf9d7cd5621a92e0f156d2cf30"
-  integrity sha512-kTiAODz091bgT7SlWNHab0LSMZAPJtlNWDGKv7pLlLY1krmf7FuG1zxE0wyPpeA8gPdwfr3cu6sPwZRqWsc3Eg==
-  dependencies:
-    prop-types "^15.7.2"
-    react-modal "^3.11.1"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

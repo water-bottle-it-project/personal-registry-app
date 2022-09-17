@@ -1,9 +1,9 @@
-import 'react-image-lightbox/style.css';
+import 'react-18-image-lightbox/style.css';
 
 import { Container, Grid, Space, Stack, Switch } from '@mantine/core';
 import { useScrollLock } from '@mantine/hooks';
 import { useState } from 'react';
-import Lightbox from 'react-image-lightbox';
+import Lightbox from 'react-18-image-lightbox';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import type { photoIdOnlyT } from '~types/photo/photo';
@@ -18,7 +18,6 @@ interface MemoryIndexProps {
 
 export function MemoryIndex(props: MemoryIndexProps) {
   const [gridView, setGridView] = useState(false);
-  const [isOpen, setLightbox] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(-1);
   const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'memory.GetMemory',
@@ -64,7 +63,6 @@ export function MemoryIndex(props: MemoryIndexProps) {
         <div
           onClick={() => {
             setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
-            setLightbox(true);
           }}
         >
           <MemoryImageGrid _id={photos[i]._id} key={i} />
@@ -75,7 +73,6 @@ export function MemoryIndex(props: MemoryIndexProps) {
         <div
           onClick={() => {
             setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
-            setLightbox(true);
           }}
         >
           <MemoryImageGrid _id={photos[i]._id} key={i} />
@@ -86,7 +83,6 @@ export function MemoryIndex(props: MemoryIndexProps) {
         <div
           onClick={() => {
             setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
-            setLightbox(true);
           }}
         >
           <MemoryImageGrid _id={photos[i]._id} key={i} />
@@ -94,6 +90,8 @@ export function MemoryIndex(props: MemoryIndexProps) {
       );
     }
   }
+
+  const currentImage = lightboxPhotos[photoIndex];
 
   // we are doing double the queries here, we should combine
   const MemoryPhotos =
@@ -141,12 +139,17 @@ export function MemoryIndex(props: MemoryIndexProps) {
           MemoryPhotos
         )}
       </Container>
-      {isOpen && (
+
+      {!!currentImage && (
         <Lightbox
           imageTitle={lightboxPhotos[photoIndex].caption}
           mainSrc={lightboxPhotos[photoIndex].url}
+          mainSrcThumbnail={lightboxPhotos[photoIndex].url}
           nextSrc={lightboxPhotos[(photoIndex + 1) % lightboxPhotos.length].url}
-          onCloseRequest={() => setLightbox(false)}
+          onCloseRequest={() => setPhotoIndex(-1)}
+          onImageLoad={() => {
+            window.dispatchEvent(new Event('resize'));
+          }}
           onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % lightboxPhotos.length)}
           onMovePrevRequest={() =>
             setPhotoIndex((photoIndex + lightboxPhotos.length - 1) % lightboxPhotos.length)
