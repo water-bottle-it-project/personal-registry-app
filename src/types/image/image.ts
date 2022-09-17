@@ -13,7 +13,10 @@ const imageZ = z
   })
   .required();
 
-type imageT = z.infer<typeof imageZ>;
+const imageIdOnlyZ = imageZ.pick({ _id: true });
 
-export type { imageT };
-export { imageZ };
+type imageT = z.infer<typeof imageZ>;
+type imageIdOnlyT = z.infer<typeof imageIdOnlyZ>;
+
+export type { imageIdOnlyT, imageT };
+export { imageIdOnlyZ, imageZ };
