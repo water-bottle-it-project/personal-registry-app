@@ -4,13 +4,16 @@ import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Photo } from '~server/models/photo';
 import type { imageT } from '~types/image/image';
 import { imageIdOnlyZ } from '~types/image/image';
+import type { photoWithMemoryT } from '~types/photo/photo';
+import { photoIdOnly } from '~types/photo/photo';
+
 /**
  * Router for debug operations
  */
 const imagesRouter = createProtectedDbRouter()
   .query('listImages', {
     async resolve({ ctx }) {
-      const photos: imageT[] = await Photo.find({ userId: ctx.userId });
+      const photos: photoWithMemoryT[] = await Photo.find({ userId: ctx.userId });
       return {
         photos,
       };
@@ -18,7 +21,7 @@ const imagesRouter = createProtectedDbRouter()
   })
 
   .query('getImage', {
-    input: imageIdOnlyZ,
+    input: photoIdOnly,
     async resolve({ ctx, input }) {
       const image = await Photo.findOne({
         _id: input._id,
