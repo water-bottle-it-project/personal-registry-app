@@ -1,6 +1,7 @@
 import 'react-image-lightbox/style.css';
 
 import { Container, Grid, Space, Stack, Switch } from '@mantine/core';
+import { useScrollLock } from '@mantine/hooks';
 import { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 
@@ -18,7 +19,7 @@ interface MemoryIndexProps {
 export function MemoryIndex(props: MemoryIndexProps) {
   const [gridView, setGridView] = useState(false);
   const [isOpen, setLightbox] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
+  const [photoIndex, setPhotoIndex] = useState(-1);
   const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'memory.GetMemory',
     { _id: props._id },

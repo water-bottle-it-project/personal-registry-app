@@ -1,15 +1,12 @@
 import { ActionIcon, createStyles, Group, Image, Text, Tooltip } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconDownload } from '@tabler/icons';
-import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { ImageOverlayInfo } from '~components/image/ImageOverlayInfo';
 import type { photoIdOnlyT } from '~types/photo/photo';
 
 export function MemoryImageGrid(props: photoIdOnlyT) {
   const { hovered, ref } = useHover();
-  const [info, setInfo] = useState(false);
   const { classes, cx } = useStyles();
   const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'images.getImage',
@@ -24,7 +21,7 @@ export function MemoryImageGrid(props: photoIdOnlyT) {
   }
 
   return (
-    <div onClick={() => setInfo(!info)} ref={ref}>
+    <div ref={ref}>
       <Image
         alt={data?.image.caption}
         className={cx(classes.wrapper, { [classes.dimmed]: hovered === true })}
@@ -43,14 +40,6 @@ export function MemoryImageGrid(props: photoIdOnlyT) {
             </ActionIcon>
           </Tooltip>
         </Group>
-      )}
-      {info && (
-        <ImageOverlayInfo
-          _id={props._id}
-          caption={data?.image.caption}
-          url={data?.image.url}
-          userId={data?.image.userId}
-        />
       )}
     </div>
   );
