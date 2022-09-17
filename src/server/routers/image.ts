@@ -2,10 +2,8 @@ import { TRPCError } from '@trpc/server';
 
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Photo } from '~server/models/photo';
-import type { imageT } from '~types/image/image';
-import { imageIdOnlyZ } from '~types/image/image';
 import type { photoWithMemoryT } from '~types/photo/photo';
-import { photoIdOnly } from '~types/photo/photo';
+import { photoBaseWithIdZ, photoIdOnly } from '~types/photo/photo';
 
 /**
  * Router for debug operations
@@ -38,6 +36,26 @@ const imagesRouter = createProtectedDbRouter()
       return {
         image,
       };
+    },
+  })
+
+  .mutation('UpdateImage', {
+    input: photoBaseWithIdZ,
+    async resolve({ ctx, input }) {
+      const image: photoWithMemoryT | null = await Photo.findOneAndUpdate(
+        { _id: input._id, userId: ctx.userId },
+        { caption: input.caption, location: input.location, photoDate: input.photoDate },
+        { returnDocument: 'after' },
+      );
+
+      if (!image) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Image to update was not found.',
+        });
+      }
+
+      return { image };
     },
   });
 
