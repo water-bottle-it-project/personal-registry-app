@@ -18,8 +18,6 @@ export function MemoryImage(props: photoIdOnlyT) {
     return <div>Error loading memory</div>;
   }
 
-  data && console.log(data.image);
-
   return (
     <>
       <Grid justify='center'>
