@@ -1,8 +1,7 @@
-import { Grid, Text } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import { IconX } from '@tabler/icons';
+import { Grid } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { SearchNotFound } from '~components/util/SearchNotFound';
 
 import { CollectionCard } from './CollectionCard';
 import { CollectionSkeleton } from './CollectionSkeleton';
@@ -30,13 +29,7 @@ export function CollectionSearchResult(props: CollectionSearchResultProps) {
   }
 
   if (isLoadingError) {
-    showNotification({
-      color: 'red',
-      icon: <IconX />,
-      title: 'Error!',
-      message: 'An error occurred while loading collections.',
-    });
-    return <Text>Error loading collections: {error?.message}</Text>;
+    return <SearchNotFound text={props.searchQuery.text} type={props.searchQuery.searchType} />;
   }
 
   const collections =
@@ -47,5 +40,15 @@ export function CollectionSearchResult(props: CollectionSearchResultProps) {
       </Grid.Col>
     ));
 
-  return <Grid>{collections}</Grid>;
+  return (
+    <Grid>
+      {collections?.length === 0 ? (
+        <Grid.Col>
+          <SearchNotFound text={props.searchQuery.text} type={props.searchQuery.searchType} />
+        </Grid.Col>
+      ) : (
+        collections
+      )}
+    </Grid>
+  );
 }
