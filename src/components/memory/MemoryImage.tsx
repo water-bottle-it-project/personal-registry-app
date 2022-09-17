@@ -1,4 +1,4 @@
-import { Container, Divider, Grid, Image, Space, Stack, Title } from '@mantine/core';
+import { Divider, Grid, Image, Space, Stack, Title } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { ImageOverlayInfo } from '~components/image/ImageOverlayInfo';
