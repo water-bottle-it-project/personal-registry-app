@@ -142,6 +142,7 @@ export function MemoryIndex(props: MemoryIndexProps) {
         ) : (
           MemoryPhotos
         )}
+        <Space h='xl' />
       </Container>
 
       {!!currentImage && (
