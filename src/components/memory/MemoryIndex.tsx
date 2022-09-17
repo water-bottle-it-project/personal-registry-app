@@ -17,6 +17,7 @@ interface MemoryIndexProps {
 }
 
 export function MemoryIndex(props: MemoryIndexProps) {
+  const [scrollLocked, setScrollLocked] = useScrollLock(false);
   const [gridView, setGridView] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(-1);
   const { data, isLoadingError, isLoading } = trpcClient.useQuery([
@@ -63,6 +64,7 @@ export function MemoryIndex(props: MemoryIndexProps) {
         <div
           onClick={() => {
             setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
+            setScrollLocked(!scrollLocked);
           }}
         >
           <MemoryImageGrid _id={photos[i]._id} key={i} />
@@ -73,6 +75,7 @@ export function MemoryIndex(props: MemoryIndexProps) {
         <div
           onClick={() => {
             setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
+            setScrollLocked(!scrollLocked);
           }}
         >
           <MemoryImageGrid _id={photos[i]._id} key={i} />
@@ -83,6 +86,7 @@ export function MemoryIndex(props: MemoryIndexProps) {
         <div
           onClick={() => {
             setPhotoIndex(lightboxPhotos.map(e => e.url).indexOf(photos[i].url));
+            setScrollLocked(!scrollLocked);
           }}
         >
           <MemoryImageGrid _id={photos[i]._id} key={i} />
@@ -146,7 +150,10 @@ export function MemoryIndex(props: MemoryIndexProps) {
           mainSrc={lightboxPhotos[photoIndex].url}
           mainSrcThumbnail={lightboxPhotos[photoIndex].url}
           nextSrc={lightboxPhotos[(photoIndex + 1) % lightboxPhotos.length].url}
-          onCloseRequest={() => setPhotoIndex(-1)}
+          onCloseRequest={() => {
+            setPhotoIndex(-1);
+            setScrollLocked(!scrollLocked);
+          }}
           onImageLoad={() => {
             window.dispatchEvent(new Event('resize'));
           }}
