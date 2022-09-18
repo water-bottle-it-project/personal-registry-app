@@ -25,6 +25,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { memoryEditFormZ } from '~types/memory/memoryForm';
 // import type { photoWithMemoryT } from '~types/photo/photo';
 // import { photoBase } from '~types/photo/photo';
 
@@ -72,7 +73,16 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
     reset,
     formState: { errors },
   } = useForm<photoBaseT>({
-    resolver: zodResolver(z.object({ caption: z.string().trim().optional() })),
+    resolver: async (data, context, options) => {
+      console.log('form data', data);
+      console.log('validation result', await zodResolver(memoryEditFormZ)(data, context, options));
+      return zodResolver(z.object({ caption: z.string().trim().optional() }))(
+        data,
+        context,
+        options,
+      );
+    },
+
     defaultValues: photo,
   });
 
@@ -105,9 +115,9 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
           </Stack>
           <Space h='xs' />
         </div>
+        <Button type='submit'>Submit</Button>
       </form>
       <div className={classes.buttonGroup}>
-        <input type='submit' />
         <UnstyledButton
           className={classes.button}
           onClick={() => {
