@@ -28,6 +28,10 @@ function DebugAuth() {
       <Code block color='green'>
         {JSON.stringify(memoriesData?.memories, null, 2)}
       </Code>
+      <Text>Most recent memory for this user</Text>
+      <Code block color='yellow'>
+        {JSON.stringify(memoryData, null, 2)}
+      </Code>
       <Text>your search query for collections</Text>
     </Container>
   );
