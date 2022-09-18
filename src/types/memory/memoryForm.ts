@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { collectionMemoryZ } from '~types/collection/collectionMemory';
+import { collectionMemory2Z } from '~types/collection/collection';
 import {
   photoFormCreateRequestZ,
   photoFormCreateZ,
@@ -61,21 +61,21 @@ const memoryCardZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photoPreviewUrl: urlZ.optional(),
   photos: photoWithIdZ.array().default([]),
-  collections: collectionMemoryZ.array().default([]),
+  collections: collectionMemory2Z.array().default([]),
 });
 
 // For viewing a single memory
 const memoryWithPhotosZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photos: photoWithIdZ.array().default([]),
-  collections: collectionMemoryZ.array().default([]),
+  collections: collectionMemory2Z.array().default([]),
 });
 
 // For getting memory details with photos to edit
 const memoryWithPhotosToEditZ = memoryBase.merge(dateTuple).extend({
   _id: objectIdZ,
   photos: photoWithIdZ.array().default([]),
-  collections: collectionMemoryZ.array().default([]),
+  collections: collectionMemory2Z.array().default([]),
 });
 
 /**

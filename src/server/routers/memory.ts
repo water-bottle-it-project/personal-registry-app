@@ -25,7 +25,7 @@ const memoryRouter = createProtectedDbRouter()
         { userId: ctx.userId },
         { userId: 0 },
         { sort: { lastDate: -1 } },
-      );
+      ).populate('collections', '-description -userId');
 
       return {
         memories,
@@ -41,6 +41,7 @@ const memoryRouter = createProtectedDbRouter()
         userId: ctx.userId,
       })
         .populate('photos')
+        .populate('collections', '-description -userId')
         .exec();
 
       if (!memory) {

@@ -1,25 +1,11 @@
 import mongoose from 'mongoose';
 
-import { COLORS } from '~types/util/color';
-
 const { Schema } = mongoose;
 
 const memorySchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: false },
-  collections: {
-    type: [
-      {
-        collectionId: { type: mongoose.Schema.Types.ObjectId, required: true },
-        collectionTitle: { type: String, required: true },
-        collectionColor: {
-          type: String,
-          required: false,
-          enum: COLORS,
-        },
-      },
-    ],
-  },
+  collections: [{ type: Schema.Types.ObjectId, ref: 'Collection' }],
   firstDate: { type: Date, required: true },
   lastDate: { type: Date, required: true },
   userId: { type: String, required: true },

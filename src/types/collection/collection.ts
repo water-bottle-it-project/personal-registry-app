@@ -12,7 +12,10 @@ const collectionZ = z
   })
   .required();
 
-type collectionT = z.infer<typeof collectionZ>;
+const collectionMemory2Z = collectionZ.omit({ description: true });
 
-export type { collectionT };
-export { collectionZ };
+type collectionT = z.infer<typeof collectionZ>;
+type collectionMemory2T = z.infer<typeof collectionMemory2Z>;
+
+export type { collectionMemory2T, collectionT };
+export { collectionMemory2Z, collectionZ };
