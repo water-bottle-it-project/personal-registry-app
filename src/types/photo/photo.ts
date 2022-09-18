@@ -57,8 +57,9 @@ const photoWithMemoryZ = photoWithIdZ.extend({
   memoryDate: z.string().min(1),
 });
 
-const photoBaseWithIdZ = photoBase.extend({
+const photoBaseWithIdZ = z.object({
   _id: objectIdZ,
+  caption: z.string().trim().optional(),
 });
 
 type photoBaseT = z.infer<typeof photoBase>;
