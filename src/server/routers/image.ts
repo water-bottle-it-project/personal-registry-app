@@ -44,9 +44,12 @@ const imagesRouter = createProtectedDbRouter()
     async resolve({ ctx, input }) {
       const image: photoWithMemoryT | null = await Photo.findOneAndUpdate(
         { _id: input._id, userId: ctx.userId },
-        { caption: input.caption, location: input.location, photoDate: input.photoDate },
+        { caption: input.caption },
         { returnDocument: 'after' },
       );
+
+      console.log(image);
+      console.log(input);
 
       if (!image) {
         throw new TRPCError({
