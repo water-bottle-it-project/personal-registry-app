@@ -20,7 +20,7 @@ export function SearchNotFound({ text, type }: SearchNotFoundProps) {
       />
       <Title order={2}>Bummer!</Title>
       <Text>
-        No {type}s named {text} found.
+        No {type}s containing '{text}' found.
       </Text>
     </Stack>
   );
