@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Box,
+  Button,
   createStyles,
   Group,
   Space,
@@ -21,10 +22,11 @@ import {
 } from '@tabler/icons';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import type { photoBaseT, photoWithMemoryT } from '~types/photo/photo';
-import { photoBase } from '~types/photo/photo';
+// import type { photoWithMemoryT } from '~types/photo/photo';
+// import { photoBase } from '~types/photo/photo';
 
 interface ImageCardProps {
   _id: string;
@@ -32,100 +34,9 @@ interface ImageCardProps {
   url: string;
 }
 
-type FormData = {
-  firstName: string;
-  lastName: string;
-};
-
-// export function ImageOverlayInfoEdit(props: ImageCardProps) {
-//   const { classes } = useStyles();
-//   const {
-//     register,
-//     setValue,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm<FormData>();
-//   const onSubmit = handleSubmit(({ firstName, lastName }) => {
-//     console.log(firstName, lastName);
-//   }); // firstName and lastName will have correct type
-//   return (
-//     <Box
-//       sx={theme => ({
-//         display: 'flex',
-//         flexDirection: 'column',
-//         justifyContent: 'space-between',
-//         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[4],
-//         borderRadius: theme.radius.xs,
-//         padding: theme.spacing.xl,
-//       })}
-//     >
-//       <form onSubmit={onSubmit}>
-//         <div>
-//           <Title order={2}>Information</Title>
-//           <Space h='lg' />
-//           <Text className={classes.infoHeader}>Title</Text>
-//           <Stack spacing='sm'>
-//             <TextInput
-//               className={classes.infoText}
-//               // description='Displayed front and centre.'
-//               // error={errors?.title?.message}
-//               // label='Title'
-//               required
-//               {...register('firstName')}
-//             />
-//           </Stack>
-//           <Space h='xs' />
-//           <Text className={classes.infoHeader}>Date</Text>
-//           <Stack spacing='sm'>
-//             <TextInput
-//               className={classes.infoText}
-//               // description='Displayed front and centre.'
-//               // error={errors?.title?.message}
-//               // label='Title'
-//               required
-//               {...register('firstName')}
-//             />
-//           </Stack>
-//           <Space h='xs' />
-//           <Text className={classes.infoHeader}>Location</Text>
-//           <Stack spacing='sm'>
-//             <TextInput
-//               className={classes.infoText}
-//               // description='Displayed front and centre.'
-//               // error={errors?.title?.message}
-//               // label='Title'
-//               required
-//               {...register('firstName')}
-//             />
-//           </Stack>
-//         </div>
-//         {/* <input type='submit' /> */}
-//       </form>
-//       <div className={classes.buttonGroup}>
-//         <UnstyledButton className={classes.button}>
-//           <Link href={`/images?edit=${props._id}`} passHref>
-//             <Group spacing={5}>
-//               <IconEdit />
-//               <Text>Edit</Text>
-//             </Group>
-//           </Link>
-//         </UnstyledButton>
-//         <UnstyledButton className={classes.button}>
-//           <Group className={classes.delete} spacing={5}>
-//             <IconTrash />
-//             <Text>Delete</Text>
-//           </Group>
-//         </UnstyledButton>
-//         <UnstyledButton className={classes.button}>
-//           <Group spacing={5}>
-//             <IconDownload />
-//             <Text>Download</Text>
-//           </Group>
-//         </UnstyledButton>
-//       </div>
-//     </Box>
-//   );
-// }
+interface photoBaseT {
+  caption: string;
+}
 
 const useStyles = createStyles(theme => ({
   infoHeader: {
@@ -149,22 +60,23 @@ const useStyles = createStyles(theme => ({
 }));
 
 interface EditFormProps {
-  // photo: photoWithMemoryT;
-  handleEdit: ({ caption, location, photoDate }: photoBaseT) => void;
+  photo: ImageCardProps;
+  handleEdit: ({ caption }: photoBaseT) => void;
 }
 
-function EditForm({ handleEdit }: EditFormProps) {
+function EditForm({ photo, handleEdit }: EditFormProps) {
   const { classes } = useStyles();
   const {
     register,
     handleSubmit,
-    control,
     reset,
     formState: { errors },
   } = useForm<photoBaseT>({
-    resolver: zodResolver(photoBase),
-    // defaultValues: photo,
+    resolver: zodResolver(z.object({ caption: z.string().trim().optional() })),
+    defaultValues: photo,
   });
+
+  // const onSubmit = (data: any) => console.log(data);
 
   return (
     <Box
@@ -177,55 +89,25 @@ function EditForm({ handleEdit }: EditFormProps) {
         padding: theme.spacing.xl,
       })}
     >
-      <form onSubmit={handleSubmit(handleEdit)}>
+      <form noValidate onSubmit={handleSubmit(handleEdit)}>
         <div>
           <Title order={2}>Information</Title>
           <Space h='lg' />
-          <Text className={classes.infoHeader}>Title</Text>
           <Stack spacing='sm'>
             <TextInput
               className={classes.infoText}
               // description='Displayed front and centre.'
-              // error={errors?.title?.message}
+              // error={errors?.caption?.message}
               // label='Title'
               required
               {...register('caption')}
             />
           </Stack>
           <Space h='xs' />
-          <Text className={classes.infoHeader}>Date</Text>
-          <Stack spacing='sm'>
-            <TextInput
-              className={classes.infoText}
-              // description='Displayed front and centre.'
-              // error={errors?.title?.message}
-              // label='Title'
-              required
-              {...register('photoDate')}
-            />
-          </Stack>
-          <Space h='xs' />
-          <Text className={classes.infoHeader}>Location</Text>
-          <Stack spacing='sm'>
-            <TextInput
-              className={classes.infoText}
-              // description='Displayed front and centre.'
-              // error={errors?.title?.message}
-              // label='Title'
-              required
-              {...register('location')}
-            />
-          </Stack>
         </div>
-        {/* <input type='submit' /> */}
       </form>
       <div className={classes.buttonGroup}>
-        <UnstyledButton className={classes.button} type='submit'>
-          <Group spacing={5}>
-            <IconDeviceFloppy />
-            <Text>Save</Text>
-          </Group>
-        </UnstyledButton>
+        <input type='submit' />
         <UnstyledButton
           className={classes.button}
           onClick={() => {
@@ -237,12 +119,6 @@ function EditForm({ handleEdit }: EditFormProps) {
             <Text>Reset</Text>
           </Group>
         </UnstyledButton>
-        <UnstyledButton className={classes.button}>
-          <Group spacing={5}>
-            <IconDownload />
-            <Text>Download</Text>
-          </Group>
-        </UnstyledButton>
       </div>
     </Box>
   );
@@ -250,16 +126,14 @@ function EditForm({ handleEdit }: EditFormProps) {
 
 export function ImageOverlayInfoEdit(props: ImageCardProps) {
   const mutation = trpcClient.useMutation(['image.UpdateImage']);
-  const trpcUtils = trpcClient.useContext();
+  // const trpcUtils = trpcClient.useContext();
 
-  function handleEdit({ caption, location, photoDate }: photoBaseT) {
-    console.log('submitted');
+  function handleEdit({ caption }: photoBaseT) {
+    console.log('fuck me');
     mutation.mutate(
       {
         _id: props._id,
         caption: caption,
-        location: location,
-        photoDate: photoDate,
       },
       {
         onSuccess: async () => {
@@ -275,11 +149,8 @@ export function ImageOverlayInfoEdit(props: ImageCardProps) {
 
   return (
     <>
-      {/* <Text color='dimmed' size='xs'>
-        Collection id: {props._id}
-      </Text> */}
       <Space h='sm' />
-      <EditForm handleEdit={handleEdit} />
+      <EditForm handleEdit={handleEdit} photo={props} />
     </>
   );
 }
