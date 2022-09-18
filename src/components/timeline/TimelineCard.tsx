@@ -24,9 +24,9 @@ type TimelineCardProps = memoryCardT;
 export function TimelineCard(props: TimelineCardProps) {
   const [indicator, setIndicator] = useState(false);
   const collectionBadges = props.collections?.map(c => (
-    <Grid.Col key={c.collectionTitle} span={3}>
-      <Badge color={c.collectionColor} radius='sm' size='xs' variant='filled'>
-        <Text>{c.collectionTitle}</Text>
+    <Grid.Col key={c.title} span={3}>
+      <Badge color={c.color} radius='sm' size='xs' variant='filled'>
+        <Text>{c.title}</Text>
       </Badge>
     </Grid.Col>
   ));

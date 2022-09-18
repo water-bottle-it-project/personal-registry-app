@@ -14,8 +14,14 @@ const collectionZ = z
 
 const collectionMemory2Z = collectionZ.omit({ description: true });
 
+const collectionSelectItemZ = z.object({
+  value: z.string().min(1),
+  label: z.string().min(1),
+});
+
 type collectionT = z.infer<typeof collectionZ>;
 type collectionMemory2T = z.infer<typeof collectionMemory2Z>;
+type collectionSelectItemT = z.infer<typeof collectionSelectItemZ>;
 
-export type { collectionMemory2T, collectionT };
-export { collectionMemory2Z, collectionZ };
+export type { collectionMemory2T, collectionSelectItemT, collectionT };
+export { collectionMemory2Z, collectionSelectItemZ, collectionZ };

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-import { collectionMemory2Z } from '~types/collection/collection';
+import { collectionMemory2Z, collectionSelectItemZ } from '~types/collection/collection';
+import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
 import {
   photoFormCreateRequestZ,
   photoFormCreateZ,
@@ -34,21 +35,25 @@ const dateSeparate = z.object({
 // Form validation
 const memoryCreateFormZ = memoryBase.merge(dateTuple).extend({
   photos: photoFormCreateZ.array().default([]),
+  collections: objectIdZ.array().default([]),
 });
 
 // Actual create request sent to server
 const memoryCreateFormRequestZ = memoryBase.merge(dateSeparate).extend({
   photos: photoFormCreateRequestZ.array().default([]),
+  collections: objectIdZ.array().default([]),
 });
 
 const memoryEditFormZ = memoryBase.merge(dateTuple).extend({
   _id: objectIdZ,
   photos: photoFormEditZ.array().default([]),
+  collections: objectIdZ.array().default([]),
 });
 
 const memoryEditFormRequestZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photos: photoFormEditRequestZ.array().default([]),
+  collections: objectIdZ.array().default([]),
 });
 
 // For querying a single memory.

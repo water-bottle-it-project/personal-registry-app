@@ -16,6 +16,7 @@ const collectionRouter = createProtectedDbRouter()
       const collections: collectionT[] = await Collection.find(
         { userId: ctx.userId },
         { userId: 0 },
+        { sort: { title: 1 } },
       );
 
       return {

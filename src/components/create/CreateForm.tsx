@@ -1,6 +1,6 @@
 import { getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Stack } from '@mantine/core';
+import { Group, Stack, Text, Title } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons';
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import { CreateFormMemoryInfo } from '~components/create/CreateFormMemoryInfo';
 import { CreateFormPhotos } from '~components/create/CreateFormPhotos';
 import { CreateFormTop } from '~components/create/CreateFormTop';
 import { ScrollToTop } from '~components/util/ScrollToTop';
+import type { collectionSelectItemT } from '~types/collection/collection';
 import type { memoryCreateFormRequestT, memoryCreateFormT } from '~types/memory/memoryForm';
 import { memoryCreateFormZ } from '~types/memory/memoryForm';
 import type { photoFormCreateRequestT } from '~types/photo/photo';
@@ -30,6 +31,8 @@ export function CreateForm() {
       photos: [],
     },
   });
+
+  const { data, isLoadingError, isLoading } = trpcClient.useQuery(['collection.GetCollections']);
 
   const trpcUtils = trpcClient.useContext();
   const creation = trpcClient.useMutation(['memory.CreateMemory']);
@@ -75,6 +78,7 @@ export function CreateForm() {
       firstDate: memory.date[0],
       lastDate: memory.date[1],
       photos: newPhotos,
+      collections: memory.collections,
     };
 
     // Store memory and photo with urls in DB.
@@ -102,12 +106,39 @@ export function CreateForm() {
     });
   }
 
+  if (isLoading || !data?.collections) {
+    return (
+      <Stack spacing='sm'>
+        <Group position='apart'>
+          <Title>Create a memory</Title>
+        </Group>
+        <Text>Loading collections for creating memory...</Text>
+      </Stack>
+    );
+  }
+
+  if (isLoadingError) {
+    return (
+      <Stack spacing='sm'>
+        <Group position='apart'>
+          <Title>Create a memory</Title>
+        </Group>
+        <Text>Error loading collections for creating memory. Try again later.</Text>
+      </Stack>
+    );
+  }
+
+  const collections: collectionSelectItemT[] = data.collections.map(c => ({
+    value: c._id,
+    label: c.title,
+  }));
+
   return (
     <>
       <form noValidate onSubmit={formMethods.handleSubmit(handleMemoryCreate)}>
         <Stack spacing='sm'>
           <CreateFormTop {...formMethods} />
-          <CreateFormMemoryInfo {...formMethods} />
+          <CreateFormMemoryInfo collections={collections} {...formMethods} />
           <CreateFormPhotos {...formMethods} />
         </Stack>
       </form>
