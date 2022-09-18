@@ -1,11 +1,14 @@
-import { Container, Grid, Space, Text, Title, useMantineTheme } from '@mantine/core';
+import { Container, Grid, Space, Stack, Text, Title, useMantineTheme } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconX } from '@tabler/icons';
+import Lottie from 'lottie-react';
 import { NextSeo } from 'next-seo';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { TimelineCard } from '~components/timeline/TimelineCard';
 import { TimelineSkeleton } from '~components/timeline/TimelineSkeleton';
+import emptyLottie from '~components/util/empty-lottie.json';
+import { LinkButton } from '~components/util/LinkButton';
 import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
 
 export function CollectionMemories({ _id }: collectionIdOnlyT) {
@@ -17,23 +20,27 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
   const collectionData = trpcClient.useQuery(['collection.GetCollection', { _id: _id }])?.data
     ?.collection;
 
-  if (isLoading || !data?.memories) {
+  if (isLoading) {
     const skeletonLoaders = Array.from({ length: 10 }, (_, i) => (
       <Grid.Col key={i} md={3} sm={4} xs={6}>
         <TimelineSkeleton />
       </Grid.Col>
     ));
 
-    return <Grid>{skeletonLoaders}</Grid>;
+    return (
+      <Container size='xl'>
+        <Grid>{skeletonLoaders}</Grid>
+      </Container>
+    );
   }
-  if (isLoadingError) {
+  if (isLoadingError || error) {
     showNotification({
       color: 'red',
       icon: <IconX />,
       title: 'Error!',
       message: 'An error occurred while loading memories.',
     });
-    return <Text>Error loading collections</Text>;
+    return <Text>Error loading Memories</Text>;
   }
 
   const sortedMemories =
@@ -68,9 +75,37 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
           </Text>
         </Title>
         <Space h='xl' />
-        <Grid>{memories}</Grid>
+        <Grid>{memories?.length === 0 ? <NoMemoriesFound /> : memories}</Grid>
         <Space h='xl' />
       </Container>
     </>
+  );
+}
+
+function NoMemoriesFound() {
+  const theme = useMantineTheme();
+  return (
+    <Grid.Col>
+      <Space h='xl' />
+      <Stack align='center'>
+        <Lottie
+          animationData={theme.colorScheme === 'dark' ? emptyLottie : emptyLottie}
+          loop
+          style={{ maxWidth: '500px', maxHeight: '500px' }}
+        />
+        <Title align='center' order={1}>
+          It's looking a little empty here...
+        </Title>
+        <Text align='center'>Click the button below to begin creating your first memory.</Text>
+        <LinkButton
+          gradient={{ from: 'indigo', to: 'cyan' }}
+          href='/create'
+          size='md'
+          variant='gradient'
+        >
+          Create a Memory
+        </LinkButton>
+      </Stack>
+    </Grid.Col>
   );
 }
