@@ -34,7 +34,7 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
           {description || 'no description provided'}
         </Text>
         <Group position='apart'>
-          <Link href='/' passHref>
+          <Link as={`/collections/${_id}`} href={`/collections/${_id}`} passHref>
             <Anchor component='a'>
               <Text>View memories</Text>
             </Anchor>
