@@ -31,24 +31,22 @@ export function MemoryHeader({
   const lDate = new Date(lastDate).toDateString();
   const collectionBadges = collections.map(c => (
     <Badge
-      key={c.collectionTitle}
+      key={c.title}
       radius='xs'
       sx={theme => ({
         backgroundColor:
-          theme.colorScheme === 'dark'
-            ? theme.colors[c.collectionColor][5]
-            : theme.colors[c.collectionColor][2],
+          theme.colorScheme === 'dark' ? theme.colors[c.color][5] : theme.colors[c.color][2],
         color: 'black',
       })}
     >
       <Link
-        as={`/collections/edit?id=${c.collectionId}`}
-        href={`/collections?edit=${c.collectionId}`}
+        as={`/collections/edit?id=${c._id}`}
+        href={`/collections?edit=${c._id}`}
         passHref
         shallow
       >
         <Anchor component='a' variant='text'>
-          {c.collectionTitle}
+          {c.title}
         </Anchor>
       </Link>
     </Badge>
