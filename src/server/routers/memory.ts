@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Memory } from '~server/models/memory';
 import { Photo } from '~server/models/photo';
+import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
 import type {
   memoryCardT,
   memoryCreateFormRequestT,
@@ -26,6 +27,27 @@ const memoryRouter = createProtectedDbRouter()
         { userId: 0 },
         { sort: { lastDate: -1 } },
       ).populate('collections', '-description -userId');
+
+      return {
+        memories,
+      };
+    },
+  })
+
+  .query('GetCollectionMemories', {
+    input: collectionIdOnlyZ,
+    async resolve({ ctx, input }) {
+      const memories: memoryCardT[] = await Memory.find({
+        userId: ctx.userId,
+        'collections.collectionId': input._id,
+      });
+
+      if (!memories) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Could not find memories using collection id.',
+        });
+      }
 
       return {
         memories,
