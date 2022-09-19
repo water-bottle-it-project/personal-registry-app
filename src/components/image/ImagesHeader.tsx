@@ -1,6 +1,6 @@
 import { Chip, Container, Space, Text, useMantineTheme } from '@mantine/core';
 
-import { SearchBar } from '~components/util/searchBar';
+import { SearchBar } from '~components/util/SearchBar';
 
 export function ImagesHeader() {
   const theme = useMantineTheme();

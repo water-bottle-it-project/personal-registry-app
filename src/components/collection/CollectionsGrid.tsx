@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CollectionCard } from '~components/collection/CollectionCard';
 import { CollectionsHeader } from '~components/collection/CollectionsHeader';
+import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 import { CollectionSearchResult } from './CollectionSearchResult';
-import { CollectionSkeleton } from './CollectionSkeleton';
 
 export function CollectionsGrid() {
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
@@ -17,15 +17,7 @@ export function CollectionsGrid() {
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState({ text: '', searchType: 'title' });
   if (isLoading) {
-    // Need to provide a key for React components when mapping over an array (check devtools console).
-    // Use same grid as the data grid to have consistent sizing.
-    const skeletonLoaders = Array.from({ length: 10 }, (_, i) => (
-      <Grid.Col key={i} md={3} sm={4} xs={6}>
-        <CollectionSkeleton />
-      </Grid.Col>
-    ));
-
-    return <Grid>{skeletonLoaders}</Grid>;
+    return <SkeletonGrid />;
   }
 
   if (isLoadingError) {
