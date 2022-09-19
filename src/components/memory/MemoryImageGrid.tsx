@@ -52,8 +52,9 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
       >
         <MemoryImageGridItem
           _id={photos[i]._id}
+          caption={photos[i].caption}
           key={photos[i]._id}
-          photoDate={new Date()}
+          photoDate={photos[i].photoDate}
           url={photos[i].url}
         />
       </div>

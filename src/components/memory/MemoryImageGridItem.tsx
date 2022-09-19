@@ -1,10 +1,9 @@
-import { ActionIcon, createStyles, Group, Image, Text, Tooltip } from '@mantine/core';
+import { createStyles, Group, Image, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
-import { IconDownload } from '@tabler/icons';
 
 import type { photoWithIdT } from '~types/photo/photo';
 
-export function MemoryImageGridItem({ caption, url }: photoWithIdT) {
+export function MemoryImageGridItem({ caption, url, photoDate }: photoWithIdT) {
   const { hovered, ref } = useHover();
   const { classes, cx } = useStyles();
 
@@ -19,14 +18,16 @@ export function MemoryImageGridItem({ caption, url }: photoWithIdT) {
       />
       {hovered && (
         <Group position='apart'>
-          <Text className={classes.imgCaption} size='lg' weight={400}>
-            {caption}
-          </Text>
-          <Tooltip label='Download'>
-            <ActionIcon className={classes.imgDownload} variant='filled'>
-              <IconDownload size={36} />
-            </ActionIcon>
-          </Tooltip>
+          <div className={classes.text}>
+            <Text className={classes.imgCaption} lineClamp={1} size='lg' weight={400}>
+              {caption}
+            </Text>
+          </div>
+          <div className={classes.text}>
+            <Text className={classes.imgDownload} lineClamp={1} size='lg' weight={400}>
+              {photoDate && new Date(photoDate).toDateString()}
+            </Text>
+          </div>
         </Group>
       )}
     </div>
@@ -48,11 +49,15 @@ const useStyles = createStyles(theme => ({
   imgDownload: {
     color: 'white',
     position: 'relative',
-    top: '-34px',
+    top: '-30px',
     left: '-12px',
     marginBottom: '-28px',
   },
   dimmed: {
     filter: 'brightness(70%)',
+  },
+  text: {
+    overflowWrap: 'break-word',
+    maxWidth: '50%',
   },
 }));
