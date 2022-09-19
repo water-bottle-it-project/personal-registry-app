@@ -1,55 +1,33 @@
 import { Carousel } from '@mantine/carousel';
-import { Anchor, Badge, Box, Card, Grid, Image, ScrollArea, Space, Text } from '@mantine/core';
+import { Anchor, Card, createStyles, Image, Space, Text } from '@mantine/core';
 import Link from 'next/link';
 import { useState } from 'react';
 
 import type { memoryCardT } from '~types/memory/memoryForm';
 
-/**
- * collections and photos will be list array which we can change when actually passing in
- * the objects, unsure about if we will pass the date as string in the prop or convert to
- * string within the component, just keeping it like this for now, will pass in the url
- * of the image as well when it comes to it, instead of using unsplash
- */
-// interface Collection {
-//   collectionId: string;
-// }
-
-// interface Photo {
-//   photoId: string;
-// }
-
-type TimelineCardProps = memoryCardT;
-
-export function TimelineCard(props: TimelineCardProps) {
+export function TimelineCard({
+  _id,
+  title,
+  description,
+  firstDate,
+  lastDate,
+  photoPreviewUrl,
+  photos,
+  collections,
+}: memoryCardT) {
   const [indicator, setIndicator] = useState(false);
-  const collectionBadges = props.collections?.map(c => (
-    <Grid.Col key={c.title} span={3}>
-      <Badge color={c.color} radius='sm' size='xs' variant='filled'>
-        <Text>{c.title}</Text>
-      </Badge>
-    </Grid.Col>
-  ));
 
-  // preview n photos in carousel
-  // const n = 3;
-  // const photoPreview = props.photos?.slice(0, n).map(c => (
-  //   <Carousel.Slide key={c._id}>
-  //     <Image alt={c.caption} height={180} src={c.url} />
-  //   </Carousel.Slide>
-  // ));
+  const { classes } = useStyles();
+
   return (
     <Card
-      p='lg'
       radius='sm'
       shadow='sm'
       sx={theme => ({
-        // subscribe to color scheme changes
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
-        // or use any other static values from theme
-        fontSize: theme.fontSizes.sm,
-        width: 275,
-        maxHeight: 500,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
       })}
       withBorder
     >
@@ -60,45 +38,50 @@ export function TimelineCard(props: TimelineCardProps) {
           mx='auto'
           onMouseEnter={() => setIndicator(true)}
           onMouseLeave={() => setIndicator(false)}
-          sx={{ maxWidth: 300, transition: 'indicator 1s, control 1s' }}
+          sx={{ transition: 'indicator 1s, control 1s' }}
           withControls={indicator}
           withIndicators={indicator}
         >
           <Carousel.Slide>
             <Image
-              alt={props.title}
+              alt={title}
+              fit='cover'
               height={180}
-              placeholder={<Text align='center'>Image preview not available.</Text>}
-              src={props.photoPreviewUrl}
+              placeholder={<Text align='center'>No photos</Text>}
+              src={photoPreviewUrl}
               withPlaceholder
             />
           </Carousel.Slide>
         </Carousel>
       </Card.Section>
-      <Text mt='sm' size='xl' weight={600}>
-        {props.title}
-      </Text>
-
-      <Text color='dimmed' mb='xs' size='xs' weight={600}>
-        {props.firstDate.toDateString()}
-      </Text>
-
-      <ScrollArea style={{ height: 100 }}>
-        <Text color='light' size='sm'>
-          {props.description}
-        </Text>
-      </ScrollArea>
       <Space h='md' />
-      <Grid gutter='xs' mb='xs'>
-        {/* {props.collections &&
-          props.collections.map(c => TimelineTag({ collectionId: c.collectionId }))} */}
-        {collectionBadges}
-      </Grid>
-      <Link href={'memory/' + props._id}>
-        <Anchor sx={{ fontSize: 14, fontWeight: 600 }}>
-          View {props.photos?.length || 0} photos
+      <Text className={classes.text} lineClamp={2} size='xl' weight={600}>
+        {title}
+      </Text>
+
+      <Text color='dimmed' size='xs' weight={600}>
+        {firstDate === lastDate
+          ? new Date(lastDate).toDateString()
+          : `${new Date(firstDate).toDateString()} - ${new Date(lastDate).toDateString()}`}
+      </Text>
+      <Space h='sm' />
+      <Text className={classes.text} color='light' italic={!description} lineClamp={6} size='sm'>
+        {description || 'no description provided'}
+      </Text>
+      <Space h='sm' />
+
+      {/* Use mt='auto' to push link to bottom of card */}
+      <Link href={`/memory/${_id}`} passHref>
+        <Anchor component='a' mt='auto' sx={{ fontSize: 14, fontWeight: 600 }}>
+          {`View ${photos.length} photo${photos.length === 1 ? '' : 's'}`}
         </Anchor>
       </Link>
     </Card>
   );
 }
+
+const useStyles = createStyles({
+  text: {
+    overflowWrap: 'break-word',
+  },
+});
