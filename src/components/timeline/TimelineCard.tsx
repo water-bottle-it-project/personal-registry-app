@@ -1,39 +1,21 @@
 import { Carousel } from '@mantine/carousel';
-import { Anchor, Badge, Card, Grid, Image, ScrollArea, Space, Text } from '@mantine/core';
+import { Anchor, Badge, Card, createStyles, Group, Image, Space, Text } from '@mantine/core';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import type { memoryCardT } from '~types/memory/memoryForm';
 
-/**
- * collections and photos will be list array which we can change when actually passing in
- * the objects, unsure about if we will pass the date as string in the prop or convert to
- * string within the component, just keeping it like this for now, will pass in the url
- * of the image as well when it comes to it, instead of using unsplash
- */
-// interface Collection {
-//   collectionId: string;
-// }
-
-// interface Photo {
-//   photoId: string;
-// }
-
-type TimelineCardProps = memoryCardT;
-
-export function TimelineCard(props: TimelineCardProps) {
-  const router = useRouter();
+export function TimelineCard({
+  _id,
+  title,
+  description,
+  firstDate,
+  lastDate,
+  photoPreviewUrl,
+  photos,
+  collections,
+}: memoryCardT) {
   const [indicator, setIndicator] = useState(false);
-
-  const isOnCollectionsPage = router.asPath.split('/')[1] === 'collections';
-  const collectionBadges = props.collections?.map(c => (
-    <Grid.Col key={c.collectionTitle} span={3}>
-      <Badge color={c.collectionColor} radius='sm' size='xs' variant='filled'>
-        <Text>{c.collectionTitle}</Text>
-      </Badge>
-    </Grid.Col>
-  ));
 
   const { classes } = useStyles();
 
