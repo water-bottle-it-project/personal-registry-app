@@ -16,6 +16,12 @@ const appTheme: MantineThemeOverride = {
         },
       }),
     },
+    Badge: {
+      defaultProps: {
+        radius: 'xs',
+        variant: 'filled',
+      },
+    },
     Button: {
       styles: theme => ({
         root: {

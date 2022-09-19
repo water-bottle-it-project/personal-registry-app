@@ -16,14 +16,11 @@ interface MemoryIndexProps {
   _id: string;
 }
 
-export function MemoryIndex(props: MemoryIndexProps) {
+export function MemoryIndex({ _id }: MemoryIndexProps) {
   const [scrollLocked, setScrollLocked] = useScrollLock(false);
   const [gridView, setGridView] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(-1);
-  const { data, isLoadingError, isLoading } = trpcClient.useQuery([
-    'memory.GetMemory',
-    { _id: props._id },
-  ]);
+  const { data, isLoadingError, isLoading } = trpcClient.useQuery(['memory.GetMemory', { _id }]);
   if (isLoading || !data?.memory) {
     return <div>Loading...</div>;
   }
@@ -104,7 +101,7 @@ export function MemoryIndex(props: MemoryIndexProps) {
   return (
     <>
       <MemoryHeader
-        _id={props._id}
+        _id={_id}
         collections={collections}
         description={description}
         firstDate={firstDate}
