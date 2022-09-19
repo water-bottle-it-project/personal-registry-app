@@ -1,58 +1,111 @@
-import { ActionIcon, createStyles, Group, Image, Text, Tooltip } from '@mantine/core';
-import { useHover } from '@mantine/hooks';
-import { IconDownload } from '@tabler/icons';
+import { Grid, Stack } from '@mantine/core';
+import { useScrollLock } from '@mantine/hooks';
+import { useState } from 'react';
+import Lightbox from 'react-18-image-lightbox';
 
+import { MemoryImageGridItem } from '~components/memory/MemoryImageGridItem';
 import type { photoWithIdT } from '~types/photo/photo';
 
-export function MemoryImageGrid({ caption, url }: photoWithIdT) {
-  const { hovered, ref } = useHover();
-  const { classes, cx } = useStyles();
-
-  return (
-    <div ref={ref}>
-      <Image
-        alt={caption}
-        className={cx(classes.wrapper, { [classes.dimmed]: hovered })}
-        height='40%'
-        src={url}
-        width='100%'
-      />
-      {hovered && (
-        <Group position='apart'>
-          <Text className={classes.imgCaption} size='lg' weight={400}>
-            {caption}
-          </Text>
-          <Tooltip label='Download'>
-            <ActionIcon className={classes.imgDownload} variant='filled'>
-              <IconDownload size={36} />
-            </ActionIcon>
-          </Tooltip>
-        </Group>
-      )}
-    </div>
-  );
+interface MemoryImageGrid2Props {
+  photos: photoWithIdT[];
 }
 
-const useStyles = createStyles(theme => ({
-  wrapper: {
-    cursor: 'zoom-in',
-    transition: 'all 0.5s ease',
-  },
-  imgCaption: {
-    color: 'white',
-    position: 'relative',
-    top: '-30px',
-    right: '-12px',
-    marginBottom: '-28px',
-  },
-  imgDownload: {
-    color: 'white',
-    position: 'relative',
-    top: '-34px',
-    left: '-12px',
-    marginBottom: '-28px',
-  },
-  dimmed: {
-    filter: 'brightness(70%)',
-  },
-}));
+export function MemoryImageGrid({ photos }: MemoryImageGrid2Props) {
+  const [scrollLocked, setScrollLocked] = useScrollLock(false);
+  const [photoIndex, setPhotoIndex] = useState(-1);
+
+  // What im trying to achieve:
+  // Distribute images on the masonry grid evenly
+  // My approach:
+  // Every nth photo in the photos array, switch columns and populate that column
+  // This is a very naive attempt and does not respect image order (in mobile view)
+  let colCount = 1;
+  const photoCol1: React.ReactElement[] = [];
+  const photoCol2: React.ReactElement[] = [];
+  const photoCol3: React.ReactElement[] = [];
+
+  function handlePhotoClick(i: number) {
+    setPhotoIndex(i);
+    setScrollLocked(scrollLocked => !scrollLocked);
+  }
+
+  for (let i = 0; i < photos.length; i++) {
+    // every nth index (where n = 2), switch to adjacent column and populate
+    if ((i - 1) % 2 == 0 && i !== 0) {
+      switch (colCount) {
+        case 1:
+          colCount = 2;
+          break;
+        case 2:
+          colCount = 3;
+          break;
+        case 3:
+          colCount = 1;
+          break;
+      }
+    }
+    const photoElem = (
+      <div
+        onClick={() => {
+          handlePhotoClick(i);
+        }}
+      >
+        <MemoryImageGridItem
+          _id={photos[i]._id}
+          key={photos[i]._id}
+          photoDate={new Date()}
+          url={photos[i].url}
+        />
+      </div>
+    );
+    if (colCount === 1) {
+      photoCol1.push(photoElem);
+    } else if (colCount === 2) {
+      photoCol2.push(photoElem);
+    } else {
+      photoCol3.push(photoElem);
+    }
+  }
+
+  const currentImage = photos[photoIndex];
+
+  return (
+    <>
+      <Grid>
+        <Grid.Col lg={4} md={6}>
+          <Stack align='flex-start' justify='flex-start' spacing='xs'>
+            {photoCol1}
+          </Stack>
+        </Grid.Col>
+        <Grid.Col lg={4} md={6}>
+          <Stack align='flex-start' justify='flex-start' spacing='xs'>
+            {photoCol2}
+          </Stack>
+        </Grid.Col>
+        <Grid.Col lg={4} md={6}>
+          <Stack align='flex-start' justify='flex-start' spacing='xs'>
+            {photoCol3}
+          </Stack>
+        </Grid.Col>
+      </Grid>
+      {!!currentImage && (
+        <Lightbox
+          imageTitle={photos[photoIndex].caption}
+          mainSrc={photos[photoIndex].url}
+          mainSrcThumbnail={photos[photoIndex].url}
+          nextSrc={photos[(photoIndex + 1) % photos.length].url}
+          onCloseRequest={() => {
+            setPhotoIndex(-1);
+            setScrollLocked(!scrollLocked);
+          }}
+          onImageLoad={() => {
+            window.dispatchEvent(new Event('resize'));
+          }}
+          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % photos.length)}
+          onMovePrevRequest={() => setPhotoIndex((photoIndex + photos.length - 1) % photos.length)}
+          prevSrc={photos[(photoIndex + photos.length - 1) % photos.length].url}
+        />
+      )}
+    </>
+  );
+}
