@@ -11,8 +11,10 @@ import {
   Title,
   UnstyledButton,
 } from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
 import { showNotification } from '@mantine/notifications';
 import {
+  IconCalendarPlus,
   IconCheck,
   IconDeviceFloppy,
   IconDownload,
@@ -20,24 +22,11 @@ import {
   IconRotateClockwise2,
   IconTrash,
 } from '@tabler/icons';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { Controller, useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { memoryEditFormZ } from '~types/memory/memoryForm';
-// import type { photoWithMemoryT } from '~types/photo/photo';
-// import { photoBase } from '~types/photo/photo';
-
-interface ImageCardProps {
-  _id: string;
-  caption: string;
-  url: string;
-}
-
-interface photoBaseT {
-  caption: string;
-}
+import type { photoBaseT, photoBaseWithIdT } from '~types/photo/photo';
+import { photoBase } from '~types/photo/photo';
 
 const useStyles = createStyles(theme => ({
   infoHeader: {
@@ -61,8 +50,8 @@ const useStyles = createStyles(theme => ({
 }));
 
 interface EditFormProps {
-  photo: ImageCardProps;
-  handleEdit: ({ caption }: photoBaseT) => void;
+  photo: photoBaseWithIdT;
+  handleEdit: ({ caption, location, photoDate }: photoBaseT) => void;
 }
 
 function EditForm({ photo, handleEdit }: EditFormProps) {
@@ -71,26 +60,15 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<photoBaseT>({
-    // resolver: zodResolver(z.object({ caption: z.string().trim().optional() })),
     resolver: async (data, context, options) => {
-      console.log('form data', data);
-      console.log('form context', context);
-      console.log('form options', options);
-      console.log(
-        'validation result',
-        await zodResolver(z.object({ caption: z.string().trim().optional() }))(
-          data,
-          context,
-          options,
-        ),
-      );
-      return zodResolver(z.object({ caption: z.string().trim().optional() }))(
-        data,
-        context,
-        options,
-      );
+      // console.log('form data', data);
+      // console.log('form context', context);
+      // console.log('form options', options);
+      console.log('validation result', await zodResolver(photoBase)(data, context, options));
+      return zodResolver(photoBase)(data, context, options);
     },
 
     defaultValues: photo,
@@ -112,13 +90,27 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
           <Title order={2}>Information</Title>
           <Space h='lg' />
           <Stack spacing='sm'>
-            <TextInput
-              className={classes.infoText}
-              // description='Displayed front and centre.'
-              // error={errors?.caption?.message}
-              // label='Title'
-              required
-              {...register('caption')}
+            <TextInput className={classes.infoText} label='Title' {...register('caption')} />
+            <TextInput className={classes.infoText} label='Location' {...register('location')} />
+            <Controller
+              control={control}
+              name='photoDate'
+              render={({ field: { value, onChange, ref, ...field }, fieldState: { error } }) => (
+                <DatePicker
+                  description='Date of this particular photo'
+                  dropdownPosition='bottom-start'
+                  error={error?.message}
+                  firstDayOfWeek='sunday'
+                  icon={<IconCalendarPlus size={16} />}
+                  inputFormat='D MMMM YYYY'
+                  label='Photo date'
+                  onChange={onChange}
+                  placeholder='Click to add a date.'
+                  ref={ref}
+                  value={value}
+                  {...field}
+                />
+              )}
             />
           </Stack>
           <Space h='xs' />
@@ -142,19 +134,19 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
   );
 }
 
-export function ImageOverlayInfoEdit(props: ImageCardProps) {
+export function ImageOverlayInfoEdit(props: photoBaseWithIdT) {
   const mutation = trpcClient.useMutation(['images.UpdateImage']);
   const trpcUtils = trpcClient.useContext();
 
-  const handleEdit = async ({ caption }: photoBaseT) => {
+  const handleEdit = async ({ caption, location, photoDate }: photoBaseT) => {
     console.log('caption', caption);
     console.log('photo id', props._id);
     mutation.mutate(
       {
         _id: props._id,
         caption: caption,
-        // location: 'tina',
-        // photoDate: null,
+        location: location,
+        photoDate: photoDate,
       },
       {
         onSuccess: async () => {
