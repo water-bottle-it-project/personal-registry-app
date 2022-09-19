@@ -1,5 +1,4 @@
-import { Container, Grid, Space, Stack, Text, Title, useMantineTheme } from '@mantine/core';
-import { IconX } from '@tabler/icons';
+import { Container, Space, Stack, Text, Title, useMantineTheme } from '@mantine/core';
 import Lottie from 'lottie-react';
 import { NextSeo } from 'next-seo';
 
@@ -32,6 +31,7 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
 
   return (
     <>
+      <NextSeo description='Viewing memories within a collection' title='View Memories' />
       <Container size='xl'>
         <Space h='xl' />
         <Title order={1}>
@@ -40,6 +40,7 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
             {collectionData?.title}
           </Text>
         </Title>
+        <Text>{data?.memories.length} found</Text>
         <Space h='xl' />
         {contents}
       </Container>
