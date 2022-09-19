@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useAuthUser } from 'next-firebase-auth';
 import { useForm } from 'react-hook-form';
 
+import { firebaseMetadata } from '~clientUtils/firebaseMetadata';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CreateFormMemoryInfo } from '~components/create/CreateFormMemoryInfo';
 import { CreateFormPhotos } from '~components/create/CreateFormPhotos';
@@ -58,7 +59,7 @@ export function CreateForm() {
     // Upload and get download url promises
     const fileUploadRequests = memory.photos.map(async p => {
       const fileRef = ref(userStorageRef, `${p._dir}/${p._file.name}`);
-      const fileUploadResult = await uploadBytes(fileRef, p._file);
+      const fileUploadResult = await uploadBytes(fileRef, p._file, firebaseMetadata);
       return await getDownloadURL(fileUploadResult.ref);
     });
 

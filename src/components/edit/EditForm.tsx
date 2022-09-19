@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { useAuthUser } from 'next-firebase-auth';
 import { useForm } from 'react-hook-form';
 
+import { firebaseMetadata } from '~clientUtils/firebaseMetadata';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { EditFormMemoryInfo } from '~components/edit/EditFormMemoryInfo';
 import { EditFormPhotos } from '~components/edit/EditFormPhotos';
@@ -88,7 +89,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
         return p.url;
       }
       const fileRef = ref(userStorageRef, `${p._dir}/${p._file.name}`);
-      const fileUploadResult = await uploadBytes(fileRef, p._file);
+      const fileUploadResult = await uploadBytes(fileRef, p._file, firebaseMetadata);
       return await getDownloadURL(fileUploadResult.ref);
     });
 
