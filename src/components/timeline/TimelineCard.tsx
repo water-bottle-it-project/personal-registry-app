@@ -1,5 +1,5 @@
 import { Carousel } from '@mantine/carousel';
-import { Anchor, Badge, Card, createStyles, Group, Image, Space, Text } from '@mantine/core';
+import { Anchor, Badge, Card, createStyles, Group, Image, Space, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -54,10 +54,10 @@ export function TimelineCard({
           </Carousel.Slide>
         </Carousel>
       </Card.Section>
-      <Space h='md' />
-      <Text className={classes.text} lineClamp={2} size='xl' weight={600}>
+      <Space h='xs' />
+      <Title className={classes.text} lineClamp={2} order={3} weight={600}>
         {title}
-      </Text>
+      </Title>
 
       <Text color='dimmed' size='xs' weight={600}>
         {firstDate === lastDate
@@ -66,7 +66,7 @@ export function TimelineCard({
       </Text>
       <Space h='sm' />
 
-      <Group>
+      <Group spacing='xs'>
         {collections.map(c => (
           <Badge color={c.color} key={c._id}>
             <Link href={`/collections/${c._id}`} passHref>
