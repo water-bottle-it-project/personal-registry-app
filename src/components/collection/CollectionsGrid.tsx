@@ -37,6 +37,7 @@ export function CollectionsGrid() {
         <CollectionCard _id={c._id} color={c.color} description={c.description} title={c.title} />
       </Grid.Col>
     ));
+
   return (
     <>
       <CollectionsHeader setIsSearching={setIsSearching} setSearchQuery={setSearchQuery} />

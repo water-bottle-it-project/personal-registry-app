@@ -15,6 +15,7 @@ import { IconEdit } from '@tabler/icons';
 import ObjectID from 'bson-objectid';
 import Link from 'next/link';
 
+import { LinkButton } from '~components/util/LinkButton';
 import type { memoryWithPhotosT } from '~types/memory/memoryForm';
 
 export function MemoryHeader({
@@ -48,7 +49,9 @@ export function MemoryHeader({
       <Container size='xl'>
         <Group position='apart'>
           <Title>{title}</Title>
-          <Button rightIcon={<IconEdit />}>Edit</Button>
+          <LinkButton href={`/memory/${_id}/edit`} rightIcon={<IconEdit />}>
+            Edit
+          </LinkButton>
         </Group>
         <Space h='xs' />
         <Text>{description}</Text>
