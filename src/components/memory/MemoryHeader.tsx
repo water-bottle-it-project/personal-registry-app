@@ -30,7 +30,7 @@ export function MemoryHeader({
 
   const collectionBadges = collections.map(c => (
     <Badge color={c.color} key={c.title}>
-      <Link as={`/collections/edit?id=${c._id}`} href={`/collections?edit=${c._id}`} passHref>
+      <Link href={`/collections/${c._id}`} passHref>
         <Anchor component='a' variant='text'>
           {c.title}
         </Anchor>
@@ -54,7 +54,7 @@ export function MemoryHeader({
           </LinkButton>
         </Group>
         <Space h='xs' />
-        <Text>{description}</Text>
+        <Text className={classes.description}>{description}</Text>
         <Space h='xs' />
         <Grid gutter='xs'>
           <Grid.Col xs={6}>
@@ -92,5 +92,9 @@ const useStyles = createStyles(theme => ({
     [theme.fn.largerThan('xs')]: {
       textAlign: 'right',
     },
+  },
+
+  description: {
+    whiteSpace: 'pre-wrap',
   },
 }));
