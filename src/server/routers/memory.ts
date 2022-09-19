@@ -146,6 +146,7 @@ const memoryRouter = createProtectedDbRouter()
           userId: ctx.userId,
           photos: photoIdsInserted,
           photoPreviewUrl,
+          collections: input.collections,
         },
         { overwrite: true },
       );

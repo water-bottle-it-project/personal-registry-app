@@ -12,6 +12,7 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { EditFormMemoryInfo } from '~components/edit/EditFormMemoryInfo';
 import { EditFormPhotos } from '~components/edit/EditFormPhotos';
 import { EditFormTop } from '~components/edit/EditFormTop';
+import type { collectionSelectItemT } from '~types/collection/collection';
 import type {
   memoryEditFormRequestT,
   memoryEditFormT,
@@ -24,8 +25,11 @@ import type { photoFormEditRequestT } from '~types/photo/photo';
 export function EditForm({ _id }: memoryIdOnlyT) {
   const router = useRouter();
   const { data, isLoading, isLoadingError } = trpcClient.useQuery(['memory.GetMemory', { _id }]);
+  const { data: collectionData } = trpcClient.useQuery(['collection.GetCollections'], {
+    placeholderData: { collections: [] },
+  });
 
-  if (isLoading || !data?.memory) {
+  if (isLoading || !data?.memory || !collectionData?.collections) {
     return <Text>Loading memory details...</Text>;
   }
 
@@ -44,16 +48,24 @@ export function EditForm({ _id }: memoryIdOnlyT) {
     ...data.memory,
     date: [new Date(data.memory.firstDate), new Date(data.memory.lastDate)],
     photos: existingPhotos,
+    collections: data.memory.collections.map(c => c._id),
   };
 
-  return <EditFormPopulated memory={existingMemory} />;
+  // Transform collection options to correct format
+  const collections: collectionSelectItemT[] = collectionData.collections.map(c => ({
+    value: c._id,
+    label: c.title,
+  }));
+
+  return <EditFormPopulated collections={collections} memory={existingMemory} />;
 }
 
 interface EditFormPopulatedProps {
   memory: memoryWithPhotosToEditT;
+  collections: collectionSelectItemT[];
 }
 
-function EditFormPopulated({ memory }: EditFormPopulatedProps) {
+function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
   const { id: userId } = useAuthUser();
   const mutation = trpcClient.useMutation(['memory.UpdateMemory']);
   const trpcUtils = trpcClient.useContext();
@@ -96,6 +108,7 @@ function EditFormPopulated({ memory }: EditFormPopulatedProps) {
       firstDate: memory.date[0],
       lastDate: memory.date[1],
       photos: editedPhotos,
+      collections: memory.collections,
     };
 
     console.log(editedMemory);
@@ -137,7 +150,7 @@ function EditFormPopulated({ memory }: EditFormPopulatedProps) {
     <form noValidate onSubmit={formMethods.handleSubmit(handleMemoryEdit)}>
       <Stack spacing='sm'>
         <EditFormTop {...formMethods} />
-        <EditFormMemoryInfo {...formMethods} />
+        <EditFormMemoryInfo collections={collections} {...formMethods} />
         <EditFormPhotos {...formMethods} />
       </Stack>
     </form>

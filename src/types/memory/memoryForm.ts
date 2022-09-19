@@ -80,7 +80,7 @@ const memoryWithPhotosZ = memoryBase.merge(dateSeparate).extend({
 const memoryWithPhotosToEditZ = memoryBase.merge(dateTuple).extend({
   _id: objectIdZ,
   photos: photoWithIdZ.array().default([]),
-  collections: collectionMemory2Z.array().default([]),
+  collections: objectIdZ.array().default([]),
 });
 
 /**
