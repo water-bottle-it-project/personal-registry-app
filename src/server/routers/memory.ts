@@ -37,10 +37,11 @@ const memoryRouter = createProtectedDbRouter()
   .query('GetCollectionMemories', {
     input: collectionIdOnlyZ,
     async resolve({ ctx, input }) {
+      const collectionId = new mongoose.Types.ObjectId(input._id);
       const memories: memoryCardT[] = await Memory.find({
         userId: ctx.userId,
-        'collections.collectionId': input._id,
-      });
+        collections: { $in: [collectionId] },
+      }).populate('collections', '-description -userId');
 
       if (!memories) {
         throw new TRPCError({
