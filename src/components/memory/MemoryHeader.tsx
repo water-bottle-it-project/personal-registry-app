@@ -29,7 +29,7 @@ export function MemoryHeader({
   const { classes } = useStyles();
 
   const collectionBadges = collections.map(c => (
-    <Badge color={c.color} key={c.title}>
+    <Badge color={c.color} key={c._id}>
       <Link href={`/collections/${c._id}`} passHref>
         <Anchor component='a' variant='text'>
           {c.title}

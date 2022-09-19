@@ -69,7 +69,11 @@ export function TimelineCard({
       <Group>
         {collections.map(c => (
           <Badge color={c.color} key={c._id}>
-            {c.title}
+            <Link href={`/collections/${c._id}`} passHref>
+              <Anchor component='a' variant='text'>
+                {c.title}
+              </Anchor>
+            </Link>
           </Badge>
         ))}
       </Group>
