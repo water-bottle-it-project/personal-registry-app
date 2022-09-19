@@ -13,15 +13,8 @@ import {
 } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { showNotification } from '@mantine/notifications';
-import {
-  IconCalendarPlus,
-  IconCheck,
-  IconDeviceFloppy,
-  IconDownload,
-  IconEdit,
-  IconRotateClockwise2,
-  IconTrash,
-} from '@tabler/icons';
+import { IconCalendarPlus, IconCheck, IconDeviceFloppy, IconRotateClockwise2 } from '@tabler/icons';
+import router from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -40,6 +33,7 @@ const useStyles = createStyles(theme => ({
   buttonGroup: {
     display: 'flex',
     flexDirection: 'row-reverse',
+    bottom: '0px',
   },
   button: {
     margin: '0 10px',
@@ -86,61 +80,65 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
       })}
     >
       <form noValidate onSubmit={handleSubmit(handleEdit)}>
-        <div>
-          <Title order={2}>Information</Title>
-          <Space h='lg' />
-          <Stack spacing='sm'>
-            <TextInput className={classes.infoText} label='Title' {...register('caption')} />
-            <TextInput className={classes.infoText} label='Location' {...register('location')} />
-            <Controller
-              control={control}
-              name='photoDate'
-              render={({ field: { value, onChange, ref, ...field }, fieldState: { error } }) => (
-                <DatePicker
-                  description='Date of this particular photo'
-                  dropdownPosition='bottom-start'
-                  error={error?.message}
-                  firstDayOfWeek='sunday'
-                  icon={<IconCalendarPlus size={16} />}
-                  inputFormat='D MMMM YYYY'
-                  label='Photo date'
-                  onChange={onChange}
-                  placeholder='Click to add a date.'
-                  ref={ref}
-                  value={value}
-                  {...field}
-                />
-              )}
+        <Title order={2}>Information</Title>
+        <Space h='lg' />
+        <Text className={classes.infoHeader}>Caption</Text>
+        <TextInput className={classes.infoText} {...register('caption')} />
+        <Space h='xs' />
+        <Text className={classes.infoHeader}>Date</Text>
+        <Controller
+          control={control}
+          name='photoDate'
+          render={({ field: { value, onChange, ref, ...field }, fieldState: { error } }) => (
+            <DatePicker
+              dropdownPosition='bottom-start'
+              error={error?.message}
+              firstDayOfWeek='sunday'
+              icon={<IconCalendarPlus size={16} />}
+              inputFormat='D MMMM YYYY'
+              onChange={onChange}
+              placeholder='Click to add a date.'
+              ref={ref}
+              value={value}
+              {...field}
             />
-          </Stack>
-          <Space h='xs' />
+          )}
+        />
+        <Space h='xs' />
+        <Text className={classes.infoHeader}>Location</Text>
+        <TextInput className={classes.infoText} {...register('location')} />
+        <Space h='xs' />
+        <div className={classes.buttonGroup}>
+          <UnstyledButton className={classes.button} type='submit'>
+            <Group spacing={5}>
+              <IconDeviceFloppy />
+              <Text>Save</Text>
+            </Group>
+          </UnstyledButton>
+          <UnstyledButton
+            className={classes.button}
+            onClick={() => {
+              reset();
+            }}
+          >
+            <Group className={classes.delete} spacing={5}>
+              <IconRotateClockwise2 />
+              <Text>Reset</Text>
+            </Group>
+          </UnstyledButton>
         </div>
-        <Button type='submit'>Submit</Button>
       </form>
-      <div className={classes.buttonGroup}>
-        <UnstyledButton
-          className={classes.button}
-          onClick={() => {
-            reset();
-          }}
-        >
-          <Group className={classes.delete} spacing={5}>
-            <IconRotateClockwise2 />
-            <Text>Reset</Text>
-          </Group>
-        </UnstyledButton>
-      </div>
     </Box>
   );
 }
 
 export function ImageOverlayInfoEdit(props: photoBaseWithIdT) {
-  const mutation = trpcClient.useMutation(['images.UpdateImage']);
+  const mutation = trpcClient.useMutation(['images.updateImage']);
   const trpcUtils = trpcClient.useContext();
 
   const handleEdit = async ({ caption, location, photoDate }: photoBaseT) => {
-    console.log('caption', caption);
-    console.log('photo id', props._id);
+    // console.log('caption', caption);
+    // console.log('photo id', props._id);
     mutation.mutate(
       {
         _id: props._id,
@@ -151,7 +149,9 @@ export function ImageOverlayInfoEdit(props: photoBaseWithIdT) {
       {
         onSuccess: async () => {
           // Auto-refresh without reload
-          await trpcUtils.invalidateQueries(['images.ListImages', { _id: props._id }]);
+          await trpcUtils.invalidateQueries(['images.listImages']);
+          await trpcUtils.invalidateQueries(['images.getImage', { _id: props._id }]);
+          await router.push(`/images?view=${props._id}`, undefined, { shallow: true });
           showNotification({
             icon: <IconCheck />,
             title: 'Success!',
@@ -162,10 +162,5 @@ export function ImageOverlayInfoEdit(props: photoBaseWithIdT) {
     );
   };
 
-  return (
-    <>
-      <Space h='sm' />
-      <EditForm handleEdit={handleEdit} photo={props} />
-    </>
-  );
+  return <EditForm handleEdit={handleEdit} photo={props} />;
 }

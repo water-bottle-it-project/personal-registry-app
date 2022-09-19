@@ -47,11 +47,18 @@ export function ImageOverlay(props: ImageCardProps) {
         _id={props._id}
         caption={data?.image.caption}
         location={data?.image.location}
-        photoDate={data?.image.location}
+        photoDate={data?.image.photoDate}
       />
     );
   } else {
-    info = <ImageOverlayInfo _id={props._id} caption={data?.image.caption} url={data?.image.url} />;
+    info = (
+      <ImageOverlayInfo
+        _id={props._id}
+        caption={data?.image.caption}
+        location={data?.image.location}
+        photoDate={data?.image.photoDate}
+      />
+    );
   }
 
   return (

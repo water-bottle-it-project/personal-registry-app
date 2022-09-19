@@ -39,7 +39,7 @@ const imagesRouter = createProtectedDbRouter()
     },
   })
 
-  .mutation('UpdateImage', {
+  .mutation('updateImage', {
     input: photoBaseWithIdZ,
     async resolve({ ctx, input }) {
       const image: photoWithMemoryT | null = await Photo.findOneAndUpdate(
@@ -47,9 +47,6 @@ const imagesRouter = createProtectedDbRouter()
         { caption: input.caption, photoDate: input.photoDate, location: input.location },
         { returnDocument: 'after' },
       );
-
-      console.log(image);
-      console.log(input);
 
       if (!image) {
         throw new TRPCError({

@@ -2,13 +2,9 @@ import { Box, createStyles, Group, Space, Text, Title, UnstyledButton } from '@m
 import { IconDownload, IconEdit, IconTrash } from '@tabler/icons';
 import Link from 'next/link';
 
-interface ImageCardProps {
-  _id: string;
-  caption?: string;
-  url: string;
-}
+import type { photoBaseWithIdT } from '~types/photo/photo';
 
-export function ImageOverlayInfo(props: ImageCardProps) {
+export function ImageOverlayInfo(props: photoBaseWithIdT) {
   const { classes } = useStyles();
   return (
     <Box
@@ -30,10 +26,14 @@ export function ImageOverlayInfo(props: ImageCardProps) {
         </Text>
         <Space h='xs' />
         <Text className={classes.infoHeader}>Date</Text>
-        <Text className={classes.infoText}>August</Text>
+        <Text className={classes.infoText} italic={!props.photoDate?.toString()}>
+          {props.photoDate?.toString() || 'no date'}
+        </Text>
         <Space h='xs' />
         <Text className={classes.infoHeader}>Location</Text>
-        <Text className={classes.infoText}>Here</Text>
+        <Text className={classes.infoText} italic={!props.location}>
+          {props.location || 'no location'}
+        </Text>
       </div>
       <Space h='md' />
       <div className={classes.buttonGroup}>
