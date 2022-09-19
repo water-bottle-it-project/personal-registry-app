@@ -1,7 +1,6 @@
 import { Container, Grid, Skeleton, Space, Text } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { CollectionSkeleton } from '~components/collection/CollectionSkeleton';
 
 import { TimelineGrid } from './TimelineGrid';
 import { TimelineHeader } from './TimelineHeader';

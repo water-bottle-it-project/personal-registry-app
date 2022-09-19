@@ -1,4 +1,4 @@
-import { Grid, Text } from '@mantine/core';
+import { Grid } from '@mantine/core';
 
 import { TimelineCard } from '~components/timeline/TimelineCard';
 import type { memoryCardT } from '~types/memory/memoryForm';
