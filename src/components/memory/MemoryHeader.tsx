@@ -11,7 +11,7 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { IconDownload, IconEdit } from '@tabler/icons';
+import { IconEdit } from '@tabler/icons';
 import ObjectID from 'bson-objectid';
 import Link from 'next/link';
 
