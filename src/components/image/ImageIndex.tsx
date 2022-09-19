@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import type { photoWithMemoryT } from '~types/photo/photo';
 
 import { ImageCard } from './ImageCard';
 import { ImageOverlay } from './ImageOverlay';
@@ -23,9 +24,7 @@ export function ImagesIndex() {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
 
-  const [imageArr, setImageArr] = useState<
-    { _id: string; index: number; caption: string; url: string }[]
-  >([]);
+  const [imageArr, setImageArr] = useState<photoWithMemoryT[]>([]);
 
   const [displayImage, setDisplayImage] = useState({
     _id: '',
@@ -49,7 +48,7 @@ export function ImagesIndex() {
     idx++;
   });
 
-  const handleNextProject = () => {
+  const handleNextProject = async () => {
     // console.log(displayImage.currentImage);
     if (displayImage.currentImage.toString() != (imageArr.length - 1).toString()) {
       const idx = parseInt(displayImage.currentImage) + 1;
@@ -60,10 +59,11 @@ export function ImagesIndex() {
         caption: imageArr[idx].caption,
         url: imageArr[idx].url,
       }));
+      await router.push(`/images?view=${imageArr[idx]._id}`, undefined, { shallow: true });
     }
   };
 
-  const handlePrevProject = () => {
+  const handlePrevProject = async () => {
     console.log('current image is', displayImage.currentImage);
     if (displayImage.currentImage.toString() != '0') {
       const idx = parseInt(displayImage.currentImage) - 1;
@@ -74,6 +74,7 @@ export function ImagesIndex() {
         caption: imageArr[idx].caption,
         url: imageArr[idx].url,
       }));
+      await router.push(`/images?view=${imageArr[idx]._id}`, undefined, { shallow: true });
     }
   };
 
