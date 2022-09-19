@@ -71,9 +71,11 @@ export function CreateFormMemoryInfo({
                 maxDropdownHeight={250}
                 onChange={onChange}
                 placeholder='Click to select collections'
+                ref={ref}
                 searchable
                 transitionDuration={250}
                 value={value}
+                {...field}
               />
             )}
           />

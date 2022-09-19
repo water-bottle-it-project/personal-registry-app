@@ -32,7 +32,9 @@ export function CreateForm() {
     },
   });
 
-  const { data, isLoadingError, isLoading } = trpcClient.useQuery(['collection.GetCollections']);
+  const { data } = trpcClient.useQuery(['collection.GetCollections'], {
+    placeholderData: { collections: [] },
+  });
 
   const trpcUtils = trpcClient.useContext();
   const creation = trpcClient.useMutation(['memory.CreateMemory']);
@@ -106,24 +108,14 @@ export function CreateForm() {
     });
   }
 
-  if (isLoading || !data?.collections) {
+  if (!data?.collections) {
+    // No need to check for isLoading since there is placeholderData.
     return (
       <Stack spacing='sm'>
         <Group position='apart'>
           <Title>Create a memory</Title>
         </Group>
         <Text>Loading collections for creating memory...</Text>
-      </Stack>
-    );
-  }
-
-  if (isLoadingError) {
-    return (
-      <Stack spacing='sm'>
-        <Group position='apart'>
-          <Title>Create a memory</Title>
-        </Group>
-        <Text>Error loading collections for creating memory. Try again later.</Text>
       </Stack>
     );
   }
