@@ -39,7 +39,7 @@ export function ImageOverlay(props: ImageCardProps) {
     { _id: props._id },
   ]);
 
-  data && console.log(data.image);
+  //data && console.log(data.image);
 
   if (editId && !Array.isArray(editId)) {
     info = (

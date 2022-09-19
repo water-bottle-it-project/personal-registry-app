@@ -21,7 +21,7 @@ function DebugAuth() {
   const handleLogin = async () => {
     mutation.mutate(
       {
-        _id: '63074225bda448b6219cd922',
+        _id: '63280f5ba71ea029264bf4bf',
         caption: 'hey its me',
         // location: 'tina',
         // photoDate: null,
@@ -31,7 +31,7 @@ function DebugAuth() {
           // Auto-refresh without reload
           await trpcUtils.invalidateQueries([
             'images.getImage',
-            { _id: '63074225bda448b6219cd922' },
+            { _id: '63280f5ba71ea029264bf4bf' },
           ]);
           showNotification({
             icon: <IconCheck />,
@@ -45,7 +45,7 @@ function DebugAuth() {
 
   const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'images.getImage',
-    { _id: '63074225bda448b6219cd922' },
+    { _id: '63280f5ba71ea029264bf4bf' },
   ]);
 
   return (

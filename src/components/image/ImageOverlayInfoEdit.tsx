@@ -73,9 +73,19 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
     reset,
     formState: { errors },
   } = useForm<photoBaseT>({
+    // resolver: zodResolver(z.object({ caption: z.string().trim().optional() })),
     resolver: async (data, context, options) => {
       console.log('form data', data);
-      console.log('validation result', await zodResolver(memoryEditFormZ)(data, context, options));
+      console.log('form context', context);
+      console.log('form options', options);
+      console.log(
+        'validation result',
+        await zodResolver(z.object({ caption: z.string().trim().optional() }))(
+          data,
+          context,
+          options,
+        ),
+      );
       return zodResolver(z.object({ caption: z.string().trim().optional() }))(
         data,
         context,
@@ -85,8 +95,6 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
 
     defaultValues: photo,
   });
-
-  // const onSubmit = (data: any) => console.log(data);
 
   return (
     <Box
@@ -135,18 +143,23 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
 }
 
 export function ImageOverlayInfoEdit(props: ImageCardProps) {
-  const mutation = trpcClient.useMutation(['image.UpdateImage']);
-  // const trpcUtils = trpcClient.useContext();
+  const mutation = trpcClient.useMutation(['images.UpdateImage']);
+  const trpcUtils = trpcClient.useContext();
 
-  function handleEdit({ caption }: photoBaseT) {
-    console.log('fuck me');
+  const handleEdit = async ({ caption }: photoBaseT) => {
+    console.log('caption', caption);
+    console.log('photo id', props._id);
     mutation.mutate(
       {
         _id: props._id,
         caption: caption,
+        // location: 'tina',
+        // photoDate: null,
       },
       {
         onSuccess: async () => {
+          // Auto-refresh without reload
+          await trpcUtils.invalidateQueries(['images.ListImages', { _id: props._id }]);
           showNotification({
             icon: <IconCheck />,
             title: 'Success!',
@@ -155,7 +168,7 @@ export function ImageOverlayInfoEdit(props: ImageCardProps) {
         },
       },
     );
-  }
+  };
 
   return (
     <>
