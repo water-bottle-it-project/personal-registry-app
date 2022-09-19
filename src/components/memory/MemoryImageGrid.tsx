@@ -6,11 +6,11 @@ import Lightbox from 'react-18-image-lightbox';
 import { MemoryImageGridItem } from '~components/memory/MemoryImageGridItem';
 import type { photoWithIdT } from '~types/photo/photo';
 
-interface MemoryImageGrid2Props {
+interface MemoryImageGridProps {
   photos: photoWithIdT[];
 }
 
-export function MemoryImageGrid({ photos }: MemoryImageGrid2Props) {
+export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
   const [scrollLocked, setScrollLocked] = useScrollLock(false);
   const [photoIndex, setPhotoIndex] = useState(-1);
 
