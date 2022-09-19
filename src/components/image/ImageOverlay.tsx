@@ -23,7 +23,6 @@ export interface ImageCardProps {
   _id: string;
   caption: string;
   url: string;
-  userId: string;
   handleNext?: (event: React.MouseEvent<HTMLElement>) => void;
   handlePrev?: (event: React.MouseEvent<HTMLElement>) => void;
 }
@@ -44,22 +43,10 @@ export function ImageOverlay(props: ImageCardProps) {
 
   if (editId && !Array.isArray(editId)) {
     info = (
-      <ImageOverlayInfoEdit
-        _id={props._id}
-        caption={data?.image.caption}
-        url={data?.image.url}
-        userId={data?.image.userId}
-      />
+      <ImageOverlayInfoEdit _id={props._id} caption={data?.image.caption} url={data?.image.url} />
     );
   } else {
-    info = (
-      <ImageOverlayInfo
-        _id={props._id}
-        caption={data?.image.caption}
-        url={data?.image.url}
-        userId={data?.image.userId}
-      />
-    );
+    info = <ImageOverlayInfo _id={props._id} caption={data?.image.caption} url={data?.image.url} />;
   }
 
   return (
@@ -91,11 +78,7 @@ export function ImageOverlay(props: ImageCardProps) {
               spacing='lg'
             >
               {info}
-              <ImageOverlayMetadata
-                caption={data?.image.caption}
-                url={data?.image.url}
-                userId={data?.image.userId}
-              />
+              <ImageOverlayMetadata caption={data?.image.caption} url={data?.image.url} />
             </SimpleGrid>
           </Container>
         </Container>

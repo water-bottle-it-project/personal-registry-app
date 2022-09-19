@@ -17,7 +17,6 @@ interface ImageCardProps {
   _id: string;
   caption: string;
   url: string;
-  userId: string;
 }
 
 type FormData = {
