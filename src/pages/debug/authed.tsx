@@ -1,8 +1,8 @@
 import { Button, Code, Container, Text, Title } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons';
-import { useAuthUser } from 'next-firebase-auth';
 import router from 'next/router';
+import { useAuthUser } from 'next-firebase-auth';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
 import { trpcClient } from '~clientUtils/trpcClient';
