@@ -33,6 +33,7 @@
     "@trpc/next": "^9.27.0",
     "@trpc/react": "^9.27.0",
     "@trpc/server": "^9.27.0",
+    "bson-objectid": "^2.0.3",
     "cookies-next": "^2.1.1",
     "dayjs": "^1.11.5",
     "embla-carousel-react": "^7.0.0",

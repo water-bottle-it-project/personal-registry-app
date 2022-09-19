@@ -4,20 +4,18 @@ import {
   Box,
   Button,
   Container,
+  createStyles,
+  Grid,
   Group,
-  Select,
   Space,
   Text,
   Title,
 } from '@mantine/core';
-import { IconDownload } from '@tabler/icons';
+import { IconDownload, IconEdit } from '@tabler/icons';
+import ObjectID from 'bson-objectid';
 import Link from 'next/link';
 
 import type { memoryWithPhotosT } from '~types/memory/memoryForm';
-
-interface MemoryHeaderProps extends memoryWithPhotosT {
-  imageCount?: number;
-}
 
 export function MemoryHeader({
   _id,
@@ -26,60 +24,70 @@ export function MemoryHeader({
   description,
   firstDate,
   lastDate,
-}: MemoryHeaderProps) {
-  const fDate = new Date(firstDate).toDateString();
-  const lDate = new Date(lastDate).toDateString();
+}: memoryWithPhotosT) {
+  const { classes } = useStyles();
+
   const collectionBadges = collections.map(c => (
-    <Badge
-      key={c.title}
-      radius='xs'
-      sx={theme => ({
-        backgroundColor:
-          theme.colorScheme === 'dark' ? theme.colors[c.color][5] : theme.colors[c.color][2],
-        color: 'black',
-      })}
-    >
-      <Link
-        as={`/collections/edit?id=${c._id}`}
-        href={`/collections?edit=${c._id}`}
-        passHref
-        shallow
-      >
+    <Badge color={c.color} key={c.title}>
+      <Link as={`/collections/edit?id=${c._id}`} href={`/collections?edit=${c._id}`} passHref>
         <Anchor component='a' variant='text'>
           {c.title}
         </Anchor>
       </Link>
     </Badge>
   ));
+
   return (
     <Box
       sx={theme => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-        padding: theme.spacing.xl,
+        paddingTop: theme.spacing.xl,
+        paddingBottom: theme.spacing.xl,
       })}
     >
       <Container size='xl'>
-        <Group>
-          <Title order={1}>{title || 'Memory Name'}</Title>
-          <Button variant='outline'>Edit</Button>
+        <Group position='apart'>
+          <Title>{title}</Title>
+          <Button rightIcon={<IconEdit />}>Edit</Button>
         </Group>
         <Space h='xs' />
-        <Text>{description || 'Description here'}</Text>
-        <Space h='md' />
-        <Title order={4}>Memory creation date</Title>
-        <Text>35 February 2090</Text>
-        <Space h='sm' />
-        <Title order={4}>Memory range</Title>
-        <Text>{`${fDate || 'FirstDate'} to ${lDate || 'LastDate'}`}</Text>
-        <Space h='xl' />
-        <Title order={4}>Collections</Title>
-        <Space h='sm' />
+        <Text>{description}</Text>
+        <Space h='xs' />
+        <Grid gutter='xs'>
+          <Grid.Col xs={6}>
+            <Title order={4} size='md'>
+              Date range
+            </Title>
+            <Text size='sm'>
+              {firstDate === lastDate
+                ? new Date(lastDate).toDateString()
+                : `${new Date(firstDate).toDateString()} - ${new Date(lastDate).toDateString()}`}
+            </Text>
+          </Grid.Col>
+          <Grid.Col xs={6}>
+            <Title className={classes.right} order={4} size='md'>
+              Created
+            </Title>
+            <Text className={classes.right} size='sm'>
+              {new ObjectID(_id).getTimestamp().toDateString()}
+            </Text>
+          </Grid.Col>
+        </Grid>
+        <Space h='xs' />
+        <Title order={4} size='md'>
+          Collections
+        </Title>
+        <Space h='xs' />
         <Group>{collectionBadges}</Group>
-        <Space h='xl' />
-        <Button leftIcon={<IconDownload />} variant='outline'>
-          Download Collection
-        </Button>
       </Container>
     </Box>
   );
 }
+
+const useStyles = createStyles(theme => ({
+  right: {
+    [theme.fn.largerThan('xs')]: {
+      textAlign: 'right',
+    },
+  },
+}));
