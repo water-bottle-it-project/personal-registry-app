@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Space, Stack, Textarea, TextInput } from '@mantine/core';
 import { useScrollLock } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
-import { IconCheck, IconDeviceFloppy, IconRotateClockwise2 } from '@tabler/icons';
+import { IconCheck, IconDeviceFloppy, IconRotateClockwise2, IconX } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -34,6 +34,14 @@ export function CollectionCreate() {
             icon: <IconCheck />,
             title: 'Success!',
             message: `${title} successfully created.`,
+          });
+        },
+        onError: async error => {
+          showNotification({
+            icon: <IconX />,
+            color: 'red',
+            title: 'Failed to create collection.',
+            message: error.message,
           });
         },
       },

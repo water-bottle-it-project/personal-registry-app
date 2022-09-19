@@ -80,11 +80,19 @@ const collectionRouter = createProtectedDbRouter()
   .mutation('UpdateCollection', {
     input: collectionZ,
     async resolve({ ctx, input }) {
-      const collection: collectionT | null = await Collection.findOneAndUpdate(
-        { _id: input._id, userId: ctx.userId },
-        { title: input.title, description: input.description, color: input.color },
-        { returnDocument: 'after' },
-      );
+      let collection: collectionT | null = null;
+      try {
+        collection = await Collection.findOneAndUpdate(
+          { _id: input._id, userId: ctx.userId },
+          { title: input.title, description: input.description, color: input.color },
+          { returnDocument: 'after' },
+        );
+      } catch (error) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: `Collection with title ${input.title} already exists. Collection title must be unique.`,
+        });
+      }
 
       if (!collection) {
         throw new TRPCError({
@@ -100,13 +108,20 @@ const collectionRouter = createProtectedDbRouter()
   .mutation('CreateCollection', {
     input: collectionOmitIdZ,
     async resolve({ ctx, input }) {
-      const collection: collectionT = await Collection.create({
-        title: input.title,
-        color: input.color,
-        description: input.description,
-        userId: ctx.userId,
-      });
+      try {
+        const collection: collectionT = await Collection.create({
+          title: input.title,
+          color: input.color,
+          description: input.description,
+          userId: ctx.userId,
+        });
 
-      return collection;
+        return collection;
+      } catch (error) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: `Collection with title ${input.title} already exists. Collection title must be unique.`,
+        });
+      }
     },
   });

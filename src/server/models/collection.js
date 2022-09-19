@@ -15,7 +15,7 @@ const collectionSchema = new Schema({
   },
 });
 
-collectionSchema.index({ userId: 'hashed', title: 1 });
+collectionSchema.index({ userId: 1, title: 1 }, { unique: true });
 
 /**
  * Only bind model to schema if it has not been previously created: supports Next.js Hot Reload

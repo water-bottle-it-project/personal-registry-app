@@ -50,6 +50,14 @@ export function CollectionEdit(props: collectionIdOnlyT) {
             message: 'Collection successfully saved.',
           });
         },
+        onError: async error => {
+          showNotification({
+            icon: <IconX />,
+            color: 'red',
+            title: 'Failed to update collection.',
+            message: error.message,
+          });
+        },
       },
     );
   }
