@@ -10,16 +10,14 @@ import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
 
 export function CollectionMemories({ _id }: collectionIdOnlyT) {
-  const theme = useMantineTheme();
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
     'memory.GetCollectionMemories',
     { _id: _id },
   ]);
-  const collectionData = trpcClient.useQuery(['collection.GetCollection', { _id: _id }])?.data
-    ?.collection;
+  const { data: collectionData } = trpcClient.useQuery(['collection.GetCollection', { _id: _id }]);
 
   let contents;
-  if (isLoading || !data?.memories) {
+  if (isLoading || !data?.memories || !collectionData) {
     contents = <SkeletonGrid />;
   } else if (isLoadingError) {
     contents = <Text>Error loading memories. Try again later.</Text>;
@@ -31,16 +29,25 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
 
   return (
     <>
-      <NextSeo description='Viewing memories within a collection' title='View Memories' />
+      <NextSeo
+        description={
+          collectionData
+            ? `Viewing memories within collection ${collectionData.collection.title}`
+            : 'Viewing memories within a collection'
+        }
+        title={
+          collectionData ? `View memories in ${collectionData.collection.title}` : 'View memories'
+        }
+      />
       <Container size='xl'>
         <Space h='xl' />
         <Title order={1}>
           Memories in collection{' '}
-          <Text color={collectionData && theme.colors[collectionData?.color][5]} inherit span>
-            {collectionData?.title}
+          <Text color={collectionData && `${collectionData.collection.color}.5`} inherit span>
+            {collectionData?.collection.title}
           </Text>
         </Title>
-        <Text>{data?.memories.length} found</Text>
+        <Text>{data?.memories ? `${data.memories.length} found` : ' '}</Text>
         <Space h='xl' />
         {contents}
       </Container>
@@ -62,7 +69,7 @@ function NoMemoriesFound() {
         <Title align='center' order={1}>
           It's looking a little empty here...
         </Title>
-        <Text align='center'>Click the button below to begin creating your first memory.</Text>
+        <Text align='center'>Click below to create a new memory with this collection.</Text>
         <LinkButton
           gradient={{ from: 'indigo', to: 'cyan' }}
           href='/create'

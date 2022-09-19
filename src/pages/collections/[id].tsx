@@ -5,7 +5,10 @@ import { CollectionMemories } from '~components/collection/CollectionMemories';
 
 function CollectionMemoryPage() {
   const router = useRouter();
-  const id = router.asPath.split('/')[2];
+  const id = router.query.id;
+  if (typeof id !== 'string') {
+    return null;
+  }
 
   return (
     <>

@@ -40,7 +40,7 @@ const memoryRouter = createProtectedDbRouter()
       const collectionId = new mongoose.Types.ObjectId(input._id);
       const memories: memoryCardT[] = await Memory.find({
         userId: ctx.userId,
-        collections: { $in: [collectionId] },
+        collections: collectionId,
       }).populate('collections', '-description -userId');
 
       if (!memories) {
