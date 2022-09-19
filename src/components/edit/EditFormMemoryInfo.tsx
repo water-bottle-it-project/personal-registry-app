@@ -5,13 +5,19 @@ import type { UseFormReturn } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
 import { useTextareaStyles } from '~components/create/textareaStyles';
+import type { collectionSelectItemT } from '~types/collection/collection';
 import type { memoryEditFormT } from '~types/memory/memoryForm';
+
+interface EditFormMemoryInfoProps extends UseFormReturn<memoryEditFormT> {
+  collections: collectionSelectItemT[];
+}
 
 export function EditFormMemoryInfo({
   register,
   control,
   formState: { errors },
-}: UseFormReturn<memoryEditFormT>) {
+  collections,
+}: EditFormMemoryInfoProps) {
   const { classes } = useTextareaStyles();
 
   return (
@@ -52,15 +58,26 @@ export function EditFormMemoryInfo({
             )}
           />
 
-          <MultiSelect
-            data={[
-              { value: '1a2b3c', label: 'Gadgets' },
-              { value: '4a5b6c', label: 'Family' },
-            ]}
-            description='Choose collections that this memory should be a part of.'
-            icon={<IconTags size={16} />}
-            label='Collections'
-            placeholder='Click to select collections'
+          <Controller
+            control={control}
+            name='collections'
+            render={({ field: { value, onChange, ref, ...field } }) => (
+              <MultiSelect
+                clearable
+                data={collections}
+                description='Choose collections that this memory should be a part of.'
+                icon={<IconTags size={16} />}
+                label='Collections'
+                maxDropdownHeight={250}
+                onChange={onChange}
+                placeholder='Click to select collections'
+                ref={ref}
+                searchable
+                transitionDuration={250}
+                value={value}
+                {...field}
+              />
+            )}
           />
         </Stack>
       </Grid.Col>

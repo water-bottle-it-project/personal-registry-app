@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   compiler: { styledComponents: true },
   experimental: {
-    swcPlugins: [['next-superjson-plugin', {}]],
+    swcPlugins: [['next-superjson-plugin', { excluded: [] }]],
   },
 };
 
