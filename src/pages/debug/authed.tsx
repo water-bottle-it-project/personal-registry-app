@@ -27,8 +27,8 @@ function DebugAuth() {
       {
         _id: '63280f5ba71ea029264bf4bf',
         caption: 'hey its me',
-        // location: 'tina',
-        // photoDate: null,
+        location: 'tina',
+        photoDate: null,
       },
       {
         onSuccess: async () => {
