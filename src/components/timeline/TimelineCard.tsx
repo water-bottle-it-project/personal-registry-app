@@ -1,5 +1,5 @@
 import { Carousel } from '@mantine/carousel';
-import { Anchor, Card, createStyles, Image, Space, Text } from '@mantine/core';
+import { Anchor, Badge, Card, createStyles, Group, Image, Space, Text } from '@mantine/core';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -65,6 +65,16 @@ export function TimelineCard({
           : `${new Date(firstDate).toDateString()} - ${new Date(lastDate).toDateString()}`}
       </Text>
       <Space h='sm' />
+
+      <Group>
+        {collections.map(c => (
+          <Badge color={c.color} key={c._id}>
+            {c.title}
+          </Badge>
+        ))}
+      </Group>
+      <Space h='sm' />
+
       <Text className={classes.text} color='light' italic={!description} lineClamp={6} size='sm'>
         {description || 'no description provided'}
       </Text>
