@@ -24,7 +24,7 @@ export function ImagesIndex() {
   const { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
 
   const [imageArr, setImageArr] = useState<
-    { _id: string; index: number; caption: string; url: string; userId: string }[]
+    { _id: string; index: number; caption: string; url: string }[]
   >([]);
 
   const [displayImage, setDisplayImage] = useState({
@@ -32,7 +32,6 @@ export function ImagesIndex() {
     currentImage: '',
     caption: '',
     url: '',
-    userId: '',
   });
 
   useEffect(() => {
@@ -82,7 +81,6 @@ export function ImagesIndex() {
     _id: string,
     photoUrl: string,
     photoCaption: string,
-    userId: string,
     currentImage: string,
   ) => {
     setDisplayImage(previousState => {
@@ -92,26 +90,17 @@ export function ImagesIndex() {
         caption: photoCaption,
         currentImage: currentImage,
         url: photoUrl,
-        userId: userId,
       };
     });
   };
 
   const Images = imageArr?.map(
-    (photo: { _id: string; index: number; caption: string; url: string; userId: string }) => (
+    (photo: { _id: string; index: number; caption: string; url: string }) => (
       <Container
         key={photo.index}
-        onClick={() =>
-          renderOverlay(photo._id, photo.url, photo.caption, photo.userId, photo.index.toString())
-        }
+        onClick={() => renderOverlay(photo._id, photo.url, photo.caption, photo.index.toString())}
       >
-        <ImageCard
-          _id={photo._id}
-          caption={photo.caption}
-          key={photo.index}
-          url={photo.url}
-          userId={photo.userId}
-        />
+        <ImageCard _id={photo._id} caption={photo.caption} key={photo.index} url={photo.url} />
       </Container>
     ),
   );
@@ -135,7 +124,6 @@ export function ImagesIndex() {
           handleNext={handleNextProject}
           handlePrev={handlePrevProject}
           url={displayImage.url}
-          userId={displayImage.userId}
         />
       </Modal>
     );
@@ -158,7 +146,6 @@ export function ImagesIndex() {
           handleNext={handleNextProject}
           handlePrev={handlePrevProject}
           url={displayImage.url}
-          userId={displayImage.userId}
         />
       </Modal>
     );

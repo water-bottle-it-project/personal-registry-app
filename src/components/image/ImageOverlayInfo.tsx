@@ -4,9 +4,8 @@ import Link from 'next/link';
 
 interface ImageCardProps {
   _id: string;
-  caption: string;
+  caption?: string;
   url: string;
-  userId: string;
 }
 
 export function ImageOverlayInfo(props: ImageCardProps) {
@@ -25,8 +24,10 @@ export function ImageOverlayInfo(props: ImageCardProps) {
       <div>
         <Title order={2}>Information</Title>
         <Space h='lg' />
-        <Text className={classes.infoHeader}>Title</Text>
-        <Text className={classes.infoText}>{props.caption}</Text>
+        <Text className={classes.infoHeader}>Caption</Text>
+        <Text className={classes.infoText} italic={!props.caption}>
+          {props.caption || 'no caption'}
+        </Text>
         <Space h='xs' />
         <Text className={classes.infoHeader}>Date</Text>
         <Text className={classes.infoText}>August</Text>

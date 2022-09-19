@@ -1,9 +1,8 @@
 import { Box, createStyles, Space, Text, Title } from '@mantine/core';
 
 interface ImageCardProps {
-  caption: string;
+  caption?: string;
   url: string;
-  userId: string;
 }
 
 export function ImageOverlayMetadata(props: ImageCardProps) {
@@ -19,7 +18,9 @@ export function ImageOverlayMetadata(props: ImageCardProps) {
       <Title order={2}>Metadata</Title>
       <Space h='lg' />
       <Text className={classes.infoHeader}>Filename</Text>
-      <Text className={classes.infoText}>{props.caption}</Text>
+      <Text className={classes.infoText} italic={!props.caption}>
+        {props.caption}
+      </Text>
       <Space h='xs' />
       <Text className={classes.infoHeader}>Date Taken</Text>
       <Text className={classes.infoText}>August</Text>
