@@ -16,8 +16,9 @@ const collectionRouter = createProtectedDbRouter()
       const collections: collectionT[] = await Collection.find(
         { userId: ctx.userId },
         { userId: 0 },
-        { sort: { title: 1 } },
-      );
+      )
+        .collation({ locale: 'en', strength: 2 })
+        .sort({ title: 1 });
 
       return {
         collections,
@@ -90,7 +91,8 @@ const collectionRouter = createProtectedDbRouter()
       } catch (error) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: `Collection with title ${input.title} already exists. Collection title must be unique.`,
+          message: `Collection with title ${input.title} already exists.
+          Collection title must be unique (ignores case).`,
         });
       }
 
@@ -120,7 +122,8 @@ const collectionRouter = createProtectedDbRouter()
       } catch (error) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: `Collection with title ${input.title} already exists. Collection title must be unique.`,
+          message: `Collection with title ${input.title} already exists.
+          Collection title must be unique (ignores case).`,
         });
       }
     },
