@@ -1,4 +1,15 @@
-import { Container, createStyles, Space, Stack, Text, Title, useMantineTheme } from '@mantine/core';
+import {
+  Box,
+  Container,
+  createStyles,
+  Group,
+  Space,
+  Stack,
+  Text,
+  Title,
+  useMantineTheme,
+} from '@mantine/core';
+import ObjectID from 'bson-objectid';
 import Lottie from 'lottie-react';
 import { NextSeo } from 'next-seo';
 
@@ -43,16 +54,29 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
       />
       <Container size='xl'>
         <Space h='xl' />
-        <Title>
-          Memories in collection{' '}
-          <Text color={collectionData && `${collectionData.collection.color}.5`} inherit span>
-            {collectionData?.collection.title}
-          </Text>
-        </Title>
+        <Group position='apart' spacing='sm'>
+          <Title>
+            Memories in collection{' '}
+            <Text color={collectionData && `${collectionData.collection.color}.5`} inherit span>
+              {collectionData?.collection.title}
+            </Text>
+          </Title>
+          <Box>
+            <Title order={4} size='md'>
+              Created{' '}
+              <Text ml={4} size='sm' span weight={400}>
+                {new ObjectID(_id).getTimestamp().toDateString()}
+              </Text>
+            </Title>
+          </Box>
+        </Group>
+
+        <Space h='sm' />
         <Text className={classes.description}>{collectionData?.collection.description}</Text>
         <Space h='sm' />
         <Text color='dimmed'>
-          {data?.memories ? `${data.memories.length} memories found` : ' '}
+          {data?.memories &&
+            `${data.memories.length} ${data.memories.length === 1 ? 'memory' : 'memories'} found`}
         </Text>
         <Space h='xl' />
         {contents}

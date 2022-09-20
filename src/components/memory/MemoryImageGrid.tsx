@@ -19,10 +19,10 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
   // My approach:
   // Every nth photo in the photos array, switch columns and populate that column
   // This is a very naive attempt and does not respect image order (in mobile view)
-  let colCount = 1;
+  let colCount = 0;
+  const photoCol0: React.ReactElement[] = [];
   const photoCol1: React.ReactElement[] = [];
   const photoCol2: React.ReactElement[] = [];
-  const photoCol3: React.ReactElement[] = [];
 
   function handlePhotoClick(i: number) {
     setPhotoIndex(i);
@@ -32,20 +32,11 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
   for (let i = 0; i < photos.length; i++) {
     // every nth index (where n = 2), switch to adjacent column and populate
     if ((i - 1) % 2 == 0 && i !== 0) {
-      switch (colCount) {
-        case 1:
-          colCount = 2;
-          break;
-        case 2:
-          colCount = 3;
-          break;
-        case 3:
-          colCount = 1;
-          break;
-      }
+      colCount = (colCount + 1) % 3;
     }
     const photoElem = (
       <div
+        key={photos[i]._id}
         onClick={() => {
           handlePhotoClick(i);
         }}
@@ -53,18 +44,17 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
         <MemoryImageGridItem
           _id={photos[i]._id}
           caption={photos[i].caption}
-          key={photos[i]._id}
           photoDate={photos[i].photoDate}
           url={photos[i].url}
         />
       </div>
     );
-    if (colCount === 1) {
+    if (colCount === 0) {
+      photoCol0.push(photoElem);
+    } else if (colCount === 1) {
       photoCol1.push(photoElem);
-    } else if (colCount === 2) {
-      photoCol2.push(photoElem);
     } else {
-      photoCol3.push(photoElem);
+      photoCol2.push(photoElem);
     }
   }
 
@@ -75,17 +65,17 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
       <Grid>
         <Grid.Col lg={4} md={6}>
           <Stack align='flex-start' justify='flex-start' spacing='xs'>
+            {photoCol0}
+          </Stack>
+        </Grid.Col>
+        <Grid.Col lg={4} md={6}>
+          <Stack align='flex-start' justify='flex-start' spacing='xs'>
             {photoCol1}
           </Stack>
         </Grid.Col>
         <Grid.Col lg={4} md={6}>
           <Stack align='flex-start' justify='flex-start' spacing='xs'>
             {photoCol2}
-          </Stack>
-        </Grid.Col>
-        <Grid.Col lg={4} md={6}>
-          <Stack align='flex-start' justify='flex-start' spacing='xs'>
-            {photoCol3}
           </Stack>
         </Grid.Col>
       </Grid>

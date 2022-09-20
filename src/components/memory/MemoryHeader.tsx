@@ -78,7 +78,7 @@ export function MemoryHeader({
         <Title order={4} size='md'>
           Collections
         </Title>
-        <Group>{collectionBadges}</Group>
+        <Group spacing='xs'>{collectionBadges}</Group>
         <Space h='xs' />
         <Text className={classes.description}>{description}</Text>
       </Container>
