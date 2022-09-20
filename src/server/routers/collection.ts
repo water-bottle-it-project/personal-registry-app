@@ -2,6 +2,7 @@ import { TRPCError } from '@trpc/server';
 
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Collection } from '~server/models/collection';
+import { Memory } from '~server/models/memory';
 import type { collectionT } from '~types/collection/collection';
 import { collectionZ } from '~types/collection/collection';
 import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
@@ -74,6 +75,7 @@ const collectionRouter = createProtectedDbRouter()
   .mutation('DeleteCollection', {
     input: collectionIdOnlyZ,
     async resolve({ ctx, input }) {
+      await Memory.updateMany({}, { $pull: { collections: input._id } });
       await Collection.deleteOne({ _id: input._id, userId: ctx.userId });
     },
   })

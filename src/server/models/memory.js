@@ -14,6 +14,7 @@ const memorySchema = new Schema({
 });
 
 memorySchema.index({ userId: 'hashed', lastDate: -1 });
+memorySchema.index({ collections: 1, lastDate: -1 });
 
 /**
  * Only bind model to schema if it has not been previously created: supports Next.js Hot Reload

@@ -64,7 +64,7 @@ export function TimelineCard({
           ? new Date(lastDate).toDateString()
           : `${new Date(firstDate).toDateString()} - ${new Date(lastDate).toDateString()}`}
       </Text>
-      <Space h='sm' />
+      <Space h='xs' />
 
       <Group spacing='xs'>
         {collections.map(c => (
@@ -77,7 +77,7 @@ export function TimelineCard({
           </Badge>
         ))}
       </Group>
-      <Space h='sm' />
+      <Space h='xs' />
 
       <Text className={classes.text} color='light' italic={!description} lineClamp={6} size='sm'>
         {description || 'no description provided'}
