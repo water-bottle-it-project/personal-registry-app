@@ -41,13 +41,17 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
       />
       <Container size='xl'>
         <Space h='xl' />
-        <Title order={1}>
+        <Title>
           Memories in collection{' '}
           <Text color={collectionData && `${collectionData.collection.color}.5`} inherit span>
             {collectionData?.collection.title}
           </Text>
         </Title>
-        <Text>{data?.memories ? `${data.memories.length} found` : ' '}</Text>
+        <Text>{collectionData?.collection.description}</Text>
+        <Space h='sm' />
+        <Text color='dimmed'>
+          {data?.memories ? `${data.memories.length} memories found` : ' '}
+        </Text>
         <Space h='xl' />
         {contents}
       </Container>
