@@ -12,6 +12,7 @@ function AppUserMenuBase() {
 
   async function handleSignOut() {
     await signOut();
+    await trpcUtils.queryClient.removeQueries();
     await trpcUtils.queryClient.getQueryCache().clear();
   }
 
