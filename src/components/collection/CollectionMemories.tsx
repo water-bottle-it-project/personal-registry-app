@@ -1,4 +1,4 @@
-import { Container, Space, Stack, Text, Title, useMantineTheme } from '@mantine/core';
+import { Container, createStyles, Space, Stack, Text, Title, useMantineTheme } from '@mantine/core';
 import Lottie from 'lottie-react';
 import { NextSeo } from 'next-seo';
 
@@ -10,6 +10,8 @@ import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
 
 export function CollectionMemories({ _id }: collectionIdOnlyT) {
+  const { classes } = useStyles();
+
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
     'memory.GetCollectionMemories',
     { _id: _id },
@@ -47,7 +49,7 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
             {collectionData?.collection.title}
           </Text>
         </Title>
-        <Text>{collectionData?.collection.description}</Text>
+        <Text className={classes.description}>{collectionData?.collection.description}</Text>
         <Space h='sm' />
         <Text color='dimmed'>
           {data?.memories ? `${data.memories.length} memories found` : ' '}
@@ -86,3 +88,9 @@ function NoMemoriesFound() {
     </>
   );
 }
+
+const useStyles = createStyles({
+  description: {
+    whiteSpace: 'pre-wrap',
+  },
+});
