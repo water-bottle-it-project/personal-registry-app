@@ -1,4 +1,5 @@
 import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { resolve } from 'path';
 import { string } from 'zod';
 import { z } from 'zod';
@@ -41,6 +42,51 @@ const imagesRouter = createProtectedDbRouter()
       return {
         image,
       };
+    },
+  })
+
+  .query('SearchImages', {
+    input: z
+      .object({
+        text: z.string().trim().min(1).max(100),
+      })
+      .required(),
+    async resolve({ ctx, input }) {
+      // const images = [];
+      // const re = new RegExp(`${input.text}`, 'i');
+      // if (input.searchType === 'title') {
+      //   images = await Photo.find({
+      //   title: re,
+      //   userId: ctx.userId,
+      // });
+      // } else if (input.searchType === 'description') {
+      //   collections = await Collection.find({
+      //     description: re,
+      //     userId: ctx.userId,
+      //   });
+      // }
+
+      try {
+        const photos = await Photo.aggregate([
+          {
+            $search: {
+              autocomplete: {
+                query: `${input.text}`,
+                path: 'caption',
+                fuzzy: {
+                  maxEdits: 2,
+                  prefixLength: 3,
+                },
+              },
+            },
+          },
+        ]);
+        return {
+          photos,
+        };
+      } catch (e) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find collection by id.' });
+      }
     },
   });
 

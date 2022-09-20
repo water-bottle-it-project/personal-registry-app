@@ -12,6 +12,10 @@ function DebugAuth() {
     ['memory.GetMemory', { _id: memoriesData?.memories?.[0]?._id || '' }],
     { enabled: !!memoriesData },
   );
+  const { data: imageData, error: imageError } = trpcClient.useQuery([
+    'images.SearchImages',
+    { text: 'mount' },
+  ]);
 
   return (
     <Container size='xl'>
@@ -32,7 +36,10 @@ function DebugAuth() {
       <Code block color='yellow'>
         {JSON.stringify(memoryData, null, 2)}
       </Code>
-      <Text>your search query for collections</Text>
+      <Text>your search query for iamges</Text>
+      <Code block color='green'>
+        {JSON.stringify(imageData?.result, null, 2)}
+      </Code>
     </Container>
   );
 }

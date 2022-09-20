@@ -8,8 +8,8 @@ const Images: NextPage = () => {
   return (
     <>
       <Container size='xl'>
-        <ImagesHeader />
-        <Space h='xl' />
+        {/* <ImagesHeader />
+        <Space h='xl' /> */}
         <ImagesIndex />
       </Container>
     </>

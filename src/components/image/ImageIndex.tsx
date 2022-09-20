@@ -1,7 +1,20 @@
-import { Container, Modal, SimpleGrid } from '@mantine/core';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  ActionIcon,
+  Container,
+  Modal,
+  SimpleGrid,
+  Space,
+  Stack,
+  TextInput,
+  Title,
+} from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { IconArrowRight, IconSearch } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 
@@ -9,19 +22,36 @@ import { ImageCard } from './ImageCard';
 import { ImageOverlay } from './ImageOverlay';
 import { ImageSkeleton } from './ImageSkeleton';
 
+const collectionSearchZ = z
+  .object({
+    text: z.string().trim().max(100),
+  })
+  .required();
+
+type CollectionSearchT = z.infer<typeof collectionSearchZ>;
+
 /**
  * Image page querying images from mongoDB
  * @constructor
  */
-
 export function ImagesIndex() {
+  const { register, handleSubmit } = useForm<CollectionSearchT>({
+    resolver: zodResolver(collectionSearchZ),
+  });
+
   const router = useRouter();
   let modal: React.ReactNode = null;
   const viewId = router.query.view;
   const editId = router.query.edit;
 
+  const [searchState, setSearchState] = useState('');
+
   const isMobile = useMediaQuery('(max-width: 600px)');
-  const { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
+  let { data, isError, isLoading, error } = trpcClient.useQuery(['images.listImages']);
+  const { data: imageData, error: imageError } = trpcClient.useQuery([
+    'images.SearchImages',
+    { text: searchState},
+  ]);
 
   const [imageArr, setImageArr] = useState<
     { _id: string; index: number; caption: string; url: string }[]
@@ -41,6 +71,14 @@ export function ImagesIndex() {
       setImageArr(data.photos);
     }
   }, [data?.photos]);
+
+  useEffect(() => {
+    if (imageData?.photos) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      setImageArr(imageData.photos);
+    }
+  }, [imageData?.photos]);
 
   // add index to the images on the page, which is used for next and prev image functionality
   let idx = 0;
@@ -151,8 +189,33 @@ export function ImagesIndex() {
     );
   }
 
+  const onSubmit = async ({ text }) => {
+    setSearchState(text);
+    console.log(text);
+  };
+
+  console.log('searched', imageData);
+
   return (
     <>
+      <Stack spacing='sm'>
+        <Title>Your Images</Title>
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          <TextInput
+            icon={<IconSearch size={18} stroke={1.5} />}
+            placeholder='Search your images by caption'
+            rightSection={
+              <ActionIcon color='indigo' size={32} type='submit' variant='filled'>
+                <IconArrowRight size={18} stroke={1.5} />
+              </ActionIcon>
+            }
+            rightSectionWidth={42}
+            size='md'
+            {...register('text')}
+          />
+        </form>
+      </Stack>
+      <Space h='xl' />
       {modal}
       <SimpleGrid
         breakpoints={[
