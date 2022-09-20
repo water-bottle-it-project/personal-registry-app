@@ -1,4 +1,4 @@
-import { Container, Text, Title } from '@mantine/core';
+import { Container, Space, Text, Title } from '@mantine/core';
 import { useRouter } from 'next/router';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
@@ -23,6 +23,7 @@ function Edit() {
 
   return (
     <Container size='xl'>
+      <Space h='xl' />
       <EditForm _id={id} />
     </Container>
   );

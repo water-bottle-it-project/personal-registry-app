@@ -87,7 +87,9 @@ export function TimelineCard({
       {/* Use mt='auto' to push link to bottom of card */}
       <Link href={`/memory/${_id}`} passHref>
         <Anchor component='a' mt='auto' sx={{ fontSize: 14, fontWeight: 600 }}>
-          {`View ${photos.length} photo${photos.length === 1 ? '' : 's'}`}
+          {photos.length
+            ? `View ${photos.length} photo${photos.length === 1 ? '' : 's'}`
+            : 'View memory details'}
         </Anchor>
       </Link>
     </Card>

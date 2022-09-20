@@ -1,4 +1,4 @@
-import { Container } from '@mantine/core';
+import { Container, Space } from '@mantine/core';
 import { NextSeo } from 'next-seo';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
@@ -8,6 +8,7 @@ const Create = () => (
   <>
     <NextSeo description='Create a memory in my personal registry' title='Create memory' />
     <Container size='xl'>
+      <Space h='xl' />
       <CreateForm />
     </Container>
   </>

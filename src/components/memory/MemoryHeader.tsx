@@ -54,8 +54,6 @@ export function MemoryHeader({
           </LinkButton>
         </Group>
         <Space h='xs' />
-        <Text className={classes.description}>{description}</Text>
-        <Space h='xs' />
         <Grid gutter='xs'>
           <Grid.Col xs={6}>
             <Title order={4} size='md'>
@@ -80,8 +78,9 @@ export function MemoryHeader({
         <Title order={4} size='md'>
           Collections
         </Title>
-        <Space h='xs' />
         <Group>{collectionBadges}</Group>
+        <Space h='xs' />
+        <Text className={classes.description}>{description}</Text>
       </Container>
     </Box>
   );
