@@ -1,5 +1,6 @@
 import { Center, Container, Pagination, Space, Stack, Text } from '@mantine/core';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { TimelineGrid } from '~components/timeline/TimelineGrid';
@@ -7,13 +8,52 @@ import { TimelineHeader } from '~components/timeline/TimelineHeader';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 export function TimelineIndex() {
-  const [page, setPage] = useState(1);
+  const router = useRouter();
+  const pageNum = router.query.page;
+
+  // Set the initial page based on the page query param.
+  const [page, setPage] = useState<number>(() => {
+    // Check for positive integer only.
+    const x = Number(pageNum);
+    if (Number.isInteger(x) && x > 0) {
+      return x;
+    }
+    void router.push({ pathname: '' }, undefined, { shallow: true });
+    return 1;
+  });
 
   // Lift query hook up to share search bar state with the memory results.
   const { data, isLoading, isLoadingError } = trpcClient.useQuery([
     'memory.GetMemoriesPaginated',
     { page },
   ]);
+
+  // Need useCallback. Without it, useEffect runs on every render:
+  // "Function makes the dependencies of useEffect Hook change on every render"
+  const changePage = useCallback(
+    async (newPage: number) => {
+      setPage(newPage);
+      await router.push(
+        {
+          pathname: '',
+          query: newPage === 1 ? {} : { page: newPage },
+        },
+        undefined,
+        { shallow: true },
+      );
+    },
+    [router],
+  );
+
+  useEffect(() => {
+    // We only know the pages once the data is loaded.
+    // If the page is more than the total number of pages, go to the last page.
+    if (data && page > data.totalPages) {
+      changePage(data.totalPages).then(() => {
+        return;
+      });
+    }
+  }, [changePage, data, page]);
 
   let contents;
   if (isLoading || !data?.docs) {
@@ -31,7 +71,13 @@ export function TimelineIndex() {
               Viewing memories {data.pagingCounter} to {data.pagingCounter + data.docs.length - 1}{' '}
               of {data.totalDocs}
             </Text>
-            <Pagination onChange={setPage} page={page} siblings={2} total={data.totalPages} />
+            <Pagination
+              onChange={changePage}
+              page={page}
+              siblings={3}
+              total={data.totalPages}
+              withEdges
+            />
           </Stack>
         </Center>
         <Space h='xl' />

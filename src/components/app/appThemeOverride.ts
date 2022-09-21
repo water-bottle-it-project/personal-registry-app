@@ -22,6 +22,14 @@ const appTheme: MantineThemeOverride = {
         variant: 'filled',
       },
     },
+    Pagination: {
+      styles: {
+        item: {
+          fontFamily: 'inherit',
+          fontWeight: 400,
+        },
+      },
+    },
     Button: {
       styles: theme => ({
         root: {
