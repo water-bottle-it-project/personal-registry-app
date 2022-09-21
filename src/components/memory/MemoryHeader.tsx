@@ -80,6 +80,9 @@ export function MemoryHeader({
         </Title>
         <Group spacing='xs'>{collectionBadges}</Group>
         <Space h='xs' />
+        <Title order={4} size='md'>
+          Description
+        </Title>
         <Text className={classes.description}>{description}</Text>
       </Container>
     </Box>
