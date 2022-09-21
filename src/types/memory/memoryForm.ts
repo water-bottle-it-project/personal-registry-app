@@ -10,6 +10,7 @@ import {
   photoWithIdZ,
 } from '~types/photo/photo';
 import { objectIdZ } from '~types/util/objectId';
+import { paginationWrapperZ } from '~types/util/pagination';
 import { urlZ } from '~types/util/url';
 
 /**
@@ -69,6 +70,11 @@ const memoryCardZ = memoryBase.merge(dateSeparate).extend({
   collections: collectionMemory2Z.array().default([]),
 });
 
+// For a paged list of memory cards
+const memoriesPaginated = paginationWrapperZ.extend({
+  docs: memoryCardZ.array().default([]),
+});
+
 // For viewing a single memory
 const memoryWithPhotosZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
@@ -91,6 +97,7 @@ type memoryCreateFormT = z.infer<typeof memoryCreateFormZ>;
 type memoryCreateFormRequestT = z.infer<typeof memoryCreateFormRequestZ>;
 type memoryIdOnlyT = z.infer<typeof memoryIdOnlyZ>;
 type memoryWithPhotosT = z.infer<typeof memoryWithPhotosZ>;
+type memoriesPaginatedT = z.infer<typeof memoriesPaginated>;
 
 type memoryEditFormRequestT = z.infer<typeof memoryEditFormRequestZ>;
 type memoryEditFormT = z.infer<typeof memoryEditFormZ>;
@@ -100,6 +107,7 @@ type memoryWithPhotosToEditT = z.infer<typeof memoryWithPhotosToEditZ>;
  * Exports
  */
 export type {
+  memoriesPaginatedT,
   memoryCardT,
   memoryCreateFormRequestT,
   memoryCreateFormT,

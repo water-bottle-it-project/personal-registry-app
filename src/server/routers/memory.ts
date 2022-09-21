@@ -1,12 +1,14 @@
 import { TRPCError } from '@trpc/server';
 import type { ObjectId } from 'mongoose';
 import mongoose from 'mongoose';
+import { z } from 'zod';
 
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Memory } from '~server/models/memory';
 import { Photo } from '~server/models/photo';
 import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
 import type {
+  memoriesPaginatedT,
   memoryCardT,
   memoryCreateFormRequestT,
   memoryEditFormRequestT,
@@ -18,6 +20,7 @@ import {
   memoryIdOnlyZ,
 } from '~types/memory/memoryForm';
 import type { photoWithIdT } from '~types/photo/photo';
+import { paginationInputZ } from '~types/util/pagination';
 
 const memoryRouter = createProtectedDbRouter()
   .query('GetMemories', {
@@ -31,6 +34,27 @@ const memoryRouter = createProtectedDbRouter()
       return {
         memories,
       };
+    },
+  })
+
+  .query('GetMemoriesPaginated', {
+    input: paginationInputZ,
+    async resolve({ ctx, input }) {
+      // Have to do this unfortunately without adding additional
+      // boilerplate to the mongoose schemas.
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const memories: memoriesPaginatedT = await Memory.paginate(
+        { userId: ctx.userId },
+        {
+          page: input.page,
+          limit: 24,
+          projection: { userId: 0 },
+          sort: { lastDate: -1 },
+          populate: { path: 'collections', select: '-description -userId' },
+        },
+      );
+      return memories;
     },
   })
 
