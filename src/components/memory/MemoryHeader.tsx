@@ -7,6 +7,7 @@ import {
   Grid,
   Group,
   Space,
+  Spoiler,
   Text,
   Title,
 } from '@mantine/core';
@@ -79,16 +80,15 @@ export function MemoryHeader({
         <Group spacing='xs'>{collectionBadges}</Group>
         <Space h='xs' />
         {description && description.length > 0 && (
-          <Title order={4} size='md'>
-            Description
-          </Title>
+          <>
+            <Title order={4} size='md'>
+              Description
+            </Title>
+            <Spoiler hideLabel='Show less' maxHeight={200} showLabel='Show more'>
+              <Text className={classes.description}>{description}</Text>
+            </Spoiler>
+          </>
         )}
-        {description &&
-          (description.length > 200 ? (
-            <ShowMore text={description} />
-          ) : (
-            <Text className={classes.description}>{description}</Text>
-          ))}
       </Container>
     </Box>
   );
