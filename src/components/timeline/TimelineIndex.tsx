@@ -28,7 +28,8 @@ export function TimelineIndex() {
         <Center>
           <Stack align='center' spacing='xs'>
             <Text color='dimmed' size='sm'>
-              Viewing memories {data.pagingCounter} to {data.pagingCounter + data.limit - 1}
+              Viewing memories {data.pagingCounter} to {data.pagingCounter + data.docs.length - 1}{' '}
+              of {data.totalDocs}
             </Text>
             <Pagination onChange={setPage} page={page} siblings={2} total={data.totalPages} />
           </Stack>
