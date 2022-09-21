@@ -47,7 +47,7 @@ const memoryRouter = createProtectedDbRouter()
         { userId: ctx.userId },
         {
           page: input.page,
-          limit: 24,
+          limit: 4,
           projection: { userId: 0 },
           sort: { lastDate: -1 },
           populate: { path: 'collections', select: '-description -userId' },
