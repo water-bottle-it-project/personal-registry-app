@@ -16,7 +16,6 @@ import ObjectID from 'bson-objectid';
 import Link from 'next/link';
 
 import { LinkButton } from '~components/util/LinkButton';
-import { ShowMore } from '~components/util/ShowMore';
 import type { memoryWithPhotosT } from '~types/memory/memoryForm';
 
 export function MemoryHeader({
