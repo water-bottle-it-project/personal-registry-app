@@ -12,6 +12,10 @@ function DebugAuth() {
     ['memory.GetMemory', { _id: memoriesData?.memories?.[0]?._id || '' }],
     { enabled: !!memoriesData },
   );
+  const { data: memoriesPaginatedData } = trpcClient.useQuery([
+    'memory.GetMemoriesPaginated',
+    { page: 1 },
+  ]);
 
   return (
     <Container size='xl'>
@@ -33,6 +37,10 @@ function DebugAuth() {
         {JSON.stringify(memoryData, null, 2)}
       </Code>
       <Text>your search query for collections</Text>
+      <Text>Paginated Memories</Text>
+      <Code block color='purple'>
+        {JSON.stringify(memoriesPaginatedData, null, 2)}
+      </Code>
     </Container>
   );
 }
