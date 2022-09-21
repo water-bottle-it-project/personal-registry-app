@@ -12,7 +12,7 @@ export function ShowMore({ text }: ShowMoreProps) {
     setIsShowMore(!isShowMore);
   };
   return (
-    <Text inline>
+    <Text className={classes.preWrap} inline>
       {isShowMore ? text.slice(0, 200) : text}
       <Text className={classes.showOrHide} onClick={toggleShowMore} span>
         {isShowMore ? '...read more' : ' show less'}
@@ -25,5 +25,8 @@ const useStyles = createStyles(theme => ({
   showOrHide: {
     color: theme.colors.blue,
     cursor: 'pointer',
+  },
+  preWrap: {
+    whiteSpace: 'pre-wrap',
   },
 }));
