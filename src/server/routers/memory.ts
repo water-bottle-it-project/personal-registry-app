@@ -1,7 +1,6 @@
 import { TRPCError } from '@trpc/server';
 import type { ObjectId } from 'mongoose';
 import mongoose from 'mongoose';
-import { z } from 'zod';
 
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Memory } from '~server/models/memory';
