@@ -27,6 +27,11 @@
     "import"
   ],
   "rules": {
+    "react/jsx-key": ["warn", {
+      "warnOnDuplicates": true,
+      "checkKeyMustBeforeSpread": true,
+      "checkFragmentShorthand": true
+    }],
     "import/no-default-export": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
