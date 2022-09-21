@@ -2,7 +2,6 @@ import {
   Anchor,
   Badge,
   Box,
-  Button,
   Container,
   createStyles,
   Grid,
@@ -16,6 +15,7 @@ import ObjectID from 'bson-objectid';
 import Link from 'next/link';
 
 import { LinkButton } from '~components/util/LinkButton';
+import { ShowMore } from '~components/util/ShowMore';
 import type { memoryWithPhotosT } from '~types/memory/memoryForm';
 
 export function MemoryHeader({
@@ -59,7 +59,7 @@ export function MemoryHeader({
             <Title order={4} size='md'>
               Date range
             </Title>
-            <Text size='sm'>
+            <Text>
               {firstDate === lastDate
                 ? new Date(lastDate).toDateString()
                 : `${new Date(firstDate).toDateString()} - ${new Date(lastDate).toDateString()}`}
@@ -69,9 +69,7 @@ export function MemoryHeader({
             <Title className={classes.right} order={4} size='md'>
               Created
             </Title>
-            <Text className={classes.right} size='sm'>
-              {new ObjectID(_id).getTimestamp().toDateString()}
-            </Text>
+            <Text className={classes.right}>{new ObjectID(_id).getTimestamp().toDateString()}</Text>
           </Grid.Col>
         </Grid>
         <Space h='xs' />
@@ -83,7 +81,10 @@ export function MemoryHeader({
         <Title order={4} size='md'>
           Description
         </Title>
-        <Text className={classes.description}>{description}</Text>
+        <Text className={classes.description}>
+          {description &&
+            (description.length > 200 ? <ShowMore text={description} /> : description)}
+        </Text>
       </Container>
     </Box>
   );
