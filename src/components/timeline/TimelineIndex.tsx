@@ -23,10 +23,6 @@ export function TimelineIndex() {
   } else {
     contents = (
       <>
-        <Center>
-          <Pagination onChange={setPage} page={page} siblings={2} total={data.totalPages} />
-        </Center>
-        <Space h='sm' />
         <TimelineGrid memories={data.docs} />
         <Space h='xl' />
         <Center>
