@@ -1,12 +1,14 @@
 import { Container, Space } from '@mantine/core';
-import type { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
 
+import { withAuthedPage } from '~clientUtils/authHooks';
 import { ImagesIndex } from '~components/image/ImageIndex';
 import { ImagesHeader } from '~components/image/ImagesHeader';
 
-const Images: NextPage = () => {
+function Images() {
   return (
     <>
+      <NextSeo description='My images' title='Images' />
       <Container size='xl'>
         <ImagesHeader />
         <Space h='xl' />
@@ -14,6 +16,6 @@ const Images: NextPage = () => {
       </Container>
     </>
   );
-};
+}
 
-export default Images;
+export default withAuthedPage(Images);
