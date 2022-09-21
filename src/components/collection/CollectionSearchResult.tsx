@@ -2,34 +2,26 @@ import { Grid } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { SearchNotFound } from '~components/util/SearchNotFound';
+import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 import { CollectionCard } from './CollectionCard';
-import { CollectionSkeleton } from './CollectionSkeleton';
 
 interface CollectionSearchResultProps {
   searchQuery: { text: string; searchType: string };
 }
 
-export function CollectionSearchResult(props: CollectionSearchResultProps) {
-  const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
+export function CollectionSearchResult({ searchQuery }: CollectionSearchResultProps) {
+  const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'collection.SearchCollections',
-    props.searchQuery,
+    searchQuery,
   ]);
 
   if (isLoading) {
-    // Need to provide a key for React components when mapping over an array (check devtools console).
-    // Use same grid as the data grid to have consistent sizing.
-    const skeletonLoaders = Array.from({ length: 10 }, (_, i) => (
-      <Grid.Col key={i} md={3} sm={4} xs={6}>
-        <CollectionSkeleton />
-      </Grid.Col>
-    ));
-
-    return <Grid>{skeletonLoaders}</Grid>;
+    return <SkeletonGrid />;
   }
 
   if (isLoadingError) {
-    return <SearchNotFound text={props.searchQuery.text} type={props.searchQuery.searchType} />;
+    return <SearchNotFound text={searchQuery.text} type={searchQuery.searchType} />;
   }
 
   const collections =
@@ -44,7 +36,7 @@ export function CollectionSearchResult(props: CollectionSearchResultProps) {
     <Grid>
       {collections?.length === 0 ? (
         <Grid.Col>
-          <SearchNotFound text={props.searchQuery.text} type={props.searchQuery.searchType} />
+          <SearchNotFound text={searchQuery.text} type={searchQuery.searchType} />
         </Grid.Col>
       ) : (
         collections
