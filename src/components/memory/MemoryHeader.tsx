@@ -25,6 +25,7 @@ export function MemoryHeader({
   description,
   firstDate,
   lastDate,
+  photos,
 }: memoryWithPhotosT) {
   const { classes } = useStyles();
 
@@ -83,9 +84,13 @@ export function MemoryHeader({
             <Title order={4} size='md'>
               Description
             </Title>
-            <Spoiler hideLabel='Show less' maxHeight={200} showLabel='Show more'>
+            {photos.length ? (
+              <Spoiler hideLabel='Show less' maxHeight={200} showLabel='Show more'>
+                <Text className={classes.description}>{description}</Text>
+              </Spoiler>
+            ) : (
               <Text className={classes.description}>{description}</Text>
-            </Spoiler>
+            )}
           </>
         )}
       </Container>

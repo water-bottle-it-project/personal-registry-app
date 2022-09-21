@@ -1,4 +1,10 @@
-import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+} from '@firebase/storage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Stack, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
@@ -81,14 +87,14 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
       return;
     }
 
-    const userStorageRef = ref(getStorage(), userId);
+    const userStorageRef = storageRef(getStorage(), userId);
 
     const fileUploadRequests = memory.photos.map(async p => {
       // Don't re-upload if the image is unchanged
       if (p.url) {
         return p.url;
       }
-      const fileRef = ref(userStorageRef, `${p._dir}/${p._file.name}`);
+      const fileRef = storageRef(userStorageRef, `${p._dir}/${p._file.name}`);
       const fileUploadResult = await uploadBytes(fileRef, p._file, firebaseMetadata);
       return await getDownloadURL(fileUploadResult.ref);
     });
@@ -117,7 +123,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
       onSuccess: async data => {
         // Delete files from Firebase Storage.
         const fileDeleteRequests = data.map(async del => {
-          const fileRef = ref(getStorage(), del);
+          const fileRef = storageRef(getStorage(), del);
           return deleteObject(fileRef);
         });
         await Promise.all(fileDeleteRequests);

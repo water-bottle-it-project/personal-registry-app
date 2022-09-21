@@ -1,4 +1,4 @@
-import { getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage';
+import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from '@firebase/storage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Group, Stack, Text, Title } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
@@ -54,11 +54,11 @@ export function CreateForm() {
     }
 
     // Get the folder with the user id
-    const userStorageRef = ref(getStorage(), userId);
+    const userStorageRef = storageRef(getStorage(), userId);
 
     // Upload and get download url promises
     const fileUploadRequests = memory.photos.map(async p => {
-      const fileRef = ref(userStorageRef, `${p._dir}/${p._file.name}`);
+      const fileRef = storageRef(userStorageRef, `${p._dir}/${p._file.name}`);
       const fileUploadResult = await uploadBytes(fileRef, p._file, firebaseMetadata);
       return await getDownloadURL(fileUploadResult.ref);
     });
