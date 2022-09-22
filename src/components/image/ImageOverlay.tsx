@@ -21,10 +21,10 @@ import { ImageOverlayMetadata } from './ImageOverlayMetadata';
 
 export interface ImageCardProps {
   _id: string;
-  caption: string;
-  url: string;
-  handleNext?: (event: React.MouseEvent<HTMLElement>) => void;
-  handlePrev?: (event: React.MouseEvent<HTMLElement>) => void;
+  // caption: string;
+  // url: string;
+  // handleNext?: (event: React.MouseEvent<HTMLElement>) => void;
+  // handlePrev?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export function ImageOverlay(props: ImageCardProps) {
@@ -39,7 +39,7 @@ export function ImageOverlay(props: ImageCardProps) {
     { _id: props._id },
   ]);
 
-  data && console.log(data.image);
+  data && console.log("hey cunt");
 
   if (editId && !Array.isArray(editId)) {
     info = (
@@ -64,11 +64,11 @@ export function ImageOverlay(props: ImageCardProps) {
   return (
     <Grid>
       <Grid.Col span={1}>
-        <Group py={250}>
+        {/* <Group py={250}>
           <UnstyledButton onClick={props.handlePrev}>
             <IconChevronLeft size={60} />
           </UnstyledButton>
-        </Group>
+        </Group> */}
       </Grid.Col>
       <Grid.Col span={10}>
         <Container
@@ -96,11 +96,11 @@ export function ImageOverlay(props: ImageCardProps) {
         </Container>
       </Grid.Col>
       <Grid.Col span={1}>
-        <Group py={250}>
+        {/* <Group py={250}>
           <UnstyledButton onClick={props.handleNext}>
             <IconChevronRight size={60} />
           </UnstyledButton>
-        </Group>
+        </Group> */}
       </Grid.Col>
     </Grid>
   );

@@ -1,5 +1,7 @@
 import { Card, Container, createStyles, Image, Space, Text } from '@mantine/core';
+import { router } from '@trpc/server';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface ImageCardProps {
   _id: string;
@@ -18,9 +20,10 @@ const useStyles = createStyles(theme => ({
 
 export function ImageCard(props: ImageCardProps) {
   const { classes } = useStyles();
+  const router = useRouter();
   return (
     <Container className={classes.wrapper}>
-      <Link href={`/images?view=${props._id}`} passHref>
+      <Link href={`/images/view?id=${props._id}`} passHref>
         <Card
           className={classes.card}
           p={0}
