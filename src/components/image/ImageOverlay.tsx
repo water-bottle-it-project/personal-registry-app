@@ -4,6 +4,7 @@ import {
   Grid,
   Group,
   Image,
+  Modal,
   SimpleGrid,
   Space,
   Text,
@@ -63,47 +64,56 @@ export function ImageOverlay(props: ImageCardProps) {
   }
 
   return (
-    <Grid>
-      <Grid.Col span={1}>
-        {/* <Group py={250}>
+    <>
+      <Modal
+        lockScroll
+        onClose={() => router.push('/images', undefined, { shallow: true })}
+        opened
+        size='60%'
+      >
+        <Grid>
+          <Grid.Col span={1}>
+            {/* <Group py={250}>
           <UnstyledButton onClick={props.handlePrev}>
             <IconChevronLeft size={60} />
           </UnstyledButton>
         </Group> */}
-      </Grid.Col>
-      <Grid.Col span={10}>
-        <Container
-          sx={theme => ({
-            fontSize: theme.fontSizes.sm,
-            padding: '0',
-          })}
-        >
-          <Image alt='' height='40%' src={data?.image.url} width='100%' />
-          <Space h='md' />
-          <Title order={1}>{data?.image.caption}</Title>
-          <Text>Posted on August 12 2022</Text>
-
-          <Space h='md' />
-          <Container className={classes.wrapper}>
-            <SimpleGrid
-              breakpoints={[{ maxWidth: 'md', cols: 1, spacing: 'sm' }]}
-              cols={2}
-              spacing='lg'
+          </Grid.Col>
+          <Grid.Col span={10}>
+            <Container
+              sx={theme => ({
+                fontSize: theme.fontSizes.sm,
+                padding: '0',
+              })}
             >
-              {info}
-              <ImageOverlayMetadata caption={data?.image.caption} url={data?.image.url} />
-            </SimpleGrid>
-          </Container>
-        </Container>
-      </Grid.Col>
-      <Grid.Col span={1}>
-        {/* <Group py={250}>
+              <Image alt='' height='40%' src={data?.image.url} width='100%' />
+              <Space h='md' />
+              <Title order={1}>{data?.image.caption}</Title>
+              <Text>Posted on August 12 2022</Text>
+
+              <Space h='md' />
+              <Container className={classes.wrapper}>
+                <SimpleGrid
+                  breakpoints={[{ maxWidth: 'md', cols: 1, spacing: 'sm' }]}
+                  cols={2}
+                  spacing='lg'
+                >
+                  {info}
+                  <ImageOverlayMetadata caption={data?.image.caption} url={data?.image.url} />
+                </SimpleGrid>
+              </Container>
+            </Container>
+          </Grid.Col>
+          <Grid.Col span={1}>
+            {/* <Group py={250}>
           <UnstyledButton onClick={props.handleNext}>
             <IconChevronRight size={60} />
           </UnstyledButton>
         </Group> */}
-      </Grid.Col>
-    </Grid>
+          </Grid.Col>
+        </Grid>
+      </Modal>
+    </>
   );
 }
 
