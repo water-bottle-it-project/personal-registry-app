@@ -38,7 +38,7 @@ export function ImageOverlayInfo(props: photoBaseWithIdT) {
       <Space h='md' />
       <div className={classes.buttonGroup}>
         <UnstyledButton className={classes.button}>
-          <Link href={`/images?edit=${props._id}`} passHref>
+          <Link href={`/images/edit?id=${props._id}`} passHref>
             <Group spacing={5}>
               <IconEdit />
               <Text>Edit</Text>
