@@ -29,7 +29,8 @@ export interface ImageCardProps {
 
 export function ImageOverlay(props: ImageCardProps) {
   const router = useRouter();
-  const editId = router.query.edit;
+  console.log('the path is', router.pathname);
+  const editId = router.pathname;
   let info: React.ReactNode = null;
 
   const { classes } = useStyles();
@@ -39,9 +40,9 @@ export function ImageOverlay(props: ImageCardProps) {
     { _id: props._id },
   ]);
 
-  data && console.log("hey cunt");
+  // data && console.log("hey cunt");
 
-  if (editId && !Array.isArray(editId)) {
+  if (editId == '/images/edit' && !Array.isArray(editId)) {
     info = (
       <ImageOverlayInfoEdit
         _id={props._id}
