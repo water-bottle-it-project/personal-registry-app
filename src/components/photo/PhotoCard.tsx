@@ -7,7 +7,6 @@ export function PhotoCard({ _id, caption, url }: photoWithIdT) {
   const { classes } = useStyles();
   return (
     <Card
-      className={classes.card}
       radius='sm'
       shadow='sm'
       sx={theme => ({
@@ -16,7 +15,7 @@ export function PhotoCard({ _id, caption, url }: photoWithIdT) {
       })}
       withBorder
     >
-      <Card.Section>
+      <Card.Section className={classes.cardSection}>
         <Link as={`/images/${_id}`} href={`/images/?id=${_id}`} shallow>
           <Image alt={caption} height={220} src={url} />
         </Link>
@@ -30,7 +29,7 @@ export function PhotoCard({ _id, caption, url }: photoWithIdT) {
 }
 
 const useStyles = createStyles({
-  card: {
+  cardSection: {
     cursor: 'pointer',
   },
 });
