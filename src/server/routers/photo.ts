@@ -7,7 +7,11 @@ import type { photoWithIdT } from '~types/photo/photo';
  */
 const photosRouter = createProtectedDbRouter().query('GetPhotos', {
   async resolve({ ctx }) {
-    const photos: photoWithIdT[] = await Photo.find({ userId: ctx.userId });
+    const photos: photoWithIdT[] = await Photo.find(
+      { userId: ctx.userId },
+      {},
+      { sort: { memoryDate: -1 } },
+    );
     return {
       photos,
     };
