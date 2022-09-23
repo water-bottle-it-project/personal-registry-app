@@ -7,8 +7,8 @@ import { createContext } from '~server/context';
 import { collectionRouter } from '~server/routers/collection';
 import { debugRouter } from '~server/routers/debug';
 import { debugAuthedRouter } from '~server/routers/debugAuthed';
-import { imagesRouter } from '~server/routers/image';
 import { memoryRouter } from '~server/routers/memory';
+import { photosRouter } from '~server/routers/photo';
 import { profileRouter } from '~server/routers/profile';
 
 /**
@@ -20,7 +20,7 @@ const appRouter = trpc
   .merge('collection.', collectionRouter)
   .merge('debug.', debugRouter)
   .merge('debugAuthed.', debugAuthedRouter)
-  .merge('images.', imagesRouter)
+  .merge('photos.', photosRouter)
   .merge('profile.', profileRouter)
   .merge('memory.', memoryRouter);
 

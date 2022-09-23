@@ -1,9 +1,9 @@
 import 'photoswipe/dist/photoswipe.css';
 
-import type { photoWithMemoryT } from '~types/photo/photo';
+import type { photoWithIdT } from '~types/photo/photo';
 
 interface PhotoGalleryProps {
-  photos: photoWithMemoryT;
+  photos: photoWithIdT;
 }
 
 export function PhotoGallery({ photos }: PhotoGalleryProps) {

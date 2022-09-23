@@ -24,7 +24,7 @@ export function ProfileContainer() {
   const username = currentUser.displayName || currentUser?.email?.split('@')[0] || 'No Name Found';
 
   // user profile stats - grab length of returned query
-  const photo_count = trpcClient.useQuery(['images.listImages'])?.data?.photos?.length || 0;
+  const photo_count = trpcClient.useQuery(['photos.GetPhotos'])?.data?.photos?.length || 0;
   const collection_count =
     trpcClient.useQuery(['collection.GetCollections'])?.data?.collections?.length || 0;
   const memory_count = trpcClient.useQuery(['memory.GetMemories'])?.data?.memories?.length || 0;

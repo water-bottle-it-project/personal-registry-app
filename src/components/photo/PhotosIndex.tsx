@@ -11,7 +11,7 @@ import { SkeletonGrid } from '~components/util/SkeletonGrid';
  */
 
 export function PhotosIndex() {
-  const { data, isLoadingError, isLoading } = trpcClient.useQuery(['images.listImages']);
+  const { data, isLoadingError, isLoading } = trpcClient.useQuery(['photos.GetPhotos']);
 
   let contents;
   if (isLoading || !data) {
