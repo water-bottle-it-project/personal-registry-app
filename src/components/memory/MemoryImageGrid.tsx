@@ -18,7 +18,7 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
   // Distribute images on the masonry grid evenly
   // My approach:
   // Every nth photo in the photos array, switch columns and populate that column
-  // This is a very naive attempt and does not respect image order (in mobile view)
+  // This is a very naive attempt and does not respect photo order (in mobile view)
   let colCount = 0;
   const photoCol0: React.ReactElement[] = [];
   const photoCol1: React.ReactElement[] = [];

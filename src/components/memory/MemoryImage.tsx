@@ -1,7 +1,7 @@
 import { Divider, Grid, Image, Space, Stack, Title } from '@mantine/core';
 
-import { ImageOverlayInfo } from '~components/image/ImageOverlayInfo';
-import { ImageOverlayMetadata } from '~components/image/ImageOverlayMetadata';
+import { PhotoInfo } from '~components/photo/PhotoInfo';
+import { PhotoMeta } from '~components/photo/PhotoMeta';
 import type { photoWithIdT } from '~types/photo/photo';
 
 export function MemoryImage({ _id, caption, url, photoDate, location }: photoWithIdT) {
@@ -15,9 +15,9 @@ export function MemoryImage({ _id, caption, url, photoDate, location }: photoWit
         </Grid.Col>
         <Grid.Col lg={4} md={8}>
           <Stack spacing='xs'>
-            <ImageOverlayInfo _id={_id} caption={caption} url={url} />
+            <PhotoInfo _id={_id} caption={caption} url={url} />
             <Space h='md' />
-            <ImageOverlayMetadata caption={caption} url={url} />
+            <PhotoMeta caption={caption} url={url} />
           </Stack>
         </Grid.Col>
       </Grid>

@@ -1,7 +1,6 @@
 import { Button, Code, Container, Text, Title } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons';
-import router from 'next/router';
 import { useAuthUser } from 'next-firebase-auth';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
@@ -21,7 +20,7 @@ function DebugAuth() {
   ]);
 
   const trpcUtils = trpcClient.useContext();
-  const mutation = trpcClient.useMutation(['images.UpdateImage']);
+  const mutation = trpcClient.useMutation(['images.updateImage']);
   const handleLogin = async () => {
     mutation.mutate(
       {

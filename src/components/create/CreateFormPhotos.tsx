@@ -174,7 +174,7 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
     // Get old thumbnail blob link to clean up later
     const _thumbnailOld = fields[index]._thumbnail;
 
-    // Insert new image
+    // Insert new photo
     update(index, {
       ...fields[index],
       _file: file,

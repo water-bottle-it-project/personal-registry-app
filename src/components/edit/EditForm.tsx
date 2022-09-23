@@ -109,7 +109,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
     const userStorageRef = storageRef(getStorage(), userId);
 
     const fileUploadRequests = memory.photos.map(async p => {
-      // Don't re-upload if the image is unchanged
+      // Don't re-upload if the photo is unchanged
       if (p.url) {
         return p.url;
       }

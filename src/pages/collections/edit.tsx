@@ -9,6 +9,7 @@ function CollectionEditPage() {
   const editId = router.query.id;
   if (!editId || Array.isArray(editId)) {
     void router.replace('/collections');
+    console.log('hi');
     return (
       <Container size='xl'>
         <Text>No collection id provided; redirecting...</Text>;

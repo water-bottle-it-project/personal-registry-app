@@ -1,11 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Box,
-  Button,
   createStyles,
   Group,
   Space,
-  Stack,
   Text,
   TextInput,
   Title,
@@ -132,7 +130,7 @@ function EditForm({ photo, handleEdit }: EditFormProps) {
   );
 }
 
-export function ImageOverlayInfoEdit(props: photoBaseWithIdT) {
+export function PhotoInfoEdit(props: photoBaseWithIdT) {
   const mutation = trpcClient.useMutation(['images.updateImage']);
   const trpcUtils = trpcClient.useContext();
 
