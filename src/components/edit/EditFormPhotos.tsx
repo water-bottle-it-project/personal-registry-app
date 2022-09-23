@@ -175,7 +175,7 @@ export function EditFormPhotos({ control, register }: UseFormReturn<memoryEditFo
     // Get old thumbnail blob link to clean up later
     const _thumbnailOld = fields[index]._thumbnail;
 
-    // Insert new image - requires new nanoid just in case.
+    // Insert new photo - requires new nanoid just in case.
     update(index, {
       ...fields[index],
       _file: file,

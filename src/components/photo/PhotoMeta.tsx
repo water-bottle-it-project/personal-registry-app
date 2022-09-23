@@ -5,7 +5,7 @@ interface ImageCardProps {
   url: string;
 }
 
-export function ImageOverlayMetadata(props: ImageCardProps) {
+export function PhotoMeta(props: ImageCardProps) {
   const { classes } = useStyles();
   return (
     <Box

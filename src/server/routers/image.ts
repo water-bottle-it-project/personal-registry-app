@@ -24,7 +24,7 @@ const imagesRouter = createProtectedDbRouter()
       const image = await Photo.findOne({
         _id: input._id,
         userId: ctx.userId,
-      }); // findById('6308a49ab3b2b466112558ec');
+      });
 
       if (!image) {
         throw new TRPCError({

@@ -58,8 +58,8 @@ const photoIdOnly = z.object({
 
 // combined photoWithId with memory details to be used in all photos view
 const photoWithMemoryZ = photoWithIdZ.extend({
-  memoryId: z.string().min(1),
-  memoryDate: z.string().min(1),
+  memoryId: objectIdZ,
+  memoryDate: z.date(),
 });
 
 const photoBaseWithIdZ = photoBase.extend({
