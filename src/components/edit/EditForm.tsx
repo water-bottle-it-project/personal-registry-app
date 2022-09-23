@@ -157,7 +157,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
           message: `Memory successfully edited.`,
           icon: <IconCheck />,
         });
-        await router.push('/timeline');
+        await router.push(`/memory/${editedMemory._id}`);
         memory.photos.forEach(p => {
           if (p._thumbnail) {
             URL.revokeObjectURL(p._thumbnail);
