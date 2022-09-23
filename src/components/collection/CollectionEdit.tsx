@@ -83,12 +83,6 @@ export function CollectionEdit(props: collectionIdOnlyT) {
   }
 
   if (isLoadingError) {
-    showNotification({
-      icon: <IconX />,
-      color: 'red',
-      title: 'Error!',
-      message: 'Error loading collection details.',
-    });
     return (
       <Stack align='center' justify='center'>
         <Lottie animationData={errorLottie} loop={false} style={{ width: '30%', height: '30%' }} />
