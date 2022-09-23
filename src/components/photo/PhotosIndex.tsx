@@ -1,14 +1,9 @@
 import { ActionIcon, Container, Grid, Space, Stack, Text, TextInput, Title } from '@mantine/core';
 import { IconArrowRight, IconSearch } from '@tabler/icons';
-import { useRouter } from 'next/router';
-import { useMemo } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { PhotoModal } from '~components/photo/PhotoModal';
+import { PhotoCard } from '~components/photo/PhotoCard';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
-import type { photoWithMemoryT } from '~types/photo/photo';
-
-import { PhotoCard } from './PhotoCard';
 
 /**
  * Image page querying images from mongoDB
@@ -17,18 +12,6 @@ import { PhotoCard } from './PhotoCard';
 
 export function PhotosIndex() {
   const { data, isLoadingError, isLoading } = trpcClient.useQuery(['images.listImages']);
-
-  const router = useRouter();
-  const id = router.query.id;
-
-  if (Array.isArray(id)) {
-    void router.replace('/images', undefined, { shallow: true });
-  }
-
-  const photoMap: Map<string, number> = useMemo(
-    () => new Map(data?.photos ? data.photos.map((p, i) => [p._id, i]) : []),
-    [data?.photos],
-  );
 
   let contents;
   if (isLoading || !data) {
@@ -46,10 +29,6 @@ export function PhotosIndex() {
       </Grid>
     );
   }
-
-  const photoIndex: number | undefined = typeof id === 'string' ? photoMap.get(id) : undefined;
-  const photoAtIndex: photoWithMemoryT | undefined =
-    photoIndex === undefined ? undefined : data?.photos.at(photoIndex);
 
   return (
     <>
@@ -73,7 +52,6 @@ export function PhotosIndex() {
         {contents}
         <Space h='xl' />
       </Container>
-      {photoAtIndex && <PhotoModal {...photoAtIndex} />}
     </>
   );
 }

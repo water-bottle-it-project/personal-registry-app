@@ -8,55 +8,13 @@ import { photoBaseWithIdZ, photoIdOnly } from '~types/photo/photo';
 /**
  * Router for debug operations
  */
-const imagesRouter = createProtectedDbRouter()
-  .query('listImages', {
-    async resolve({ ctx }) {
-      const photos: photoWithMemoryT[] = await Photo.find({ userId: ctx.userId });
-      return {
-        photos,
-      };
-    },
-  })
-
-  .query('getImage', {
-    input: photoIdOnly,
-    async resolve({ ctx, input }) {
-      const image = await Photo.findOne({
-        _id: input._id,
-        userId: ctx.userId,
-      });
-
-      if (!image) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: 'Image not found by ID.',
-        });
-      }
-
-      return {
-        image,
-      };
-    },
-  })
-
-  .mutation('updateImage', {
-    input: photoBaseWithIdZ,
-    async resolve({ ctx, input }) {
-      const image: photoWithMemoryT | null = await Photo.findOneAndUpdate(
-        { _id: input._id, userId: ctx.userId },
-        { caption: input.caption, photoDate: input.photoDate, location: input.location },
-        { returnDocument: 'after' },
-      );
-
-      if (!image) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: 'Image to update was not found.',
-        });
-      }
-
-      return { image };
-    },
-  });
+const imagesRouter = createProtectedDbRouter().query('listImages', {
+  async resolve({ ctx }) {
+    const photos: photoWithMemoryT[] = await Photo.find({ userId: ctx.userId });
+    return {
+      photos,
+    };
+  },
+});
 
 export { imagesRouter };

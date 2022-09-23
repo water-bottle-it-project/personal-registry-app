@@ -2,9 +2,9 @@ import { Box, createStyles, Group, Space, Text, Title, UnstyledButton } from '@m
 import { IconDownload, IconEdit, IconTrash } from '@tabler/icons';
 import Link from 'next/link';
 
-import type { photoBaseWithIdT } from '~types/photo/photo';
+import type { photoWithMemoryT } from '~types/photo/photo';
 
-export function PhotoInfo(props: photoBaseWithIdT) {
+export function PhotoInfo(props: photoWithMemoryT) {
   const { classes } = useStyles();
   return (
     <Box

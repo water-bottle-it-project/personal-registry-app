@@ -15,7 +15,7 @@ export function MemoryImage({ _id, caption, url, photoDate, location }: photoWit
         </Grid.Col>
         <Grid.Col lg={4} md={8}>
           <Stack spacing='xs'>
-            <PhotoInfo _id={_id} caption={caption} url={url} />
+            {/*<PhotoInfo _id={_id} caption={caption} url={url} />*/}
             <Space h='md' />
             <PhotoMeta caption={caption} url={url} />
           </Stack>
