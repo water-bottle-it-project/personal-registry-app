@@ -7,6 +7,7 @@ import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
 import type { GalleryProps } from 'react-photoswipe-gallery';
 import { Gallery, Item } from 'react-photoswipe-gallery';
 
+import { iconToMemory } from '~components/photo/customElements/iconToMemory';
 import { PhotoCard } from '~components/photo/PhotoCard';
 import type { photoWithIdT } from '~types/photo/photo';
 
@@ -26,7 +27,11 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       name: 'memoryLink',
       order: 9,
       isButton: true,
-      html: 'View memory',
+      html: {
+        isCustomSVG: true,
+        inner: iconToMemory,
+        size: 24,
+      },
       onClick: (e, element, pswp) => {
         e.stopPropagation();
         e.preventDefault();
@@ -89,5 +94,5 @@ function getAlt({ memoryDate, photoDate, caption, location, width, height }: pho
     strings.push(`Resolution:<br><b>${width} x ${height}</b>`);
   }
 
-  return strings.join(`<br><br>`);
+  return strings.join(`<sub>&nbsp</sub><br>`);
 }
