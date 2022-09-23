@@ -41,12 +41,7 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
           handlePhotoClick(i);
         }}
       >
-        <MemoryImageGridItem
-          _id={photos[i]._id}
-          caption={photos[i].caption}
-          photoDate={photos[i].photoDate}
-          url={photos[i].url}
-        />
+        <MemoryImageGridItem {...photos[i]} />
       </div>
     );
     if (colCount === 0) {

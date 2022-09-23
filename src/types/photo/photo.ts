@@ -10,8 +10,11 @@ const photoBase = z.object({
   caption: z.string().trim().optional(),
   location: z.string().trim().optional(),
   photoDate: z.date().nullable(),
-  height: z.number().optional(),
-  width: z.number().optional(),
+});
+
+const photoDims = z.object({
+  height: z.number(),
+  width: z.number(),
 });
 
 /**
@@ -26,11 +29,11 @@ const photoFormCreateZ = photoBase.extend({
 });
 
 // Gets combined with form create request.
-const photoFormCreateRequestZ = photoBase.extend({
+const photoFormCreateRequestZ = photoBase.merge(photoDims).extend({
   url: urlZ,
 });
 
-const photoFormEditZ = photoBase.extend({
+const photoFormEditZ = photoBase.merge(photoDims.partial()).extend({
   _file: z.any().optional(),
   _dir: z.string(),
   _thumbnail: z.string().optional(),
@@ -38,13 +41,13 @@ const photoFormEditZ = photoBase.extend({
   url: urlZ.optional(),
 });
 
-const photoFormEditRequestZ = photoBase.extend({
+const photoFormEditRequestZ = photoBase.merge(photoDims).extend({
   _id: objectIdZ.optional(),
   url: urlZ,
 });
 
 // Gets combined with memory to return a single memory with all the photos populated.
-const photoWithIdZ = photoBase.extend({
+const photoWithIdZ = photoBase.merge(photoDims).extend({
   url: urlZ,
   _id: objectIdZ,
 });
