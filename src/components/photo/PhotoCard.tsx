@@ -1,9 +1,14 @@
 import { Card, createStyles, Image, Space, Text } from '@mantine/core';
-import Link from 'next/link';
+import type { MouseEvent, MutableRefObject } from 'react';
 
 import type { photoWithIdT } from '~types/photo/photo';
 
-export function PhotoCard({ _id, caption, url }: photoWithIdT) {
+interface PhotoCardProps extends photoWithIdT {
+  itemRef?: MutableRefObject<HTMLDivElement>;
+  open?: (e: MouseEvent) => void;
+}
+
+export function PhotoCard({ _id, caption, url, itemRef, open }: PhotoCardProps) {
   const { classes } = useStyles();
   return (
     <Card
@@ -16,9 +21,7 @@ export function PhotoCard({ _id, caption, url }: photoWithIdT) {
       withBorder
     >
       <Card.Section className={classes.cardSection}>
-        <Link as={`/images/${_id}`} href={`/images/?id=${_id}`} shallow>
-          <Image alt={caption} height={220} src={url} />
-        </Link>
+        <Image alt={caption} height={220} onClick={open} ref={itemRef} src={url} />
       </Card.Section>
       <Space h='sm' />
       <Text align='center' color={caption ? 'gray.4' : 'dimmed'} italic={!caption}>
