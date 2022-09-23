@@ -87,6 +87,25 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
       return;
     }
 
+    // Get dimensions of all photos
+    const photoDimRequests = memory.photos.map(async p => {
+      if (p.height && p.width) {
+        return { height: p.height, width: p.width };
+      }
+
+      const src = p._thumbnail ?? p.url;
+      if (!src) {
+        return { height: 0, width: 0 };
+      }
+      const img = new Image();
+      img.src = src;
+      await img.decode();
+      return { height: img.height, width: img.width };
+    });
+
+    const photoDims = await Promise.all(photoDimRequests);
+
+    // Upload photos to Firebase if not already present (new or replaced image photos only)
     const userStorageRef = storageRef(getStorage(), userId);
 
     const fileUploadRequests = memory.photos.map(async p => {
@@ -100,12 +119,15 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
     });
 
     const fileUrls = await Promise.all(fileUploadRequests);
+
     const editedPhotos: photoFormEditRequestT[] = memory.photos.map((p, index) => ({
       _id: p._id,
       caption: p.caption,
       photoDate: p.photoDate,
       location: p.location,
       url: fileUrls[index],
+      height: photoDims[index].height,
+      width: photoDims[index].width,
     }));
 
     const editedMemory: memoryEditFormRequestT = {

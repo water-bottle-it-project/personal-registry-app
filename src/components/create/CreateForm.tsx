@@ -53,6 +53,18 @@ export function CreateForm() {
       return;
     }
 
+    const photoDimRequests = memory.photos.map(async p => {
+      if (!p._thumbnail) {
+        return { height: 0, width: 0 };
+      }
+      const img = new Image();
+      img.src = p._thumbnail;
+      await img.decode();
+      return { height: img.height, width: img.width };
+    });
+
+    const photoDims = await Promise.all(photoDimRequests);
+
     // Get the folder with the user id
     const userStorageRef = storageRef(getStorage(), userId);
 
@@ -72,6 +84,8 @@ export function CreateForm() {
       photoDate: p.photoDate,
       location: p.location,
       url: fileUrls[index],
+      height: photoDims[index].height,
+      width: photoDims[index].width,
     }));
 
     // Create a CreateMemory TRPC backend request

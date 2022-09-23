@@ -10,6 +10,8 @@ const photoSchema = new Schema({
   memoryId: { type: Schema.Types.ObjectId, required: true, ref: 'Memory' },
   memoryDate: { type: Date, required: true },
   photoDate: { type: Date, required: false },
+  height: { type: Number, required: true },
+  width: { type: Number, required: true },
 });
 
 photoSchema.index({ userId: 'hashed', memoryDate: -1 });

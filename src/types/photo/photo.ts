@@ -10,6 +10,8 @@ const photoBase = z.object({
   caption: z.string().trim().optional(),
   location: z.string().trim().optional(),
   photoDate: z.date().nullable(),
+  height: z.number().optional(),
+  width: z.number().optional(),
 });
 
 /**
