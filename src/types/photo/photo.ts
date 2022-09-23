@@ -50,14 +50,6 @@ const photoFormEditRequestZ = photoBase.merge(photoDims).extend({
 const photoWithIdZ = photoBase.merge(photoDims).extend({
   url: urlZ,
   _id: objectIdZ,
-});
-
-const photoIdOnly = z.object({
-  _id: objectIdZ,
-});
-
-// combined photoWithId with memory details to be used in all photos view
-const photoWithMemoryZ = photoWithIdZ.extend({
   memoryId: objectIdZ,
   memoryDate: z.date(),
 });
@@ -65,26 +57,20 @@ const photoWithMemoryZ = photoWithIdZ.extend({
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
 type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
 type photoWithIdT = z.infer<typeof photoWithIdZ>;
-type photoIdOnlyT = z.infer<typeof photoIdOnly>;
 type photoFormEditT = z.infer<typeof photoFormEditZ>;
 type photoFormEditRequestT = z.infer<typeof photoFormEditRequestZ>;
-type photoWithMemoryT = z.infer<typeof photoWithMemoryZ>;
 
 export type {
   photoFormCreateRequestT,
   photoFormCreateT,
   photoFormEditRequestT,
   photoFormEditT,
-  photoIdOnlyT,
   photoWithIdT,
-  photoWithMemoryT,
 };
 export {
   photoFormCreateRequestZ,
   photoFormCreateZ,
   photoFormEditRequestZ,
   photoFormEditZ,
-  photoIdOnly,
   photoWithIdZ,
-  photoWithMemoryZ,
 };
