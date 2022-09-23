@@ -21,7 +21,7 @@ interface LinkButtonProps extends ButtonProps {
 export function LinkButton({ href, ...buttonProps }: LinkButtonProps) {
   return (
     <Link href={href} passHref>
-      <Button {...buttonProps} />
+      <Button component='a' {...buttonProps} />
     </Link>
   );
 }
