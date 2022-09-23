@@ -1,6 +1,9 @@
 import 'photoswipe/dist/photoswipe.css';
+import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css';
 
 import { Grid } from '@mantine/core';
+import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
+import type { GalleryProps } from 'react-photoswipe-gallery';
 import { Gallery, Item } from 'react-photoswipe-gallery';
 
 import { PhotoCard } from '~components/photo/PhotoCard';
@@ -11,12 +14,26 @@ interface PhotoGalleryProps {
 }
 
 export function PhotoGallery({ photos }: PhotoGalleryProps) {
+  const customElements: GalleryProps['uiElements'] = [];
+
   return (
-    <Gallery>
+    <Gallery
+      id='gallery'
+      plugins={pswpLightbox => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const captionPlugin = new PhotoSwipeDynamicCaption(pswpLightbox, {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          captionContent: (slide: any) => slide.data.alt,
+        });
+      }}
+      uiElements={customElements}
+      withDownloadButton
+    >
       {photos.map(p => (
         <Item
-          alt={p.caption}
+          alt={getAlt(p)}
           height={p.height}
+          id={p._id}
           key={p._id}
           original={p.url}
           thumbnail={p.url}
@@ -35,4 +52,23 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       ))}
     </Gallery>
   );
+}
+
+function getAlt({ memoryDate, photoDate, caption, location, width, height }: photoWithIdT): string {
+  const strings = [];
+  strings.push(`Memory date:<br><b>${new Date(memoryDate).toDateString()}</b>`);
+  if (photoDate) {
+    strings.push(`Photo date:<br><b>${new Date(photoDate).toDateString()}</b>`);
+  }
+  if (caption) {
+    strings.push(`Caption:<br><b>${caption}</b>`);
+  }
+  if (location) {
+    strings.push(`Location:<br><b>${location}</b>`);
+  }
+  if (width && height) {
+    strings.push(`Resolution:<br><b>${width} x ${height}</b>`);
+  }
+
+  return strings.join(`<br><br>`);
 }
