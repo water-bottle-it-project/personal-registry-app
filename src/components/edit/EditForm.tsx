@@ -89,7 +89,8 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
 
     // Get dimensions of all photos
     const photoDimRequests = memory.photos.map(async p => {
-      if (p.height && p.width) {
+      // Only early return same dimensions if URL was not cleared - aka, same image.
+      if (p.url && p.height && p.width) {
         return { height: p.height, width: p.width };
       }
 

@@ -2,7 +2,7 @@ import { ActionIcon, Container, Grid, Space, Stack, Text, TextInput, Title } fro
 import { IconArrowRight, IconSearch } from '@tabler/icons';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { PhotoCard } from '~components/photo/PhotoCard';
+import { PhotoGallery } from '~components/photo/PhotoGallery';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 /**
@@ -21,11 +21,7 @@ export function PhotosIndex() {
   } else {
     contents = (
       <Grid>
-        {data.photos.map(p => (
-          <Grid.Col key={p._id} md={3} sm={4} xs={6}>
-            <PhotoCard {...p} />
-          </Grid.Col>
-        ))}
+        <PhotoGallery photos={data.photos} />
       </Grid>
     );
   }
