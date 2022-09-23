@@ -2,6 +2,7 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css';
 
 import { Grid } from '@mantine/core';
+import { useRouter } from 'next/router';
 import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
 import type { GalleryProps } from 'react-photoswipe-gallery';
 import { Gallery, Item } from 'react-photoswipe-gallery';
@@ -14,11 +15,28 @@ interface PhotoGalleryProps {
 }
 
 export function PhotoGallery({ photos }: PhotoGalleryProps) {
-  const customElements: GalleryProps['uiElements'] = [];
+  const router = useRouter();
+
+  function redirect(memoryId: string) {
+    void router.push(`/memory/${memoryId}`);
+  }
+
+  const customElements: GalleryProps['uiElements'] = [
+    {
+      name: 'memoryLink',
+      order: 9,
+      isButton: true,
+      html: 'View memory',
+      onClick: (e, element, pswp) => {
+        e.stopPropagation();
+        e.preventDefault();
+        redirect(photos[pswp.currIndex].memoryId);
+      },
+    },
+  ];
 
   return (
     <Gallery
-      id='gallery'
       plugins={pswpLightbox => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const captionPlugin = new PhotoSwipeDynamicCaption(pswpLightbox, {
@@ -56,6 +74,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
 
 function getAlt({ memoryDate, photoDate, caption, location, width, height }: photoWithIdT): string {
   const strings = [];
+
   strings.push(`Memory date:<br><b>${new Date(memoryDate).toDateString()}</b>`);
   if (photoDate) {
     strings.push(`Photo date:<br><b>${new Date(photoDate).toDateString()}</b>`);
