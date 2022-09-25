@@ -1,4 +1,4 @@
-import { Divider, Grid, Image, Space, Stack, Title } from '@mantine/core';
+import { Divider, Grid, Image, Space, Stack } from '@mantine/core';
 
 import { PhotoInfo } from '~components/photo/PhotoInfo';
 import { PhotoMeta } from '~components/photo/PhotoMeta';
@@ -11,7 +11,6 @@ export function MemoryImage({ _id, caption, url, photoDate, location }: photoWit
         <Grid.Col lg={8} md={8}>
           <Image alt={caption} height='40%' src={url} width='100%' />
           <Space h='md' />
-          <Title order={1}>{caption}</Title>
         </Grid.Col>
         <Grid.Col lg={4} md={8}>
           <Stack spacing='xs'>
