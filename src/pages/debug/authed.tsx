@@ -16,6 +16,10 @@ function DebugAuth() {
     'memory.GetMemoriesPaginated',
     { page: 1 },
   ]);
+  const { data: imageData, error: imageError } = trpcClient.useQuery([
+    'photos.SearchPhotos',
+    { text: 'sa' },
+  ]);
 
   return (
     <Container size='xl'>
@@ -29,6 +33,10 @@ function DebugAuth() {
       <Code block color='indigo'>
         {JSON.stringify(user, null, 2)}
       </Code>
+      <Text>your search query for images</Text>
+      <Code block color='green'>
+        {JSON.stringify(imageData?.photos, null, 2)}
+      </Code>
       <Text>All memories for this user</Text>
       <Code block color='green'>
         {JSON.stringify(memoriesData?.memories, null, 2)}
@@ -37,7 +45,7 @@ function DebugAuth() {
       <Code block color='yellow'>
         {JSON.stringify(memoryData, null, 2)}
       </Code>
-      <Text>your search query for collections</Text>
+      <Text>your search query for images</Text>
       <Text>Paginated Memories</Text>
       <Code block color='purple'>
         {JSON.stringify(memoriesPaginatedData, null, 2)}

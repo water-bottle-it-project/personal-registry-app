@@ -54,17 +54,25 @@ const photoWithIdZ = photoBase.merge(photoDims).extend({
   memoryDate: z.date(),
 });
 
+const photoSearchZ = z
+  .object({
+    text: z.string().trim().min(1).max(100),
+  })
+  .required();
+
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
 type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
 type photoWithIdT = z.infer<typeof photoWithIdZ>;
 type photoFormEditT = z.infer<typeof photoFormEditZ>;
 type photoFormEditRequestT = z.infer<typeof photoFormEditRequestZ>;
+type photoSearchT = z.infer<typeof photoSearchZ>;
 
 export type {
   photoFormCreateRequestT,
   photoFormCreateT,
   photoFormEditRequestT,
   photoFormEditT,
+  photoSearchT,
   photoWithIdT,
 };
 export {
@@ -72,5 +80,6 @@ export {
   photoFormCreateZ,
   photoFormEditRequestZ,
   photoFormEditZ,
+  photoSearchZ,
   photoWithIdZ,
 };
