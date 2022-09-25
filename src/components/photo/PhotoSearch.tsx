@@ -1,18 +1,23 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ActionIcon, Stack, TextInput, Title } from '@mantine/core';
 import { IconArrowRight, IconSearch } from '@tabler/icons';
+import type { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
 import type { photoSearchT } from '~types/photo/photo';
 import { photoSearchZ } from '~types/photo/photo';
 
-export function PhotoSearch() {
+interface PhotoSearchProps {
+  setSearchText: Dispatch<SetStateAction<string>>;
+}
+
+export function PhotoSearch(props: PhotoSearchProps) {
   const { register, handleSubmit } = useForm<photoSearchT>({
     resolver: zodResolver(photoSearchZ),
   });
 
   const onSubmit = async ({ text }) => {
-    // setSearchState(text);
+    props.setSearchText(text);
     console.log(text);
   };
 
