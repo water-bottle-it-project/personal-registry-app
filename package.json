@@ -36,6 +36,7 @@
     "@trpc/next": "^9.27.0",
     "@trpc/react": "^9.27.0",
     "@trpc/server": "^9.27.0",
+    "@types/mapbox__mapbox-gl-geocoder": "^4.7.3",
     "@types/mapbox__mapbox-sdk": "^0.13.4",
     "bson-objectid": "^2.0.3",
     "cookies-next": "^2.1.1",
