@@ -2,14 +2,16 @@ import { Box, createStyles, Space, Text, Title } from '@mantine/core';
 
 import { MapBox } from '~components/util/MapBox';
 
-interface ImageCardProps {
+interface PhotoMetaProps {
   caption?: string;
   url: string;
   location?: string;
-  photoDate?: Date;
+  photoDate: Date | null;
+  width: number;
+  height: number;
 }
 
-export function PhotoMeta(props: ImageCardProps) {
+export function PhotoMeta(props: PhotoMetaProps) {
   const { classes } = useStyles();
   return (
     <Box
@@ -21,19 +23,29 @@ export function PhotoMeta(props: ImageCardProps) {
     >
       <Title order={2}>Metadata</Title>
       <Space h='lg' />
-      <Text className={classes.infoHeader}>Filename</Text>
+      <Text className={classes.infoHeader}>Caption</Text>
       <Text className={classes.infoText} italic={!props.caption}>
-        {props.caption}
+        {props.caption || 'No caption provided'}
       </Text>
       <Space h='xs' />
       <Text className={classes.infoHeader}>Photo Date</Text>
-      <Text className={classes.infoText}>Insert Date</Text>
+      {props.photoDate ? (
+        <Text className={classes.infoText}>{new Date(props.photoDate).toDateString()}</Text>
+      ) : (
+        <Text className={classes.infoText} italic>
+          No date provided
+        </Text>
+      )}
       <Space h='xs' />
-      <Text className={classes.infoHeader}>Size</Text>
-      <Text className={classes.infoText}>1920x1080</Text>
+      <Text className={classes.infoHeader}>Resolution</Text>
+      <Text className={classes.infoText}>
+        {props.width} x {props.height}
+      </Text>
       <Space h='xs' />
       <Text className={classes.infoHeader}>Location</Text>
-      <Text className={classes.infoText}>{props.location}</Text>
+      <Text className={classes.infoText} italic={!props.location}>
+        {props.location || 'No location provided'}
+      </Text>
       <Space h='xs' />
       {props.location && <MapBox locQuery={props.location} />}
     </Box>
