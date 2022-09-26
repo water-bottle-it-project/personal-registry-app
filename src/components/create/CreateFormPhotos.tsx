@@ -39,10 +39,12 @@ import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { useDragDropStyles } from '~components/create/dragDropStyles';
 import { IMAGE_MIME_TYPES_FILE_BUTTON } from '~components/create/mimeTypes';
 import { useTextareaStyles } from '~components/create/textareaStyles';
+import { MapBoxControl } from '~components/util/MapBoxControl';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 import type { photoFormCreateT } from '~types/photo/photo';
 
 export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCreateFormT>) {
+  const [loc, setLoc] = useState('');
   const { classes } = useDragDropStyles();
   const { classes: textareaClasses } = useTextareaStyles();
 
@@ -156,12 +158,15 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
               />
               <Space h='md' />
               <TextInput
-                description='Just text for now.'
+                description='Search for a location'
+                disabled
                 icon={<IconLocation size={16} />}
                 label='Location'
-                placeholder='Gravity Falls'
+                placeholder='University Of Melbourne'
+                value={loc}
                 {...register(`photos.${index}.location`)}
               />
+              <MapBoxControl setLocation={setLoc} />
             </Grid.Col>
           </Grid>
         </Paper>
