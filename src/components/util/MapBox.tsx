@@ -1,7 +1,9 @@
 // needs this import for the map box UI and marker
 import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import { useMantineTheme } from '@mantine/core';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding';
 import type { Map } from 'mapbox-gl';
 import mapboxgl from 'mapbox-gl';
@@ -52,6 +54,12 @@ export function MapBox({ locQuery }: MapBoxProps) {
       center: [lng, lat],
       zoom: 12,
     });
+    // map.current.addControl(
+    //   new MapboxGeocoder({
+    //     accessToken: mapboxgl.accessToken,
+    //     mapboxgl: mapboxgl,
+    //   }),
+    // );
     new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
   }, [lat, lng]);
 
