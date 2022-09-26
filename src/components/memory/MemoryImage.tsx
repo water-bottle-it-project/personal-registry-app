@@ -4,7 +4,15 @@ import { PhotoInfo } from '~components/photo/PhotoInfo';
 import { PhotoMeta } from '~components/photo/PhotoMeta';
 import type { photoWithIdT } from '~types/photo/photo';
 
-export function MemoryImage({ _id, caption, url, photoDate, location }: photoWithIdT) {
+export function MemoryImage({
+  _id,
+  caption,
+  url,
+  photoDate,
+  location,
+  width,
+  height,
+}: photoWithIdT) {
   return (
     <>
       <Grid justify='center'>
@@ -14,9 +22,14 @@ export function MemoryImage({ _id, caption, url, photoDate, location }: photoWit
         </Grid.Col>
         <Grid.Col lg={4} md={8}>
           <Stack spacing='xs'>
-            {/*<PhotoInfo _id={_id} caption={caption} url={url} />*/}
-            <Space h='md' />
-            <PhotoMeta caption={caption} url={url} />
+            <PhotoMeta
+              caption={caption}
+              height={height}
+              location={location}
+              photoDate={photoDate}
+              url={url}
+              width={width}
+            />
           </Stack>
         </Grid.Col>
       </Grid>
