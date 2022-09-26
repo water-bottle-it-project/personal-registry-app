@@ -31,7 +31,7 @@ export function MapBox({ locQuery }: MapBoxProps) {
             limit: 1,
           })
           .send());
-      if (geoData) {
+      if (geoData.body.features[0]) {
         setLng(geoData.body.features[0].geometry.coordinates[0]);
         setLat(geoData.body.features[0].geometry.coordinates[1]);
       }
@@ -53,5 +53,7 @@ export function MapBox({ locQuery }: MapBoxProps) {
     new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
   }, [lat, lng]);
 
-  return <div ref={mapContainer} style={{ minWidth: '300px', minHeight: '300px' }} />;
+  return lng !== 0 && lat !== 0 ? (
+    <div ref={mapContainer} style={{ minWidth: '300px', minHeight: '300px' }} />
+  ) : null;
 }
