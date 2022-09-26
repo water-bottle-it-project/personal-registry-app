@@ -22,11 +22,11 @@ export function TimelineIndex() {
     return 1;
   });
 
-  // Lift query hook up to share search bar state with the memory results.
-  const { data, isLoading, isLoadingError } = trpcClient.useQuery([
-    'memory.GetMemoriesPaginated',
-    { page },
-  ]);
+  // // Lift query hook up to share search bar state with the memory results.
+  // // const { data, isLoading, isLoadingError } = trpcClient.useQuery([
+  // //   'memory.GetMemoriesPaginated',
+  // //   { page },
+  // ]);
 
   // Need useCallback. Without it, useEffect runs on every render:
   // "Function makes the dependencies of useEffect Hook change on every render"
