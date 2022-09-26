@@ -66,7 +66,6 @@ export function MapBoxControl({ setLocation }: MapBoxControlProps) {
       zoom: 12,
     });
     map.current.addControl(geoCoderControl);
-    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
   }, [geoCoderControl, lat, lng]);
 
   map.current?.setStyle(
