@@ -1,6 +1,5 @@
-import { Box, createStyles, Group, Space, Text, Title, UnstyledButton } from '@mantine/core';
-import { IconDownload, IconEdit, IconTrash } from '@tabler/icons';
-import Link from 'next/link';
+import { Box, createStyles, Space, Text, Title, UnstyledButton } from '@mantine/core';
+import { IconDownload } from '@tabler/icons';
 
 import type { photoWithIdT } from '~types/photo/photo';
 
@@ -18,12 +17,16 @@ export function PhotoInfo(props: photoWithIdT) {
       })}
     >
       <div>
-        <Title order={2}>Information</Title>
+        <Title italic={!props.caption} order={2}>
+          {props.caption || 'no caption provided'}
+        </Title>
         <Space h='lg' />
-        <Text className={classes.infoHeader}>Caption</Text>
-        <Text className={classes.infoText} italic={!props.caption}>
-          {props.caption || 'no caption'}
-        </Text>
+        {props.photoDate && (
+          <>
+            <Text className={classes.infoHeader}>Photo Date</Text>
+            <Text className={classes.infoText}>{new Date(props.photoDate).toDateString()}</Text>
+          </>
+        )}
         <Space h='xs' />
         <Text className={classes.infoHeader}>Date</Text>
         <Text className={classes.infoText} italic={!props.photoDate?.toString()}>
@@ -38,24 +41,7 @@ export function PhotoInfo(props: photoWithIdT) {
       <Space h='md' />
       <div className={classes.buttonGroup}>
         <UnstyledButton className={classes.button}>
-          <Link href={`/images/edit?id=${props._id}`} passHref>
-            <Group spacing={5}>
-              <IconEdit />
-              <Text>Edit</Text>
-            </Group>
-          </Link>
-        </UnstyledButton>
-        <UnstyledButton className={classes.button}>
-          <Group className={classes.delete} spacing={5}>
-            <IconTrash />
-            <Text>Delete</Text>
-          </Group>
-        </UnstyledButton>
-        <UnstyledButton className={classes.button}>
-          <Group spacing={5}>
-            <IconDownload />
-            <Text>Download</Text>
-          </Group>
+          <IconDownload />
         </UnstyledButton>
       </div>
     </Box>

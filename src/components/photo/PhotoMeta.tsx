@@ -6,6 +6,7 @@ interface ImageCardProps {
   caption?: string;
   url: string;
   location?: string;
+  photoDate?: Date;
 }
 
 export function PhotoMeta(props: ImageCardProps) {
