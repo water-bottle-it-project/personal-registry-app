@@ -159,7 +159,6 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
               <Space h='md' />
               <TextInput
                 description='Search for a location'
-                disabled
                 icon={<IconLocation size={16} />}
                 label='Location'
                 placeholder='University Of Melbourne'
