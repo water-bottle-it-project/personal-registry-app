@@ -3,7 +3,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import { useMantineTheme } from '@mantine/core';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding';
 import type { Map } from 'mapbox-gl';
 import mapboxgl from 'mapbox-gl';
