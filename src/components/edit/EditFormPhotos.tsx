@@ -39,10 +39,11 @@ import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { useDragDropStyles } from '~components/create/dragDropStyles';
 import { IMAGE_MIME_TYPES_FILE_BUTTON } from '~components/create/mimeTypes';
 import { useTextareaStyles } from '~components/create/textareaStyles';
+import { MapBoxControl } from '~components/util/MapBoxControl';
 import type { memoryEditFormT } from '~types/memory/memoryForm';
 import type { photoFormEditT } from '~types/photo/photo';
 
-export function EditFormPhotos({ control, register }: UseFormReturn<memoryEditFormT>) {
+export function EditFormPhotos({ control, register, setValue }: UseFormReturn<memoryEditFormT>) {
   const { classes } = useDragDropStyles();
   const { classes: textareaClasses } = useTextareaStyles();
 
@@ -156,12 +157,31 @@ export function EditFormPhotos({ control, register }: UseFormReturn<memoryEditFo
                 )}
               />
               <Space h='md' />
-              <TextInput
-                description='Just text for now.'
-                icon={<IconLocation size={16} />}
-                label='Location'
-                placeholder='Gravity Falls'
-                {...register(`photos.${index}.location`)}
+              <Controller
+                control={control}
+                name={`photos.${index}.location`}
+                render={({ field: { value, onChange, ref, ...field }, fieldState: { error } }) => (
+                  <>
+                    <TextInput
+                      description='Search for a location'
+                      disabled
+                      error={error?.message}
+                      icon={<IconLocation size={16} />}
+                      label='Location'
+                      onChange={onChange}
+                      placeholder='University Of Melbourne'
+                      ref={ref}
+                      value={value}
+                      {...field}
+                    />
+                    <Space h='xs' />
+                    <MapBoxControl
+                      locationQuery={value}
+                      name={`photos.${index}.location`}
+                      setLocation={setValue}
+                    />
+                  </>
+                )}
               />
             </Grid.Col>
           </Grid>

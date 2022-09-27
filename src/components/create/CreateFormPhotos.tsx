@@ -43,8 +43,11 @@ import { MapBoxControl } from '~components/util/MapBoxControl';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
 import type { photoFormCreateT } from '~types/photo/photo';
 
-export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCreateFormT>) {
-  const [loc, setLoc] = useState('');
+export function CreateFormPhotos({
+  control,
+  register,
+  setValue,
+}: UseFormReturn<memoryCreateFormT>) {
   const { classes } = useDragDropStyles();
   const { classes: textareaClasses } = useTextareaStyles();
 
@@ -157,15 +160,32 @@ export function CreateFormPhotos({ control, register }: UseFormReturn<memoryCrea
                 )}
               />
               <Space h='md' />
-              <TextInput
-                description='Search for a location'
-                icon={<IconLocation size={16} />}
-                label='Location'
-                placeholder='University Of Melbourne'
-                value={loc}
-                {...register(`photos.${index}.location`)}
+              <Controller
+                control={control}
+                name={`photos.${index}.location`}
+                render={({ field: { value, onChange, ref, ...field }, fieldState: { error } }) => (
+                  <>
+                    <TextInput
+                      description='Search for a location'
+                      disabled
+                      error={error?.message}
+                      icon={<IconLocation size={16} />}
+                      label='Location'
+                      onChange={onChange}
+                      placeholder='University Of Melbourne'
+                      ref={ref}
+                      value={value}
+                      {...field}
+                    />
+                    <Space h='xs' />
+                    <MapBoxControl
+                      locationQuery={value}
+                      name={`photos.${index}.location`}
+                      setLocation={setValue}
+                    />
+                  </>
+                )}
               />
-              <MapBoxControl setLocation={setLoc} />
             </Grid.Col>
           </Grid>
         </Paper>

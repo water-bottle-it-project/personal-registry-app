@@ -7,19 +7,21 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding';
 import type { Map } from 'mapbox-gl';
 import mapboxgl from 'mapbox-gl';
-import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface MapBoxControlProps {
-  setLocation: Dispatch<SetStateAction<string>>;
+  setLocation: any;
+  locationQuery?: string;
+  name: string;
 }
 
-export function MapBoxControl({ setLocation }: MapBoxControlProps) {
+export function MapBoxControl({ setLocation, locationQuery, name }: MapBoxControlProps) {
   const theme = useMantineTheme();
   const [lng, setLng] = useState(0);
   const [lat, setLat] = useState(0);
   const mapContainer = useRef<any>(null);
   const map = useRef<Map | null>(null);
+
   // needs to be placed inside .env file
   const mapBoxToken =
     'pk.eyJ1IjoieXN0YW4xMSIsImEiOiJjbDhlamVxamEwMHVxM25uejVtNnFtejJpIn0.xWmchj1VO5fEGEDLIi4AvQ';
@@ -42,7 +44,7 @@ export function MapBoxControl({ setLocation }: MapBoxControlProps) {
         geoCoder &&
         (await geoCoder
           .forwardGeocode({
-            query: 'Melbourne, Victoria, Australia',
+            query: locationQuery || 'Melbourne, Victoria, Australia',
             limit: 1,
           })
           .send());
@@ -52,7 +54,7 @@ export function MapBoxControl({ setLocation }: MapBoxControlProps) {
       }
     }
     getLocation();
-  }, [geoCoder]);
+  }, [geoCoder, locationQuery]);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -65,8 +67,12 @@ export function MapBoxControl({ setLocation }: MapBoxControlProps) {
       center: [lng, lat],
       zoom: 12,
     });
+    // for editing, place existing location marker
+    if (locationQuery) {
+      new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
+    }
     map.current.addControl(geoCoderControl);
-  }, [geoCoderControl, lat, lng]);
+  }, [geoCoderControl, lat, lng, locationQuery, setLocation]);
 
   map.current?.setStyle(
     theme.colorScheme === 'dark'
@@ -76,8 +82,8 @@ export function MapBoxControl({ setLocation }: MapBoxControlProps) {
 
   // Save the location string
   geoCoderControl.on('result', function (result) {
-    setLocation(result.result.place_name);
+    setLocation(name, result.result.place_name);
   });
 
-  return <div ref={mapContainer} style={{ minWidth: '300px', minHeight: '300px' }} />;
+  return <div ref={mapContainer} style={{ minWidth: '200px', minHeight: '200px' }} />;
 }
