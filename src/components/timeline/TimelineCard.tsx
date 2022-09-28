@@ -18,7 +18,7 @@ export function TimelineCard({
   const [indicator, setIndicator] = useState(false);
 
   const { classes } = useStyles();
-
+  console.log(collections);
   return (
     <Card
       radius='sm'
