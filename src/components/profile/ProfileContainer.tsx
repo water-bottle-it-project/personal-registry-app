@@ -2,9 +2,11 @@ import { Box, Button, Container, SimpleGrid, Space, Text, Title } from '@mantine
 import { useAuthUser } from 'next-firebase-auth';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { SigninForm } from '~components/auth/SigninForm';
 import { stringToDate, tupleToString } from '~components/profile/profileUtils';
 
 import { ConfirmPassword, InputValidation, UpdatePassword } from './ConfirmPassword';
+import { PasswordUpdateForm } from './CredentialUpdate';
 import { StatsGroup } from './StatsGroup';
 
 export function ProfileContainer() {
@@ -117,6 +119,8 @@ export function ProfileContainer() {
 
             <Space h='xs' />
 
+            <ConfirmPassword />
+            <Space h='md' />
             <InputValidation />
             <Space h='xs' />
             <Button ml={10}>Submit</Button>
@@ -135,13 +139,7 @@ export function ProfileContainer() {
             <Text size='xl' weight={800}>
               Update Password
             </Text>
-            <Space h='xs' />
-            <UpdatePassword />
-
-            <Space h='md' />
-            <ConfirmPassword />
-            <Space h='xs' />
-            <Button ml={10}>Submit</Button>
+            <PasswordUpdateForm />
           </Box>
         </Container>
       </SimpleGrid>
