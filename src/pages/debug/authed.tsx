@@ -21,6 +21,11 @@ function DebugAuth() {
     { text: 'sa' },
   ]);
 
+  const { data: memorySearch, error: memorySearchError } = trpcClient.useQuery([
+    'memory.SearchMemory',
+    { text: 'test' },
+  ]);
+
   return (
     <Container size='xl'>
       <Title>Debug Page - auth required</Title>
@@ -35,7 +40,7 @@ function DebugAuth() {
       </Code>
       <Text>your search query for images</Text>
       <Code block color='green'>
-        {JSON.stringify(imageData?.photos, null, 2)}
+        {JSON.stringify(memorySearch?.memories, null, 2)}
       </Code>
       <Text>All memories for this user</Text>
       <Code block color='green'>

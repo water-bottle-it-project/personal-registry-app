@@ -19,6 +19,7 @@ import {
   memoryIdOnlyZ,
 } from '~types/memory/memoryForm';
 import type { photoWithIdT } from '~types/photo/photo';
+import { photoSearchZ } from '~types/photo/photo';
 import { paginationInputZ } from '~types/util/pagination';
 
 const memoryRouter = createProtectedDbRouter()
@@ -209,6 +210,79 @@ const memoryRouter = createProtectedDbRouter()
       // support getting a ref from a download URL, only the client JS SDK supports it :/)
       console.log(deleteUrls);
       return deleteUrls;
+    },
+  })
+
+  .query('SearchMemory', {
+    input: photoSearchZ,
+    async resolve({ ctx, input }) {
+      // const re = new RegExp(`${input.text}`, 'i');
+      const memories: memoryCardT[] = await Memory.aggregate([
+        {
+          $search: {
+            index: 'MemorySearch',
+            compound: {
+              should: [
+                {
+                  regex: {
+                    query: `${input.text}`,
+                    path: 'title',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 4,
+                      },
+                    },
+                  },
+                },
+                {
+                  regex: {
+                    query: `(.*)${input.text}(.*)`,
+                    path: 'description',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 1,
+                      },
+                    },
+                  },
+                },
+                {
+                  regex: {
+                    query: `(.*)${input.text}(.*)`,
+                    path: 'description',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 2,
+                      },
+                    },
+                  },
+                },
+                {
+                  regex: {
+                    query: `(.*)${input.text}(.*)`,
+                    path: 'title',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 3,
+                      },
+                    },
+                  },
+                },
+              ],
+              minimumShouldMatch: 1,
+            },
+          },
+        },
+      ]);
+      if (!memories) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find collection by id.' });
+      }
+      return {
+        memories,
+      };
     },
   });
 
