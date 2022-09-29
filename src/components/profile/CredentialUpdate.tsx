@@ -1,62 +1,90 @@
-import {
-  Box,
-  Button,
-  Container,
-  Group,
-  PasswordInput,
-  SimpleGrid,
-  Space,
-  Stack,
-  Text,
-  Textarea,
-  Title,
-} from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import { resetNavigationProgress } from '@mantine/nprogress';
-import { IconDeviceFloppy, IconFingerprint, IconRotateClockwise2 } from '@tabler/icons';
-import { IconCheck, IconX } from '@tabler/icons';
-import {
-  EmailAuthProvider,
-  getAuth,
-  reauthenticateWithCredential,
-  updatePassword,
-} from 'firebase/auth';
-import { useAuthUser } from 'next-firebase-auth';
-import { appendErrors, Controller, useForm } from 'react-hook-form';
-import { StringDigit } from 'type-fest/source/internal';
-import { setErrorMap } from 'zod';
+import { Button, PasswordInput, Space, Stack, TextInput } from '@mantine/core';
+import { IconFingerprint } from '@tabler/icons';
+import { EmailAuthProvider, getAuth, reauthenticateWithCredential } from 'firebase/auth';
+import { useForm } from 'react-hook-form';
 
-import { trpcClient } from '~clientUtils/trpcClient';
-import { ColorControl } from '~components/collection/ColorControl';
-import { User } from '~server/models/user';
-
-/*
-function handlePasswordUpdate({ ogPassword, newPassword }) {
-  const auth = getAuth();
-
-  return createUserWithEmailAndPassword(auth, email, password).catch(error => {
-    if (error.code === 'auth/email-already-in-use') {
-      setError('email', { type: 'server', message: error.message }, { shouldFocus: true });
-    } else {
-      setError('password', { type: 'server', message: error.message }, { shouldFocus: true });
-    }
-  });
-}*/
-function successNotif(dispMessage: string) {
-  showNotification({
-    autoClose: 8000,
-    icon: <IconCheck />,
-    title: 'Success!',
-    color: 'teal',
-    message: dispMessage,
-  });
-}
+import { changeEmail, changePassword } from '~components/profile/CredentialChangers';
 
 type PasswordUpdateType = {
   originalPassword: string;
   newPassword: string;
   confirmNewPassword: string;
 };
+
+type EmailUpdateType = {
+  currentPassword: string;
+  newEmail: string;
+};
+
+export function EmailUpdateForm() {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    reset,
+    formState: { errors },
+  } = useForm<EmailUpdateType>();
+
+  const onSubmit = handleSubmit(data => {
+    // first need to reauth the user
+    const auth = getAuth();
+    const user = auth.currentUser!;
+
+    const credential = EmailAuthProvider.credential(user?.email || '', data.currentPassword);
+
+    // attempt reauth, catch wrong password error
+    reauthenticateWithCredential(user, credential)
+      .then(() => {
+        // User re-authenticated, have a crack at updating password
+        changeEmail(data.newEmail);
+
+        // success
+        reset();
+      })
+      .catch(error => {
+        // An error ocurred
+        // ...
+        setError(
+          'currentPassword',
+          { type: 'server', message: error.message },
+          { shouldFocus: true },
+        );
+      });
+  });
+
+  return (
+    <>
+      <form onSubmit={onSubmit}>
+        <Stack>
+          <TextInput
+            description='Must be a valid email..'
+            id='newEmail'
+            label='New Email'
+            placeholder='Your new email'
+            required
+            {...register('newEmail')}
+            error={errors?.newEmail?.message}
+          />
+
+          <PasswordInput
+            description='Must be at least 6 characters long.'
+            icon={<IconFingerprint size={16} />}
+            id='currentPassword'
+            label='Password'
+            placeholder='Your current password'
+            required
+            {...register('currentPassword')}
+            error={errors?.currentPassword?.message}
+          />
+        </Stack>
+        <Space h='xs' />
+        <Button ml={10} type='submit'>
+          Submit
+        </Button>
+      </form>
+    </>
+  );
+}
 
 export function PasswordUpdateForm() {
   const {
@@ -97,7 +125,6 @@ export function PasswordUpdateForm() {
         changePassword(data.newPassword);
 
         // success
-        successNotif('Password was updated successfully');
         reset();
       })
       .catch(error => {
@@ -155,18 +182,4 @@ export function PasswordUpdateForm() {
       </form>
     </>
   );
-}
-
-function changePassword(newPass: string) {
-  const auth = getAuth();
-
-  const user = auth && auth?.currentUser;
-
-  updatePassword(user!, newPass)
-    .then(() => {
-      //  able to update pass
-    })
-    .catch(error => {
-      // not able to update password
-    });
 }
