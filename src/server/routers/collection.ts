@@ -80,12 +80,6 @@ const collectionRouter = createProtectedDbRouter()
     },
   })
 
-  .mutation('DeleteAllCollection', {
-    async resolve({ ctx }) {
-      await Collection.deleteMany({ userId: ctx.userId });
-    },
-  })
-
   .mutation('UpdateCollection', {
     input: collectionZ,
     async resolve({ ctx, input }) {

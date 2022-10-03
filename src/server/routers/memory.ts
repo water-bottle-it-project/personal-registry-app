@@ -210,11 +210,6 @@ const memoryRouter = createProtectedDbRouter()
       console.log(deleteUrls);
       return deleteUrls;
     },
-  })
-  .mutation('DeleteAllMemories', {
-    async resolve({ ctx }) {
-      await Memory.deleteMany({ userId: ctx.userId });
-    },
   });
 
 export { memoryRouter };
