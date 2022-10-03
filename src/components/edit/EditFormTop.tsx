@@ -32,7 +32,12 @@ export function EditFormTop({
         >
           Reset
         </Button>
-        <Button loading={isSubmitting} rightIcon={<IconDeviceFloppy />} type='submit'>
+        <Button
+          loaderPosition='right'
+          loading={isSubmitting}
+          rightIcon={<IconDeviceFloppy />}
+          type='submit'
+        >
           Save edits
         </Button>
       </Group>

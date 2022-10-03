@@ -29,7 +29,12 @@ export function CreateFormTop({
         >
           Reset
         </Button>
-        <Button loading={isSubmitting} rightIcon={<IconPlus />} type='submit'>
+        <Button
+          loaderPosition='right'
+          loading={isSubmitting}
+          rightIcon={<IconPlus />}
+          type='submit'
+        >
           Create
         </Button>
       </Group>
