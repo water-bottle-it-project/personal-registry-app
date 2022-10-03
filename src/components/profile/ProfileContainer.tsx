@@ -2,10 +2,10 @@ import { Box, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useAuthUser } from 'next-firebase-auth';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { EmailUpdateForm } from '~components/profile/EmailUpdateForm';
+import { PasswordUpdateForm } from '~components/profile/PasswordUpdateForm';
 import { stringToDate, tupleToString } from '~components/profile/profileUtils';
-
-import { EmailUpdateForm, PasswordUpdateForm } from './CredentialUpdate';
-import { StatsGroup } from './StatsGroup';
+import { StatsGroup } from '~components/profile/StatsGroup';
 
 export function ProfileContainer() {
   const currentUser = useAuthUser();
