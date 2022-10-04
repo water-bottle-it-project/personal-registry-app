@@ -25,16 +25,37 @@ const photosRouter = createProtectedDbRouter()
   .query('SearchPhotos', {
     input: photoSearchZ,
     async resolve({ ctx, input }) {
-      const photos = await Photo.aggregate([
+      const photos: photoWithIdT[] = await Photo.aggregate([
         {
           $search: {
-            autocomplete: {
-              query: `${input.text}`,
-              path: 'caption',
-              fuzzy: {
-                maxEdits: 2,
-                prefixLength: 3,
-              },
+            compound: {
+              should: [
+                {
+                  regex: {
+                    query: `${input.text}`,
+                    path: 'caption',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 2,
+                      },
+                    },
+                  },
+                },
+                {
+                  regex: {
+                    query: `(.*)${input.text}(.*)`,
+                    path: 'caption',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 0.5,
+                      },
+                    },
+                  },
+                },
+              ],
+              minimumShouldMatch: 1,
             },
           },
         },
