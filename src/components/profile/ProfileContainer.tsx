@@ -134,7 +134,26 @@ export function ProfileContainer() {
             </Text>
             <PasswordUpdateForm />
           </Box>
-          <DeleteAccount />
+
+          <Space h='xl' />
+          <Box
+            sx={theme => ({
+              backgroundColor:
+                theme.colorScheme === 'dark' ? theme.colors.gray : theme.colors.gray[2],
+              textAlign: 'left',
+              padding: theme.spacing.md,
+              borderRadius: theme.radius.lg,
+            })}
+          >
+            <Text size='xl' weight={800}>
+              Delete Account
+            </Text>
+            <Text color='dimmed' size='xs'>
+              Remove your profile and all associated data.
+            </Text>
+            <Space h='xs' />
+            <DeleteAccount />
+          </Box>
         </Container>
       </SimpleGrid>
     </Container>
