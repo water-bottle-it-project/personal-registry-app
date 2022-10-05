@@ -55,6 +55,28 @@ const memoryRouter = createProtectedDbRouter()
               ],
               should: [
                 {
+                  text: {
+                    query: input.text,
+                    path: 'title',
+                    score: {
+                      boost: {
+                        value: 4,
+                      },
+                    },
+                  },
+                },
+                {
+                  text: {
+                    query: input.text,
+                    path: 'description',
+                    score: {
+                      boost: {
+                        value: 2,
+                      },
+                    },
+                  },
+                },
+                {
                   autocomplete: {
                     query: input.text,
                     path: 'title',
