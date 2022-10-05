@@ -15,7 +15,6 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { TimelineGrid } from '~components/timeline/TimelineGrid';
-import { TimelineHeader } from '~components/timeline/TimelineHeader';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 export function TimelineIndex() {

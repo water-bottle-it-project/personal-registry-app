@@ -19,7 +19,7 @@ const paginationWrapperZ = z.object({
 
 const paginationInputZ = z.object({
   page: z.number(),
-  text: z.string(),
+  text: z.string().trim().default(''),
 });
 
 export { paginationInputZ, paginationWrapperZ };

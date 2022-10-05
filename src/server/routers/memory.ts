@@ -39,102 +39,107 @@ const memoryRouter = createProtectedDbRouter()
   .query('GetMemoriesPaginated', {
     input: paginationInputZ,
     async resolve({ ctx, input }) {
+      if (input.text) {
+        console.log(input);
+        const myAggregate = Memory.aggregate()
+          .search({
+            index: 'v2',
+            compound: {
+              filter: [
+                {
+                  phrase: {
+                    query: ctx.userId,
+                    path: 'userId',
+                  },
+                },
+              ],
+              should: [
+                {
+                  regex: {
+                    query: `${input.text}`,
+                    path: 'title',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 4,
+                      },
+                    },
+                  },
+                },
+                {
+                  regex: {
+                    query: `(.*)${input.text}(.*)`,
+                    path: 'description',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 1,
+                      },
+                    },
+                  },
+                },
+                {
+                  regex: {
+                    query: `${input.text}`,
+                    path: 'description',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 2,
+                      },
+                    },
+                  },
+                },
+                {
+                  regex: {
+                    query: `(.*)${input.text}(.*)`,
+                    path: 'title',
+                    allowAnalyzedField: true,
+                    score: {
+                      boost: {
+                        value: 3,
+                      },
+                    },
+                  },
+                },
+              ],
+              minimumShouldMatch: 1,
+            },
+          })
+          .project({ userId: 0 })
+          .lookup({
+            from: 'collections',
+            localField: 'collections',
+            foreignField: '_id',
+            as: 'collections',
+          });
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const memories: memoriesPaginatedT = await Memory.aggregatePaginate(myAggregate, {
+          page: input.page,
+          limit: 12,
+        });
+
+        console.log(memories);
+
+        return memories;
+      }
+
       // Have to do this unfortunately without adding additional
       // boilerplate to the mongoose schemas.
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const options = {
-        page: input.page,
-        limit: 12,
-        projection: { userId: 0 },
-        sort: { lastDate: -1 },
-      };
-      let memoryAggregate = null;
-      if (!input.text) {
-        memoryAggregate = Memory.aggregate([
-          { $match: { userId: ctx.userId } },
-          { $sort: { lastDate: -1 } },
-          {
-            $lookup: {
-              from: 'collections',
-              localField: 'collections',
-              foreignField: '_id',
-              as: 'collections',
-            },
-          },
-        ]);
-      } else {
-        memoryAggregate = Memory.aggregate([
-          {
-            $search: {
-              compound: {
-                must: [{ text: { query: ctx.userId, path: 'userId' } }],
-                should: [
-                  {
-                    regex: {
-                      query: `${input.text}`,
-                      path: 'title',
-                      allowAnalyzedField: true,
-                      score: {
-                        boost: {
-                          value: 4,
-                        },
-                      },
-                    },
-                  },
-                  {
-                    regex: {
-                      query: `(.*)${input.text}(.*)`,
-                      path: 'description',
-                      allowAnalyzedField: true,
-                      score: {
-                        boost: {
-                          value: 1,
-                        },
-                      },
-                    },
-                  },
-                  {
-                    regex: {
-                      query: `${input.text}`,
-                      path: 'description',
-                      allowAnalyzedField: true,
-                      score: {
-                        boost: {
-                          value: 2,
-                        },
-                      },
-                    },
-                  },
-                  {
-                    regex: {
-                      query: `(.*)${input.text}(.*)`,
-                      path: 'title',
-                      allowAnalyzedField: true,
-                      score: {
-                        boost: {
-                          value: 3,
-                        },
-                      },
-                    },
-                  },
-                ],
-                minimumShouldMatch: 1,
-              },
-            },
-          },
-          {
-            $lookup: {
-              from: 'collections',
-              localField: 'collections',
-              foreignField: '_id',
-              as: 'collections',
-            },
-          },
-        ]);
-      }
-
-      const memories: memoriesPaginatedT = await Memory.aggregatePaginate(memoryAggregate, options);
+      const memories: memoriesPaginatedT = await Memory.paginate(
+        { userId: ctx.userId },
+        {
+          page: input.page,
+          limit: 12,
+          projection: { userId: 0 },
+          sort: { lastDate: -1 },
+          populate: { path: 'collections', select: '-description -userId' },
+        },
+      );
       return memories;
     },
   })
