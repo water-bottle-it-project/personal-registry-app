@@ -44,7 +44,7 @@ export function TimelineIndex() {
 
   // Lift query hook up to share search bar state with the memory results.
   const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
-    ['memory.GetMemoriesPaginated', { page: page, text: debouncedText }],
+    ['memory.GetMemoriesPaginated', { page: page, text: debouncedText.trim() }],
     { keepPreviousData: true },
   );
 
@@ -91,8 +91,11 @@ export function TimelineIndex() {
         <Center>
           <Stack align='center' spacing='xs'>
             <Text color='dimmed' size='sm'>
-              Viewing memories {data.pagingCounter} to {data.pagingCounter + data.docs.length - 1}{' '}
-              of {data.totalDocs}
+              {data.docs.length
+                ? `Viewing memories ${data.pagingCounter} to ${
+                    data.pagingCounter + data.docs.length - 1
+                  } of ${data.totalDocs}`
+                : 'No memories found'}
             </Text>
             <Pagination
               onChange={changePage}

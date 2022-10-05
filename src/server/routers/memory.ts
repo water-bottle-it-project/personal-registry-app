@@ -40,7 +40,6 @@ const memoryRouter = createProtectedDbRouter()
     input: paginationInputZ,
     async resolve({ ctx, input }) {
       if (input.text) {
-        console.log(input);
         const myAggregate = Memory.aggregate()
           .search({
             index: 'v2',
@@ -54,28 +53,6 @@ const memoryRouter = createProtectedDbRouter()
                 },
               ],
               should: [
-                {
-                  text: {
-                    query: input.text,
-                    path: 'title',
-                    score: {
-                      boost: {
-                        value: 4,
-                      },
-                    },
-                  },
-                },
-                {
-                  text: {
-                    query: input.text,
-                    path: 'description',
-                    score: {
-                      boost: {
-                        value: 2,
-                      },
-                    },
-                  },
-                },
                 {
                   autocomplete: {
                     query: input.text,
