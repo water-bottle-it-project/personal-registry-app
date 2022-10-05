@@ -3715,6 +3715,11 @@ mongodb@4.8.1:
   optionalDependencies:
     saslprep "^1.0.3"
 
+mongoose-aggregate-paginate-v2@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/mongoose-aggregate-paginate-v2/-/mongoose-aggregate-paginate-v2-1.0.6.tgz#fd2f2564d1bbf52f49a196f0b7b03675913dacca"
+  integrity sha512-UuALu+mjhQa1K9lMQvjLL3vm3iALvNw8PQNIh2gp1b+tO5hUa0NC0Wf6/8QrT9PSJVTihXaD8hQVy3J4e0jO0Q==
+
 mongoose-geojson-schema@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/mongoose-geojson-schema/-/mongoose-geojson-schema-2.2.3.tgz#6bed7d123f2f2f34c036aeb81fe0a7ad2a9536d9"

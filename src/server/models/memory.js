@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const { Schema } = mongoose;
@@ -18,6 +19,7 @@ memorySchema.index({ userId: 'hashed', lastDate: -1 });
 memorySchema.index({ collections: 1, lastDate: -1 });
 
 memorySchema.plugin(mongoosePaginate);
+memorySchema.plugin(mongooseAggregatePaginate);
 
 /**
  * Only bind model to schema if it has not been previously created: supports Next.js Hot Reload
