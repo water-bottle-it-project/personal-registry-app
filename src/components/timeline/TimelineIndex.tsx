@@ -10,10 +10,11 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { useDebouncedValue } from '@mantine/hooks';
+import { useDebouncedState } from '@mantine/hooks';
 import { IconArrowRight, IconSearch } from '@tabler/icons';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import type { FormEvent } from 'react';
+import { useEffect } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { TimelineGrid } from '~components/timeline/TimelineGrid';
@@ -39,29 +40,29 @@ export function TimelineIndex() {
 
   const page = getPage();
 
-  const [text, setText] = useState(() => '');
-  const [debouncedText] = useDebouncedValue(text, 300);
+  const [text, setText] = useDebouncedState('', 300);
 
   // Lift query hook up to share search bar state with the memory results.
   const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
-    ['memory.GetMemoriesPaginated', { page: page, text: debouncedText.trim() }],
+    ['memory.GetMemoriesPaginated', { page: page, text: text.trim() }],
     { keepPreviousData: true },
   );
 
   console.log('rendered');
 
-  // Need useCallback. Without it, useEffect runs on every render:
-  // "Function makes the dependencies of useEffect Hook change on every render"
-  const changePage = useCallback(
-    async (newPage: number) => {
-      const { page, ...newQuery } = router.query;
-      await router.push({
-        pathname: '',
-        query: newPage === 1 ? newQuery : { ...newQuery, page: newPage },
-      });
-    },
-    [router],
-  );
+  async function handleEnter(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    await refetch();
+  }
+
+  async function changePage(newPage: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { page, ...newQuery } = router.query;
+    await router.push({
+      pathname: '',
+      query: newPage === 1 ? newQuery : { ...newQuery, page: newPage },
+    });
+  }
 
   useEffect(() => {
     // We only know the pages once the data is loaded.
@@ -117,23 +118,24 @@ export function TimelineIndex() {
         <Space h='xl' />
         <Stack spacing='sm'>
           <Title>Your memories</Title>
-          <TextInput
-            icon={<IconSearch size={18} stroke={1.5} />}
-            onChange={event => setText(event.currentTarget.value)}
-            placeholder='Search your memories by title and description'
-            rightSection={
-              <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
-                {isFetching ? (
-                  <Loader color='white' size='xs' variant='dots' />
-                ) : (
-                  <IconArrowRight size={18} stroke={1.5} />
-                )}
-              </ActionIcon>
-            }
-            rightSectionWidth={42}
-            size='md'
-            value={text}
-          />
+          <form onSubmit={handleEnter}>
+            <TextInput
+              icon={<IconSearch size={18} stroke={1.5} />}
+              onChange={event => setText(event.currentTarget.value)}
+              placeholder='Search your memories by title and description'
+              rightSection={
+                <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
+                  {isFetching ? (
+                    <Loader color='white' size='xs' variant='dots' />
+                  ) : (
+                    <IconArrowRight size={18} stroke={1.5} />
+                  )}
+                </ActionIcon>
+              }
+              rightSectionWidth={42}
+              size='md'
+            />
+          </form>
         </Stack>
         <Space h='xl' />
         {contents}
