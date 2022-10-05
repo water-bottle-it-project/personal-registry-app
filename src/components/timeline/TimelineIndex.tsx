@@ -19,19 +19,26 @@ import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 export function TimelineIndex() {
   const router = useRouter();
-  const pageNum = router.query.page;
-  const [value, setValue] = useState('');
-  const [text, setText] = useState('');
-  // Set the initial page based on the page query param.
-  const [page, setPage] = useState<number>(() => {
-    // Check for positive integer only.
-    const x = Number(pageNum);
-    if (Number.isInteger(x) && x > 0) {
+
+  function getPage(): number {
+    const pageQuery = router.query.page;
+    if (typeof pageQuery !== 'string') {
+      return 1;
+    }
+
+    const x = Number(pageQuery);
+    if (Number.isInteger(x) && x >= 1) {
       return x;
     }
-    void router.push({ pathname: '' }, undefined, { shallow: true });
+
+    void router.replace({ pathname: '' }, undefined, { shallow: true });
     return 1;
-  });
+  }
+
+  const page = getPage();
+
+  const [value, setValue] = useState('');
+  const [text, setText] = useState('');
 
   // Lift query hook up to share search bar state with the memory results.
   const { data, isLoading, isLoadingError } = trpcClient.useQuery([
@@ -39,19 +46,17 @@ export function TimelineIndex() {
     { page: page, text: text },
   ]);
 
+  console.log('rendered');
+
   // Need useCallback. Without it, useEffect runs on every render:
   // "Function makes the dependencies of useEffect Hook change on every render"
   const changePage = useCallback(
     async (newPage: number) => {
-      setPage(newPage);
-      await router.push(
-        {
-          pathname: '',
-          query: newPage === 1 ? {} : { page: newPage },
-        },
-        undefined,
-        { shallow: true },
-      );
+      const { page, ...newQuery } = router.query;
+      await router.push({
+        pathname: '',
+        query: newPage === 1 ? newQuery : { ...newQuery, page: newPage },
+      });
     },
     [router],
   );
@@ -59,12 +64,17 @@ export function TimelineIndex() {
   useEffect(() => {
     // We only know the pages once the data is loaded.
     // If the page is more than the total number of pages, go to the last page.
-    if (data && page > data.totalPages) {
-      changePage(data.totalPages).then(() => {
-        return;
-      });
+    if (data?.totalPages && page > data.totalPages) {
+      router
+        .replace({
+          pathname: '',
+          query: { ...router.query, page: data.totalPages },
+        })
+        .then(() => {
+          return;
+        });
     }
-  }, [changePage, data, page]);
+  }, [data, page, router]);
 
   let contents;
   if (isLoading || !data?.docs) {
