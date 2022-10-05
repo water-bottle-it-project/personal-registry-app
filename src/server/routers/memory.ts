@@ -55,49 +55,23 @@ const memoryRouter = createProtectedDbRouter()
               ],
               should: [
                 {
-                  regex: {
-                    query: `${input.text}`,
+                  autocomplete: {
+                    query: input.text,
                     path: 'title',
-                    allowAnalyzedField: true,
-                    score: {
-                      boost: {
-                        value: 4,
-                      },
-                    },
-                  },
-                },
-                {
-                  regex: {
-                    query: `(.*)${input.text}(.*)`,
-                    path: 'description',
-                    allowAnalyzedField: true,
-                    score: {
-                      boost: {
-                        value: 1,
-                      },
-                    },
-                  },
-                },
-                {
-                  regex: {
-                    query: `${input.text}`,
-                    path: 'description',
-                    allowAnalyzedField: true,
-                    score: {
-                      boost: {
-                        value: 2,
-                      },
-                    },
-                  },
-                },
-                {
-                  regex: {
-                    query: `(.*)${input.text}(.*)`,
-                    path: 'title',
-                    allowAnalyzedField: true,
                     score: {
                       boost: {
                         value: 3,
+                      },
+                    },
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: input.text,
+                    path: 'description',
+                    score: {
+                      boost: {
+                        value: 1,
                       },
                     },
                   },
@@ -120,8 +94,6 @@ const memoryRouter = createProtectedDbRouter()
           page: input.page,
           limit: 12,
         });
-
-        console.log(memories);
 
         return memories;
       }
