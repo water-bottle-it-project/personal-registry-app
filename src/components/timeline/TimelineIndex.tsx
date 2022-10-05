@@ -2,6 +2,7 @@ import {
   ActionIcon,
   Center,
   Container,
+  Loader,
   Pagination,
   Space,
   Stack,
@@ -9,6 +10,7 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
+import { useDebouncedValue } from '@mantine/hooks';
 import { IconArrowRight, IconSearch } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
@@ -37,14 +39,14 @@ export function TimelineIndex() {
 
   const page = getPage();
 
-  const [value, setValue] = useState('');
-  const [text, setText] = useState('');
+  const [text, setText] = useState(() => '');
+  const [debouncedText] = useDebouncedValue(text, 300);
 
   // Lift query hook up to share search bar state with the memory results.
-  const { data, isLoading, isLoadingError } = trpcClient.useQuery([
-    'memory.GetMemoriesPaginated',
-    { page: page, text: text },
-  ]);
+  const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
+    ['memory.GetMemoriesPaginated', { page: page, text: debouncedText }],
+    { keepPreviousData: true },
+  );
 
   console.log('rendered');
 
@@ -114,16 +116,20 @@ export function TimelineIndex() {
           <Title>Your memories</Title>
           <TextInput
             icon={<IconSearch size={18} stroke={1.5} />}
-            onChange={event => setValue(event.currentTarget.value)}
+            onChange={event => setText(event.currentTarget.value)}
             placeholder='Search your memories by title and description'
             rightSection={
-              <ActionIcon color='indigo' onClick={() => setText(value)} size={32} variant='filled'>
-                <IconArrowRight size={18} stroke={1.5} />
+              <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
+                {isFetching ? (
+                  <Loader color='white' size='xs' variant='dots' />
+                ) : (
+                  <IconArrowRight size={18} stroke={1.5} />
+                )}
               </ActionIcon>
             }
             rightSectionWidth={42}
             size='md'
-            value={value}
+            value={text}
           />
         </Stack>
         <Space h='xl' />
