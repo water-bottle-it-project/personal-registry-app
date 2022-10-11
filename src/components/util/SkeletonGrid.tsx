@@ -8,7 +8,6 @@ export function SkeletonGrid() {
           <Skeleton animate height={300} width='100%' />
         </Grid.Col>
       ))}
-      ;
     </Grid>
   );
 }
