@@ -38,7 +38,8 @@ function HeroBase() {
             Keep detailed records of personal artifacts, memories and events safely in this app,
             using your preferred combination of text and images.
           </Text>
-          <Group align='center' className={classes.heroGrid} grow mt={20} spacing={30}>
+          {/* Timeline button text cuts off at mobile sizes when using Group */}
+          {/* <Group align='center' className={classes.heroGrid} grow mt={20} spacing={30}>
             <LinkButton
               gradient={{ from: 'indigo', to: 'cyan' }}
               href='/signin'
@@ -55,7 +56,29 @@ function HeroBase() {
             >
               Register
             </LinkButton>
-          </Group>
+          </Group> */}
+          <Grid mt={20}>
+            <Grid.Col lg={2} md={3} sm={4}>
+              <LinkButton
+                gradient={{ from: 'indigo', to: 'cyan' }}
+                href='/signin'
+                size='md'
+                variant='gradient'
+              >
+                {id ? 'Your timeline' : 'Sign in'}
+              </LinkButton>
+            </Grid.Col>
+            <Grid.Col lg={2} md={3} sm={4}>
+              <LinkButton
+                href='/signup'
+                size='md'
+                style={{ visibility: id ? 'hidden' : 'visible' }}
+                variant='default'
+              >
+                Register
+              </LinkButton>
+            </Grid.Col>
+          </Grid>
         </Grid.Col>
         <Grid.Col sm={6}>
           <Lottie
