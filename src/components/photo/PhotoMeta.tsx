@@ -1,4 +1,4 @@
-import { Box, createStyles, Space, Text, Title } from '@mantine/core';
+import { Badge, Box, createStyles, Space, Text } from '@mantine/core';
 
 import { MapBox } from '~components/util/MapBox';
 
@@ -9,6 +9,8 @@ interface PhotoMetaProps {
   photoDate: Date | null;
   width: number;
   height: number;
+  index: number;
+  total: number;
 }
 
 export function PhotoMeta(props: PhotoMetaProps) {
@@ -21,7 +23,7 @@ export function PhotoMeta(props: PhotoMetaProps) {
         padding: theme.spacing.xl,
       })}
     >
-      <Title order={2}>Metadata</Title>
+      <Badge radius='md' size='lg' variant='dot'>{`Photo ${props.index + 1}/${props.total}`}</Badge>
       <Space h='lg' />
       <Text className={classes.infoHeader}>Caption</Text>
       <Text className={classes.infoText} italic={!props.caption}>
