@@ -64,6 +64,7 @@ function HeroBase() {
                 href='/timeline'
                 size='md'
                 variant='gradient'
+                className={classes.gradientBg}
               >
                 {id ? 'Your timeline' : 'Sign in'}
               </LinkButton>
@@ -112,6 +113,23 @@ const useStyles = createStyles(theme => ({
 
   heroGrid: {
     maxWidth: '75%',
+  },
+
+  gradientBg: {
+    '@keyframes background-pan': {
+      from: {
+        backgroundPosition: '0% center',
+      },
+      to: {
+        backgroundPosition: '-200% center',
+      },
+    },
+    animation: 'background-pan 15s linear infinite',
+    background:
+      theme.colorScheme === 'dark'
+        ? 'linear-gradient(to right, rgb(33, 19, 114), rgb(9, 154, 154), rgb(33, 19, 114)) 100%'
+        : 'linear-gradient(to right, rgb(102, 0, 255), rgb(0, 204, 153), rgb(102, 0, 255)) 100%',
+    backgroundSize: '200%',
   },
 }));
 
