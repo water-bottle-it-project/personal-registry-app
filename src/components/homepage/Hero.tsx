@@ -127,7 +127,7 @@ const useStyles = createStyles(theme => ({
     animation: 'background-pan 15s linear infinite',
     background:
       theme.colorScheme === 'dark'
-        ? 'linear-gradient(to right, rgb(33, 19, 114), rgb(9, 154, 154), rgb(33, 19, 114)) 100%'
+        ? 'linear-gradient(to right, rgb(33, 19, 114), rgb(4, 109, 109), rgb(33, 19, 114)) 100%'
         : 'linear-gradient(to right, rgb(102, 0, 255), rgb(0, 204, 153), rgb(102, 0, 255)) 100%',
     backgroundSize: '200%',
   },
