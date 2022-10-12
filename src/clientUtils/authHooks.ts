@@ -15,7 +15,6 @@ const withAuthComponent = withAuthUser({
 const withAuthedPage = withAuthUser({
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
   whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-  authPageURL: `/signin/?unauthorized=${true}`,
 });
 
 /**

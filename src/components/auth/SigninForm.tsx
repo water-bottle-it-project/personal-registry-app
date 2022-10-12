@@ -32,7 +32,7 @@ export function SigninForm() {
   });
 
   const router = useRouter();
-  const isUnauthorized = router.query.unauthorized;
+  const isUnauthorized = router.query.to;
 
   function handleSignin({ email, password }: SigninT) {
     const auth = getAuth();

@@ -1,10 +1,27 @@
+import absoluteUrl from 'next-absolute-url';
 import { init } from 'next-firebase-auth';
 
 // Frontend and backend
 const initAuth = () => {
   init({
-    appPageURL: '/debug/authed',
-    authPageURL: '/signin',
+    appPageURL: ({ ctx }) => {
+      const isServerSide = typeof window === 'undefined';
+      const origin = isServerSide ? absoluteUrl(ctx.req).origin : window.location.origin;
+      const params = isServerSide
+        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          new URL(ctx.req!.url!, origin).searchParams
+        : new URLSearchParams(window.location.search);
+      const toParam = params.get('to');
+      const destination = toParam ? decodeURIComponent(toParam) : undefined;
+      return destination ?? '/timeline';
+    },
+    authPageURL: ({ ctx }) => {
+      const isServerSide = typeof window === 'undefined';
+      const origin = isServerSide ? absoluteUrl(ctx.req).origin : window.location.origin;
+      const destPath = isServerSide ? ctx.resolvedUrl : window.location.href;
+      const destURL = new URL(destPath, origin);
+      return `/signin?to=${encodeURIComponent(destURL.toString())}`;
+    },
     cookies: {
       name: 'AppAuth',
       keys: [process.env.COOKIE_SECRET_CURRENT, process.env.COOKIE_SECRET_PREVIOUS],
