@@ -30,13 +30,13 @@ function AppUserMenuBase() {
     });
 
   return id ? (
-    <Tooltip label='Sign out'>
+    <Tooltip label='Sign out' withArrow>
       <ActionIcon color='orange' onClick={openModal} size='lg' sx={actionIconSx} variant='light'>
         <IconLogout size={19} />
       </ActionIcon>
     </Tooltip>
   ) : (
-    <Tooltip label='Sign in'>
+    <Tooltip label='Sign in' withArrow>
       <ActionIcon
         color='indigo'
         component={NextLink}
