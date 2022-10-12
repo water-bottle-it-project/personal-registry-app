@@ -5,7 +5,6 @@ import superjson from 'superjson';
 import type { Context } from '~server/context';
 import { createContext } from '~server/context';
 import { collectionRouter } from '~server/routers/collection';
-import { debugRouter } from '~server/routers/debug';
 import { debugAuthedRouter } from '~server/routers/debugAuthed';
 import { memoryRouter } from '~server/routers/memory';
 import { photosRouter } from '~server/routers/photo';
@@ -18,7 +17,6 @@ const appRouter = trpc
   .router<Context>()
   .transformer(superjson)
   .merge('collection.', collectionRouter)
-  .merge('debug.', debugRouter)
   .merge('debugAuthed.', debugAuthedRouter)
   .merge('photos.', photosRouter)
   .merge('profile.', profileRouter)
