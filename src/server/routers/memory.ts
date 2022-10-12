@@ -195,6 +195,32 @@ const memoryRouter = createProtectedDbRouter()
     },
   })
 
+  .mutation('DeleteMemory', {
+    input: memoryIdOnlyZ,
+    async resolve({ ctx, input }) {
+      const prev = await Memory.findOne(
+        {
+          _id: input._id,
+          userId: ctx.userId,
+        },
+        { photos: 1 },
+      )
+        .populate('photos')
+        .exec();
+
+      let photoUrls: string[] = [];
+      if (prev?.photos) {
+        photoUrls = prev?.photos.map((p: photoWithIdT) => p.url);
+        const photoIds: string[] = prev?.photos.map((p: photoWithIdT) => p._id);
+        await Photo.deleteMany({ _id: { $in: photoIds } });
+      }
+
+      await Memory.deleteOne({ _id: input._id, userId: ctx.userId });
+
+      return photoUrls;
+    },
+  })
+
   .mutation('UpdateMemory', {
     input: memoryEditFormRequestZ,
     async resolve({ ctx, input }) {

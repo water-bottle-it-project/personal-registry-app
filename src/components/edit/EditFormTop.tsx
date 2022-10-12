@@ -1,7 +1,12 @@
-import { Button, Group, Title } from '@mantine/core';
-import { IconDeviceFloppy, IconRotateClockwise2 } from '@tabler/icons';
+import { deleteObject, getStorage, ref as storageRef } from '@firebase/storage';
+import { Button, Group, Text, Title } from '@mantine/core';
+import { openConfirmModal } from '@mantine/modals';
+import { showNotification } from '@mantine/notifications';
+import { IconCheck, IconDeviceFloppy, IconRotateClockwise2, IconTrash, IconX } from '@tabler/icons';
+import { useRouter } from 'next/router';
 import type { UseFormReturn } from 'react-hook-form';
 
+import { trpcClient } from '~clientUtils/trpcClient';
 import type { memoryEditFormT } from '~types/memory/memoryForm';
 
 export function EditFormTop({
@@ -20,10 +25,67 @@ export function EditFormTop({
     });
   }
 
+  const router = useRouter();
+  const trpcUtils = trpcClient.useContext();
+  const deleteMutation = trpcClient.useMutation(['memory.DeleteMemory']);
+
+  async function handleDelete() {
+    const _id = getValues('_id');
+    await deleteMutation.mutate(
+      { _id },
+      {
+        onSuccess: async data => {
+          // Delete files from Firebase Storage.
+          const fileDeleteRequests = data.map(async del => {
+            const fileRef = storageRef(getStorage(), del);
+            return deleteObject(fileRef);
+          });
+          await Promise.all(fileDeleteRequests);
+
+          // Redirect
+          await trpcUtils.invalidateQueries(['memory.GetMemories']);
+          await router.push('/timeline');
+          showNotification({
+            icon: <IconCheck />,
+            title: 'Success!',
+            message: 'Memory successfully deleted.',
+          });
+        },
+
+        onError: async error => {
+          showNotification({
+            icon: <IconX />,
+            color: 'red',
+            title: 'Error deleting memory!',
+            message: error.message,
+          });
+        },
+      },
+    );
+  }
+
+  const openDeleteModal = () =>
+    openConfirmModal({
+      title: <Title order={3}>Delete this memory</Title>,
+      centered: true,
+      children: <Text size='sm'>Are you sure you want to delete this memory?</Text>,
+      labels: { confirm: `Yes, I'm sure`, cancel: 'No' },
+      confirmProps: { color: 'red' },
+      onConfirm: handleDelete,
+    });
+
   return (
     <Group position='apart'>
       <Title>Edit this memory</Title>
       <Group position='right'>
+        <Button
+          color='red'
+          disabled={isSubmitting}
+          onClick={openDeleteModal}
+          rightIcon={<IconTrash />}
+        >
+          Delete
+        </Button>
         <Button
           disabled={isSubmitting}
           onClick={resetWithCleanup}
@@ -33,6 +95,7 @@ export function EditFormTop({
           Reset
         </Button>
         <Button
+          disabled={isSubmitting}
           loaderPosition='right'
           loading={isSubmitting}
           rightIcon={<IconDeviceFloppy />}
