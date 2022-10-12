@@ -2,7 +2,7 @@ import { Modal, Title } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
-import { CollectionCreate } from './CollectionCreate';
+import { CollectionCreate } from '~components/collection/CollectionCreate';
 
 export function CollectionCreateModal() {
   const router = useRouter();

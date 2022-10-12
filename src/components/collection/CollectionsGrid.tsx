@@ -5,10 +5,9 @@ import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CollectionCard } from '~components/collection/CollectionCard';
+import { CollectionSearchResult } from '~components/collection/CollectionSearchResult';
 import { CollectionsHeader } from '~components/collection/CollectionsHeader';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
-
-import { CollectionSearchResult } from './CollectionSearchResult';
 
 export function CollectionsGrid() {
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([

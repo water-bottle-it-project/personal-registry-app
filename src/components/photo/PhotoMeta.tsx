@@ -1,4 +1,4 @@
-import { Badge, Card, createStyles, Paper, Space, Text } from '@mantine/core';
+import { Badge, Card, createStyles, Space, Text } from '@mantine/core';
 
 import { MapBox } from '~components/util/MapBox';
 

@@ -1,10 +1,9 @@
 import { Grid } from '@mantine/core';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { CollectionCard } from '~components/collection/CollectionCard';
 import { SearchNotFound } from '~components/util/SearchNotFound';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
-
-import { CollectionCard } from './CollectionCard';
 
 interface CollectionSearchResultProps {
   searchQuery: { text: string; searchType: string };

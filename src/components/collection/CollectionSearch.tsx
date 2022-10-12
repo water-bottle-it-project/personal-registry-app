@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ActionIcon, Radio, Stack, TextInput, useMantineTheme } from '@mantine/core';
-import { IconArrowLeft, IconArrowRight, IconSearch } from '@tabler/icons';
+import { IconArrowRight, IconSearch } from '@tabler/icons';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';

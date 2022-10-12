@@ -1,5 +1,4 @@
 import {
-  BackgroundImage,
   Container,
   createStyles,
   Grid,
@@ -10,15 +9,12 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core';
-import { IconFolders, IconFreeRights, IconPhoto, IconSearch, IconTags } from '@tabler/icons';
+import { IconFolders, IconPhoto, IconSearch, IconTags } from '@tabler/icons';
 
-import gradient from '~components/homepage/gradient.png';
-import gradientDark from '~components/homepage/gradient-dark.png';
 import { LinkButton } from '~components/util/LinkButton';
 
 export function FeaturesTitle() {
   const { classes } = useStyles();
-  const theme = useMantineTheme();
   const items = features.map(feature => (
     <div key={feature.title}>
       <ThemeIcon color={feature.color} radius='md' size={44}>

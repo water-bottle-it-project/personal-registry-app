@@ -9,14 +9,13 @@ import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { CollectionFormSkeleton } from '~components/collection/CollectionFormSkeleton';
 import { ColorControl } from '~components/collection/ColorControl';
 import errorLottie from '~components/util/error-lottie.json';
 import type { collectionT } from '~types/collection/collection';
 import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
 import type { collectionOmitIdT } from '~types/collection/collectionOmitId';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
-
-import { CollectionFormSkeleton } from './CollectionFormSkeleton';
 
 export function CollectionEdit(props: collectionIdOnlyT) {
   useScrollLock(true);

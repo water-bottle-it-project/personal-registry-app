@@ -1,7 +1,5 @@
-import { Carousel } from '@mantine/carousel';
 import { Anchor, Badge, Card, createStyles, Group, Image, Space, Text, Title } from '@mantine/core';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import type { memoryCardT } from '~types/memory/memoryForm';
 
@@ -15,8 +13,6 @@ export function TimelineCard({
   photos,
   collections,
 }: memoryCardT) {
-  const [indicator, setIndicator] = useState(false);
-
   const { classes } = useStyles();
   return (
     <Card

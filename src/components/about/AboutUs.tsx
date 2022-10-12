@@ -1,9 +1,8 @@
 import { Container, createStyles, Grid, Space, Title } from '@mantine/core';
 
+import { AboutUsCard } from '~components/about/AboutUsCard';
+import { FAQ } from '~components/about/FAQ';
 import { Banner } from '~components/util/Banner';
-
-import { AboutUsCard } from './AboutUsCard';
-import { FAQ } from './FAQ';
 
 const teamInfo = [
   {

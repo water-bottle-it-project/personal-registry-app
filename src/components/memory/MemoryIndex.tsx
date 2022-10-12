@@ -4,10 +4,9 @@ import { Container, Space, Switch } from '@mantine/core';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { MemoryHeader } from '~components/memory/MemoryHeader';
 import { MemoryImage } from '~components/memory/MemoryImage';
 import { MemoryImageGrid } from '~components/memory/MemoryImageGrid';
-
-import { MemoryHeader } from './MemoryHeader';
 
 interface MemoryIndexProps {
   _id: string;
