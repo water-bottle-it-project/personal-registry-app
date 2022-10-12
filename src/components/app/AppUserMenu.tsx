@@ -1,3 +1,4 @@
+import type { Sx } from '@mantine/core';
 import { ActionIcon, Text, Title, Tooltip } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { NextLink } from '@mantine/next';
@@ -30,18 +31,31 @@ function AppUserMenuBase() {
 
   return id ? (
     <Tooltip label='Sign out'>
-      <ActionIcon color='orange' onClick={openModal} size='lg' variant='light'>
+      <ActionIcon color='orange' onClick={openModal} size='lg' sx={actionIconSx} variant='light'>
         <IconLogout size={19} />
       </ActionIcon>
     </Tooltip>
   ) : (
     <Tooltip label='Sign in'>
-      <ActionIcon color='indigo' component={NextLink} href='/signin' size='lg' variant='light'>
+      <ActionIcon
+        color='indigo'
+        component={NextLink}
+        href='/signin'
+        size='lg'
+        sx={actionIconSx}
+        variant='light'
+      >
         <IconLogin size={19} />
       </ActionIcon>
     </Tooltip>
   );
 }
+
+const actionIconSx: Sx = theme => ({
+  boxShadow: theme.shadows.md,
+  borderWidth: '1px',
+  borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
+});
 
 const AppUserMenu = withAuthComponent(AppUserMenuBase);
 

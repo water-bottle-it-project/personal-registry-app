@@ -46,7 +46,7 @@ export function MemoryImage({
         </Grid.Col>
       </Grid>
       <Space h='sm' />
-      <Divider size='sm' />
+      <Divider size='xs' variant='dotted' />
       <Space h='sm' />
     </>
   );

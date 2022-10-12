@@ -31,27 +31,22 @@ export function TimelineCard({
       withBorder
     >
       <Card.Section>
-        <Carousel
-          align='center'
-          height={180}
-          mx='auto'
-          onMouseEnter={() => setIndicator(true)}
-          onMouseLeave={() => setIndicator(false)}
-          sx={{ transition: 'indicator 1s, control 1s' }}
-          withControls={indicator}
-          withIndicators={indicator}
-        >
-          <Carousel.Slide>
-            <Image
-              alt={title}
-              fit='cover'
-              height={180}
-              placeholder={<Text align='center'>No photos</Text>}
-              src={photoPreviewUrl}
-              withPlaceholder
-            />
-          </Carousel.Slide>
-        </Carousel>
+        {photoPreviewUrl ? (
+          <Image
+            alt={title}
+            fit='cover'
+            height={180}
+            placeholder={<Text align='center'>No photos</Text>}
+            src={photoPreviewUrl}
+          />
+        ) : (
+          <Image
+            fit='cover'
+            height={180}
+            placeholder={<Text align='center'>No photos</Text>}
+            withPlaceholder
+          />
+        )}
       </Card.Section>
       <Space h='xs' />
       <Title className={classes.text} lineClamp={2} order={3} weight={600}>
