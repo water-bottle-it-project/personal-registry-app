@@ -48,7 +48,7 @@ export function MemoryIndex({ _id }: MemoryIndexProps) {
         {gridView ? (
           <MemoryImageGrid photos={photos} />
         ) : (
-          photos.map(p => <MemoryImage key={p._id} {...p} />)
+          photos.map((p, i) => <MemoryImage key={p._id} {...p} index={i} total={photos.length} />)
         )}
         <Space h='xl' />
       </Container>
