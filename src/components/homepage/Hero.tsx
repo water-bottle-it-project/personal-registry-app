@@ -61,7 +61,7 @@ function HeroBase() {
             <Grid.Col lg={2} md={3} sm={4}>
               <LinkButton
                 gradient={{ from: 'indigo', to: 'cyan' }}
-                href='/signin'
+                href='/timeline'
                 size='md'
                 variant='gradient'
               >
