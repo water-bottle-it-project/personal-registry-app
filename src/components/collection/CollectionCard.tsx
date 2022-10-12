@@ -21,7 +21,7 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
       })}
     >
       <Stack spacing='xs' sx={{ height: '100%' }}>
-        <Title className={classes.text} lineClamp={3} order={4}>
+        <Title className={classes.text} lineClamp={3} order={3} weight={600}>
           {title}
         </Title>
         <Text

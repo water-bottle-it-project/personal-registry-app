@@ -117,7 +117,7 @@ export function EditFormPhotos({ control, register, setValue }: UseFormReturn<me
                     <Image
                       alt={`Photo ${index + 1}/${fields.length}`}
                       fit={contained ? 'contain' : 'cover'}
-                      height={180}
+                      height={360}
                       radius='sm'
                       src={p.url || p._thumbnail}
                       width='100%'

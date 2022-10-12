@@ -24,7 +24,7 @@ export function PhotoCard({ _id, caption, url, itemRef, open }: PhotoCardProps) 
         <Image alt={caption} height={220} onClick={open} ref={itemRef} src={url} />
       </Card.Section>
       <Space h='sm' />
-      <Text align='center' italic={!caption}>
+      <Text align='center' color={caption ? undefined : 'dimmed'} italic={!caption}>
         {caption || 'no caption'}
       </Text>
     </Card>

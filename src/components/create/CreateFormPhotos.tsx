@@ -120,7 +120,7 @@ export function CreateFormPhotos({
                     <Image
                       alt={`Photo ${index + 1}/${fields.length}`}
                       fit={contained ? 'contain' : 'cover'}
-                      height={180}
+                      height={360}
                       radius='sm'
                       src={p._thumbnail}
                       width='100%'

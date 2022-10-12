@@ -1,4 +1,4 @@
-import { createStyles, Group, Image, Text } from '@mantine/core';
+import { Card, createStyles, Group, Image, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 
 import type { photoWithIdT } from '~types/photo/photo';
@@ -8,29 +8,31 @@ export function MemoryImageGridItem({ caption, url, photoDate }: photoWithIdT) {
   const { classes, cx } = useStyles();
 
   return (
-    <div ref={ref}>
-      <Image
-        alt={caption}
-        className={cx(classes.wrapper, { [classes.dimmed]: hovered })}
-        height='40%'
-        src={url}
-        width='100%'
-      />
-      {hovered && (
-        <Group position='apart'>
-          <div className={classes.text}>
-            <Text className={classes.imgCaption} lineClamp={1} size='lg' weight={400}>
-              {caption}
-            </Text>
-          </div>
-          <div className={classes.text}>
-            <Text className={classes.imgDownload} lineClamp={1} size='lg' weight={400}>
-              {photoDate && new Date(photoDate).toDateString()}
-            </Text>
-          </div>
-        </Group>
-      )}
-    </div>
+    <Card>
+      <Card.Section ref={ref}>
+        <Image
+          alt={caption}
+          className={cx(classes.wrapper, { [classes.dimmed]: hovered })}
+          height='40%'
+          src={url}
+          width='100%'
+        />
+        {hovered && (
+          <Group position='apart'>
+            <div className={classes.text}>
+              <Text className={classes.imgCaption} lineClamp={1} size='lg' weight={400}>
+                {caption}
+              </Text>
+            </div>
+            <div className={classes.text}>
+              <Text className={classes.imgDownload} lineClamp={1} size='lg' weight={400}>
+                {photoDate && new Date(photoDate).toDateString()}
+              </Text>
+            </div>
+          </Group>
+        )}
+      </Card.Section>
+    </Card>
   );
 }
 

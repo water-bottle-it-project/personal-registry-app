@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Group, Space, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import { Button, Group, Space, Stack, Text, Textarea, TextInput, Title } from '@mantine/core';
 import { useScrollLock } from '@mantine/hooks';
 import { openConfirmModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
@@ -149,7 +149,7 @@ function CollectionEditForm({
 
   const openModal = () =>
     openConfirmModal({
-      title: 'Warning',
+      title: <Title order={3}>Delete this collection</Title>,
       children: (
         <Text size='sm'>Are you sure you want to delete the collection {collection.title}?</Text>
       ),

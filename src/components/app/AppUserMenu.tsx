@@ -1,9 +1,11 @@
-import { Button } from '@mantine/core';
+import { ActionIcon, Text, Title, Tooltip } from '@mantine/core';
+import { openConfirmModal } from '@mantine/modals';
+import { NextLink } from '@mantine/next';
+import { IconLogin, IconLogout } from '@tabler/icons';
 import { useAuthUser } from 'next-firebase-auth';
 
 import { withAuthComponent } from '~clientUtils/authHooks';
 import { trpcClient } from '~clientUtils/trpcClient';
-import { LinkButton } from '~components/util/LinkButton';
 
 function AppUserMenuBase() {
   const { id, signOut } = useAuthUser();
@@ -16,14 +18,28 @@ function AppUserMenuBase() {
     await trpcUtils.queryClient.getQueryCache().clear();
   }
 
+  const openModal = () =>
+    openConfirmModal({
+      title: <Title order={3}>You're about to sign out</Title>,
+      children: <Text size='sm'>Are you sure you want to sign out?</Text>,
+      labels: { confirm: 'Sign out', cancel: 'Cancel' },
+      confirmProps: { color: 'orange' },
+      onConfirm: () => handleSignOut(),
+      zIndex: '999',
+    });
+
   return id ? (
-    <Button color='orange' onClick={handleSignOut} variant='light'>
-      Sign out
-    </Button>
+    <Tooltip label='Sign out'>
+      <ActionIcon color='orange' onClick={openModal} size='lg' variant='light'>
+        <IconLogout size={19} />
+      </ActionIcon>
+    </Tooltip>
   ) : (
-    <LinkButton href='/signin' variant='default'>
-      Sign in
-    </LinkButton>
+    <Tooltip label='Sign in'>
+      <ActionIcon color='indigo' component={NextLink} href='/signin' size='lg' variant='light'>
+        <IconLogin size={19} />
+      </ActionIcon>
+    </Tooltip>
   );
 }
 

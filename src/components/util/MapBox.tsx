@@ -52,6 +52,7 @@ export function MapBox({ locQuery }: MapBoxProps) {
       style: 'mapbox://styles/mapbox/light-v10',
       center: [lng, lat],
       zoom: 12,
+      cooperativeGestures: true,
     });
     // map.current.addControl(
     //   new MapboxGeocoder({

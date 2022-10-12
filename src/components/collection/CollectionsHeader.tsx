@@ -1,4 +1,4 @@
-import { Anchor, Button, Container, Space, Title } from '@mantine/core';
+import { Anchor, Button, Container, Group, Space, Title } from '@mantine/core';
 import { IconPlus } from '@tabler/icons';
 import Link from 'next/link';
 import type { Dispatch, SetStateAction } from 'react';
@@ -13,22 +13,21 @@ interface CollectionHeaderProps {
 export function CollectionsHeader(props: CollectionHeaderProps) {
   return (
     <>
-      <Container mx={0} px={0}>
-        <Space h='xl' />
-        <Title order={1}>Your Collections</Title>
-        <Space h='md' />
-        <CollectionSearchForm
-          setIsSearching={props.setIsSearching}
-          setSearchQuery={props.setSearchQuery}
-        />
-        <Space h='xl' />
+      <Space h='xl' />
+      <Group position='apart'>
+        <Title order={1}>Your collections</Title>
         <Link as='/collections/create' href='/collections?create=true' passHref>
-          <Anchor color='red' component='a'>
-            <Button leftIcon={<IconPlus />}>Add a collection</Button>
-          </Anchor>
+          <Button component='a' leftIcon={<IconPlus />}>
+            Add a collection
+          </Button>
         </Link>
-        <Space h='xl' />
-      </Container>
+      </Group>
+      <Space h='md' />
+      <CollectionSearchForm
+        setIsSearching={props.setIsSearching}
+        setSearchQuery={props.setSearchQuery}
+      />
+      <Space h='xl' />
     </>
   );
 }

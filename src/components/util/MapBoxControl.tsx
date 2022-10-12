@@ -66,6 +66,7 @@ export function MapBoxControl({ setLocation, locationQuery, name }: MapBoxContro
       style: 'mapbox://styles/mapbox/light-v10',
       center: [lng, lat],
       zoom: 12,
+      cooperativeGestures: true,
     });
     // for editing, place existing location marker
     if (locationQuery) {

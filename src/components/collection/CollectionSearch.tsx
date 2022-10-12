@@ -36,21 +36,10 @@ export function CollectionSearchForm(props: CollectionSearchFormProps) {
       <Stack spacing='xs'>
         <TextInput
           icon={<IconSearch size={18} stroke={1.5} />}
-          placeholder='Enter a collection name.'
-          radius='lg'
+          placeholder='Enter collection search terms'
           rightSection={
-            <ActionIcon
-              color={theme.primaryColor}
-              radius='lg'
-              size={32}
-              type='submit'
-              variant='filled'
-            >
-              {theme.dir === 'ltr' ? (
-                <IconArrowRight size={18} stroke={1.5} />
-              ) : (
-                <IconArrowLeft size={18} stroke={1.5} />
-              )}
+            <ActionIcon color={theme.primaryColor} size='lg' type='submit' variant='filled'>
+              <IconArrowRight size={18} stroke={1.5} />
             </ActionIcon>
           }
           rightSectionWidth={42}

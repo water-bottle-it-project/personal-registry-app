@@ -59,17 +59,17 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
     <>
       <Grid>
         <Grid.Col lg={4} md={6}>
-          <Stack align='flex-start' justify='flex-start' spacing='xs'>
+          <Stack align='center' justify='flex-start' spacing='xs'>
             {photoCol0}
           </Stack>
         </Grid.Col>
         <Grid.Col lg={4} md={6}>
-          <Stack align='flex-start' justify='flex-start' spacing='xs'>
+          <Stack align='center' justify='flex-start' spacing='xs'>
             {photoCol1}
           </Stack>
         </Grid.Col>
         <Grid.Col lg={4} md={6}>
-          <Stack align='flex-start' justify='flex-start' spacing='xs'>
+          <Stack align='center' justify='flex-start' spacing='xs'>
             {photoCol2}
           </Stack>
         </Grid.Col>

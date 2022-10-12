@@ -42,7 +42,7 @@ export function MemoryHeader({
   return (
     <Box
       sx={theme => ({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
         paddingTop: theme.spacing.xl,
         paddingBottom: theme.spacing.xl,
       })}

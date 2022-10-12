@@ -1,4 +1,4 @@
-import { Divider, Grid, Image, Space, Stack } from '@mantine/core';
+import { Card, Divider, Grid, Image, Space, Stack } from '@mantine/core';
 
 import { PhotoMeta } from '~components/photo/PhotoMeta';
 import type { photoWithIdT } from '~types/photo/photo';
@@ -23,7 +23,11 @@ export function MemoryImage({
     <>
       <Grid justify='center'>
         <Grid.Col lg={8} md={8}>
-          <Image alt={caption} height='40%' src={url} width='100%' />
+          <Card>
+            <Card.Section>
+              <Image alt={caption} height='40%' src={url} width='100%' />
+            </Card.Section>
+          </Card>
           <Space h='md' />
         </Grid.Col>
         <Grid.Col lg={4} md={8}>
