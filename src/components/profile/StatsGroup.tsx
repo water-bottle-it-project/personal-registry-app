@@ -58,7 +58,7 @@ const useStyles = createStyles(theme => ({
 }));
 
 interface StatsGroupProps {
-  data: { title: string; stats: string; description: string }[];
+  data: { title: string; stats: number | string; description: string }[];
 }
 
 export function StatsGroup({ data }: StatsGroupProps) {

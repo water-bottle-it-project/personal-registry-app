@@ -5,24 +5,25 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { DeleteAccount } from '~components/profile/DeleteAccount';
 import { EmailUpdateForm } from '~components/profile/EmailUpdateForm';
 import { PasswordUpdateForm } from '~components/profile/PasswordUpdateForm';
-import { stringToDate, tupleToString } from '~components/profile/profileUtils';
 import { StatsGroup } from '~components/profile/StatsGroup';
 
 export function ProfileContainer() {
   const currentUser = useAuthUser();
+  const { lastSignInTime, creationTime } = currentUser?.firebaseUser?.metadata || {};
 
   // grab date that user account was created and last accessed
-  const loggedInDate = stringToDate(
-    currentUser?.firebaseUser?.metadata?.lastSignInTime || '1/1/2001',
-  );
-  const createdDate = stringToDate(currentUser?.firebaseUser?.metadata?.creationTime || '1/1/2001');
+  const loggedInDate = lastSignInTime ? new Date(lastSignInTime) : null;
+  const createdDate = creationTime ? new Date(creationTime) : null;
 
   // calculate years since creation
   const date = new Date();
-  const yearSinceCreation = date.getFullYear() - createdDate[2];
+  const yearsSinceCreation: number = createdDate
+    ? date.getFullYear() - createdDate.getFullYear()
+    : 0;
 
   // user display name if they have it, else use email username, if they don't have that use error msg.
-  const username = currentUser.displayName || currentUser?.email?.split('@')[0] || 'No Name Found';
+  const username =
+    currentUser.displayName || currentUser?.email?.split('@')[0] || 'No name specified';
 
   // user profile stats - grab length of returned query
   const photo_count = trpcClient.useQuery(['photos.GetPhotos'])?.data?.photos?.length || 0;
@@ -62,11 +63,11 @@ export function ProfileContainer() {
           <Text size='md' weight={600}>
             Account Created:{' '}
             <Text size='md' span weight={400}>
-              {tupleToString(createdDate) || 'No creation date found'} -{' '}
+              {createdDate?.toDateString() || 'No creation date found'} -{' '}
               <Text italic size='md' span weight={400}>
-                {yearSinceCreation == 0
-                  ? 'This Year'
-                  : yearSinceCreation + ' year' + (yearSinceCreation > 1 ? 's' : '') + ' ago'}
+                {yearsSinceCreation
+                  ? yearsSinceCreation + ' year' + (yearsSinceCreation != 1 ? 's' : '') + ' ago'
+                  : 'This Year'}
               </Text>
             </Text>
           </Text>
@@ -74,7 +75,7 @@ export function ProfileContainer() {
           <Text size='md' weight={600}>
             Last Logged In:{' '}
             <Text size='md' span weight={400}>
-              {tupleToString(loggedInDate) || 'No login date found'}
+              {loggedInDate?.toDateString() || 'No login date found'}
             </Text>
           </Text>
 
@@ -84,17 +85,17 @@ export function ProfileContainer() {
             data={[
               {
                 title: (photo_count == 1 ? 'Photo' : 'Photos') + ' Uploaded',
-                stats: photo_count.toString(),
+                stats: photo_count,
                 description: '',
               },
               {
                 title: (memory_count == 1 ? 'Memory' : 'Memories') + ' Made',
-                stats: memory_count.toString(),
+                stats: memory_count,
                 description: '',
               },
               {
                 title: (collection_count == 1 ? 'Collection' : 'Collections') + ' Created',
-                stats: collection_count.toString(),
+                stats: collection_count,
                 description: '',
               },
             ]}
