@@ -46,7 +46,7 @@ function HeroBase() {
               size='md'
               variant='gradient'
             >
-              {id ? 'Your timeline' : 'Sign in'}
+              {id ? 'Your memories' : 'Sign in'}
             </LinkButton>
             <LinkButton
               href='/signup'
@@ -66,7 +66,7 @@ function HeroBase() {
                 variant='gradient'
                 className={classes.gradientBg}
               >
-                {id ? 'Your timeline' : 'Sign in'}
+                {id ? 'Your memories' : 'Sign in'}
               </LinkButton>
             </Grid.Col>
             <Grid.Col lg={2} md={3} sm={4}>

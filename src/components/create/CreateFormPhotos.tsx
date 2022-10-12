@@ -4,6 +4,7 @@ import type { DropResult } from '@hello-pangea/dnd';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import {
   ActionIcon,
+  Card,
   Center,
   FileButton,
   Grid,
@@ -114,17 +115,21 @@ export function CreateFormPhotos({
           <Grid sx={{ flexGrow: 1 }}>
             <Grid.Col sm={4}>
               <Center sx={{ width: '100%' }}>
-                <Stack spacing={2} sx={{ width: '100%' }}>
+                <Stack mb={0} pb={0} spacing={2} sx={{ width: '100%' }}>
                   <Input.Label>{`${index + 1}/${fields.length}`}</Input.Label>
                   <Zoom>
-                    <Image
-                      alt={`Photo ${index + 1}/${fields.length}`}
-                      fit={contained ? 'contain' : 'cover'}
-                      height={360}
-                      radius='sm'
-                      src={p._thumbnail}
-                      width='100%'
-                    />
+                    <Card>
+                      <Card.Section>
+                        <Image
+                          alt={`Photo ${index + 1}/${fields.length}`}
+                          fit={contained ? 'contain' : 'cover'}
+                          height={360}
+                          radius='sm'
+                          src={p._thumbnail}
+                          width='100%'
+                        />
+                      </Card.Section>
+                    </Card>
                   </Zoom>
                 </Stack>
               </Center>
