@@ -6,7 +6,7 @@ import { TimelineIndex } from '~components/timeline/TimelineIndex';
 function Timeline() {
   return (
     <>
-      <NextSeo description='My timeline of memories' title='Timeline' />
+      <NextSeo description='My memories' title='Memories' />
       <TimelineIndex />
     </>
   );
