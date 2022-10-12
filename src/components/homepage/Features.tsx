@@ -10,7 +10,7 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core';
-import { IconFolders, IconPhoto, IconSearch, IconTags } from '@tabler/icons';
+import { IconFolders, IconFreeRights, IconPhoto, IconSearch, IconTags } from '@tabler/icons';
 
 import gradient from '~components/homepage/gradient.png';
 import gradientDark from '~components/homepage/gradient-dark.png';
@@ -34,7 +34,8 @@ export function FeaturesTitle() {
   ));
 
   return (
-    <BackgroundImage src={theme.colorScheme === 'dark' ? gradientDark.src : gradient.src}>
+    // <BackgroundImage src={theme.colorScheme === 'dark' ? gradientDark.src : gradient.src}>
+    <div className={classes.gradientBg}>
       <Container px={0} size='xl'>
         <Space h='xl' />
         <Space h='xl' />
@@ -62,7 +63,8 @@ export function FeaturesTitle() {
         <Space h='xl' />
         <Space h='xl' />
       </Container>
-    </BackgroundImage>
+    </div>
+    //</BackgroundImage>
   );
 }
 
@@ -86,6 +88,24 @@ const useStyles = createStyles(theme => ({
 
   description: {
     color: theme.colors.gray[2],
+  },
+
+  gradientBg: {
+    '@keyframes background-pan': {
+      from: {
+        backgroundPosition: '0% center',
+      },
+      to: {
+        backgroundPosition: '-200% center',
+      },
+    },
+    animation: 'background-pan 15s linear infinite',
+    background:
+      theme.colorScheme === 'dark'
+        ? 'linear-gradient(to right, rgb(33, 19, 114), rgb(9, 154, 118), rgb(33, 19, 114)) 100%'
+        : 'linear-gradient(to right, rgb(102, 0, 255), rgb(0, 204, 153), rgb(102, 0, 255)) 100%',
+    backgroundSize: '200%',
+    backgroundAttachment: 'fixed',
   },
 }));
 
