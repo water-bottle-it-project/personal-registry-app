@@ -1,13 +1,4 @@
-import {
-  Container,
-  createStyles,
-  Grid,
-  Group,
-  Space,
-  Text,
-  Title,
-  useMantineTheme,
-} from '@mantine/core';
+import { Container, createStyles, Grid, Space, Text, Title, useMantineTheme } from '@mantine/core';
 import Lottie from 'lottie-react';
 import { useAuthUser } from 'next-firebase-auth';
 
@@ -60,11 +51,11 @@ function HeroBase() {
           <Grid mt={20}>
             <Grid.Col lg={2} md={3} sm={4}>
               <LinkButton
+                className={classes.gradientBg}
                 gradient={{ from: 'indigo', to: 'cyan' }}
                 href='/timeline'
                 size='md'
                 variant='gradient'
-                className={classes.gradientBg}
               >
                 {id ? 'Your memories' : 'Sign in'}
               </LinkButton>
