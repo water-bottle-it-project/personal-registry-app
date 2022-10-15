@@ -1,4 +1,5 @@
-import { Box, Container, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import { Box, Container, Group, Space, Text, Title } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { useAuthUser } from 'next-firebase-auth';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -8,6 +9,7 @@ import { PasswordUpdateForm } from '~components/profile/PasswordUpdateForm';
 import { StatsGroup } from '~components/profile/StatsGroup';
 
 export function ProfileContainer() {
+  const matches = useMediaQuery('(min-width: 600px)');
   const currentUser = useAuthUser();
   const { lastSignInTime, creationTime } = currentUser?.firebaseUser?.metadata || {};
 
@@ -32,18 +34,10 @@ export function ProfileContainer() {
   const memory_count = trpcClient.useQuery(['memory.GetMemories'])?.data?.memories?.length || 0;
 
   return (
-    <Container px='xs'>
+    <Container size='xl'>
       <Space h='xl' />
-
-      <SimpleGrid
-        breakpoints={[
-          { maxWidth: 'sm', cols: 2, spacing: 'sm' },
-          { maxWidth: 'xs', cols: 1, spacing: 'sm' },
-        ]}
-        cols={2}
-        spacing='xl'
-      >
-        <Container>
+      <Group align='start' position={matches ? 'apart' : 'center'}>
+        <div>
           <Title order={1} size={65}>
             {username}
           </Title>
@@ -100,9 +94,9 @@ export function ProfileContainer() {
               },
             ]}
           />
-        </Container>
+        </div>
 
-        <Container>
+        <div>
           <Box
             sx={theme => ({
               backgroundColor:
@@ -110,7 +104,7 @@ export function ProfileContainer() {
               textAlign: 'left',
               padding: theme.spacing.md,
               borderRadius: theme.radius.lg,
-              minWidth: '300px',
+              minWidth: '330px',
             })}
           >
             <Text size='xl' weight={800}>
@@ -155,8 +149,9 @@ export function ProfileContainer() {
             <Space h='xs' />
             <DeleteAccount />
           </Box>
-        </Container>
-      </SimpleGrid>
+        </div>
+      </Group>
+      <Space h='xl' />
     </Container>
   );
 }

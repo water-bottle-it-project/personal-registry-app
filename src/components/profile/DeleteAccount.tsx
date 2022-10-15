@@ -39,7 +39,7 @@ export function DeleteAccount() {
 
   return (
     <>
-      <Button ml={10} onClick={openDeleteModal}>
+      <Button color='red' ml={10} onClick={openDeleteModal}>
         Delete Account
       </Button>
     </>
