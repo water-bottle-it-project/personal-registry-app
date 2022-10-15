@@ -4,9 +4,28 @@ import { createStyles, Text } from '@mantine/core';
 const useStyles = createStyles(theme => ({
   root: {
     display: 'flex',
-    backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
-      theme.colors[theme.primaryColor][7]
-    } 100%)`,
+    // backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
+    //   theme.colors[theme.primaryColor][7]
+    // } 100%)`,
+    '@keyframes background-pan': {
+      from: {
+        backgroundPosition: '0% center',
+      },
+      to: {
+        backgroundPosition: '-200% center',
+      },
+    },
+    animation: 'background-pan 10s linear infinite',
+    background:
+      theme.colorScheme === 'dark'
+        ? `radial-gradient(${theme.colors[theme.primaryColor][9]}, ${theme.colors.teal[7]},${
+            theme.colors[theme.primaryColor][9]
+          }) 100%`
+        : `radial-gradient(${theme.colors[theme.primaryColor][4]}, ${theme.colors.teal[5]},${
+            theme.colors[theme.primaryColor][4]
+          }) 100%`,
+    backgroundSize: '200%',
+    backgroundAttachment: 'fixed',
     padding: theme.spacing.xl * 1.5,
     borderRadius: theme.radius.md,
 
