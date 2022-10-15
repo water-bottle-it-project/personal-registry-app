@@ -77,6 +77,7 @@ export function MemoryHeader({
         <Title order={4} size='md'>
           Collections
         </Title>
+        <Space h='xs' />
         <Group spacing='xs'>{collectionBadges}</Group>
         <Space h='xs' />
         {description && description.length > 0 && (

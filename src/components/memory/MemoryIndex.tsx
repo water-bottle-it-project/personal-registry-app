@@ -7,6 +7,7 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { MemoryHeader } from '~components/memory/MemoryHeader';
 import { MemoryImage } from '~components/memory/MemoryImage';
 import { MemoryImageGrid } from '~components/memory/MemoryImageGrid';
+import { MemorySkeleton } from '~components/memory/MemorySkeleton';
 
 interface MemoryIndexProps {
   _id: string;
@@ -17,7 +18,7 @@ export function MemoryIndex({ _id }: MemoryIndexProps) {
 
   const { data, isLoadingError, isLoading } = trpcClient.useQuery(['memory.GetMemory', { _id }]);
   if (isLoading || !data?.memory) {
-    return <div>Loading...</div>;
+    return <MemorySkeleton />;
   }
   if (isLoadingError) {
     return <div>Error loading memory</div>;
