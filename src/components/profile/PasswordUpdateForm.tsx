@@ -117,7 +117,7 @@ export function PasswordUpdateForm() {
           />
         </Stack>
         <Space h='xs' />
-        <Button loaderPosition='right' loading={isSubmitting} ml={10} type='submit'>
+        <Button loaderPosition='right' loading={isSubmitting} type='submit'>
           Submit
         </Button>
       </form>
