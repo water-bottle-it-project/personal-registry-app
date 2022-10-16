@@ -26,6 +26,16 @@ export function PhotosIndex() {
     );
   }
 
+  const memoryLinkBtns = Array.from(
+    document.getElementsByClassName('pswp__button pswp__button--memoryLink'),
+  );
+
+  for (let i = 0; i < memoryLinkBtns.length; i++) {
+    if (memoryLinkBtns[i]) {
+      memoryLinkBtns[i].setAttribute('title', 'View Memory');
+    }
+  }
+
   return (
     <>
       <Container size='xl'>
