@@ -1,7 +1,7 @@
 <div align="center">
 
   <!-- <img src="public/images/logo-full.png" alt="logo" width="500" height="auto" /> -->
-  <h1>Personal Registry App</h1>
+  <h1>SnapSave</h1>
 
   <p>
    We are Team 055 (Water Bottle). Our team consists of Ian, Kian, Sean, Jack and Calvin.
@@ -18,7 +18,7 @@
 
 ## :star2: About the Project
 
-Personal Registry App is a web app developed for COMP30022 IT Project Semester 2 2022, which allows
+SnapSave is a web app developed for COMP30022 IT Project Semester 2 2022, which allows
 users to upload memories containing optional textual descriptions and images, organise memories into
 collections, and search their memories and images.
 

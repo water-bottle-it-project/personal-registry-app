@@ -1,10 +1,10 @@
 import type { DefaultSeoProps } from 'next-seo';
 
 const appSeo: DefaultSeoProps = {
-  defaultTitle: 'Personal Registry',
+  defaultTitle: 'SnapSave',
   description: 'A personal registry to catalogue memories and artifacts.',
   title: undefined,
-  titleTemplate: '%s | Personal Registry',
+  titleTemplate: '%s | SnapSave',
   openGraph: {
     type: 'website',
     locale: 'en_AU',

@@ -8,7 +8,7 @@ const SignUp = () => (
   <>
     <Container mt='6vh' size='xl'>
       <Title align='center' weight={900}>
-        Welcome to Registry App
+        Welcome to SnapSave
       </Title>
       <Text align='center' color='dimmed' mt={5} size='sm'>
         Already have an account?

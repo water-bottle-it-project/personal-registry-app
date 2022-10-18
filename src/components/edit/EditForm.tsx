@@ -19,6 +19,7 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { EditFormMemoryInfo } from '~components/edit/EditFormMemoryInfo';
 import { EditFormPhotos } from '~components/edit/EditFormPhotos';
 import { EditFormTop } from '~components/edit/EditFormTop';
+import trpc from '~pages/api/trpc/[trpc]';
 import type { collectionSelectItemT } from '~types/collection/collection';
 import type {
   memoryEditFormRequestT,
@@ -152,6 +153,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
         await Promise.all(fileDeleteRequests);
 
         await trpcUtils.invalidateQueries('memory.GetMemories');
+        await trpcUtils.invalidateQueries(['memory.GetMemory', { _id: editedMemory._id }]);
         showNotification({
           title: 'Success!',
           message: `Memory successfully edited.`,

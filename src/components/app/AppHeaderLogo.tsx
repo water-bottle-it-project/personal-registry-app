@@ -9,7 +9,7 @@ export function AppHeaderLogo() {
   return (
     <Link href='/' passHref>
       <Anchor component='a' pr={7} underline={false} weight={700}>
-        Registry App
+        SnapSave
       </Anchor>
     </Link>
   );

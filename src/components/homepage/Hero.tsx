@@ -20,9 +20,10 @@ function HeroBase() {
       <Space h='xl' />
       <Grid>
         <Grid.Col sm={6}>
-          <Title className={classes.title}>
-            The <Text color='indigo' inherit span /> Personal Registry App
+          <Title className={classes.title} color='indigo'>
+            SnapSave
           </Title>
+          <Title className={classes.title}>The Personal Registry App</Title>
           <Text className={classes.heroGrid} mt='md'>
             Keep detailed records of personal artifacts, memories and events safely in this app,
             using your preferred combination of text and images.
@@ -51,7 +52,7 @@ function HeroBase() {
               <LinkButton
                 className={classes.gradientBg}
                 gradient={{ from: 'indigo', to: 'cyan' }}
-                href='/timeline'
+                href={id ? '/timeline' : '/signin'}
                 size='md'
                 variant='gradient'
               >
