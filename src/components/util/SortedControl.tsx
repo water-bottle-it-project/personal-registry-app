@@ -60,7 +60,7 @@ export function SortedControl({
           </ActionIcon>
         </HoverCard.Target>
         <HoverCard.Dropdown>
-          <Text size='sm'>Results are sorted by the end date of the memory.</Text>
+          <Text size='sm'>Memories and photos are sorted by the end date of the memory.</Text>
           <Space h='xs' />
           <Text size='sm'>
             Sorting is disabled when searching. Search results are ranked by string relevance.
