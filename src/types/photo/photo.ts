@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { objectIdZ } from '~types/util/objectId';
+import { paginationWrapperZ } from '~types/util/pagination';
 import { urlZ } from '~types/util/url';
 
 /**
@@ -54,19 +55,26 @@ const photoWithIdZ = photoBase.merge(photoDims).extend({
   memoryDate: z.date(),
 });
 
+const photosPaginatedZ = paginationWrapperZ.extend({
+  docs: photoWithIdZ.array().default([]),
+});
+
 type photoFormCreateT = z.infer<typeof photoFormCreateZ>;
 type photoFormCreateRequestT = z.infer<typeof photoFormCreateRequestZ>;
 type photoWithIdT = z.infer<typeof photoWithIdZ>;
 type photoFormEditT = z.infer<typeof photoFormEditZ>;
 type photoFormEditRequestT = z.infer<typeof photoFormEditRequestZ>;
+type photosPaginatedT = z.infer<typeof photosPaginatedZ>;
 
 export type {
   photoFormCreateRequestT,
   photoFormCreateT,
   photoFormEditRequestT,
   photoFormEditT,
+  photosPaginatedT,
   photoWithIdT,
 };
+
 export {
   photoFormCreateRequestZ,
   photoFormCreateZ,
