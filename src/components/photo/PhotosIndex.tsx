@@ -131,7 +131,7 @@ export function PhotosIndex() {
             <SortedControl
               defaultValue={sortOrder}
               highlight={!!text.trim()}
-              sortOrder={setSortOrder}
+              onChangeSortOrder={setSortOrder}
             />
           </form>
         </Stack>
