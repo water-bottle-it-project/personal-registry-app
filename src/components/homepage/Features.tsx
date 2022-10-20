@@ -7,13 +7,12 @@ import {
   Text,
   ThemeIcon,
   Title,
-  useMantineTheme,
 } from '@mantine/core';
 import { IconFolders, IconPhoto, IconSearch, IconTags } from '@tabler/icons';
 
 import { LinkButton } from '~components/util/LinkButton';
 
-export function FeaturesTitle() {
+export function Features() {
   const { classes } = useStyles();
   const items = features.map(feature => (
     <div key={feature.title}>

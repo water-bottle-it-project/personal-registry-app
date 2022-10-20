@@ -19,7 +19,6 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { EditFormMemoryInfo } from '~components/edit/EditFormMemoryInfo';
 import { EditFormPhotos } from '~components/edit/EditFormPhotos';
 import { EditFormTop } from '~components/edit/EditFormTop';
-import trpc from '~pages/api/trpc/[trpc]';
 import type { collectionSelectItemT } from '~types/collection/collection';
 import type {
   memoryEditFormRequestT,
