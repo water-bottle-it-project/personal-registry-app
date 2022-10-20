@@ -4,16 +4,58 @@ import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Collection } from '~server/models/collection';
 import { Memory } from '~server/models/memory';
 import type { collectionT } from '~types/collection/collection';
-import { collectionZ } from '~types/collection/collection';
+import { collectionSearchZ, collectionZ } from '~types/collection/collection';
 import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
 import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
-import { collectionSearchZ } from '~types/collection/collectionSearch';
 
 export { collectionRouter };
 
 const collectionRouter = createProtectedDbRouter()
   .query('GetCollections', {
-    async resolve({ ctx }) {
+    input: collectionSearchZ,
+    async resolve({ ctx, input }) {
+      if (input?.text) {
+        const collections: collectionT[] = await Collection.aggregate().search({
+          compound: {
+            filter: [
+              {
+                phrase: {
+                  query: ctx.userId,
+                  path: 'userId',
+                },
+              },
+            ],
+            should: [
+              {
+                autocomplete: {
+                  query: input.text,
+                  path: 'title',
+                  score: {
+                    boost: {
+                      value: 3,
+                    },
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query: input.text,
+                  path: 'description',
+                  score: {
+                    boost: {
+                      value: 1,
+                    },
+                  },
+                },
+              },
+            ],
+            minimumShouldMatch: 1,
+          },
+        });
+
+        return { collections };
+      }
+
       const collections: collectionT[] = await Collection.find(
         { userId: ctx.userId },
         { userId: 0 },
@@ -41,33 +83,6 @@ const collectionRouter = createProtectedDbRouter()
 
       return {
         collection,
-      };
-    },
-  })
-
-  .query('SearchCollections', {
-    input: collectionSearchZ,
-    async resolve({ ctx, input }) {
-      let collections: collectionT[] = [];
-      const re = new RegExp(`${input.text}`, 'i');
-      if (input.searchType === 'title') {
-        collections = await Collection.find({
-          title: re,
-          userId: ctx.userId,
-        });
-      } else if (input.searchType === 'description') {
-        collections = await Collection.find({
-          description: re,
-          userId: ctx.userId,
-        });
-      }
-
-      if (!collections) {
-        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find collection by id.' });
-      }
-
-      return {
-        collections,
       };
     },
   })

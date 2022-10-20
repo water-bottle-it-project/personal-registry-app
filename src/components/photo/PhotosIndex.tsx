@@ -31,10 +31,10 @@ export function PhotosIndex() {
   const page = usePage();
   const [text, setText] = useDebouncedState('', 300);
 
-  const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery([
-    'photos.GetPhotosPaginated',
-    { page, text: text.trim() },
-  ]);
+  const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
+    ['photos.GetPhotosPaginated', { page, text: text.trim() }],
+    { keepPreviousData: true },
+  );
 
   console.log('rendered');
 
