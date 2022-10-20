@@ -9,7 +9,7 @@ import { PasswordUpdateForm } from '~components/profile/PasswordUpdateForm';
 import { StatsGroup } from '~components/profile/StatsGroup';
 
 export function ProfileContainer() {
-  const matches = useMediaQuery('(min-width: 900px)');
+  const matches = useMediaQuery('(max-width: 900px)');
   const currentUser = useAuthUser();
   const { lastSignInTime, creationTime } = currentUser?.firebaseUser?.metadata || {};
 
@@ -36,7 +36,7 @@ export function ProfileContainer() {
   return (
     <Container size='xl'>
       <Space h='xl' />
-      <Group align='start' position={matches ? 'apart' : 'center'}>
+      <Group align='start' position={matches ? 'center' : 'apart'}>
         <div>
           <Title order={1} size={65}>
             Hello, {username}

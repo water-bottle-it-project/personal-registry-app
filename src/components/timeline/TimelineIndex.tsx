@@ -64,7 +64,7 @@ export function TimelineIndex() {
   }, [data, page, router]);
 
   let contents;
-  if (isLoading || !data?.docs) {
+  if (isLoading || !data) {
     contents = <SkeletonGrid />;
   } else if (isLoadingError) {
     contents = <Text>Error loading memories. Try again later.</Text>;
