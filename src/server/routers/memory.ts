@@ -39,7 +39,8 @@ const memoryRouter = createProtectedDbRouter()
   .query('GetMemoriesPaginated', {
     input: paginationInputZ,
     async resolve({ ctx, input }) {
-      if (input.text) {
+      const text = input.text.trim();
+      if (text) {
         const myAggregate = Memory.aggregate()
           .search({
             index: 'v2',

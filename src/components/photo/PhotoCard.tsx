@@ -12,6 +12,7 @@ export function PhotoCard({ _id, caption, url, itemRef, open }: PhotoCardProps) 
   const { classes } = useStyles();
   return (
     <Card
+      pb='sm'
       radius='sm'
       shadow='sm'
       sx={theme => ({
@@ -24,7 +25,13 @@ export function PhotoCard({ _id, caption, url, itemRef, open }: PhotoCardProps) 
         <Image alt={caption} height={220} onClick={open} ref={itemRef} src={url} />
       </Card.Section>
       <Space h='sm' />
-      <Text align='center' color={caption ? undefined : 'dimmed'} italic={!caption}>
+      <Text
+        align='center'
+        color={caption ? undefined : 'dimmed'}
+        italic={!caption}
+        lineClamp={2}
+        size='md'
+      >
         {caption || 'no caption'}
       </Text>
     </Card>
