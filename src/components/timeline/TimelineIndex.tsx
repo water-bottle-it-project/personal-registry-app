@@ -2,7 +2,6 @@ import {
   ActionIcon,
   Center,
   Container,
-  Group,
   Loader,
   Pagination,
   Space,
@@ -123,7 +122,11 @@ export function TimelineIndex() {
               size='md'
             />
             <Space h='xs' />
-            <SortedControl defaultValue={sortOrder} sortOrder={setSortOrder} />
+            <SortedControl
+              defaultValue={sortOrder}
+              highlight={!!text.trim()}
+              sortOrder={setSortOrder}
+            />
           </form>
         </Stack>
         <Space h='xl' />
