@@ -19,32 +19,16 @@ import { useEffect } from 'react';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { TimelineGrid } from '~components/timeline/TimelineGrid';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
+import { usePage } from '~components/util/usePage';
 
 export function TimelineIndex() {
   const router = useRouter();
-
-  function getPage(): number {
-    const pageQuery = router.query.page;
-    if (typeof pageQuery !== 'string') {
-      return 1;
-    }
-
-    const x = Number(pageQuery);
-    if (Number.isInteger(x) && x >= 1) {
-      return x;
-    }
-
-    void router.replace({ pathname: '' }, undefined, { shallow: true });
-    return 1;
-  }
-
-  const page = getPage();
-
+  const page = usePage();
   const [text, setText] = useDebouncedState('', 300);
 
   // Lift query hook up to share search bar state with the memory results.
   const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
-    ['memory.GetMemoriesPaginated', { page: page, text: text.trim() }],
+    ['memory.GetMemoriesPaginated', { page, text: text.trim() }],
     { keepPreviousData: true },
   );
 
@@ -107,7 +91,6 @@ export function TimelineIndex() {
             />
           </Stack>
         </Center>
-        <Space h='xl' />
       </>
     );
   }
@@ -139,6 +122,7 @@ export function TimelineIndex() {
         </Stack>
         <Space h='xl' />
         {contents}
+        <Space h='xl' />
       </Container>
     </>
   );
