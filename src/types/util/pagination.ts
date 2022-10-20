@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { sortOrderZ } from '~types/util/sortOrderT';
+
 /**
  * Extend this wrapper with a docs field containing the zod schemas you want to include as results
  * https://github.com/aravindnc/mongoose-paginate-v2/blob/master/index.d.ts#L75
@@ -20,6 +22,7 @@ const paginationWrapperZ = z.object({
 const paginationInputZ = z.object({
   page: z.number(),
   text: z.string().trim().default(''),
+  sortOrder: sortOrderZ,
 });
 
 export { paginationInputZ, paginationWrapperZ };

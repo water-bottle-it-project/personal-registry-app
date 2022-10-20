@@ -67,7 +67,7 @@ const photosRouter = createProtectedDbRouter()
           page: input.page,
           limit: 36,
           projection: { userId: 0 },
-          sort: { memoryDate: -1 },
+          sort: { memoryDate: input.sortOrder === 'descending' ? -1 : 1 },
         },
       );
 

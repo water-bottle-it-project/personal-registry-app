@@ -2,6 +2,7 @@ import {
   ActionIcon,
   Center,
   Container,
+  Group,
   Loader,
   Pagination,
   Space,
@@ -14,21 +15,24 @@ import { useDebouncedState } from '@mantine/hooks';
 import { IconArrowRight, IconSearch } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { TimelineGrid } from '~components/timeline/TimelineGrid';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
+import { SortedControl } from '~components/util/SortedControl';
 import { usePage } from '~components/util/usePage';
+import type { sortOrderT } from '~types/util/sortOrderT';
 
 export function TimelineIndex() {
   const router = useRouter();
   const page = usePage();
   const [text, setText] = useDebouncedState('', 300);
+  const [sortOrder, setSortOrder] = useState<sortOrderT>('descending');
 
   // Lift query hook up to share search bar state with the memory results.
   const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
-    ['memory.GetMemoriesPaginated', { page, text: text.trim() }],
+    ['memory.GetMemoriesPaginated', { page, text: text.trim(), sortOrder }],
     { keepPreviousData: true },
   );
 
@@ -118,6 +122,10 @@ export function TimelineIndex() {
               rightSectionWidth={42}
               size='md'
             />
+            <Space h='xs' />
+            <Group position='apart'>
+              <SortedControl defaultValue={sortOrder} sortOrder={setSortOrder} />
+            </Group>
           </form>
         </Stack>
         <Space h='xl' />

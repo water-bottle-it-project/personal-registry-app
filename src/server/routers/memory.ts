@@ -108,7 +108,7 @@ const memoryRouter = createProtectedDbRouter()
           page: input.page,
           limit: 12,
           projection: { userId: 0 },
-          sort: { lastDate: -1 },
+          sort: { lastDate: input.sortOrder === 'descending' ? -1 : 1 },
           populate: { path: 'collections', select: '-description -userId' },
         },
       );
