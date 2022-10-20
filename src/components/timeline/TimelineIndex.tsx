@@ -125,7 +125,7 @@ export function TimelineIndex() {
             <SortedControl
               defaultValue={sortOrder}
               highlight={!!text.trim()}
-              sortOrder={setSortOrder}
+              onChangeSortOrder={setSortOrder}
             />
           </form>
         </Stack>

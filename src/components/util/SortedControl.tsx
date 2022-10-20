@@ -14,11 +14,15 @@ import type { sortOrderT } from '~types/util/sortOrderT';
 
 interface SortedControlProps {
   defaultValue: sortOrderT;
-  sortOrder: (value: ((prevState: sortOrderT) => sortOrderT) | sortOrderT) => void;
+  onChangeSortOrder: (value: ((prevState: sortOrderT) => sortOrderT) | sortOrderT) => void;
   highlight?: boolean;
 }
 
-export function SortedControl({ defaultValue, sortOrder, highlight = false }: SortedControlProps) {
+export function SortedControl({
+  defaultValue,
+  onChangeSortOrder,
+  highlight = false,
+}: SortedControlProps) {
   return (
     <Group>
       <SegmentedControl
@@ -47,7 +51,7 @@ export function SortedControl({ defaultValue, sortOrder, highlight = false }: So
           },
         ]}
         defaultValue={defaultValue}
-        onChange={sortOrder as (value: sortOrderT) => void}
+        onChange={onChangeSortOrder as (value: sortOrderT) => void}
       />
       <HoverCard shadow='md' width={280}>
         <HoverCard.Target>
