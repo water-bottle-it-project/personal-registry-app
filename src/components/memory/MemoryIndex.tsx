@@ -1,6 +1,7 @@
 import 'react-18-image-lightbox/style.css';
 
 import { Container, Space, Switch } from '@mantine/core';
+import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
@@ -27,6 +28,7 @@ export function MemoryIndex({ _id }: MemoryIndexProps) {
 
   return (
     <>
+      <NextSeo title={title} />
       <MemoryHeader
         _id={_id}
         collections={collections}
