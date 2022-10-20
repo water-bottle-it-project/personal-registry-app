@@ -11,7 +11,10 @@ import { SkeletonGrid } from '~components/util/SkeletonGrid';
  */
 
 export function PhotosIndex() {
-  const { data, isLoadingError, isLoading } = trpcClient.useQuery(['photos.GetPhotos']);
+  const { data, isLoadingError, isLoading } = trpcClient.useQuery([
+    'photos.GetPhotosPaginated',
+    { page: 1, text: '' },
+  ]);
 
   let contents;
   if (isLoading || !data) {
@@ -21,19 +24,9 @@ export function PhotosIndex() {
   } else {
     contents = (
       <Grid>
-        <PhotoGallery photos={data.photos} />
+        <PhotoGallery photos={data.docs} />
       </Grid>
     );
-  }
-
-  const memoryLinkBtns = Array.from(
-    document.getElementsByClassName('pswp__button pswp__button--memoryLink'),
-  );
-
-  for (let i = 0; i < memoryLinkBtns.length; i++) {
-    if (memoryLinkBtns[i]) {
-      memoryLinkBtns[i].setAttribute('title', 'View Memory');
-    }
   }
 
   return (
