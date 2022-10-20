@@ -129,10 +129,7 @@ export function PhotosIndex() {
               size='md'
             />
             <Space h='xs' />
-
-            <Group position='apart'>
-              <SortedControl defaultValue={sortOrder} sortOrder={setSortOrder} />
-            </Group>
+            <SortedControl defaultValue={sortOrder} sortOrder={setSortOrder} />
           </form>
         </Stack>
         <Space h='xl' />
