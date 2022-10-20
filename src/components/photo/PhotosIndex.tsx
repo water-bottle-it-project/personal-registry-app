@@ -23,10 +23,9 @@ import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { usePage } from '~components/util/usePage';
 
 /**
- * Image page querying images from mongoDB
+ * Photos page querying images from MongoDB
  * @constructor
  */
-
 export function PhotosIndex() {
   const router = useRouter();
   const page = usePage();
