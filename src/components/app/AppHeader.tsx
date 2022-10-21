@@ -17,7 +17,7 @@ export interface AppHeaderProps {
   links: AppLink[];
 }
 
-const HAMBURGER_BREAKPOINT = 580;
+const HAMBURGER_BREAKPOINT = 540;
 
 /**
  * The header for the entire app
