@@ -2,6 +2,8 @@
 
   <!-- <img src="public/images/logo-full.png" alt="logo" width="500" height="auto" /> -->
   <h1>SnapSave</h1>
+  
+  [![build](https://github.com/water-bottle-it-project/personal-registry-app/actions/workflows/build.yml/badge.svg)](https://github.com/water-bottle-it-project/personal-registry-app/actions/workflows/build.yml)
 
   <p>
    We are Team 055 (Water Bottle). Our team consists of Ian, Kian, Sean, Jack and Calvin.
