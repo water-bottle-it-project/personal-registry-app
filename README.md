@@ -4,6 +4,7 @@
   <h1>SnapSave</h1>
   
   [![build](https://github.com/water-bottle-it-project/personal-registry-app/actions/workflows/build.yml/badge.svg)](https://github.com/water-bottle-it-project/personal-registry-app/actions/workflows/build.yml)
+  [![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=deployment&up_color=green&up_message=online&url=https%3A%2F%2Fpersonal-registry-app-zx936.ondigitalocean.app%2F)](https://personal-registry-app-zx936.ondigitalocean.app/)
 
   <p>
    We are Team 055 (Water Bottle). Our team consists of Ian, Kian, Sean, Jack and Calvin.
