@@ -1,6 +1,6 @@
 <div align="center">
 
-  <!-- <img src="public/images/logo-full.png" alt="logo" width="500" height="auto" /> -->
+<img src="public/icon.png" alt="logo" width="100" height="auto" />
   <h1>SnapSave</h1>
   
   [![build](https://github.com/water-bottle-it-project/personal-registry-app/actions/workflows/build.yml/badge.svg)](https://github.com/water-bottle-it-project/personal-registry-app/actions/workflows/build.yml)
