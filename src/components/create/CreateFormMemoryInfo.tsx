@@ -74,7 +74,9 @@ export function CreateFormMemoryInfo({
                   <Text>
                     No more collections left.{' '}
                     <Link href='/collections/create' passHref>
-                      <Anchor target='_blank'>Create a new collection here.</Anchor>
+                      <Anchor component='a' target='_blank'>
+                        Create a new collection here.
+                      </Anchor>
                     </Link>
                   </Text>
                 }
