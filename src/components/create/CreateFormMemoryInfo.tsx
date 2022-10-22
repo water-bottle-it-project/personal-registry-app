@@ -72,9 +72,9 @@ export function CreateFormMemoryInfo({
                 maxDropdownHeight={250}
                 nothingFound={
                   <Text>
-                    Collection does not exist, create a new one{' '}
+                    No more collections left.{' '}
                     <Link href='/collections/create' passHref>
-                      <Anchor target='_blank'>here</Anchor>
+                      <Anchor target='_blank'>Create a new collection here.</Anchor>
                     </Link>
                   </Text>
                 }
