@@ -6,38 +6,28 @@ import { Banner } from '~components/util/Banner';
 
 const teamInfo = [
   {
-    index: 0,
     name: 'Sean Tan',
-    title: 'Front End Developer',
-    desc: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto fuga mollitia perspiciatis incidunt quisquam distinctio aut minima, veniam voluptates iure quo quis odio reprehenderit, sapiente, voluptatibus itaque praesentium similique fugiat?',
+    title: 'Human and Frontend lead',
     imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
   },
   {
-    index: 1,
     name: 'Kian Dsouza',
-    title: 'Front End Developer',
-    desc: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto fuga mollitia perspiciatis incidunt quisquam distinctio aut minima, veniam voluptates iure quo quis odio reprehenderit, sapiente, voluptatibus itaque praesentium similique fugiat?',
+    title: 'Awesome human and Backend lead',
     imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
   },
   {
-    index: 2,
-    name: 'Ian',
-    title: 'Front End Developer',
-    desc: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto fuga mollitia perspiciatis incidunt quisquam distinctio aut minima, veniam voluptates iure quo quis odio reprehenderit, sapiente, voluptatibus itaque praesentium similique fugiat?',
+    name: 'Ian Chen',
+    title: 'Overwatch noob and Framework finder',
+    imgUrl: '/team/ian.jpg',
+  },
+  {
+    name: 'Jack Woodman',
+    title: '8 Fingers, 2 Thumbs, Communications & Scrum Lead',
     imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
   },
   {
-    index: 3,
-    name: 'Calvin',
-    title: 'Front End Developer',
-    desc: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto fuga mollitia perspiciatis incidunt quisquam distinctio aut minima, veniam voluptates iure quo quis odio reprehenderit, sapiente, voluptatibus itaque praesentium similique fugiat?',
-    imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
-  },
-  {
-    index: 4,
-    name: 'Jack',
-    title: 'Front End Developer',
-    desc: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto fuga mollitia perspiciatis incidunt quisquam distinctio aut minima, veniam voluptates iure quo quis odio reprehenderit, sapiente, voluptatibus itaque praesentium similique fugiat?',
+    name: 'Calvin Yu',
+    title: 'Project Manager',
     imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
   },
 ];
@@ -55,7 +45,6 @@ export function AboutUs() {
   const teamData = teamInfo.map(member => (
     <Grid.Col className={classes.wrapper} key={member.name} span={4}>
       <AboutUsCard
-        desc={member.desc}
         imgUrl={member.imgUrl}
         key={member.name}
         name={member.name}
@@ -67,8 +56,8 @@ export function AboutUs() {
   return (
     <>
       <Banner
-        description='We are a team of developers who develop developed applications that require development,
-            while developing developer skills.'
+        description='We are a team of developers who develop developed applications that require
+          development, while developing developer skills.'
         title='About Us'
       />
       <Container size='xl'>

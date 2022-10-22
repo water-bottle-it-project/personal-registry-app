@@ -1,10 +1,11 @@
 import {
   Accordion,
+  Anchor,
   BackgroundImage,
   Container,
   createStyles,
-  MantineProvider,
   Space,
+  Text,
   ThemeIcon,
   Title,
   useMantineTheme,
@@ -24,17 +25,16 @@ const useStyles = createStyles((theme, _params, getRef) => {
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'top left',
       position: 'relative',
-      color: theme.black,
     },
 
     title: {
-      color: theme.white,
       fontSize: 52,
       marginBottom: theme.spacing.xl * 1.5,
+      // Setting a CSS-in-JS style to undefined reverts it to the default.
+      color: theme.colorScheme === 'dark' ? undefined : theme.white,
     },
 
     item: {
-      backgroundColor: theme.white,
       borderBottom: 0,
       borderRadius: theme.radius.md,
       boxShadow: theme.shadows.lg,
@@ -44,7 +44,6 @@ const useStyles = createStyles((theme, _params, getRef) => {
     control: {
       fontSize: theme.fontSizes.lg,
       padding: `${theme.spacing.lg}px ${theme.spacing.xl}px`,
-      color: theme.black,
 
       '&:hover': {
         backgroundColor: 'transparent',
@@ -54,7 +53,6 @@ const useStyles = createStyles((theme, _params, getRef) => {
     content: {
       paddingLeft: theme.spacing.xl,
       lineHeight: 1.6,
-      color: theme.black,
     },
 
     icon: {
@@ -80,75 +78,78 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-const ans1 = 'This is our capstone project for COMP30022 IT Project Semester 2 2022';
-const ans2 = 'Mongo with Firebase Auth, React/NextJS, MantineUI, and NodeJS';
-const ans3 = 'It is free to use our service until you post more than 69 images';
-const ans4 = "Baby don't hurt me";
+const info = [
+  {
+    title: 'Why does this web app exist?',
+    answer: 'This is our capstone project for COMP30022 IT Project Semester 2 2022',
+  },
+  {
+    title: 'What tech stack do you use?',
+    answer: (
+      <Text>
+        There's a lot of things to unpack here.{' '}
+        <Anchor
+          href='https://water-bottle.atlassian.net/wiki/spaces/DEV/pages/229829/Tech+Stack+Architecture'
+          target='_blank'
+        >
+          Visit our Confluence space for all of the details!
+        </Anchor>
+      </Text>
+    ),
+  },
+  {
+    title: 'Do I need to pay to use this service?',
+    answer: 'It is free to use our service until you post more than 69 images. Haha.',
+  },
+  {
+    title: 'What is love?',
+    answer: `Baby don't hurt me`,
+  },
+];
 
 export function FAQ() {
   const theme = useMantineTheme();
   const { classes } = useStyles();
   return (
-    <MantineProvider inherit theme={{ colorScheme: 'light' }}>
-      <BackgroundImage src={theme.colorScheme === 'dark' ? gradientDark.src : gradient.src}>
-        <div className={classes.wrapper}>
-          <Container size='sm'>
-            <Title align='center' className={classes.title}>
-              Frequently Asked Questions
-            </Title>
+    <BackgroundImage src={theme.colorScheme === 'dark' ? gradientDark.src : gradient.src}>
+      <div className={classes.wrapper}>
+        <Container size='sm'>
+          <Title align='center' className={classes.title}>
+            Frequently Asked Questions
+          </Title>
 
-            <Accordion
-              chevron={
-                <ThemeIcon className={classes.gradient} radius='xl' size={32}>
-                  <IconPlus size={18} stroke={1.5} />
-                </ThemeIcon>
-              }
-              chevronPosition='right'
-              chevronSize={50}
-              defaultValue='reset-password'
-              styles={{
-                chevron: {
-                  '&[data-rotate]': {
-                    transform: 'rotate(45deg)',
-                  },
+          <Accordion
+            chevron={
+              <ThemeIcon className={classes.gradient} radius='xl' size={32}>
+                <IconPlus size={18} stroke={1.5} />
+              </ThemeIcon>
+            }
+            chevronPosition='right'
+            chevronSize={50}
+            defaultValue={info[0].title}
+            styles={{
+              chevron: {
+                '&[data-rotate]': {
+                  transform: 'rotate(45deg)',
                 },
-              }}
-              variant='separated'
-            >
-              <Accordion.Item className={classes.item} value='reset-password'>
+              },
+            }}
+            variant='separated'
+          >
+            {info.map(a => (
+              <Accordion.Item className={classes.item} key={a.title} value={a.title}>
                 <Accordion.Control>
-                  <Title order={4}>Why does this web app exist?</Title>
+                  <Title order={4}>{a.title}</Title>
                 </Accordion.Control>
-                <Accordion.Panel>{ans1}</Accordion.Panel>
+                <Accordion.Panel>{a.answer}</Accordion.Panel>
               </Accordion.Item>
-
-              <Accordion.Item className={classes.item} value='another-account'>
-                <Accordion.Control>
-                  <Title order={4}>What tech stack do you use?</Title>
-                </Accordion.Control>
-                <Accordion.Panel>{ans2}</Accordion.Panel>
-              </Accordion.Item>
-
-              <Accordion.Item className={classes.item} value='newsletter'>
-                <Accordion.Control>
-                  <Title order={4}>Do I need to pay to use this service?</Title>
-                </Accordion.Control>
-                <Accordion.Panel>{ans3}</Accordion.Panel>
-              </Accordion.Item>
-
-              <Accordion.Item className={classes.item} value='credit-card'>
-                <Accordion.Control>
-                  <Title order={4}>What is love?</Title>
-                </Accordion.Control>
-                <Accordion.Panel>{ans4}</Accordion.Panel>
-              </Accordion.Item>
-            </Accordion>
-          </Container>
-          <Space h='xl' />
-          <Space h='xl' />
-          <Space h='xl' />
-        </div>
-      </BackgroundImage>
-    </MantineProvider>
+            ))}
+          </Accordion>
+        </Container>
+        <Space h='xl' />
+        <Space h='xl' />
+        <Space h='xl' />
+      </div>
+    </BackgroundImage>
   );
 }

@@ -14,10 +14,7 @@ const links: AppHeaderProps['links'] = [
   { name: 'Profile', route: '/profile' },
 ];
 
-const linksFooter: AppFooterProps['links'] = [
-  { name: 'About', route: '/about' },
-  { name: 'Contact', route: '/contact' },
-];
+const linksFooter: AppFooterProps['links'] = [{ name: 'About', route: '/about' }];
 
 /**
  * The layout for the entire app, which includes the sticky header and the main page content
