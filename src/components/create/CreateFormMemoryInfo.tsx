@@ -1,6 +1,7 @@
-import { Grid, MultiSelect, Stack, Textarea, TextInput } from '@mantine/core';
+import { Anchor, Grid, MultiSelect, Stack, Text, Textarea, TextInput } from '@mantine/core';
 import { DateRangePicker } from '@mantine/dates';
 import { IconCalendar, IconPencil, IconTags } from '@tabler/icons';
+import Link from 'next/link';
 import type { UseFormReturn } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
@@ -69,6 +70,14 @@ export function CreateFormMemoryInfo({
                 icon={<IconTags size={16} />}
                 label='Collections'
                 maxDropdownHeight={250}
+                nothingFound={
+                  <Text>
+                    Collection does not exist, create a new one{' '}
+                    <Link href='/collections/create' passHref>
+                      <Anchor target='_blank'>here</Anchor>
+                    </Link>
+                  </Text>
+                }
                 onChange={onChange}
                 placeholder='Click to select collections. Type to narrow down collections further.'
                 ref={ref}
