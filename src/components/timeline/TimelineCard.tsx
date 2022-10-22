@@ -28,13 +28,17 @@ export function TimelineCard({
     >
       <Card.Section>
         {photoPreviewUrl ? (
-          <Image
-            alt={title}
-            fit='cover'
-            height={180}
-            placeholder={<Text align='center'>No photos</Text>}
-            src={photoPreviewUrl}
-          />
+          <Link href={`/memory/${_id}`} passHref>
+            <a>
+              <Image
+                alt={title}
+                fit='cover'
+                height={180}
+                placeholder={<Text align='center'>No photos</Text>}
+                src={photoPreviewUrl}
+              />
+            </a>
+          </Link>
         ) : (
           <Image
             alt='Placeholder'
@@ -47,7 +51,11 @@ export function TimelineCard({
       </Card.Section>
       <Space h='xs' />
       <Title className={classes.text} lineClamp={2} order={3} weight={600}>
-        {title}
+        <Link href={`/memory/${_id}`} passHref>
+          <Text component='a' inherit>
+            {title}
+          </Text>
+        </Link>
       </Title>
 
       <Text color='dimmed' size='xs' weight={600}>

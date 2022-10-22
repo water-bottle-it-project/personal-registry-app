@@ -22,7 +22,11 @@ export function CollectionCard({ _id, description, title, color }: CollectionCar
     >
       <Stack spacing='xs' sx={{ height: '100%' }}>
         <Title className={classes.text} lineClamp={3} order={3} weight={600}>
-          {title}
+          <Link href={`/collections/${_id}`} passHref>
+            <Text component='a' inherit>
+              {title}
+            </Text>
+          </Link>
         </Title>
         <Text
           className={classes.text}
