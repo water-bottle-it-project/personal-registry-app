@@ -29,7 +29,7 @@ export function EditFormMemoryInfo({
             error={errors?.title?.message}
             icon={<IconPencil size={16} />}
             label='Title'
-            placeholder='My memory title'
+            placeholder='My memory title.'
             required
             {...register('title')}
           />
@@ -49,7 +49,7 @@ export function EditFormMemoryInfo({
                 inputFormat='D MMMM YYYY'
                 label='Start and end dates'
                 onChange={onChange}
-                placeholder='Click to choose a date range'
+                placeholder='Click to choose a date range.'
                 ref={ref}
                 value={value}
                 withAsterisk
@@ -70,7 +70,7 @@ export function EditFormMemoryInfo({
                 label='Collections'
                 maxDropdownHeight={250}
                 onChange={onChange}
-                placeholder='Click to select collections'
+                placeholder='Click to select collections. Type to narrow down collections further.'
                 ref={ref}
                 searchable
                 transitionDuration={250}
