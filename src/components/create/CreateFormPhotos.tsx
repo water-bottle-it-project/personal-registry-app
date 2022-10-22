@@ -177,7 +177,7 @@ export function CreateFormPhotos({
                       icon={<IconLocation size={16} />}
                       label='Location'
                       onChange={onChange}
-                      placeholder='University Of Melbourne'
+                      placeholder='Search below'
                       ref={ref}
                       value={value}
                       {...field}

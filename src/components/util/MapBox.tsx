@@ -16,6 +16,7 @@ export function MapBox({ locQuery }: MapBoxProps) {
   const theme = useMantineTheme();
   const [lng, setLng] = useState(0);
   const [lat, setLat] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapContainer = useRef<any>(null);
   const map = useRef<Map | null>(null);
   // needs to be placed inside .env file

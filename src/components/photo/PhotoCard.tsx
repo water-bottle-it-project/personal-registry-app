@@ -8,7 +8,7 @@ interface PhotoCardProps extends photoWithIdT {
   open?: (e: MouseEvent) => void;
 }
 
-export function PhotoCard({ _id, caption, url, itemRef, open }: PhotoCardProps) {
+export function PhotoCard({ caption, url, itemRef, open }: PhotoCardProps) {
   const { classes } = useStyles();
   return (
     <Card

@@ -23,7 +23,7 @@ import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
 export function CollectionMemories({ _id }: collectionIdOnlyT) {
   const { classes } = useStyles();
 
-  const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
+  const { data, isLoadingError, isLoading } = trpcClient.useQuery([
     'memory.GetCollectionMemories',
     { _id: _id },
   ]);

@@ -36,7 +36,7 @@ export function MemoryImageGridItem({ caption, url, photoDate }: photoWithIdT) {
   );
 }
 
-const useStyles = createStyles(theme => ({
+const useStyles = createStyles({
   wrapper: {
     cursor: 'zoom-in',
     transition: 'all 0.5s ease',
@@ -62,4 +62,4 @@ const useStyles = createStyles(theme => ({
     overflowWrap: 'break-word',
     maxWidth: '50%',
   },
-}));
+});

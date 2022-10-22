@@ -1,4 +1,4 @@
-import { Burger, Drawer, Group, Space, Text, Title } from '@mantine/core';
+import { Burger, Drawer, Group, Space, Title } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';

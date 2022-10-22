@@ -42,12 +42,12 @@ const teamInfo = [
   },
 ];
 
-const useStyles = createStyles(theme => ({
+const useStyles = createStyles({
   wrapper: {
     display: 'flex',
     justifyContent: 'center',
   },
-}));
+});
 
 export function AboutUs() {
   const { classes } = useStyles();

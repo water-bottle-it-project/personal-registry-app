@@ -9,7 +9,6 @@ interface MemoryImageProps extends photoWithIdT {
 }
 
 export function MemoryImage({
-  _id,
   caption,
   url,
   photoDate,

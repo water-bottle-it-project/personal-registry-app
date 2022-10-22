@@ -10,6 +10,7 @@ import mapboxgl from 'mapbox-gl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface MapBoxControlProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setLocation: any;
   locationQuery?: string;
   name: string;
@@ -19,6 +20,7 @@ export function MapBoxControl({ setLocation, locationQuery, name }: MapBoxContro
   const theme = useMantineTheme();
   const [lng, setLng] = useState(0);
   const [lat, setLat] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapContainer = useRef<any>(null);
   const map = useRef<Map | null>(null);
 

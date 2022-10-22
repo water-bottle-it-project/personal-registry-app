@@ -37,6 +37,7 @@ export function TimelineCard({
           />
         ) : (
           <Image
+            alt='Placeholder'
             fit='cover'
             height={180}
             placeholder={<Text align='center'>No photos</Text>}

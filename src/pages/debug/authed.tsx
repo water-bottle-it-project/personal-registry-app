@@ -7,8 +7,8 @@ import { trpcClient } from '~clientUtils/trpcClient';
 function DebugAuth() {
   const user = useAuthUser();
 
-  const { data: memoriesData, error: memoriesError } = trpcClient.useQuery(['memory.GetMemories']);
-  const { data: memoryData, error: memoryError } = trpcClient.useQuery(
+  const { data: memoriesData } = trpcClient.useQuery(['memory.GetMemories']);
+  const { data: memoryData } = trpcClient.useQuery(
     ['memory.GetMemory', { _id: memoriesData?.memories?.[0]?._id || '' }],
     { enabled: !!memoriesData },
   );
