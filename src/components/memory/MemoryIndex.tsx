@@ -38,22 +38,29 @@ export function MemoryIndex({ _id }: MemoryIndexProps) {
         photos={photos}
         title={title}
       />
-      <Space h='xl' />
-      <Container size='xl'>
-        <Switch
-          checked={gridView}
-          label={`${gridView ? 'Grid View' : 'Stacked View'}`}
-          onChange={event => setGridView(event.target.checked)}
-          size='md'
-        />
-        <Space h='xl' />
-        {gridView ? (
-          <MemoryImageGrid photos={photos} />
-        ) : (
-          photos.map((p, i) => <MemoryImage key={p._id} {...p} index={i} total={photos.length} />)
-        )}
-        <Space h='xl' />
-      </Container>
+
+      {data.memory.photos.length > 0 && (
+        <>
+          <Space h='xl' />
+          <Container size='xl'>
+            <Switch
+              checked={gridView}
+              label={`${gridView ? 'Grid View' : 'Stacked View'}`}
+              onChange={event => setGridView(event.target.checked)}
+              size='md'
+            />
+            <Space h='xl' />
+            {gridView ? (
+              <MemoryImageGrid photos={photos} />
+            ) : (
+              photos.map((p, i) => (
+                <MemoryImage key={p._id} {...p} index={i} total={photos.length} />
+              ))
+            )}
+            <Space h='xl' />
+          </Container>
+        </>
+      )}
     </>
   );
 }
