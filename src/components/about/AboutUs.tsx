@@ -23,7 +23,7 @@ const teamInfo = [
   {
     name: 'Jack Woodman',
     title: '8 Fingers, 2 Thumbs, Communications & Scrum Lead',
-    imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
+    imgUrl: '/team/jack.jpg',
   },
   {
     name: 'Calvin Yu',
