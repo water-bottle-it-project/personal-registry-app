@@ -107,7 +107,7 @@ export function CreateForm() {
           message: `Memory '${data.title}' successfully created.`,
           icon: <IconCheck />,
         });
-        await router.push('/timeline');
+        await router.push(`/memory/${data._id}`);
         memory.photos.forEach(p => {
           URL.revokeObjectURL(p._thumbnail);
         });

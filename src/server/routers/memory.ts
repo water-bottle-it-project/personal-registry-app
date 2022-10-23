@@ -9,7 +9,7 @@ import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
 import type {
   memoriesPaginatedT,
   memoryCardT,
-  memoryCreateFormRequestT,
+  memoryCreatedResponseZ,
   memoryEditFormRequestT,
   memoryWithPhotosT,
 } from '~types/memory/memoryForm';
@@ -180,7 +180,7 @@ const memoryRouter = createProtectedDbRouter()
 
       const photoPreviewUrl: string | undefined = input.photos?.[0]?.url;
 
-      const memory: memoryCreateFormRequestT = await Memory.create({
+      const memory: memoryCreatedResponseZ = await Memory.create({
         _id: memoryId,
         title: input.title,
         description: input.description,

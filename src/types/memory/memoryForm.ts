@@ -88,6 +88,12 @@ const memoryWithPhotosToEditZ = memoryBase.merge(dateTuple).extend({
   collections: objectIdZ.array().default([]),
 });
 
+const memoryCreatedResponseZ = memoryBase.merge(dateSeparate).extend({
+  _id: objectIdZ,
+  photos: objectIdZ.array().default([]),
+  collections: objectIdZ.array().default([]),
+});
+
 /**
  * Inferred types
  */
@@ -101,6 +107,7 @@ type memoriesPaginatedT = z.infer<typeof memoriesPaginated>;
 type memoryEditFormRequestT = z.infer<typeof memoryEditFormRequestZ>;
 type memoryEditFormT = z.infer<typeof memoryEditFormZ>;
 type memoryWithPhotosToEditT = z.infer<typeof memoryWithPhotosToEditZ>;
+type memoryCreatedResponseZ = z.infer<typeof memoryCreatedResponseZ>;
 
 /**
  * Exports
@@ -108,6 +115,7 @@ type memoryWithPhotosToEditT = z.infer<typeof memoryWithPhotosToEditZ>;
 export type {
   memoriesPaginatedT,
   memoryCardT,
+  memoryCreatedResponseZ,
   memoryCreateFormRequestT,
   memoryCreateFormT,
   memoryEditFormRequestT,

@@ -23,7 +23,7 @@ const teamInfo = [
   {
     name: 'Jack Woodman',
     title: '8 Fingers, 2 Thumbs, Communications & Scrum Lead',
-    imgUrl: '/team/jack.png',
+    imgUrl: '/team/jack.jpg',
   },
   {
     name: 'Calvin Yu',
