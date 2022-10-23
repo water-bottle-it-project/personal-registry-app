@@ -33,6 +33,7 @@ export function CollectionsGrid() {
     await refetch();
   }
 
+  let contents;
   if (isLoadingError) {
     showNotification({
       color: 'red',
@@ -40,22 +41,25 @@ export function CollectionsGrid() {
       title: 'Error!',
       message: 'An error occurred while loading collections.',
     });
-    return <Text>Error loading collections: {error?.message}</Text>;
+    contents = <Text>Error loading collections: {error?.message}</Text>;
+  } else if (isLoading || !data) {
+    contents = <SkeletonGrid />;
+  } else {
+    contents = (
+      <Grid>
+        {data.collections.map(c => (
+          <Grid.Col key={c._id} md={3} sm={4} xs={6}>
+            <CollectionCard
+              _id={c._id}
+              color={c.color}
+              description={c.description}
+              title={c.title}
+            />
+          </Grid.Col>
+        ))}
+      </Grid>
+    );
   }
-
-  if (isLoading || !data) {
-    return <SkeletonGrid />;
-  }
-
-  const contents = (
-    <Grid>
-      {data.collections.map(c => (
-        <Grid.Col key={c._id} md={3} sm={4} xs={6}>
-          <CollectionCard _id={c._id} color={c.color} description={c.description} title={c.title} />
-        </Grid.Col>
-      ))}
-    </Grid>
-  );
 
   return (
     <>
