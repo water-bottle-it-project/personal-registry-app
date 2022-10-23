@@ -27,8 +27,8 @@ const teamInfo = [
   },
   {
     name: 'Calvin Yu',
-    title: 'Project Manager',
-    imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
+    title: 'Hacker and Project Manager',
+    imgUrl: '/team/calvin.jpg',
   },
 ];
 
