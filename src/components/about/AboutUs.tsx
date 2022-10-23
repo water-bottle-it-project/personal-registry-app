@@ -13,7 +13,7 @@ const teamInfo = [
   {
     name: 'Kian Dsouza',
     title: 'Awesome human and Backend lead',
-    imgUrl: '/team/kian.png',
+    imgUrl: '/team/kian.jpg',
   },
   {
     name: 'Ian Chen',
