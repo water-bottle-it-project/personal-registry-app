@@ -71,7 +71,7 @@ export function CreateFormDropzone({ onDrop }: CreateFormDropzoneProps) {
 
             <Text align='center' mt='sm' size='lg' weight={700}>
               <Dropzone.Accept>Drop photos here</Dropzone.Accept>
-              <Dropzone.Reject>Each file must be an photo at most 20 MB in size</Dropzone.Reject>
+              <Dropzone.Reject>Each file must be a photo and at most 20 MB in size</Dropzone.Reject>
               <Dropzone.Idle>Upload photos</Dropzone.Idle>
             </Text>
             <Text align='center' color='dimmed' mt='xs' size='sm'>
