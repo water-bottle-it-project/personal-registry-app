@@ -6,9 +6,9 @@ import { Banner } from '~components/util/Banner';
 
 const teamInfo = [
   {
-    name: 'Sean Tan',
+    name: 'Yi Sheon Tan (Sean)',
     title: 'Human and Frontend lead',
-    imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
+    imgUrl: '/team/sean.jpg',
   },
   {
     name: 'Kian Dsouza',
