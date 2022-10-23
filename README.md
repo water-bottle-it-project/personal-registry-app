@@ -147,7 +147,7 @@ cannot start the app and authentication will not work.**
    ✨  Done in 22.44s.
    ```
 
-   **Caution:** if you have other projects running, you should close them first, or else the port might
+   **Caution #1:** if you have other projects running, you should close them first, or else the port might
    not be able to bind:
 
    ```bash
@@ -162,6 +162,30 @@ cannot start the app and authentication will not work.**
      address: '0.0.0.0',
      port: 3000
    }
+   ```
+   
+   **Caution #2:** if you receive the following error, then you forgot to include the .env.local file correctly:
+   ```
+   info  - Compiled successfully
+   info  - Collecting page data ..node:internal/process/promises:279
+               triggerUncaughtException(err, true /* fromPromise */);
+               ^
+   
+   Error: Invalid next-firebase-auth options: The "firebaseClientInitConfig.apiKey" value is required. The "cookies.keys" setting must be set if "cookies.signed" is true.
+       at m (/Users/sky/Code/wk12/node_modules/next-firebase-auth/build/index.node.js:2:5278)
+       at /Users/sky/Code/wk12/node_modules/next-firebase-auth/build/index.node.js:2:38994
+       at init (/Users/sky/Code/wk12/node_modules/next-firebase-auth/build/index.node.js:2:38999)
+       at initAuth (/Users/sky/Code/wk12/.next/server/pages/_app.js:65:42)
+       at Object.292 (/Users/sky/Code/wk12/.next/server/pages/_app.js:676:1)
+       at __webpack_require__ (/Users/sky/Code/wk12/.next/server/webpack-runtime.js:25:42)
+       at __webpack_exec__ (/Users/sky/Code/wk12/.next/server/pages/_app.js:1007:39)
+       at /Users/sky/Code/wk12/.next/server/pages/_app.js:1008:78
+       at Function.__webpack_require__.X (/Users/sky/Code/wk12/.next/server/webpack-runtime.js:177:21)
+       at /Users/sky/Code/wk12/.next/server/pages/_app.js:1008:47 {
+     type: 'Error'
+   }
+   error Command failed with exit code 1.
+   info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
    ```
 
 ## :pencil: Contributing
