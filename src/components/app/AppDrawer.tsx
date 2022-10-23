@@ -1,4 +1,4 @@
-import { Burger, Drawer, Group, Space, Title } from '@mantine/core';
+import { Burger, Drawer, Group, Space, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -41,8 +41,12 @@ export function AppDrawer({ links }: AppHeaderProps) {
         styles={{ closeButton: { '& svg': { width: '30px', height: '30px' } } }}
       >
         {/* Drawer content */}
-        <Title color='indigo' weight={800}>
-          SnapSave
+        <Title color='indigo' onClick={() => setOpened(false)} weight={800}>
+          <Link href='/' passHref>
+            <Text component='a' inherit>
+              SnapSave
+            </Text>
+          </Link>
         </Title>
 
         <Space h='sm' />
