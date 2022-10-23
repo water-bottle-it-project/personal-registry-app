@@ -50,6 +50,10 @@ cannot start the app and authentication will not work.**
 
 1. Install node.js, minimum version 16.10 using https://nodejs.org/en/ (the LTS version) or using
    nvm https://github.com/nvm-sh/nvm, if you don't already have node.js installed.
+   ```bash
+   $ node -v
+   v16.15.1 // just needs to be 16.10 or newer
+   ```
 2. We are using yarn, not the regular included npm, as our package manager. Visit
    https://yarnpkg.com/getting-started/install#install-corepack, using either `corepack enable ` or
    `npm i -g corepack`. After finishing this step, do not use the `npm` command for this project.
@@ -58,8 +62,23 @@ cannot start the app and authentication will not work.**
 5. Checkout the branch that has been requested to be assessed, or stay on main if none has been
    specified.
 6. Copy the provided `.env.local` file into the root folder. You need it or else the app will not 
-build and authentication will not work. Please make sure it is `.env.local`, **not** `env.local`
-or anything else. The root folder should look like this:
+   build and authentication will not work. Please make sure it is `.env.local`, **not** `env.local`
+   or anything else. 
+   
+   Note: if your computer (particularly macOS) complains that it cannot make the filename begin
+   with a dot, you still rename it through the Terminal.
+   
+   ```
+   $ ls -a
+   .		..		env.local
+   
+   $ mv env.local .env.local
+   
+   $ ls -a
+   .		..		.env.local
+   ```
+
+   The root folder should look like this:
    ```text
    $ tree -L 1 -a
    .
@@ -89,44 +108,46 @@ or anything else. The root folder should look like this:
    in the browser (by default `localhost:3000`).
 
    ```
-   info  - Generating static pages (13/13)
+   info  - Generating static pages (18/18)
    info  - Finalizing page optimization
-
+   
    Route (pages)                              Size     First Load JS
-   ┌ ○ /                                      54.6 kB         336 kB
-   ├   /_app                                  0 B             205 kB
-   ├ ○ /404                                   6.58 kB         288 kB
-   ├ ○ /about                                 12.4 kB         217 kB
-   ├ λ /api/auth/signin                       0 B             205 kB
-   ├ λ /api/auth/signout                      0 B             205 kB
-   ├ λ /api/trpc/[trpc]                       0 B             205 kB
-   ├ ○ /collections                           3.43 kB         208 kB
-   ├ ○ /create                                38.4 kB         262 kB
-   ├ ○ /debug                                 1.38 kB         210 kB
-   ├ ○ /debug/authed                          1.55 kB         210 kB
-   ├ ○ /images                                5.93 kB         215 kB
-   ├ ○ /profile                               4.89 kB         216 kB
-   ├ ○ /signin                                5.17 kB         238 kB
-   ├ ○ /signup                                1.5 kB          235 kB
-   └ ○ /timeline                              5.6 kB          210 kB
-   + First Load JS shared by all              205 kB
+   ┌ ○ /                                      57.5 kB         354 kB
+   ├   /_app                                  0 B             223 kB
+   ├ ○ /404                                   6.6 kB          303 kB
+   ├ ○ /about                                 10.8 kB         233 kB
+   ├ λ /api/auth/signin                       0 B             223 kB
+   ├ λ /api/auth/signout                      0 B             223 kB
+   ├ λ /api/trpc/[trpc]                       0 B             223 kB
+   ├ ○ /collections                           5.06 kB         333 kB
+   ├ ○ /collections/[id]                      3.68 kB         305 kB
+   ├ ○ /collections/create                    2.27 kB         252 kB
+   ├ ○ /collections/edit                      445 B           328 kB
+   ├ ○ /create                                6.51 kB         628 kB
+   ├ ○ /debug/authed                          1.49 kB         224 kB
+   ├ ○ /forgotpassword                        1.1 kB          247 kB
+   ├ ○ /images                                23.4 kB         262 kB
+   ├   └ css/b68d142d44689e33.css             1.59 kB
+   ├ ○ /memory/[id]                           19.4 kB         520 kB
+   ├   └ css/b0d7eac1e0377b2a.css             1.88 kB
+   ├ ○ /memory/[id]/edit                      7.07 kB         629 kB
+   ├ ○ /profile                               6.21 kB         252 kB
+   ├ ○ /signin                                6.89 kB         253 kB
+   ├ ○ /signup                                3.8 kB          250 kB
+   └ ○ /timeline                              4.05 kB         242 kB
+   + First Load JS shared by all              223 kB
      ├ chunks/framework-9b5d6ec4444c80fa.js   45.7 kB
      ├ chunks/main-3123a443c688934f.js        30.9 kB
-     ├ chunks/pages/_app-9ef1f493e1d19aee.js  127 kB
-     └ chunks/webpack-68b2762c8b212ad5.js     1.01 kB
-
+     ├ chunks/pages/_app-517136af005b4650.js  145 kB
+     └ chunks/webpack-84209fb2022d3d30.js     1.05 kB
+   
    λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
    ○  (Static)  automatically rendered as static HTML (uses no initial props)
-
-   ✨  Done in 17.24s.
-   yarn run v1.22.15
-   $ next start
-   ready - started server on 0.0.0.0:3000, url: http://localhost:3000
-   info  - Loaded env from /Users/xyz/Code/personal-registry-app/.env.local
-   info  - SWC minify release candidate enabled. https://nextjs.link/swcmin
+   
+   ✨  Done in 22.44s.
    ```
 
-   Caution: if you have other projects running, you should close them first, or else the port might
+   **Caution:** if you have other projects running, you should close them first, or else the port might
    not be able to bind:
 
    ```bash
