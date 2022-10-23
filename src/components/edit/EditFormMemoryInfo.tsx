@@ -81,7 +81,7 @@ export function EditFormMemoryInfo({
                   </Text>
                 }
                 onChange={onChange}
-                placeholder='Click to select collections. Type to narrow down collections further.'
+                placeholder='Click to select collections. Type to filter collections.'
                 ref={ref}
                 searchable
                 transitionDuration={250}
