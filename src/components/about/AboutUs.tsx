@@ -13,7 +13,7 @@ const teamInfo = [
   {
     name: 'Kian Dsouza',
     title: 'Awesome human and Backend lead',
-    imgUrl: 'https://i.kym-cdn.com/entries/icons/facebook/000/026/152/gigachad.jpg',
+    imgUrl: '/team/kian.png',
   },
   {
     name: 'Ian Chen',
