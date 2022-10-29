@@ -1,0 +1,59 @@
+sequenceDiagram
+  title Save edited memory
+  actor U as Authenticated user
+  participant N as Next.js Frontend
+  participant T as Next.js Backend (tRPC)
+  participant M as MongoDB
+  participant F as Firebase Storage
+  U-)N: Press save
+  loop get photo dimensions
+    alt photo url, height, and width already exist (existing photo)
+      N-)N: return existing {height, width}
+    else
+      N-)N: decode image height and width
+      N-)N: return {height, width}
+    end
+  end
+  loop upload photos
+    opt if photo url does not already exist
+      N-)N: path = photo.dir/photo.filename
+      N-)F: uploadBytes(path, photo.file, Cache-Control header metadata)
+      F--)N: downloadable url of the uploaded photo with secure token
+    end
+  end
+  loop transform photos to tRPC backend upload request
+    N-)N: editedPhotos merge photo object<br>with urls, height and width
+  end
+  N-)N: -transform tuple [date0, date1]<br>to separate object keys {firstDate, lastDate}<br>-add editedPhotos to photos key
+  N-)T: UpdateMemory(id)
+  T-)T: userId = verify cookie token
+  T-)M: prev = get previous memory<br>Memory.findOne(id, userId)
+  opt prev has at least 1 photo
+    T-)T: inputPhotoIdsSet = <br>get the photo ids of the edited memory -> Set
+    T-)T: prevPhotoIds = <br>get the photo ids of prev
+    T-)T: prevPhotosToDelete = any photo ids<br>in prevPhotoIds which are not in inputPhotoIdsSet
+    T-)M: Photo.find(id is in prevPhotosToDelete).
+    M--)T: res. res is an array of photos to delete from Firebase
+    T-)M: Photo.deleteMany(id is in prev.photos).<br>Delete ALL photos metadata from MongoDB since it is cheap<br>to re-save later and simplifies editing
+    T-)T: deleteUrls = just the url for each photo in res.<br>Photos have not been deleted from Firebase yet.
+  end
+  T-)T: photosToInsert = add memory id, date and userId<br>to each photo in input.photos
+  T-)M: Photo.insertMany(photosToInsert)
+  M--)T: photoIdsInserted
+  T-)T: photoPreviewUrl = photoIdsInserted[0]
+  T-)M: Memory.findByIdAndUpdate(id, input)
+  M--)T: memory
+  T--)N: deleteUrls
+  loop for each fileRef in deleteUrls
+    %% delete files based on URLs<br>Done in Frontend due to reasons below.
+    N--)F: deleteObject(fileRef)
+  end
+  N-)N: clear cached query for GetMemories and GetMemory(id)
+  N-)N: show success notification
+  N-)N: redirect to the page of the redirected memory.
+  N-)N: clear thumbnail objects to prevent memory leaks in the browser
+
+
+
+
+

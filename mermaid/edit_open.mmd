@@ -1,0 +1,35 @@
+sequenceDiagram
+  title Opening the edit page
+  actor U as Authenticated user
+  participant N as Next.js Frontend
+  participant T as Next.js Backend (tRPC)
+  participant M as MongoDB
+  participant F as Firebase Storage
+      U-)N: Opens edit page for a memory with id
+  par Query collections
+    N-)T: GetCollections()
+    T-)T: userId = verify cookie token
+    T-)M: Collection.find(userId)
+    M--)T: collections
+    T--)N: collections
+    N-)N: cache GetCollections() query
+  and Query memory
+    N-)T: GetMemory(id)
+    T-)T: userId = verify cookie token
+    T-)M: Memory.findOne(id, userId)
+    M--)T: memory
+    T--)N: memory
+    N-)N: cache GetMemory(id) query
+  end
+  par Load photo thumbnails
+    N-)F: HTTP request to download any photos which are not cached using Cache-Control
+    F--)N: photo data
+    N-)N: cache photos
+  and Populate form
+    N-)N: populate form with memory<br>and list of collections which can be added
+    N-)N: set memory as value to reset to<br>when clicking reset
+  end
+
+
+
+
