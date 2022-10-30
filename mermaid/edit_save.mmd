@@ -46,12 +46,12 @@ sequenceDiagram
   T--)N: deleteUrls
   loop for each fileRef in deleteUrls
     %% delete files based on URLs<br>Done in Frontend due to reasons below.
-    N--)F: deleteObject(fileRef)
+    N-)F: deleteObject(fileRef)
   end
   N-)N: clear cached query for GetMemories and GetMemory(id)
   N-)N: show success notification
-  N-)N: redirect to the page of the redirected memory.
   N-)N: clear thumbnail objects to prevent memory leaks in the browser
+  N--)U: redirect to the page of the edited memory.
 
 
 
