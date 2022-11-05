@@ -34,10 +34,10 @@ export function PhotosIndex() {
   const [text, setText] = useDebouncedState('', 300);
   const [sortOrder, setSortOrder] = useState<sortOrderT>('descending');
 
-  const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
-    ['photos.GetPhotosPaginated', { page, text: text.trim(), sortOrder }],
-    { keepPreviousData: true },
-  );
+  const { data, isLoading, isLoadingError, refetch, isFetching, dataUpdatedAt } =
+    trpcClient.useQuery(['photos.GetPhotosPaginated', { page, text: text.trim(), sortOrder }], {
+      keepPreviousData: true,
+    });
 
   console.log('rendered');
 
@@ -79,7 +79,7 @@ export function PhotosIndex() {
     contents = (
       <>
         <Grid>
-          <PhotoGallery photos={data.docs} />
+          <PhotoGallery key={dataUpdatedAt + sortOrder} photos={data.docs} />
         </Grid>
         <Space h='xl' />
         <Center>
