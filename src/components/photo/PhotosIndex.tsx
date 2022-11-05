@@ -1,8 +1,10 @@
 import {
   ActionIcon,
   Center,
+  CloseButton,
   Container,
   Grid,
+  Group,
   Loader,
   Pagination,
   Space,
@@ -11,18 +13,18 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { useDebouncedState } from '@mantine/hooks';
 import { IconArrowRight, IconSearch } from '@tabler/icons';
+import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
+import { photosSearchAtom, photosSortAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { PhotoGallery } from '~components/photo/PhotoGallery';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
 import { usePage } from '~components/util/usePage';
-import type { sortOrderT } from '~types/util/sortOrderT';
 
 /**
  * Photos page querying images from MongoDB
@@ -31,13 +33,17 @@ import type { sortOrderT } from '~types/util/sortOrderT';
 export function PhotosIndex() {
   const router = useRouter();
   const page = usePage();
-  const [text, setText] = useDebouncedState('', 300);
-  const [sortOrder, setSortOrder] = useState<sortOrderT>('descending');
+  const currentText = useAtomValue(photosSearchAtom.currentValueAtom);
+  const [debouncedText, setText] = useAtom(photosSearchAtom.debouncedValueAtom);
+  const [sortOrder, setSortOrder] = useAtom(photosSortAtom);
 
   const { data, isLoading, isLoadingError, refetch, isFetching, dataUpdatedAt } =
-    trpcClient.useQuery(['photos.GetPhotosPaginated', { page, text: text.trim(), sortOrder }], {
-      keepPreviousData: true,
-    });
+    trpcClient.useQuery(
+      ['photos.GetPhotosPaginated', { page, text: debouncedText.trim(), sortOrder }],
+      {
+        keepPreviousData: true,
+      },
+    );
 
   console.log('rendered');
 
@@ -69,6 +75,8 @@ export function PhotosIndex() {
         });
     }
   }, [data, page, router]);
+
+  console.log(dataUpdatedAt);
 
   let contents;
   if (isLoading || !data?.docs) {
@@ -116,21 +124,25 @@ export function PhotosIndex() {
               onChange={event => setText(event.currentTarget.value)}
               placeholder='Search your photos by caption'
               rightSection={
-                <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
-                  {isFetching ? (
-                    <Loader color='white' size='xs' variant='dots' />
-                  ) : (
-                    <IconArrowRight size={18} stroke={1.5} />
-                  )}
-                </ActionIcon>
+                <Group position='right' pr={5} spacing={5}>
+                  <CloseButton onClick={() => setText('')} />
+                  <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
+                    {isFetching ? (
+                      <Loader color='white' size='xs' variant='dots' />
+                    ) : (
+                      <IconArrowRight size={18} stroke={1.5} />
+                    )}
+                  </ActionIcon>
+                </Group>
               }
-              rightSectionWidth={42}
+              rightSectionWidth={70}
               size='md'
+              value={currentText}
             />
             <Space h='xs' />
             <SortedControl
               defaultValue={sortOrder}
-              highlight={!!text.trim()}
+              highlight={!!debouncedText.trim()}
               onChangeSortOrder={setSortOrder}
             />
           </form>
