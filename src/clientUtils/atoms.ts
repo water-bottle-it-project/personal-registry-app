@@ -1,0 +1,85 @@
+import type { SetStateAction } from 'jotai';
+import { atom } from 'jotai';
+
+import type { sortOrderT } from '~types/util/sortOrderT';
+
+const SEARCH_DELAY = 250;
+
+const collectionSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
+const memoriesSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
+const memoriesSortAtom = atom<sortOrderT>('descending');
+const photosSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
+const photosSortAtom = atom<sortOrderT>('descending');
+
+/**
+ * Like useDebouncedState, but has full integration with `jotai`, which is the simple
+ * global client-side state management library that we are using.
+ * @param initialValue
+ * @param delayMilliseconds
+ * @param shouldDebounceOnReset
+ */
+function atomWithDebounce<T>(
+  initialValue: T,
+  delayMilliseconds = 500,
+  shouldDebounceOnReset = false,
+) {
+  const prevTimeoutAtom = atom<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  // DO NOT EXPORT currentValueAtom as using this atom to set state can cause
+  // inconsistent state between currentValueAtom and debouncedValueAtom
+  const _currentValueAtom = atom(initialValue);
+  const isDebouncingAtom = atom(false);
+
+  const debouncedValueAtom = atom(initialValue, (get, set, update: SetStateAction<T>) => {
+    clearTimeout(get(prevTimeoutAtom));
+
+    const prevValue = get(_currentValueAtom);
+    const nextValue = typeof update === 'function' ? (update as (prev: T) => T)(prevValue) : update;
+
+    const onDebounceStart = () => {
+      set(_currentValueAtom, nextValue);
+      set(isDebouncingAtom, true);
+    };
+
+    const onDebounceEnd = () => {
+      set(debouncedValueAtom, nextValue);
+      set(isDebouncingAtom, false);
+    };
+
+    onDebounceStart();
+
+    if (!shouldDebounceOnReset && nextValue === initialValue) {
+      onDebounceEnd();
+      return;
+    }
+
+    const nextTimeoutId = setTimeout(() => {
+      onDebounceEnd();
+    }, delayMilliseconds);
+
+    // set previous timeout atom in case it needs to get cleared
+    set(prevTimeoutAtom, nextTimeoutId);
+  });
+
+  // exported atom setter to clear timeout if needed
+  const clearTimeoutAtom = atom(null, (get, set, _arg) => {
+    clearTimeout(get(prevTimeoutAtom));
+    set(isDebouncingAtom, false);
+  });
+
+  return {
+    currentValueAtom: atom(get => get(_currentValueAtom)),
+    isDebouncingAtom,
+    clearTimeoutAtom,
+    debouncedValueAtom,
+  };
+}
+
+export {
+  atomWithDebounce,
+  collectionSearchAtom,
+  memoriesSearchAtom,
+  memoriesSortAtom,
+  photosSearchAtom,
+  photosSortAtom,
+};
