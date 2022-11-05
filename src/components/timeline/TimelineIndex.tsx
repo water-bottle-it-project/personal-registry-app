@@ -17,10 +17,10 @@ import type { FormEvent } from 'react';
 import { useEffect, useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
+import { usePage } from '~clientUtils/usePage';
 import { TimelineGrid } from '~components/timeline/TimelineGrid';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
-import { usePage } from '~components/util/usePage';
 import type { sortOrderT } from '~types/util/sortOrderT';
 
 export function TimelineIndex() {

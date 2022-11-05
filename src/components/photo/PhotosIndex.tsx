@@ -21,10 +21,10 @@ import { useEffect } from 'react';
 
 import { photosSearchAtom, photosSortAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
+import { usePage } from '~clientUtils/usePage';
 import { PhotoGallery } from '~components/photo/PhotoGallery';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
-import { usePage } from '~components/util/usePage';
 
 /**
  * Photos page querying images from MongoDB
