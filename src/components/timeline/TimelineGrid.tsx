@@ -1,7 +1,7 @@
 import { Grid } from '@mantine/core';
 
 import { TimelineCard } from '~components/timeline/TimelineCard';
-import type { memoryCardT } from '~types/memory/memoryForm';
+import type { memoryCardT } from '~types/memoryT';
 
 interface TimelineGridProps {
   memories: memoryCardT[];

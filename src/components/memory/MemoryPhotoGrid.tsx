@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Lightbox from 'react-18-image-lightbox';
 
 import { MemoryPhotoGridItem } from '~components/memory/MemoryPhotoGridItem';
-import type { photoWithIdT } from '~types/photo/photo';
+import type { photoWithIdT } from '~types/photoT';
 
 interface MemoryPhotoGridProps {
   photos: photoWithIdT[];

@@ -8,8 +8,8 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { ColorControl } from '~components/collection/ColorControl';
-import type { collectionOmitIdT } from '~types/collection/collectionOmitId';
-import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
+import type { collectionOmitIdT } from '~types/collectionT';
+import { collectionOmitIdZ } from '~types/collectionT';
 
 export function CollectionCreate() {
   useScrollLock(true);

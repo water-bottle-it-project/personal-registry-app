@@ -5,8 +5,8 @@ import { Button, Container, Paper, PasswordInput, TextInput } from '@mantine/cor
 import { IconArrowNarrowRight, IconAt, IconCheck, IconFingerprint } from '@tabler/icons';
 import { useForm } from 'react-hook-form';
 
-import type { SignupT } from '~types/signup';
-import { signupZ } from '~types/signup';
+import type { SignupT } from '~types/signupT';
+import { signupZ } from '~types/signupT';
 
 export function SignupForm() {
   // Observe form state

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { COLORS } from '~types/util/color';
+import { COLORS } from '~types/util/colorT';
 
 const { Schema } = mongoose;
 

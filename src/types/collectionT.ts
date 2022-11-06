@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { colorZ } from '~types/util/color';
+import { colorZ } from '~types/util/colorT';
 
 // For getting and updating collections.
 const collectionZ = z
@@ -12,7 +12,7 @@ const collectionZ = z
   })
   .required();
 
-const collectionMemory2Z = collectionZ.omit({ description: true });
+const collectionMemoryZ = collectionZ.omit({ description: true });
 
 const collectionSearchZ = z
   .object({
@@ -25,9 +25,22 @@ const collectionSelectItemZ = z.object({
   label: z.string().min(1),
 });
 
-type collectionT = z.infer<typeof collectionZ>;
-type collectionMemory2T = z.infer<typeof collectionMemory2Z>;
-type collectionSelectItemT = z.infer<typeof collectionSelectItemZ>;
+const collectionIdOnlyZ = collectionZ.pick({ _id: true });
 
-export type { collectionMemory2T, collectionSelectItemT, collectionT };
-export { collectionMemory2Z, collectionSearchZ, collectionSelectItemZ, collectionZ };
+const collectionOmitIdZ = collectionZ.omit({ _id: true });
+
+type collectionT = z.infer<typeof collectionZ>;
+type collectionSelectItemT = z.infer<typeof collectionSelectItemZ>;
+type collectionIdOnlyT = z.infer<typeof collectionIdOnlyZ>;
+type collectionOmitIdT = z.infer<typeof collectionOmitIdZ>;
+
+export type { collectionIdOnlyT, collectionOmitIdT, collectionSelectItemT, collectionT };
+
+export {
+  collectionIdOnlyZ,
+  collectionMemoryZ,
+  collectionOmitIdZ,
+  collectionSearchZ,
+  collectionSelectItemZ,
+  collectionZ,
+};

@@ -9,7 +9,7 @@ import { Gallery, Item } from 'react-photoswipe-gallery';
 
 import { iconToMemory } from '~components/photo/customElements/iconToMemory';
 import { PhotoCard } from '~components/photo/PhotoCard';
-import type { photoWithIdT } from '~types/photo/photo';
+import type { photoWithIdT } from '~types/photoT';
 
 interface PhotoGalleryProps {
   photos: photoWithIdT[];

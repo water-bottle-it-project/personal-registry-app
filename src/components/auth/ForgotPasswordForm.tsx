@@ -6,7 +6,7 @@ import { IconArrowNarrowRight, IconAt, IconCheck } from '@tabler/icons';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { emailZ } from '~types/util/email';
+import { emailZ } from '~types/util/emailT';
 
 const forgotZ = z
   .object({

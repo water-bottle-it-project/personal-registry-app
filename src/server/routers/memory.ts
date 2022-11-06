@@ -5,21 +5,17 @@ import mongoose from 'mongoose';
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Memory } from '~server/models/memory';
 import { Photo } from '~server/models/photo';
-import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
+import { collectionIdOnlyZ } from '~types/collectionT';
 import type {
   memoriesPaginatedT,
   memoryCardT,
   memoryCreatedResponseZ,
   memoryEditFormRequestT,
   memoryWithPhotosT,
-} from '~types/memory/memoryForm';
-import {
-  memoryCreateFormRequestZ,
-  memoryEditFormRequestZ,
-  memoryIdOnlyZ,
-} from '~types/memory/memoryForm';
-import type { photoWithIdT } from '~types/photo/photo';
-import { paginationInputZ } from '~types/util/pagination';
+} from '~types/memoryT';
+import { memoryCreateFormRequestZ, memoryEditFormRequestZ, memoryIdOnlyZ } from '~types/memoryT';
+import type { photoWithIdT } from '~types/photoT';
+import { paginationInputZ } from '~types/util/paginationT';
 
 const memoryRouter = createProtectedDbRouter()
   .query('GetMemories', {

@@ -19,15 +19,15 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { EditFormMemoryInfo } from '~components/edit/EditFormMemoryInfo';
 import { EditFormPhotos } from '~components/edit/EditFormPhotos';
 import { EditFormTop } from '~components/edit/EditFormTop';
-import type { collectionSelectItemT } from '~types/collection/collection';
+import type { collectionSelectItemT } from '~types/collectionT';
 import type {
   memoryEditFormRequestT,
   memoryEditFormT,
   memoryIdOnlyT,
   memoryWithPhotosToEditT,
-} from '~types/memory/memoryForm';
-import { memoryEditFormZ } from '~types/memory/memoryForm';
-import type { photoFormEditRequestT } from '~types/photo/photo';
+} from '~types/memoryT';
+import { memoryEditFormZ } from '~types/memoryT';
+import type { photoFormEditRequestT } from '~types/photoT';
 
 export function EditForm({ _id }: memoryIdOnlyT) {
   const router = useRouter();

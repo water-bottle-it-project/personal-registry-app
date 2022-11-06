@@ -3,10 +3,13 @@ import { TRPCError } from '@trpc/server';
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Collection } from '~server/models/collection';
 import { Memory } from '~server/models/memory';
-import type { collectionT } from '~types/collection/collection';
-import { collectionSearchZ, collectionZ } from '~types/collection/collection';
-import { collectionIdOnlyZ } from '~types/collection/collectionIdOnly';
-import { collectionOmitIdZ } from '~types/collection/collectionOmitId';
+import type { collectionT } from '~types/collectionT';
+import {
+  collectionIdOnlyZ,
+  collectionOmitIdZ,
+  collectionSearchZ,
+  collectionZ,
+} from '~types/collectionT';
 
 export { collectionRouter };
 

@@ -40,8 +40,8 @@ import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { useDragDropStyles } from '~components/create/dragDropStyles';
 import { useTextareaStyles } from '~components/create/textareaStyles';
 import { MapBoxControl } from '~components/util/MapBoxControl';
-import type { memoryEditFormT } from '~types/memory/memoryForm';
-import type { photoFormEditT } from '~types/photo/photo';
+import type { memoryEditFormT } from '~types/memoryT';
+import type { photoFormEditT } from '~types/photoT';
 
 export function EditFormPhotos({ control, register, setValue }: UseFormReturn<memoryEditFormT>) {
   const { classes } = useDragDropStyles();

@@ -23,8 +23,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-import type { SigninT } from '~types/signin';
-import { signinZ } from '~types/signin';
+import type { SigninT } from '~types/signinT';
+import { signinZ } from '~types/signinT';
 
 export function SigninForm() {
   // Observe form state

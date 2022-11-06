@@ -1,16 +1,16 @@
 import { z } from 'zod';
 
-import { collectionMemory2Z } from '~types/collection/collection';
+import { collectionMemoryZ } from '~types/collectionT';
 import {
   photoFormCreateRequestZ,
   photoFormCreateZ,
   photoFormEditRequestZ,
   photoFormEditZ,
   photoWithIdZ,
-} from '~types/photo/photo';
-import { objectIdZ } from '~types/util/objectId';
-import { paginationWrapperZ } from '~types/util/pagination';
-import { urlZ } from '~types/util/url';
+} from '~types/photoT';
+import { objectIdZ } from '~types/util/objectIdT';
+import { paginationWrapperZ } from '~types/util/paginationT';
+import { urlZ } from '~types/util/urlT';
 
 /**
  * Building blocks
@@ -66,7 +66,7 @@ const memoryCardZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photoPreviewUrl: urlZ.optional(),
   photos: objectIdZ.array().default([]),
-  collections: collectionMemory2Z.array().default([]),
+  collections: collectionMemoryZ.array().default([]),
 });
 
 // For a paged list of memory cards
@@ -78,7 +78,7 @@ const memoriesPaginated = paginationWrapperZ.extend({
 const memoryWithPhotosZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photos: photoWithIdZ.array().default([]),
-  collections: collectionMemory2Z.array().default([]),
+  collections: collectionMemoryZ.array().default([]),
 });
 
 // For getting memory details with photos to edit

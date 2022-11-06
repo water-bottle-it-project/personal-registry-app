@@ -1,7 +1,7 @@
 import { Anchor, Badge, Card, createStyles, Group, Image, Space, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
-import type { memoryCardT } from '~types/memory/memoryForm';
+import type { memoryCardT } from '~types/memoryT';
 
 export function TimelineCard({
   _id,
