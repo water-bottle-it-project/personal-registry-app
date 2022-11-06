@@ -30,10 +30,10 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
   const { data: collectionData } = trpcClient.useQuery(['collection.GetCollection', { _id: _id }]);
 
   let contents;
-  if (isLoading || !data || !collectionData) {
-    contents = <SkeletonGrid />;
-  } else if (isLoadingError) {
+  if (isLoadingError) {
     contents = <Text>Error loading memories. Try again later.</Text>;
+  } else if (isLoading || !data || !collectionData) {
+    contents = <SkeletonGrid />;
   } else if (data.memories.length === 0) {
     contents = <NoMemoriesFound />;
   } else {

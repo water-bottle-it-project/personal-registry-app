@@ -1,6 +1,7 @@
 import 'react-18-image-lightbox/style.css';
 
 import { Container, Space, Switch } from '@mantine/core';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
@@ -9,6 +10,7 @@ import { MemoryHeader } from '~components/memory/MemoryHeader';
 import { MemoryPhoto } from '~components/memory/MemoryPhoto';
 import { MemoryPhotoGrid } from '~components/memory/MemoryPhotoGrid';
 import { MemorySkeleton } from '~components/memory/MemorySkeleton';
+import { showFailureNotification } from '~components/util/notificationHelpers';
 
 interface MemoryIndexProps {
   _id: string;
@@ -16,13 +18,18 @@ interface MemoryIndexProps {
 
 export function MemoryIndex({ _id }: MemoryIndexProps) {
   const [gridView, setGridView] = useState(false);
+  const router = useRouter();
 
-  const { data, isLoadingError, isLoading } = trpcClient.useQuery(['memory.GetMemory', { _id }]);
-  if (isLoading || !data?.memory) {
-    return <MemorySkeleton />;
-  }
+  const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
+    'memory.GetMemory',
+    { _id },
+  ]);
   if (isLoadingError) {
-    return <div>Error loading memory</div>;
+    showFailureNotification(error?.message, `memory.GetMemory(${_id})`);
+    void router.replace('/memories');
+    return <MemorySkeleton />;
+  } else if (isLoading || !data?.memory) {
+    return <MemorySkeleton />;
   }
   const { title, collections, description, firstDate, lastDate, photos } = data.memory;
 

@@ -72,10 +72,10 @@ export function AllMemoriesIndex() {
   }, [data, page, router]);
 
   let contents;
-  if (isLoading || !data) {
-    contents = <SkeletonGrid />;
-  } else if (isLoadingError) {
+  if (isLoadingError) {
     contents = <Text>Error loading memories. Try again later.</Text>;
+  } else if (isLoading || !data) {
+    contents = <SkeletonGrid />;
   } else {
     contents = (
       <>
