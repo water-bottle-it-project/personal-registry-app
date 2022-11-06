@@ -89,7 +89,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
 
     // Get dimensions of all photos
     const photoDimRequests = memory.photos.map(async p => {
-      // Only early return same dimensions if URL was not cleared - aka, same image.
+      // Only early return same dimensions if URL was not cleared - aka, same photo.
       if (p.url && p.height && p.width) {
         return { height: p.height, width: p.width };
       }
@@ -106,7 +106,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
 
     const photoDims = await Promise.all(photoDimRequests);
 
-    // Upload photos to Firebase if not already present (new or replaced image photos only)
+    // Upload photos to Firebase if not already present (new or replaced photo files only)
     const userStorageRef = storageRef(getStorage(), userId);
 
     const fileUploadRequests = memory.photos.map(async p => {

@@ -22,8 +22,8 @@
 ## :star2: About the Project
 
 SnapSave is a web app developed for COMP30022 IT Project Semester 2 2022, which allows
-users to upload memories containing optional textual descriptions and images, organise memories into
-collections, and search their memories and images.
+users to upload memories containing optional textual descriptions and photos, organise memories into
+collections, and search their memories and photos.
 
 [View deployed demo](https://personal-registry-app-zx936.ondigitalocean.app/)
 

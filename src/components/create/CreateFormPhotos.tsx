@@ -38,7 +38,6 @@ import Zoom from 'react-medium-image-zoom';
 
 import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { useDragDropStyles } from '~components/create/dragDropStyles';
-import { IMAGE_MIME_TYPES_FILE_BUTTON } from '~components/create/mimeTypes';
 import { useTextareaStyles } from '~components/create/textareaStyles';
 import { MapBoxControl } from '~components/util/MapBoxControl';
 import type { memoryCreateFormT } from '~types/memory/memoryForm';
@@ -101,7 +100,7 @@ export function CreateFormPhotos({
               </ActionIcon>
             </Tooltip>
 
-            <FileButton accept={IMAGE_MIME_TYPES_FILE_BUTTON} onChange={setFile(index)}>
+            <FileButton accept={'image/*'} onChange={setFile(index)}>
               {props => (
                 <Tooltip label='Replace photo' position='right'>
                   <ActionIcon color='indigo' size='lg' variant='light' {...props}>

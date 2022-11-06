@@ -5,7 +5,7 @@ import Link from 'next/link';
  * App logo which appears in the header.
  * @constructor
  */
-export function AppHeaderText() {
+export function AppText() {
   return (
     <>
       <Link href='/' passHref>

@@ -3,7 +3,7 @@ import { useHover } from '@mantine/hooks';
 
 import type { photoWithIdT } from '~types/photo/photo';
 
-export function MemoryImageGridItem({ caption, url, photoDate }: photoWithIdT) {
+export function MemoryPhotoGridItem({ caption, url, photoDate }: photoWithIdT) {
   const { hovered, ref } = useHover();
   const { classes, cx } = useStyles();
 

@@ -29,7 +29,6 @@ export function Features() {
   ));
 
   return (
-    // <BackgroundImage src={theme.colorScheme === 'dark' ? gradientDark.src : gradient.src}>
     <div className={classes.gradientBg}>
       <Container px={0} size='xl'>
         <Space h='xl' />

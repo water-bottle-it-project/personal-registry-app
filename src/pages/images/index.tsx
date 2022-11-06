@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 import { withAuthedPage } from '~clientUtils/authHooks';
 import { PhotosIndex } from '~components/photo/PhotosIndex';
 
-function Images() {
+function Photos() {
   return (
     <>
       <NextSeo description='My photos' title='Photos' />
@@ -12,4 +12,4 @@ function Images() {
   );
 }
 
-export default withAuthedPage(Images);
+export default withAuthedPage(Photos);

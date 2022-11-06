@@ -3,12 +3,12 @@ import { Card, Divider, Grid, Image, Space, Stack } from '@mantine/core';
 import { PhotoMeta } from '~components/photo/PhotoMeta';
 import type { photoWithIdT } from '~types/photo/photo';
 
-interface MemoryImageProps extends photoWithIdT {
+interface MemoryPhotoProps extends photoWithIdT {
   index: number;
   total: number;
 }
 
-export function MemoryImage({
+export function MemoryPhoto({
   caption,
   url,
   photoDate,
@@ -17,7 +17,7 @@ export function MemoryImage({
   height,
   index,
   total,
-}: MemoryImageProps) {
+}: MemoryPhotoProps) {
   return (
     <>
       <Grid justify='center'>
