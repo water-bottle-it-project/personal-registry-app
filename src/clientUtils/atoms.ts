@@ -3,7 +3,7 @@ import { atom } from 'jotai';
 
 import type { sortOrderT } from '~types/util/sortOrderT';
 
-const SEARCH_DELAY = 300;
+const SEARCH_DELAY = 150;
 const SEARCH_DEFAULT = '';
 const SORT_DEFAULT: sortOrderT = 'descending';
 
