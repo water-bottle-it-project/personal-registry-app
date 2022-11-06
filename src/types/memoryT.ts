@@ -61,7 +61,7 @@ const memoryIdOnlyZ = z.object({
   _id: objectIdZ,
 });
 
-// For memory/timeline cards
+// For memory cards
 const memoryCardZ = memoryBase.merge(dateSeparate).extend({
   _id: objectIdZ,
   photoPreviewUrl: urlZ.optional(),
