@@ -3,14 +3,14 @@ import { useScrollLock } from '@mantine/hooks';
 import { useState } from 'react';
 import Lightbox from 'react-18-image-lightbox';
 
-import { MemoryImageGridItem } from '~components/memory/MemoryImageGridItem';
+import { MemoryPhotoGridItem } from '~components/memory/MemoryPhotoGridItem';
 import type { photoWithIdT } from '~types/photo/photo';
 
-interface MemoryImageGridProps {
+interface MemoryPhotoGridProps {
   photos: photoWithIdT[];
 }
 
-export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
+export function MemoryPhotoGrid({ photos }: MemoryPhotoGridProps) {
   const [scrollLocked, setScrollLocked] = useScrollLock(false);
   const [photoIndex, setPhotoIndex] = useState(-1);
 
@@ -41,7 +41,7 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
           handlePhotoClick(i);
         }}
       >
-        <MemoryImageGridItem {...photos[i]} />
+        <MemoryPhotoGridItem {...photos[i]} />
       </div>
     );
     if (colCount === 0) {
@@ -53,7 +53,7 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
     }
   }
 
-  const currentImage = photos[photoIndex];
+  const currentPhoto = photos[photoIndex];
 
   return (
     <>
@@ -74,7 +74,7 @@ export function MemoryImageGrid({ photos }: MemoryImageGridProps) {
           </Stack>
         </Grid.Col>
       </Grid>
-      {!!currentImage && (
+      {!!currentPhoto && (
         <Lightbox
           imageTitle={photos[photoIndex].caption}
           mainSrc={photos[photoIndex].url}

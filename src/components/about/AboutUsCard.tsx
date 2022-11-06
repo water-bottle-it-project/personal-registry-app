@@ -29,9 +29,6 @@ export function AboutUsCard({ imgUrl, name, title }: AboutUsProps) {
       <Text align='center' size='sm'>
         {title}
       </Text>
-      {/*<Text align='center' mt='sm' weight={400}>*/}
-      {/*  {desc}*/}
-      {/*</Text>*/}
       <Space h='xs' />
     </Card>
   );

@@ -1,7 +1,7 @@
 import { Anchor, Container, createStyles, Group, Text } from '@mantine/core';
 import Link from 'next/link';
 
-import { AppHeaderText } from '~components/app/AppHeaderText';
+import { AppText } from '~components/app/AppText';
 
 interface AppLink {
   name: string;
@@ -32,7 +32,7 @@ export function AppFooter({ links }: AppFooterProps) {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner} size='xl'>
-        <AppHeaderText />
+        <AppText />
         <Text color='dimmed' size='xs' weight={300}>
           Powered by water-bottle™
         </Text>

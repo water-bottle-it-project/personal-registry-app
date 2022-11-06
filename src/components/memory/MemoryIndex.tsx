@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 import { trpcClient } from '~clientUtils/trpcClient';
 import { MemoryHeader } from '~components/memory/MemoryHeader';
-import { MemoryImage } from '~components/memory/MemoryImage';
-import { MemoryImageGrid } from '~components/memory/MemoryImageGrid';
+import { MemoryPhoto } from '~components/memory/MemoryPhoto';
+import { MemoryPhotoGrid } from '~components/memory/MemoryPhotoGrid';
 import { MemorySkeleton } from '~components/memory/MemorySkeleton';
 
 interface MemoryIndexProps {
@@ -51,10 +51,10 @@ export function MemoryIndex({ _id }: MemoryIndexProps) {
             />
             <Space h='xl' />
             {gridView ? (
-              <MemoryImageGrid photos={photos} />
+              <MemoryPhotoGrid photos={photos} />
             ) : (
               photos.map((p, i) => (
-                <MemoryImage key={p._id} {...p} index={i} total={photos.length} />
+                <MemoryPhoto key={p._id} {...p} index={i} total={photos.length} />
               ))
             )}
             <Space h='xl' />

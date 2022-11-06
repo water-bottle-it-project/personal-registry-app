@@ -99,7 +99,7 @@ const info = [
   },
   {
     title: 'Do I need to pay to use this service?',
-    answer: 'It is free to use our service until you post more than 69 images. Haha.',
+    answer: 'It is free to use our service until you post more than 69 photos. Haha.',
   },
   {
     title: 'What is love?',

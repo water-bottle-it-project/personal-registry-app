@@ -2,6 +2,7 @@ import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { ButtonProps } from '@mantine/core';
 import {
+  Alert,
   Anchor,
   Button,
   Checkbox,
@@ -11,12 +12,17 @@ import {
   PasswordInput,
   TextInput,
 } from '@mantine/core';
-import { IconArrowNarrowRight, IconAt, IconCheck, IconFingerprint } from '@tabler/icons';
+import {
+  IconAlertCircle,
+  IconArrowNarrowRight,
+  IconAt,
+  IconCheck,
+  IconFingerprint,
+} from '@tabler/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-import { AlertMessage } from '~components/util/AlertMessage';
 import type { SigninT } from '~types/signin';
 import { signinZ } from '~types/signin';
 
@@ -58,7 +64,9 @@ export function SigninForm() {
       <form noValidate onSubmit={handleSubmit(handleSignin)}>
         <Container my={10} size={420}>
           {isUnauthorized && (
-            <AlertMessage isError text='You must be signed in to access that page.' title='Error' />
+            <Alert color='red' icon={<IconAlertCircle size={16} />} title='Error'>
+              You must be signed in to access that page.
+            </Alert>
           )}
           <Paper mt={20} p={30} radius='md' shadow='md' withBorder>
             <TextInput
