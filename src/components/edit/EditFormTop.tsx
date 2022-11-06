@@ -81,24 +81,24 @@ export function EditFormTop({
         <Button
           color='red'
           disabled={isSubmitting}
+          leftIcon={<IconTrash />}
           onClick={openDeleteModal}
-          rightIcon={<IconTrash />}
         >
           Delete
         </Button>
         <Button
           disabled={isSubmitting}
+          leftIcon={<IconRotateClockwise2 />}
           onClick={resetWithCleanup}
-          rightIcon={<IconRotateClockwise2 />}
           variant='default'
         >
           Reset
         </Button>
         <Button
           disabled={isSubmitting}
+          leftIcon={<IconDeviceFloppy />}
           loaderPosition='right'
           loading={isSubmitting}
-          rightIcon={<IconDeviceFloppy />}
           type='submit'
         >
           Save edits
