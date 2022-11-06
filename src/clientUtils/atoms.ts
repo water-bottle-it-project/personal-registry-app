@@ -5,7 +5,7 @@ import type { sortOrderT } from '~types/util/sortOrderT';
 
 const SEARCH_DELAY = 250;
 
-const collectionSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
+const collectionsSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
 const memoriesSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
 const memoriesSortAtom = atom<sortOrderT>('descending');
 const photosSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
@@ -77,7 +77,7 @@ function atomWithDebounce<T>(
 
 export {
   atomWithDebounce,
-  collectionSearchAtom,
+  collectionsSearchAtom,
   memoriesSearchAtom,
   memoriesSortAtom,
   photosSearchAtom,
