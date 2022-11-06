@@ -18,7 +18,7 @@ export function CollectionCreate() {
   const creation = trpcClient.useMutation(['collection.CreateCollection']);
 
   function handleCollectionCreate({ title, color, description }: collectionOmitIdT) {
-    console.log('submitted');
+    // console.log('submitted');
     creation.mutate(
       {
         title: title,

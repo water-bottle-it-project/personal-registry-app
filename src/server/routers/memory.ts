@@ -240,10 +240,10 @@ const memoryRouter = createProtectedDbRouter()
           prev?.photos?.map((p: { p: ObjectId }) => p.toString()) || [];
 
         const prevPhotosToDelete: string[] = prevPhotoIds.filter(p => !inputPhotoIdsSet.has(p));
-        console.log(prevPhotosToDelete);
+        // console.log(prevPhotosToDelete);
 
         const res: photoWithIdT[] = await Photo.find({ _id: { $in: prevPhotosToDelete } });
-        console.log(res);
+        // console.log(res);
 
         // Delete photo data just from the database.
         await Photo.deleteMany({ _id: { $in: prev?.photos } });
@@ -288,7 +288,7 @@ const memoryRouter = createProtectedDbRouter()
 
       // Delete photos client-side (a bit easier, if silly - Firebase Admin SDK doesn't easily
       // support getting a ref from a download URL, only the client JS SDK supports it :/)
-      console.log(deleteUrls);
+      // console.log(deleteUrls);
       return deleteUrls;
     },
   });

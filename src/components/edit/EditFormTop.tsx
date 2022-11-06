@@ -16,7 +16,7 @@ export function EditFormTop({
 }: UseFormReturn<memoryEditFormT>) {
   function resetWithCleanup() {
     const photos = getValues('photos');
-    console.warn('RESETTING');
+    // console.warn('RESETTING');
     reset();
     photos.forEach(p => {
       if (p._thumbnail) {

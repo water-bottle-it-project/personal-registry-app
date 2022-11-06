@@ -40,7 +40,7 @@ export function AllMemoriesIndex() {
     { keepPreviousData: true },
   );
 
-  console.log('rendered');
+  // console.log('rendered');
 
   async function handleEnter(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

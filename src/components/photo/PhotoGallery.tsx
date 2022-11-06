@@ -19,7 +19,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
   const router = useRouter();
 
   function redirect(memoryId: string) {
-    void router.push(`/memory/${memoryId}`);
+    void router.push(`/memories/${memoryId}`);
   }
 
   const customElements: GalleryProps['uiElements'] = [
