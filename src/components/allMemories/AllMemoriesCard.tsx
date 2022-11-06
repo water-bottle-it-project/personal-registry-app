@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import type { memoryCardT } from '~types/memoryT';
 
-export function TimelineCard({
+export function AllMemoriesCard({
   _id,
   title,
   description,

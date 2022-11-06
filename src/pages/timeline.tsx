@@ -1,15 +1,15 @@
 import { NextSeo } from 'next-seo';
 
 import { withAuthedPage } from '~clientUtils/authHooks';
-import { TimelineIndex } from '~components/timeline/TimelineIndex';
+import { AllMemoriesIndex } from '~components/allMemories/AllMemoriesIndex';
 
-function Timeline() {
+function AllMemories() {
   return (
     <>
       <NextSeo description='My memories' title='Memories' />
-      <TimelineIndex />
+      <AllMemoriesIndex />
     </>
   );
 }
 
-export default withAuthedPage(Timeline);
+export default withAuthedPage(AllMemories);

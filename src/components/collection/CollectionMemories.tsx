@@ -14,7 +14,7 @@ import Lottie from 'lottie-react';
 import { NextSeo } from 'next-seo';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import { TimelineGrid } from '~components/timeline/TimelineGrid';
+import { AllMemoriesGrid } from '~components/allMemories/AllMemoriesGrid';
 import emptyLottie from '~components/util/empty-lottie.json';
 import { LinkButton } from '~components/util/LinkButton';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
@@ -37,7 +37,7 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
   } else if (data.memories.length === 0) {
     contents = <NoMemoriesFound />;
   } else {
-    contents = <TimelineGrid memories={data.memories} />;
+    contents = <AllMemoriesGrid memories={data.memories} />;
   }
 
   return (

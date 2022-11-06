@@ -23,11 +23,11 @@ import { useEffect } from 'react';
 import { memoriesSearchAtom, memoriesSortAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { usePage } from '~clientUtils/usePage';
-import { TimelineGrid } from '~components/timeline/TimelineGrid';
+import { AllMemoriesGrid } from '~components/allMemories/AllMemoriesGrid';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
 
-export function TimelineIndex() {
+export function AllMemoriesIndex() {
   const router = useRouter();
   const page = usePage();
   const currentText = useAtomValue(memoriesSearchAtom.currentValueAtom);
@@ -79,7 +79,7 @@ export function TimelineIndex() {
   } else {
     contents = (
       <>
-        <TimelineGrid memories={data.docs} />
+        <AllMemoriesGrid memories={data.docs} />
         <Space h='xl' />
         <Center>
           <Stack align='center' spacing='xs'>

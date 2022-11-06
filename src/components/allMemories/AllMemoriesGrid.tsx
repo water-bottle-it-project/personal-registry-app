@@ -1,9 +1,9 @@
 import { Grid } from '@mantine/core';
 
-import { TimelineCard } from '~components/timeline/TimelineCard';
+import { AllMemoriesCard } from '~components/allMemories/AllMemoriesCard';
 import type { memoryCardT } from '~types/memoryT';
 
-interface TimelineGridProps {
+interface AllMemoriesGridProps {
   memories: memoryCardT[];
 }
 
@@ -12,12 +12,12 @@ interface TimelineGridProps {
  * @param memories
  * @constructor
  */
-export function TimelineGrid({ memories }: TimelineGridProps) {
+export function AllMemoriesGrid({ memories }: AllMemoriesGridProps) {
   return (
     <Grid>
       {memories.map(m => (
         <Grid.Col key={m._id} md={3} sm={4} xs={6}>
-          <TimelineCard {...m} />
+          <AllMemoriesCard {...m} />
         </Grid.Col>
       ))}
     </Grid>
