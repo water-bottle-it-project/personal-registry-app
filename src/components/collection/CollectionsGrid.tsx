@@ -17,14 +17,14 @@ import { useAtom, useAtomValue } from 'jotai';
 import Link from 'next/link';
 import type { FormEvent } from 'react';
 
-import { collectionSearchAtom } from '~clientUtils/atoms';
+import { collectionsSearchAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CollectionCard } from '~components/collection/CollectionCard';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 export function CollectionsGrid() {
-  const currentText = useAtomValue(collectionSearchAtom.currentValueAtom);
-  const [debouncedText, setText] = useAtom(collectionSearchAtom.debouncedValueAtom);
+  const currentText = useAtomValue(collectionsSearchAtom.currentValueAtom);
+  const [debouncedText, setText] = useAtom(collectionsSearchAtom.debouncedValueAtom);
 
   const { data, isLoadingError, isLoading, error, isFetching, refetch } = trpcClient.useQuery(
     ['collection.GetCollections', { text: debouncedText.trim() }],
