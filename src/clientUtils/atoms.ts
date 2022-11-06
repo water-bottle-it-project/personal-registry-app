@@ -62,7 +62,7 @@ function atomWithDebounce<T>(
   });
 
   // exported atom setter to clear timeout if needed
-  const clearTimeoutAtom = atom(null, (get, set, _arg) => {
+  const clearTimeoutAtom = atom(null, (get, set) => {
     clearTimeout(get(prevTimeoutAtom));
     set(isDebouncingAtom, false);
   });

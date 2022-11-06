@@ -109,7 +109,7 @@ cannot start the app and authentication will not work.**
 
    ```
    info  - Generating static pages (18/18)
-   info  - Finalizing page optimization
+   info  - Finalizing page optimization  
    
    Route (pages)                              Size     First Load JS
    ┌ ○ /                                      57.5 kB         354 kB
@@ -119,32 +119,32 @@ cannot start the app and authentication will not work.**
    ├ λ /api/auth/signin                       0 B             223 kB
    ├ λ /api/auth/signout                      0 B             223 kB
    ├ λ /api/trpc/[trpc]                       0 B             223 kB
-   ├ ○ /collections                           5.06 kB         333 kB
-   ├ ○ /collections/[id]                      3.68 kB         305 kB
-   ├ ○ /collections/create                    2.27 kB         252 kB
-   ├ ○ /collections/edit                      445 B           328 kB
-   ├ ○ /create                                6.51 kB         628 kB
+   ├ ○ /collections                           5.26 kB         336 kB
+   ├ ○ /collections/[id]                      3.69 kB         305 kB
+   ├ ○ /collections/create                    2.25 kB         252 kB
+   ├ ○ /collections/edit                      1.25 kB         328 kB
+   ├ ○ /create                                6.49 kB         628 kB
    ├ ○ /debug/authed                          1.49 kB         224 kB
    ├ ○ /forgotpassword                        1.1 kB          247 kB
-   ├ ○ /images                                23.4 kB         262 kB
-   ├   └ css/b68d142d44689e33.css             1.59 kB
-   ├ ○ /memory/[id]                           19.4 kB         520 kB
+   ├ ○ /memories                              4.46 kB         246 kB
+   ├ ○ /memories/[id]                         19.4 kB         520 kB
    ├   └ css/b0d7eac1e0377b2a.css             1.88 kB
-   ├ ○ /memory/[id]/edit                      7.07 kB         629 kB
+   ├ ○ /memories/[id]/edit                    6.96 kB         629 kB
+   ├ ○ /photos                                23.8 kB         265 kB
+   ├   └ css/b68d142d44689e33.css             1.59 kB
    ├ ○ /profile                               6.21 kB         252 kB
-   ├ ○ /signin                                6.89 kB         253 kB
-   ├ ○ /signup                                3.8 kB          250 kB
-   └ ○ /timeline                              4.05 kB         242 kB
+   ├ ○ /signin                                6.86 kB         253 kB
+   └ ○ /signup                                3.8 kB          250 kB
    + First Load JS shared by all              223 kB
      ├ chunks/framework-9b5d6ec4444c80fa.js   45.7 kB
      ├ chunks/main-3123a443c688934f.js        30.9 kB
-     ├ chunks/pages/_app-517136af005b4650.js  145 kB
+     ├ chunks/pages/_app-9cd80874c36a686d.js  145 kB
      └ chunks/webpack-84209fb2022d3d30.js     1.05 kB
    
    λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
    ○  (Static)  automatically rendered as static HTML (uses no initial props)
    
-   ✨  Done in 22.44s.
+   ✨  Done in 22.32s.
    ```
 
    **Caution #1:** if you have other projects running, you should close them first, or else the port might
