@@ -30,19 +30,15 @@ import { memoryEditFormZ } from '~types/memoryT';
 import type { photoFormEditRequestT } from '~types/photoT';
 
 export function EditForm({ _id }: memoryIdOnlyT) {
-  const router = useRouter();
   const { data, isLoading, isLoadingError } = trpcClient.useQuery(['memory.GetMemory', { _id }]);
   const { data: collectionData } = trpcClient.useQuery(['collection.GetCollections'], {
     placeholderData: { collections: [] },
   });
 
-  if (isLoading || !data?.memory || !collectionData?.collections) {
-    return <Text>Loading memory details...</Text>;
-  }
-
   if (isLoadingError) {
-    void router.push('/memories');
     return <Text>Error loading memory to edit: memory doesn't exist</Text>;
+  } else if (isLoading || !data?.memory || !collectionData?.collections) {
+    return <Text>Loading memory details...</Text>;
   }
 
   // Process existing photos from server

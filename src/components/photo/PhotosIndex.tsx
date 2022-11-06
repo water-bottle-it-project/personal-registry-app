@@ -79,10 +79,10 @@ export function PhotosIndex() {
   // console.log(dataUpdatedAt);
 
   let contents;
-  if (isLoading || !data?.docs) {
-    contents = <SkeletonGrid />;
-  } else if (isLoadingError) {
+  if (isLoadingError) {
     contents = <Text>Error loading photos. Try again later.</Text>;
+  } else if (isLoading || !data?.docs) {
+    contents = <SkeletonGrid />;
   } else {
     contents = (
       <>

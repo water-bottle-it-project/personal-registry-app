@@ -68,6 +68,7 @@ export default withTRPC<AppRouter>({
     return {
       url: '/api/trpc',
       transformer: superjson,
+      queryClientConfig: { defaultOptions: { queries: { retry: 1 } } },
     };
   },
   ssr: false,

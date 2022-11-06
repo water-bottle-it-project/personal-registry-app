@@ -86,9 +86,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
         <Text>Error loading collection details: {error?.message}</Text>
       </Stack>
     );
-  }
-
-  if (isLoading || !data?.collection) {
+  } else if (isLoading || !data?.collection) {
     return (
       <>
         <CollectionFormSkeleton />
