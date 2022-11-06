@@ -33,7 +33,7 @@ function HeroBase() {
               <LinkButton
                 className={classes.gradientBg}
                 gradient={{ from: 'indigo', to: 'cyan' }}
-                href={id ? '/timeline' : '/signin'}
+                href={id ? '/memories' : '/signin'}
                 size='md'
                 variant='gradient'
               >

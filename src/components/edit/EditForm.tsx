@@ -41,7 +41,7 @@ export function EditForm({ _id }: memoryIdOnlyT) {
   }
 
   if (isLoadingError) {
-    void router.push('/timeline');
+    void router.push('/memories');
     return <Text>Error loading memory to edit: memory doesn't exist</Text>;
   }
 

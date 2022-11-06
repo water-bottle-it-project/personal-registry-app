@@ -7,7 +7,7 @@ import type { AppHeaderProps } from '~components/app/AppHeader';
 import { AppHeader } from '~components/app/AppHeader';
 
 const links: AppHeaderProps['links'] = [
-  { name: 'Memories', route: '/timeline' },
+  { name: 'Memories', route: '/memories' },
   { name: 'Photos', route: '/photos' },
   { name: 'Collections', route: '/collections' },
   { name: 'Create', route: '/create' },

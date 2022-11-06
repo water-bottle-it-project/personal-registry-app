@@ -44,7 +44,7 @@ export function EditFormTop({
 
           // Redirect
           await trpcUtils.invalidateQueries(['memory.GetMemories']);
-          await router.push('/timeline');
+          await router.push('/memories');
           showNotification({
             icon: <IconCheck />,
             title: 'Success!',

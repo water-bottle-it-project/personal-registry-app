@@ -13,7 +13,7 @@ const initAuth = () => {
         : new URLSearchParams(window.location.search);
       const toParam = params.get('to');
       const destination = toParam ? decodeURIComponent(toParam) : undefined;
-      return destination ?? '/timeline';
+      return destination ?? '/memories';
     },
     authPageURL: ({ ctx }) => {
       const isServerSide = typeof window === 'undefined';
