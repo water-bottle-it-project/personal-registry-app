@@ -3,13 +3,23 @@ import { atom } from 'jotai';
 
 import type { sortOrderT } from '~types/util/sortOrderT';
 
-const SEARCH_DELAY = 250;
+const SEARCH_DELAY = 300;
+const SEARCH_DEFAULT = '';
+const SORT_DEFAULT: sortOrderT = 'descending';
 
-const collectionsSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
-const memoriesSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
-const memoriesSortAtom = atom<sortOrderT>('descending');
-const photosSearchAtom = atomWithDebounce<string>('', SEARCH_DELAY);
-const photosSortAtom = atom<sortOrderT>('descending');
+const collectionsSearchAtom = atomWithDebounce<string>(SEARCH_DEFAULT, SEARCH_DELAY);
+const memoriesSearchAtom = atomWithDebounce<string>(SEARCH_DEFAULT, SEARCH_DELAY);
+const memoriesSortAtom = atom<sortOrderT>(SORT_DEFAULT);
+const photosSearchAtom = atomWithDebounce<string>(SEARCH_DEFAULT, SEARCH_DELAY);
+const photosSortAtom = atom<sortOrderT>(SORT_DEFAULT);
+
+const resetAtom = atom(null, (_get, set) => {
+  set(collectionsSearchAtom.debouncedValueAtom, SEARCH_DEFAULT);
+  set(memoriesSearchAtom.debouncedValueAtom, SEARCH_DEFAULT);
+  set(memoriesSortAtom, SORT_DEFAULT);
+  set(photosSearchAtom.debouncedValueAtom, SEARCH_DEFAULT);
+  set(photosSortAtom, SORT_DEFAULT);
+});
 
 /**
  * Like useDebouncedState, but has full integration with `jotai`, which is the simple
@@ -82,4 +92,5 @@ export {
   memoriesSortAtom,
   photosSearchAtom,
   photosSortAtom,
+  resetAtom,
 };

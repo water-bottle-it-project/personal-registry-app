@@ -3,13 +3,16 @@ import { ActionIcon, Text, Title, Tooltip } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import { NextLink } from '@mantine/next';
 import { IconLogin, IconLogout } from '@tabler/icons';
+import { useSetAtom } from 'jotai';
 import { useAuthUser } from 'next-firebase-auth';
 
+import { resetAtom } from '~clientUtils/atoms';
 import { withAuthComponent } from '~clientUtils/authHooks';
 import { trpcClient } from '~clientUtils/trpcClient';
 
 function AppUserMenuBase() {
   const { id, signOut } = useAuthUser();
+  const reset = useSetAtom(resetAtom);
 
   const trpcUtils = trpcClient.useContext();
 
@@ -17,6 +20,7 @@ function AppUserMenuBase() {
     await signOut();
     await trpcUtils.queryClient.removeQueries();
     await trpcUtils.queryClient.getQueryCache().clear();
+    reset();
   }
 
   const openModal = () =>
