@@ -1,7 +1,10 @@
 import {
   ActionIcon,
+  Button,
   Center,
+  CloseButton,
   Container,
+  Group,
   Loader,
   Pagination,
   Space,
@@ -10,28 +13,30 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { useDebouncedState } from '@mantine/hooks';
-import { IconArrowRight, IconSearch } from '@tabler/icons';
+import { IconArrowRight, IconPlus, IconSearch } from '@tabler/icons';
+import { useAtom, useAtomValue } from 'jotai';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
+import { memoriesSearchAtom, memoriesSortAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { usePage } from '~clientUtils/usePage';
 import { TimelineGrid } from '~components/timeline/TimelineGrid';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
-import type { sortOrderT } from '~types/util/sortOrderT';
 
 export function TimelineIndex() {
   const router = useRouter();
   const page = usePage();
-  const [text, setText] = useDebouncedState('', 300);
-  const [sortOrder, setSortOrder] = useState<sortOrderT>('descending');
+  const currentText = useAtomValue(memoriesSearchAtom.currentValueAtom);
+  const [debouncedText, setText] = useAtom(memoriesSearchAtom.debouncedValueAtom);
+  const [sortOrder, setSortOrder] = useAtom(memoriesSortAtom);
 
   // Lift query hook up to share search bar state with the memory results.
   const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
-    ['memory.GetMemoriesPaginated', { page, text: text.trim(), sortOrder }],
+    ['memory.GetMemoriesPaginated', { page, text: debouncedText.trim(), sortOrder }],
     { keepPreviousData: true },
   );
 
@@ -103,28 +108,39 @@ export function TimelineIndex() {
       <Container size='xl'>
         <Space h='xl' />
         <Stack spacing='sm'>
-          <Title>Your memories</Title>
+          <Group position='apart'>
+            <Title order={1}>Your memories</Title>
+            <Link href='/create' passHref>
+              <Button component='a' leftIcon={<IconPlus />}>
+                Create
+              </Button>
+            </Link>
+          </Group>
           <form onSubmit={handleEnter}>
             <TextInput
               icon={<IconSearch size={18} stroke={1.5} />}
               onChange={event => setText(event.currentTarget.value)}
               placeholder='Search your memories by title and description'
               rightSection={
-                <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
-                  {isFetching ? (
-                    <Loader color='white' size='xs' variant='dots' />
-                  ) : (
-                    <IconArrowRight size={18} stroke={1.5} />
-                  )}
-                </ActionIcon>
+                <Group position='right' pr={5} spacing={5}>
+                  {currentText && <CloseButton onClick={() => setText('')} />}
+                  <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
+                    {isFetching ? (
+                      <Loader color='white' size='xs' variant='dots' />
+                    ) : (
+                      <IconArrowRight size={18} stroke={1.5} />
+                    )}
+                  </ActionIcon>
+                </Group>
               }
-              rightSectionWidth={42}
+              rightSectionWidth={currentText ? 70 : 37}
               size='md'
+              value={currentText}
             />
             <Space h='xs' />
             <SortedControl
               defaultValue={sortOrder}
-              highlight={!!text.trim()}
+              highlight={!!currentText.trim()}
               onChangeSortOrder={setSortOrder}
             />
           </form>

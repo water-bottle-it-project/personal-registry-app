@@ -1,6 +1,7 @@
 import {
   ActionIcon,
   Button,
+  CloseButton,
   Grid,
   Group,
   Loader,
@@ -10,21 +11,23 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { useDebouncedState } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
-import { IconArrowRight, IconPlus, IconSearch, IconX } from '@tabler/icons';
+import { IconArrowRight, IconFolderPlus, IconSearch, IconX } from '@tabler/icons';
+import { useAtom, useAtomValue } from 'jotai';
 import Link from 'next/link';
 import type { FormEvent } from 'react';
 
+import { collectionSearchAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CollectionCard } from '~components/collection/CollectionCard';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 export function CollectionsGrid() {
-  const [text, setText] = useDebouncedState('', 300);
+  const currentText = useAtomValue(collectionSearchAtom.currentValueAtom);
+  const [debouncedText, setText] = useAtom(collectionSearchAtom.debouncedValueAtom);
 
   const { data, isLoadingError, isLoading, error, isFetching, refetch } = trpcClient.useQuery(
-    ['collection.GetCollections', { text: text.trim() }],
+    ['collection.GetCollections', { text: debouncedText.trim() }],
     { keepPreviousData: true },
   );
 
@@ -68,8 +71,8 @@ export function CollectionsGrid() {
         <Group position='apart'>
           <Title order={1}>Your collections</Title>
           <Link as='/collections/create' href='/collections?create=true' passHref>
-            <Button component='a' leftIcon={<IconPlus />}>
-              Add a collection
+            <Button component='a' leftIcon={<IconFolderPlus />}>
+              New
             </Button>
           </Link>
         </Group>
@@ -79,16 +82,20 @@ export function CollectionsGrid() {
             onChange={event => setText(event.currentTarget.value)}
             placeholder='Search your collections by title and description'
             rightSection={
-              <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
-                {isFetching ? (
-                  <Loader color='white' size='xs' variant='dots' />
-                ) : (
-                  <IconArrowRight size={18} stroke={1.5} />
-                )}
-              </ActionIcon>
+              <Group position='right' pr={5} spacing={5}>
+                {currentText && <CloseButton onClick={() => setText('')} />}
+                <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
+                  {isFetching ? (
+                    <Loader color='white' size='xs' variant='dots' />
+                  ) : (
+                    <IconArrowRight size={18} stroke={1.5} />
+                  )}
+                </ActionIcon>
+              </Group>
             }
-            rightSectionWidth={42}
+            rightSectionWidth={currentText ? 70 : 37}
             size='md'
+            value={currentText}
           />
         </form>
       </Stack>

@@ -23,18 +23,13 @@ export function CreateFormTop({
       <Group position='right'>
         <Button
           disabled={isSubmitting}
+          leftIcon={<IconRotateClockwise2 />}
           onClick={resetWithCleanup}
-          rightIcon={<IconRotateClockwise2 />}
           variant='default'
         >
           Reset
         </Button>
-        <Button
-          loaderPosition='right'
-          loading={isSubmitting}
-          rightIcon={<IconPlus />}
-          type='submit'
-        >
+        <Button leftIcon={<IconPlus />} loaderPosition='right' loading={isSubmitting} type='submit'>
           Create
         </Button>
       </Group>

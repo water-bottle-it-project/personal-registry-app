@@ -50,7 +50,7 @@ export function MemoryHeader({
       <Container size='xl'>
         <Group position='apart'>
           <Title>{title}</Title>
-          <LinkButton href={`/memory/${_id}/edit`} rightIcon={<IconEdit />}>
+          <LinkButton href={`/memory/${_id}/edit`} leftIcon={<IconEdit />}>
             Edit
           </LinkButton>
         </Group>

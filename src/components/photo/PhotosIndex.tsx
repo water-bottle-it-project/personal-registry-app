@@ -125,7 +125,7 @@ export function PhotosIndex() {
               placeholder='Search your photos by caption'
               rightSection={
                 <Group position='right' pr={5} spacing={5}>
-                  <CloseButton onClick={() => setText('')} />
+                  {currentText && <CloseButton onClick={() => setText('')} />}
                   <ActionIcon color='indigo' onClick={() => refetch()} size={32} variant='filled'>
                     {isFetching ? (
                       <Loader color='white' size='xs' variant='dots' />
@@ -135,14 +135,14 @@ export function PhotosIndex() {
                   </ActionIcon>
                 </Group>
               }
-              rightSectionWidth={70}
+              rightSectionWidth={currentText ? 70 : 37}
               size='md'
               value={currentText}
             />
             <Space h='xs' />
             <SortedControl
               defaultValue={sortOrder}
-              highlight={!!debouncedText.trim()}
+              highlight={!!currentText.trim()}
               onChangeSortOrder={setSortOrder}
             />
           </form>
