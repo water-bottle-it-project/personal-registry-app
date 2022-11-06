@@ -81,7 +81,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 const info = [
   {
     title: 'Why does this web app exist?',
-    answer: 'This is our capstone project for COMP30022 IT Project Semester 2 2022',
+    answer: `This is Team 55's capstone project for COMP30022 IT Project Semester 2 2022`,
   },
   {
     title: 'What tech stack do you use?',

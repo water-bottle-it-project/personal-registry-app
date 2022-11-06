@@ -56,8 +56,8 @@ export function AboutUs() {
   return (
     <>
       <Banner
-        description='We are a team of developers who develop developed applications that require
-          development, while developing developer skills.'
+        description={`We are Team 55 – codename 'water bottle™' – a team of developers who develop
+        developed applications that require development, while developing developer skills.`}
         title='About Us'
       />
       <Container size='xl'>

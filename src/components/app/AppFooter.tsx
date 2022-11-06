@@ -34,7 +34,7 @@ export function AppFooter({ links }: AppFooterProps) {
       <Container className={classes.inner} size='xl'>
         <AppText />
         <Text color='dimmed' size='xs' weight={300}>
-          Powered by water-bottle™
+          Powered by Team 55: water bottle™
         </Text>
         <Group className={classes.links}>{items}</Group>
       </Container>
