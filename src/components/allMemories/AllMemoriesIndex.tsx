@@ -15,6 +15,7 @@ import {
 } from '@mantine/core';
 import { IconArrowRight, IconPlus, IconSearch } from '@tabler/icons';
 import { useAtom, useAtomValue } from 'jotai';
+import Lottie from 'lottie-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
@@ -24,6 +25,8 @@ import { memoriesSearchAtom, memoriesSortAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { usePage } from '~clientUtils/usePage';
 import { AllMemoriesGrid } from '~components/allMemories/AllMemoriesGrid';
+import errorLottie from '~components/util/error-lottie.json';
+import { LinkButton } from '~components/util/LinkButton';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
 
@@ -35,7 +38,7 @@ export function AllMemoriesIndex() {
   const [sortOrder, setSortOrder] = useAtom(memoriesSortAtom);
 
   // Lift query hook up to share search bar state with the memory results.
-  const { data, isLoading, isLoadingError, refetch, isFetching } = trpcClient.useQuery(
+  const { data, isLoading, isLoadingError, refetch, isFetching, error } = trpcClient.useQuery(
     ['memory.GetMemoriesPaginated', { page, text: debouncedText.trim(), sortOrder }],
     { keepPreviousData: true },
   );
@@ -73,7 +76,20 @@ export function AllMemoriesIndex() {
 
   let contents;
   if (isLoadingError) {
-    contents = <Text>Error loading memories. Try again later.</Text>;
+    contents = (
+      <Stack align='center' justify='center'>
+        <Space h='md' />
+        <Lottie animationData={errorLottie} loop={false} style={{ width: '50%', maxWidth: 180 }} />
+        <Text align='center'>Error loading memories view: {error?.message}</Text>
+        <LinkButton gradient={{ from: 'indigo', to: 'cyan' }} href='/' size='md' variant='gradient'>
+          Back to homepage
+        </LinkButton>
+        <Text align='center'>
+          Memories will be automatically refetched without reloading when you refocus the window or
+          tab. You can also reload the page.
+        </Text>
+      </Stack>
+    );
   } else if (isLoading || !data) {
     contents = <SkeletonGrid />;
   } else {

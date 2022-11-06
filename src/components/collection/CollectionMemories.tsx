@@ -16,6 +16,7 @@ import { NextSeo } from 'next-seo';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { AllMemoriesGrid } from '~components/allMemories/AllMemoriesGrid';
 import emptyLottie from '~components/util/empty-lottie.json';
+import errorLottie from '~components/util/error-lottie.json';
 import { LinkButton } from '~components/util/LinkButton';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import type { collectionIdOnlyT } from '~types/collectionT';
@@ -23,15 +24,34 @@ import type { collectionIdOnlyT } from '~types/collectionT';
 export function CollectionMemories({ _id }: collectionIdOnlyT) {
   const { classes } = useStyles();
 
-  const { data, isLoadingError, isLoading } = trpcClient.useQuery([
-    'memory.GetCollectionMemories',
-    { _id: _id },
-  ]);
-  const { data: collectionData } = trpcClient.useQuery(['collection.GetCollection', { _id: _id }]);
+  const { data, isLoading } = trpcClient.useQuery(['memory.GetCollectionMemories', { _id: _id }]);
+  const {
+    data: collectionData,
+    isLoadingError,
+    error,
+  } = trpcClient.useQuery(['collection.GetCollection', { _id: _id }]);
 
   let contents;
   if (isLoadingError) {
-    contents = <Text>Error loading memories. Try again later.</Text>;
+    contents = (
+      <Stack align='center' justify='center'>
+        <Space h='md' />
+        <Lottie animationData={errorLottie} loop={false} style={{ width: '50%', maxWidth: 180 }} />
+        <Text align='center'>Error loading memories for collection: {error?.message}</Text>
+        <LinkButton
+          gradient={{ from: 'indigo', to: 'cyan' }}
+          href='/collections'
+          size='md'
+          variant='gradient'
+        >
+          View all collections
+        </LinkButton>
+        <Text align='center'>
+          Memories for this collection will be automatically refetched without reloading when you
+          refocus the window or tab. You can also reload the page.
+        </Text>
+      </Stack>
+    );
   } else if (isLoading || !data || !collectionData) {
     contents = <SkeletonGrid />;
   } else if (data.memories.length === 0) {
@@ -61,21 +81,24 @@ export function CollectionMemories({ _id }: collectionIdOnlyT) {
               {collectionData?.collection.title}
             </Text>
           </Title>
-          <Box>
-            <Title order={4} size='md'>
-              Created{' '}
-              <Text ml={4} size='sm' span weight={400}>
-                {new ObjectID(_id).getTimestamp().toDateString()}
-              </Text>
-            </Title>
-          </Box>
+          {data && collectionData && (
+            <Box>
+              <Title order={4} size='md'>
+                Created{' '}
+                <Text ml={4} size='sm' span weight={400}>
+                  {new ObjectID(_id).getTimestamp().toDateString()}
+                </Text>
+              </Title>
+            </Box>
+          )}
         </Group>
 
         <Space h='sm' />
         <Text className={classes.description}>{collectionData?.collection.description}</Text>
         <Space h='sm' />
         <Text color='dimmed'>
-          {data?.memories &&
+          {data &&
+            collectionData &&
             `${data.memories.length} ${data.memories.length === 1 ? 'memory' : 'memories'} found`}
         </Text>
         <Space h='xl' />
@@ -106,7 +129,7 @@ function NoMemoriesFound() {
           size='md'
           variant='gradient'
         >
-          Create a Memory
+          Create a memory
         </LinkButton>
       </Stack>
     </>

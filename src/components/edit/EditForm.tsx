@@ -6,9 +6,10 @@ import {
   uploadBytes,
 } from '@firebase/storage';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Stack, Text } from '@mantine/core';
+import { Space, Stack, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons';
+import Lottie from 'lottie-react';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/router';
 import { useAuthUser } from 'next-firebase-auth';
@@ -19,6 +20,8 @@ import { trpcClient } from '~clientUtils/trpcClient';
 import { EditFormMemoryInfo } from '~components/edit/EditFormMemoryInfo';
 import { EditFormPhotos } from '~components/edit/EditFormPhotos';
 import { EditFormTop } from '~components/edit/EditFormTop';
+import errorLottie from '~components/util/error-lottie.json';
+import { LinkButton } from '~components/util/LinkButton';
 import type { collectionSelectItemT } from '~types/collectionT';
 import type {
   memoryEditFormRequestT,
@@ -30,13 +33,30 @@ import { memoryEditFormZ } from '~types/memoryT';
 import type { photoFormEditRequestT } from '~types/photoT';
 
 export function EditForm({ _id }: memoryIdOnlyT) {
-  const { data, isLoading, isLoadingError } = trpcClient.useQuery(['memory.GetMemory', { _id }]);
+  const { data, isLoading, isLoadingError, error } = trpcClient.useQuery([
+    'memory.GetMemory',
+    { _id },
+  ]);
   const { data: collectionData } = trpcClient.useQuery(['collection.GetCollections'], {
     placeholderData: { collections: [] },
   });
 
   if (isLoadingError) {
-    return <Text>Error loading memory to edit: memory doesn't exist</Text>;
+    return (
+      <Stack align='center' justify='center'>
+        <Space h='md' />
+        <Lottie animationData={errorLottie} loop={false} style={{ width: '50%', maxWidth: 180 }} />
+        <Text align='center'>Error loading memory details: {error?.message}</Text>
+        <LinkButton
+          gradient={{ from: 'indigo', to: 'cyan' }}
+          href='/memories'
+          size='md'
+          variant='gradient'
+        >
+          View all memories
+        </LinkButton>
+      </Stack>
+    );
   } else if (isLoading || !data?.memory || !collectionData?.collections) {
     return <Text>Loading memory details...</Text>;
   }
