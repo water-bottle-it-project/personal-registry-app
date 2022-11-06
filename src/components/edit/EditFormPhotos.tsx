@@ -65,7 +65,7 @@ export function EditFormPhotos({ control, register, setValue }: UseFormReturn<me
         location: '',
       }));
 
-      console.log('append', photos);
+      // console.log('append', photos);
       append(photos);
     },
     [append],

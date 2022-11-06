@@ -141,7 +141,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
       collections: memory.collections,
     };
 
-    console.log(editedMemory);
+    // console.log(editedMemory);
     mutation.mutate(editedMemory, {
       onSuccess: async data => {
         // Delete files from Firebase Storage.
@@ -158,7 +158,7 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
           message: `Memory successfully edited.`,
           icon: <IconCheck />,
         });
-        await router.push(`/memory/${editedMemory._id}`);
+        await router.push(`/memories/${editedMemory._id}`);
         memory.photos.forEach(p => {
           if (p._thumbnail) {
             URL.revokeObjectURL(p._thumbnail);
@@ -171,8 +171,8 @@ function EditFormPopulated({ memory, collections }: EditFormPopulatedProps) {
   const formMethods = useForm<memoryEditFormT>({
     defaultValues: memory,
     resolver: async (data, context, options) => {
-      console.log('form data', data);
-      console.log('validation result', await zodResolver(memoryEditFormZ)(data, context, options));
+      // console.log('form data', data);
+      // console.log('validation result', await zodResolver(memoryEditFormZ)(data, context, options));
       return zodResolver(memoryEditFormZ)(data, context, options);
     },
   });

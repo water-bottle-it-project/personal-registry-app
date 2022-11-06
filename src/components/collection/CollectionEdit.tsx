@@ -27,7 +27,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
   ]);
 
   function handleCollectionEdit({ title, color, description }: collectionOmitIdT) {
-    console.log('submitted');
+    // console.log('submitted');
     mutation.mutate(
       {
         _id: props._id,
@@ -60,7 +60,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
   }
 
   function handleCollectionDelete() {
-    console.log('deletion attempted');
+    // console.log('deletion attempted');
     deletion.mutate(
       { _id: props._id },
       {

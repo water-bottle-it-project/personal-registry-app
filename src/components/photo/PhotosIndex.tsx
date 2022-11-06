@@ -45,7 +45,7 @@ export function PhotosIndex() {
       },
     );
 
-  console.log('rendered');
+  // console.log('rendered');
 
   async function handleEnter(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -76,7 +76,7 @@ export function PhotosIndex() {
     }
   }, [data, page, router]);
 
-  console.log(dataUpdatedAt);
+  // console.log(dataUpdatedAt);
 
   let contents;
   if (isLoading || !data?.docs) {

@@ -28,7 +28,7 @@ export function AllMemoriesCard({
     >
       <Card.Section>
         {photoPreviewUrl ? (
-          <Link href={`/memory/${_id}`} passHref>
+          <Link href={`/memories/${_id}`} passHref>
             <a>
               <Image
                 alt={title}
@@ -51,7 +51,7 @@ export function AllMemoriesCard({
       </Card.Section>
       <Space h='xs' />
       <Title className={classes.text} lineClamp={2} order={3} weight={600}>
-        <Link href={`/memory/${_id}`} passHref>
+        <Link href={`/memories/${_id}`} passHref>
           <Text component='a' inherit>
             {title}
           </Text>
@@ -84,7 +84,7 @@ export function AllMemoriesCard({
       <Space h='sm' />
 
       {/* Use mt='auto' to push link to bottom of card */}
-      <Link href={`/memory/${_id}`} passHref>
+      <Link href={`/memories/${_id}`} passHref>
         <Anchor component='a' mt='auto' sx={{ fontSize: 14, fontWeight: 600 }}>
           {photos.length
             ? `View ${photos.length} photo${photos.length === 1 ? '' : 's'}`
