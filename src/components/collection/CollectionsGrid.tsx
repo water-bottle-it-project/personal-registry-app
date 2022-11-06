@@ -11,15 +11,17 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import { IconArrowRight, IconFolderPlus, IconSearch, IconX } from '@tabler/icons';
+import { IconArrowRight, IconFolderPlus, IconSearch } from '@tabler/icons';
 import { useAtom, useAtomValue } from 'jotai';
+import Lottie from 'lottie-react';
 import Link from 'next/link';
 import type { FormEvent } from 'react';
 
 import { collectionsSearchAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { CollectionCard } from '~components/collection/CollectionCard';
+import errorLottie from '~components/util/error-lottie.json';
+import { LinkButton } from '~components/util/LinkButton';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 
 export function CollectionsGrid() {
@@ -38,13 +40,20 @@ export function CollectionsGrid() {
 
   let contents;
   if (isLoadingError) {
-    showNotification({
-      color: 'red',
-      icon: <IconX />,
-      title: 'Error!',
-      message: 'An error occurred while loading collections.',
-    });
-    contents = <Text>Error loading collections: {error?.message}</Text>;
+    contents = (
+      <Stack align='center' justify='center'>
+        <Space h='md' />
+        <Lottie animationData={errorLottie} loop={false} style={{ width: '50%', maxWidth: 180 }} />
+        <Text align='center'>Error loading collections view: {error?.message}</Text>
+        <LinkButton gradient={{ from: 'indigo', to: 'cyan' }} href='/' size='md' variant='gradient'>
+          Back to homepage
+        </LinkButton>
+        <Text align='center'>
+          Collections will be automatically refetched without reloading when you refocus the window
+          or tab. You can also reload the page.
+        </Text>
+      </Stack>
+    );
   } else if (isLoading || !data) {
     contents = <SkeletonGrid />;
   } else {

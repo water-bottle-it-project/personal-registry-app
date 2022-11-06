@@ -81,7 +81,10 @@ const collectionRouter = createProtectedDbRouter()
       });
 
       if (!collection) {
-        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find collection by id.' });
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: `Could not find collection with id ${input._id}.`,
+        });
       }
 
       return {

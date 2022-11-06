@@ -83,7 +83,7 @@ export function CollectionEdit(props: collectionIdOnlyT) {
     return (
       <Stack align='center' justify='center'>
         <Lottie animationData={errorLottie} loop={false} style={{ width: '30%', height: '30%' }} />
-        <Text>Error loading collection details: {error?.message}</Text>
+        <Text align='center'>Error loading collection details: {error?.message}</Text>
       </Stack>
     );
   } else if (isLoading || !data?.collection) {

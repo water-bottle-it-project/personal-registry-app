@@ -15,6 +15,7 @@ import {
 } from '@mantine/core';
 import { IconArrowRight, IconSearch } from '@tabler/icons';
 import { useAtom, useAtomValue } from 'jotai';
+import Lottie from 'lottie-react';
 import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
 import { useEffect } from 'react';
@@ -23,6 +24,8 @@ import { photosSearchAtom, photosSortAtom } from '~clientUtils/atoms';
 import { trpcClient } from '~clientUtils/trpcClient';
 import { usePage } from '~clientUtils/usePage';
 import { PhotoGallery } from '~components/photo/PhotoGallery';
+import errorLottie from '~components/util/error-lottie.json';
+import { LinkButton } from '~components/util/LinkButton';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
 
@@ -37,7 +40,7 @@ export function PhotosIndex() {
   const [debouncedText, setText] = useAtom(photosSearchAtom.debouncedValueAtom);
   const [sortOrder, setSortOrder] = useAtom(photosSortAtom);
 
-  const { data, isLoading, isLoadingError, refetch, isFetching, dataUpdatedAt } =
+  const { data, isLoading, isLoadingError, refetch, isFetching, dataUpdatedAt, error } =
     trpcClient.useQuery(
       ['photos.GetPhotosPaginated', { page, text: debouncedText.trim(), sortOrder }],
       {
@@ -80,7 +83,20 @@ export function PhotosIndex() {
 
   let contents;
   if (isLoadingError) {
-    contents = <Text>Error loading photos. Try again later.</Text>;
+    contents = (
+      <Stack align='center' justify='center'>
+        <Space h='md' />
+        <Lottie animationData={errorLottie} loop={false} style={{ width: '50%', maxWidth: 180 }} />
+        <Text align='center'>Error loading photos view: {error?.message}</Text>
+        <LinkButton gradient={{ from: 'indigo', to: 'cyan' }} href='/' size='md' variant='gradient'>
+          Back to homepage
+        </LinkButton>
+        <Text align='center'>
+          Photos will be automatically refetched without reloading when you refocus the window or
+          tab. You can also reload the page.
+        </Text>
+      </Stack>
+    );
   } else if (isLoading || !data?.docs) {
     contents = <SkeletonGrid />;
   } else {
