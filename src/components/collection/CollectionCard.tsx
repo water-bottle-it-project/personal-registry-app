@@ -1,7 +1,7 @@
 import { Anchor, Card, createStyles, Group, Stack, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
-import type { collectionT } from '~types/collection/collection';
+import type { collectionT } from '~types/collectionT';
 
 interface CollectionCardProps extends collectionT {
   postCount?: number;

@@ -18,7 +18,7 @@ import { TimelineGrid } from '~components/timeline/TimelineGrid';
 import emptyLottie from '~components/util/empty-lottie.json';
 import { LinkButton } from '~components/util/LinkButton';
 import { SkeletonGrid } from '~components/util/SkeletonGrid';
-import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
+import type { collectionIdOnlyT } from '~types/collectionT';
 
 export function CollectionMemories({ _id }: collectionIdOnlyT) {
   const { classes } = useStyles();

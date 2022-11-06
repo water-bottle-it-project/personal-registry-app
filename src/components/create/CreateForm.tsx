@@ -13,10 +13,10 @@ import { CreateFormMemoryInfo } from '~components/create/CreateFormMemoryInfo';
 import { CreateFormPhotos } from '~components/create/CreateFormPhotos';
 import { CreateFormTop } from '~components/create/CreateFormTop';
 import { ScrollToTop } from '~components/util/ScrollToTop';
-import type { collectionSelectItemT } from '~types/collection/collection';
-import type { memoryCreateFormRequestT, memoryCreateFormT } from '~types/memory/memoryForm';
-import { memoryCreateFormZ } from '~types/memory/memoryForm';
-import type { photoFormCreateRequestT } from '~types/photo/photo';
+import type { collectionSelectItemT } from '~types/collectionT';
+import type { memoryCreateFormRequestT, memoryCreateFormT } from '~types/memoryT';
+import { memoryCreateFormZ } from '~types/memoryT';
+import type { photoFormCreateRequestT } from '~types/photoT';
 
 /**
  * Initialises the create memory form and holds its child component parts.

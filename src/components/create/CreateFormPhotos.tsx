@@ -40,8 +40,8 @@ import { CreateFormDropzone } from '~components/create/CreateFormDropzone';
 import { useDragDropStyles } from '~components/create/dragDropStyles';
 import { useTextareaStyles } from '~components/create/textareaStyles';
 import { MapBoxControl } from '~components/util/MapBoxControl';
-import type { memoryCreateFormT } from '~types/memory/memoryForm';
-import type { photoFormCreateT } from '~types/photo/photo';
+import type { memoryCreateFormT } from '~types/memoryT';
+import type { photoFormCreateT } from '~types/photoT';
 
 export function CreateFormPhotos({
   control,

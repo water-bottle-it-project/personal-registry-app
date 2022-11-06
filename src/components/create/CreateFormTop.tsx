@@ -2,7 +2,7 @@ import { Button, Group, Title } from '@mantine/core';
 import { IconPlus, IconRotateClockwise2 } from '@tabler/icons';
 import type { UseFormReturn } from 'react-hook-form';
 
-import type { memoryCreateFormT } from '~types/memory/memoryForm';
+import type { memoryCreateFormT } from '~types/memoryT';
 
 export function CreateFormTop({
   reset,

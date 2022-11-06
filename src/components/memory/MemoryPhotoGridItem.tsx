@@ -1,7 +1,7 @@
 import { Card, createStyles, Group, Image, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 
-import type { photoWithIdT } from '~types/photo/photo';
+import type { photoWithIdT } from '~types/photoT';
 
 export function MemoryPhotoGridItem({ caption, url, photoDate }: photoWithIdT) {
   const { hovered, ref } = useHover();

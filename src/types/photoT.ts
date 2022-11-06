@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { objectIdZ } from '~types/util/objectId';
-import { paginationWrapperZ } from '~types/util/pagination';
-import { urlZ } from '~types/util/url';
+import { objectIdZ } from '~types/util/objectIdT';
+import { paginationWrapperZ } from '~types/util/paginationT';
+import { urlZ } from '~types/util/urlT';
 
 /**
  * Building blocks

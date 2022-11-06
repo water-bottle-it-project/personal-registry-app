@@ -1,7 +1,7 @@
 import { Card, Divider, Grid, Image, Space, Stack } from '@mantine/core';
 
 import { PhotoMeta } from '~components/photo/PhotoMeta';
-import type { photoWithIdT } from '~types/photo/photo';
+import type { photoWithIdT } from '~types/photoT';
 
 interface MemoryPhotoProps extends photoWithIdT {
   index: number;

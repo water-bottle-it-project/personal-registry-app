@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { emailZ } from '~types/util/email';
+import { emailZ } from '~types/util/emailT';
 
 const signupZ = z
   .object({

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import type { UseFormReturn } from 'react-hook-form';
 
 import { trpcClient } from '~clientUtils/trpcClient';
-import type { memoryEditFormT } from '~types/memory/memoryForm';
+import type { memoryEditFormT } from '~types/memoryT';
 
 export function EditFormTop({
   reset,

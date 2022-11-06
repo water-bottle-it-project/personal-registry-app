@@ -1,7 +1,7 @@
 import { createProtectedDbRouter } from '~server/createProtectedDbRouter';
 import { Photo } from '~server/models/photo';
-import type { photosPaginatedT, photoWithIdT } from '~types/photo/photo';
-import { paginationInputZ } from '~types/util/pagination';
+import type { photosPaginatedT, photoWithIdT } from '~types/photoT';
+import { paginationInputZ } from '~types/util/paginationT';
 
 /**
  * Router for debug operations

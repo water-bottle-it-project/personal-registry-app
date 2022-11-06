@@ -1,7 +1,7 @@
 import { Card, createStyles, Image, Space, Text } from '@mantine/core';
 import type { MouseEvent, MutableRefObject } from 'react';
 
-import type { photoWithIdT } from '~types/photo/photo';
+import type { photoWithIdT } from '~types/photoT';
 
 interface PhotoCardProps extends photoWithIdT {
   itemRef?: MutableRefObject<HTMLDivElement>;

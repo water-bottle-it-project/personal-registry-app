@@ -6,8 +6,8 @@ import type { UseFormReturn } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
 import { useTextareaStyles } from '~components/create/textareaStyles';
-import type { collectionSelectItemT } from '~types/collection/collection';
-import type { memoryEditFormT } from '~types/memory/memoryForm';
+import type { collectionSelectItemT } from '~types/collectionT';
+import type { memoryEditFormT } from '~types/memoryT';
 
 interface EditFormMemoryInfoProps extends UseFormReturn<memoryEditFormT> {
   collections: collectionSelectItemT[];

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 import { CollectionEdit } from '~components/collection/CollectionEdit';
-import type { collectionIdOnlyT } from '~types/collection/collectionIdOnly';
+import type { collectionIdOnlyT } from '~types/collectionT';
 
 export function CollectionEditModal({ _id }: collectionIdOnlyT) {
   const router = useRouter();
