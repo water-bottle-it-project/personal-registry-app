@@ -26,7 +26,7 @@ function HeroBase() {
           <Title className={classes.title}>The Personal Registry App</Title>
           <Text className={classes.heroGrid} mt='md'>
             Keep detailed records of personal artifacts, memories and events safely in this app,
-            using your preferred combination of text and images.
+            using your preferred combination of text and photos.
           </Text>
           <Grid mt={20}>
             <Grid.Col lg={2} md={3} sm={4}>
