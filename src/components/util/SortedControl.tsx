@@ -65,6 +65,8 @@ export function SortedControl({
           <Text size='sm'>
             Sorting is disabled when searching. Search results are ranked by string relevance.
           </Text>
+          <Space h='xs' />
+          <Text size='sm'>Search query and sort order are preserved when leaving the page.</Text>
         </HoverCard.Dropdown>
       </HoverCard>
     </Group>
