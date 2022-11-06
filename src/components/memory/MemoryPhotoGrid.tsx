@@ -15,7 +15,7 @@ export function MemoryPhotoGrid({ photos }: MemoryPhotoGridProps) {
   const [photoIndex, setPhotoIndex] = useState(-1);
 
   // What im trying to achieve:
-  // Distribute images on the masonry grid evenly
+  // Distribute photos on the masonry grid evenly
   // My approach:
   // Every nth photo in the photos array, switch columns and populate that column
   // This is a very naive attempt and does not respect photo order (in mobile view)

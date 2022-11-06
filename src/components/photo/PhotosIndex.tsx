@@ -27,7 +27,7 @@ import { SkeletonGrid } from '~components/util/SkeletonGrid';
 import { SortedControl } from '~components/util/SortedControl';
 
 /**
- * Photos page querying images from MongoDB
+ * Photos page querying photos from MongoDB
  * @constructor
  */
 export function PhotosIndex() {
