@@ -115,11 +115,10 @@ const memoryRouter = createProtectedDbRouter()
   .query('GetCollectionMemories', {
     input: collectionIdOnlyZ,
     async resolve({ ctx, input }) {
-      const collectionId = new mongoose.Types.ObjectId(input._id);
       const memories: memoryCardT[] = await Memory.find(
         {
           userId: ctx.userId,
-          collections: collectionId,
+          collections: input._id,
         },
         { userId: 0 },
         { sort: { lastDate: -1 } },
@@ -128,7 +127,8 @@ const memoryRouter = createProtectedDbRouter()
       if (!memories) {
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Could not find memories using collection id.',
+          message: `Could not find memories belonging to collection since collection with
+          id ${input._id} does not exist.`,
         });
       }
 
@@ -150,7 +150,10 @@ const memoryRouter = createProtectedDbRouter()
         .exec();
 
       if (!memory) {
-        throw new TRPCError({ code: 'NOT_FOUND', message: 'Could not find memory by id.' });
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: `Could not find memory with id ${input._id}.`,
+        });
       }
 
       return {

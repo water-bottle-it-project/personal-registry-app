@@ -1,7 +1,7 @@
 import 'react-18-image-lightbox/style.css';
 
-import { Container, Space, Switch } from '@mantine/core';
-import { useRouter } from 'next/router';
+import { Container, Space, Stack, Switch, Text } from '@mantine/core';
+import Lottie from 'lottie-react';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
@@ -10,7 +10,8 @@ import { MemoryHeader } from '~components/memory/MemoryHeader';
 import { MemoryPhoto } from '~components/memory/MemoryPhoto';
 import { MemoryPhotoGrid } from '~components/memory/MemoryPhotoGrid';
 import { MemorySkeleton } from '~components/memory/MemorySkeleton';
-import { showFailureNotification } from '~components/util/notificationHelpers';
+import errorLottie from '~components/util/error-lottie.json';
+import { LinkButton } from '~components/util/LinkButton';
 
 interface MemoryIndexProps {
   _id: string;
@@ -18,16 +19,33 @@ interface MemoryIndexProps {
 
 export function MemoryIndex({ _id }: MemoryIndexProps) {
   const [gridView, setGridView] = useState(false);
-  const router = useRouter();
 
   const { data, isLoadingError, isLoading, error } = trpcClient.useQuery([
     'memory.GetMemory',
     { _id },
   ]);
   if (isLoadingError) {
-    showFailureNotification(error?.message, `memory.GetMemory(${_id})`);
-    void router.replace('/memories');
-    return <MemorySkeleton />;
+    return (
+      <Container size='xl'>
+        <Stack align='center' justify='center'>
+          <Space h='md' />
+          <Lottie
+            animationData={errorLottie}
+            loop={false}
+            style={{ width: '50%', maxWidth: 180 }}
+          />
+          <Text align='center'>Error loading memory details: {error?.message}</Text>
+          <LinkButton
+            gradient={{ from: 'indigo', to: 'cyan' }}
+            href='/memories'
+            size='md'
+            variant='gradient'
+          >
+            View all memories
+          </LinkButton>
+        </Stack>
+      </Container>
+    );
   } else if (isLoading || !data?.memory) {
     return <MemorySkeleton />;
   }

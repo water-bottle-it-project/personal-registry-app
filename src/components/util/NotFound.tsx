@@ -14,7 +14,7 @@ export function NotFound() {
         <Title order={1}>Are you lost?</Title>
         <Space h='xl' />
         <LinkButton gradient={{ from: 'indigo', to: 'cyan' }} href='/' size='md' variant='gradient'>
-          BACK TO HOMEPAGE
+          Back to homepage
         </LinkButton>
       </Container>
     </>
