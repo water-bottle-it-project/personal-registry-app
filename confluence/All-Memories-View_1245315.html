@@ -1,72 +1,239 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Team 55 IT Project : All Memories View</title>
-        <link rel="stylesheet" href="styles/site.css" type="text/css" />
-        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
+  <head>
+    <title>Team 55 IT Project : All Memories View</title>
+    <link rel="stylesheet" href="styles/site.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
 
-    <body class="theme-default aui-theme-default">
-        <div id="page">
-            <div id="main" class="aui-page-panel">
-                <div id="main-header">
-                    <div id="breadcrumb-section">
-                        <ol id="breadcrumbs">
-                            <li class="first">
-                                <span><a href="index.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Interface-Design_1409060.html">Interface Design</a></span>
-                            </li>
-                                                </ol>
-                    </div>
-                    <h1 id="title-heading" class="pagetitle">
-                                                <span id="title-text">
-                            Team 55 IT Project : All Memories View
-                        </span>
-                    </h1>
-                </div>
+  <body class="theme-default aui-theme-default">
+    <div id="page">
+      <div id="main" class="aui-page-panel">
+        <div id="main-header">
+          <div id="breadcrumb-section">
+            <ol id="breadcrumbs">
+              <li class="first">
+                <span><a href="index.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Interface-Design_1409060.html">Interface Design</a></span>
+              </li>
+            </ol>
+          </div>
+          <h1 id="title-heading" class="pagetitle">
+            <span id="title-text"> Team 55 IT Project : All Memories View </span>
+          </h1>
+        </div>
 
-                <div id="content" class="view">
-                    <div class="page-metadata">
-                        
-        
-    
-        
-    
-        
-        
-            Created by <span class='author'> Ian Chen</span>, last modified on Oct 23, 2022
-                        </div>
-                    <div id="main-content" class="wiki-content group">
-                    <p>The all memories view is the main page of the site, and is the first page the user sees (if they weren’t redirected from another screen because they were not yet authenticated).</p><h2 id="AllMemoriesView-Anatomy">Anatomy</h2><p>Titled “Your memories”. Changes to “Searched memories” if doing a search</p><p>Search UI</p><ul><li><p>Search bar</p><ul><li><p>Search button</p></li><li><p>Clear search button</p></li></ul></li><li><p>Require clicking search button to actually execute query.</p><ul><li><p>Just changing dates will not require clicking search.</p></li></ul></li></ul><p>A vertical list of memories. When tapped, we go to that specific memory’s page.</p><p>Sort orders: newest first (default), oldest first, title</p><ul><li><p>Automatically sort without having to click confirm.</p></li></ul><p>Each memory is represented as a card.</p><p>Each card has a</p><ul><li><p>Image preview</p></li><li><p>Title </p></li><li><p>Description</p><ul><li><p><span style="color: rgb(0,141,166);">Trim to 2 to 3 lines at most (lineClamp)</span></p></li></ul></li><li><p>Date</p><ul><li><p>Can be a range if dates different. </p></li><li><p><span style="color: rgb(0,141,166);">If dates same, try to condense them into a single value.</span></p></li></ul></li><li><p>List of coloured tags</p></li><li><p>A link to view the memory, with the number of photos contained within</p><ul><li><p><span style="color: rgb(0,141,166);">Consider counting/$size performance with MongoDB</span></p></li></ul></li></ul><p>Cards are arranged in a grid: 1, 2 or 3 wide depending on viewport width.</p><p>Scroll-to-top button in the bottom right</p><h2 id="AllMemoriesView-Nice-to-haves">Nice-to-haves</h2><ul><li><p>Add tags to memories directly in timeline (a small + button)</p></li><li><p>Pin memories to top shelf (Favourites).</p></li></ul><h2 id="AllMemoriesView-Designchanges[EndofSprint2]"><span style="color: rgb(255,86,48);">Design changes [End of Sprint 2]</span></h2><ul><li><p>No gradient</p><ul><li><p>Keep the focus on the content, not the background</p></li></ul></li><li><p>Simplify search bar: just a search box, no checkboxes</p><ul><li><p>Users won’t want to manually specify which section to search - they may not even remember which section contained the search query!</p></li></ul></li><li><p>No collections chips</p><ul><li><p>Already can see memories belonging to a single memory only by going to Collections first</p></li></ul></li><li><p>No actual timeline: so we are renaming this page from ‘Timeline’ to ‘Memories’ [still WIP in the actual deployed website].</p></li></ul><p><strong>Screenshot: end of sprint 3</strong></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1245315/15499658.png" data-image-src="attachments/1245315/15499658.png" data-height="982" data-width="1512" data-unresolved-comment-count="0" data-linked-resource-id="15499658" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2022-10-23 at 9.25.01 pm.png" data-base-url="https://water-bottle.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1245315" data-linked-resource-container-version="10" data-media-id="bf7eee04-5ec8-495d-8ee2-74d40937c4b5" data-media-type="file"></span><p /><h2 id="AllMemoriesView-Lowleveldesign">Low level design</h2><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1245315/3080214.png" data-image-src="attachments/1245315/3080214.png" data-height="757" data-width="1129" data-unresolved-comment-count="0" data-linked-resource-id="3080214" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220813-045141.png" data-base-url="https://water-bottle.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1245315" data-linked-resource-container-version="10" data-media-id="85d82988-0038-43e1-b206-764a1042637f" data-media-type="file"></span><p /><h2 id="AllMemoriesView-Highleveldesign">High level design</h2><p><a class="external-link" data-card-appearance="inline" href="https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801" rel="nofollow">https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801</a> </p><p /><p />
-                    </div>
+        <div id="content" class="view">
+          <div class="page-metadata">
+            Created by <span class="author"> Ian Chen</span>, last modified on Oct 23, 2022
+          </div>
+          <div id="main-content" class="wiki-content group">
+            <p>
+              The all memories view is the main page of the site, and is the first page the user
+              sees (if they weren’t redirected from another screen because they were not yet
+              authenticated).
+            </p>
+            <h2 id="AllMemoriesView-Anatomy">Anatomy</h2>
+            <p>Titled “Your memories”. Changes to “Searched memories” if doing a search</p>
+            <p>Search UI</p>
+            <ul>
+              <li>
+                <p>Search bar</p>
+                <ul>
+                  <li><p>Search button</p></li>
+                  <li><p>Clear search button</p></li>
+                </ul>
+              </li>
+              <li>
+                <p>Require clicking search button to actually execute query.</p>
+                <ul>
+                  <li><p>Just changing dates will not require clicking search.</p></li>
+                </ul>
+              </li>
+            </ul>
+            <p>A vertical list of memories. When tapped, we go to that specific memory’s page.</p>
+            <p>Sort orders: newest first (default), oldest first, title</p>
+            <ul>
+              <li><p>Automatically sort without having to click confirm.</p></li>
+            </ul>
+            <p>Each memory is represented as a card.</p>
+            <p>Each card has a</p>
+            <ul>
+              <li><p>Image preview</p></li>
+              <li><p>Title</p></li>
+              <li>
+                <p>Description</p>
+                <ul>
+                  <li>
+                    <p>
+                      <span style="color: rgb(0, 141, 166)"
+                        >Trim to 2 to 3 lines at most (lineClamp)</span
+                      >
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>Date</p>
+                <ul>
+                  <li><p>Can be a range if dates different.</p></li>
+                  <li>
+                    <p>
+                      <span style="color: rgb(0, 141, 166)"
+                        >If dates same, try to condense them into a single value.</span
+                      >
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li><p>List of coloured tags</p></li>
+              <li>
+                <p>A link to view the memory, with the number of photos contained within</p>
+                <ul>
+                  <li>
+                    <p>
+                      <span style="color: rgb(0, 141, 166)"
+                        >Consider counting/$size performance with MongoDB</span
+                      >
+                    </p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <p>Cards are arranged in a grid: 1, 2 or 3 wide depending on viewport width.</p>
+            <p>Scroll-to-top button in the bottom right</p>
+            <h2 id="AllMemoriesView-Nice-to-haves">Nice-to-haves</h2>
+            <ul>
+              <li><p>Add tags to memories directly in timeline (a small + button)</p></li>
+              <li><p>Pin memories to top shelf (Favourites).</p></li>
+            </ul>
+            <h2 id="AllMemoriesView-Designchanges[EndofSprint2]">
+              <span style="color: rgb(255, 86, 48)">Design changes [End of Sprint 2]</span>
+            </h2>
+            <ul>
+              <li>
+                <p>No gradient</p>
+                <ul>
+                  <li><p>Keep the focus on the content, not the background</p></li>
+                </ul>
+              </li>
+              <li>
+                <p>Simplify search bar: just a search box, no checkboxes</p>
+                <ul>
+                  <li>
+                    <p>
+                      Users won’t want to manually specify which section to search - they may not
+                      even remember which section contained the search query!
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>No collections chips</p>
+                <ul>
+                  <li>
+                    <p>
+                      Already can see memories belonging to a single memory only by going to
+                      Collections first
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  No actual timeline: so we are renaming this page from ‘Timeline’ to ‘Memories’
+                  [still WIP in the actual deployed website].
+                </p>
+              </li>
+            </ul>
+            <p><strong>Screenshot: end of sprint 3</strong></p>
+            <span class="confluence-embedded-file-wrapper image-center-wrapper"
+              ><img
+                class="confluence-embedded-image image-center"
+                loading="lazy"
+                src="attachments/1245315/15499658.png"
+                data-image-src="attachments/1245315/15499658.png"
+                data-height="982"
+                data-width="1512"
+                data-unresolved-comment-count="0"
+                data-linked-resource-id="15499658"
+                data-linked-resource-version="1"
+                data-linked-resource-type="attachment"
+                data-linked-resource-default-alias="Screen Shot 2022-10-23 at 9.25.01 pm.png"
+                data-base-url="https://water-bottle.atlassian.net/wiki"
+                data-linked-resource-content-type="image/png"
+                data-linked-resource-container-id="1245315"
+                data-linked-resource-container-version="10"
+                data-media-id="bf7eee04-5ec8-495d-8ee2-74d40937c4b5"
+                data-media-type="file"
+            /></span>
+            <p />
+            <h2 id="AllMemoriesView-Lowleveldesign">Low level design</h2>
+            <span class="confluence-embedded-file-wrapper image-center-wrapper"
+              ><img
+                class="confluence-embedded-image image-center"
+                loading="lazy"
+                src="attachments/1245315/3080214.png"
+                data-image-src="attachments/1245315/3080214.png"
+                data-height="757"
+                data-width="1129"
+                data-unresolved-comment-count="0"
+                data-linked-resource-id="3080214"
+                data-linked-resource-version="1"
+                data-linked-resource-type="attachment"
+                data-linked-resource-default-alias="image-20220813-045141.png"
+                data-base-url="https://water-bottle.atlassian.net/wiki"
+                data-linked-resource-content-type="image/png"
+                data-linked-resource-container-id="1245315"
+                data-linked-resource-container-version="10"
+                data-media-id="85d82988-0038-43e1-b206-764a1042637f"
+                data-media-type="file"
+            /></span>
+            <p />
+            <h2 id="AllMemoriesView-Highleveldesign">High level design</h2>
+            <p>
+              <a
+                class="external-link"
+                data-card-appearance="inline"
+                href="https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801"
+                rel="nofollow"
+                >https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801</a
+              >
+            </p>
+            <p />
+            <p />
+          </div>
 
-                                        <div class="pageSection group">
-                        <div class="pageSectionHeader">
-                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
-                        </div>
-
-                        <div class="greybox" align="left">
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/1245315/3080214.png">image-20220813-045141.png</a> (image/png)
-                                <br/>
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/1245315/15499658.png">Screen Shot 2022-10-23 at 9.25.01 pm.png</a> (image/png)
-                                <br/>
-                                                    </div>
-                    </div>
-                    
-                                                      
-                </div>             </div> 
-            <div id="footer" role="contentinfo">
-                <section class="footer-body">
-                    <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-                </section>
+          <div class="pageSection group">
+            <div class="pageSectionHeader">
+              <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
             </div>
-        </div>     </body>
+
+            <div class="greybox" align="left">
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/1245315/3080214.png">image-20220813-045141.png</a> (image/png)
+              <br />
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/1245315/15499658.png"
+                >Screen Shot 2022-10-23 at 9.25.01 pm.png</a
+              >
+              (image/png)
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer" role="contentinfo">
+        <section class="footer-body">
+          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
+          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>

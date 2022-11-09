@@ -1,55 +1,331 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Team 55 IT Project : Tech Stack + Architecture</title>
-        <link rel="stylesheet" href="styles/site.css" type="text/css" />
-        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
+  <head>
+    <title>Team 55 IT Project : Tech Stack + Architecture</title>
+    <link rel="stylesheet" href="styles/site.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
 
-    <body class="theme-default aui-theme-default">
-        <div id="page">
-            <div id="main" class="aui-page-panel">
-                <div id="main-header">
-                    <div id="breadcrumb-section">
-                        <ol id="breadcrumbs">
-                            <li class="first">
-                                <span><a href="index.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-                            </li>
-                                                </ol>
-                    </div>
-                    <h1 id="title-heading" class="pagetitle">
-                                                <span id="title-text">
-                            Team 55 IT Project : Tech Stack + Architecture
-                        </span>
-                    </h1>
-                </div>
+  <body class="theme-default aui-theme-default">
+    <div id="page">
+      <div id="main" class="aui-page-panel">
+        <div id="main-header">
+          <div id="breadcrumb-section">
+            <ol id="breadcrumbs">
+              <li class="first">
+                <span><a href="index.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+              </li>
+            </ol>
+          </div>
+          <h1 id="title-heading" class="pagetitle">
+            <span id="title-text"> Team 55 IT Project : Tech Stack + Architecture </span>
+          </h1>
+        </div>
 
-                <div id="content" class="view">
-                    <div class="page-metadata">
-                        
-        
-    
-        
-    
-        
-        
-            Created by <span class='author'> Kian DSOUZA</span>, last modified by <span class='editor'> Ian Chen</span> on Nov 09, 2022
-                        </div>
-                    <div id="main-content" class="wiki-content group">
-                    <p>Team 55 will be using the following tech stack:</p><h2 id="TechStack+Architecture-Frontend">Frontend</h2><ul><li><p>Framework: Next.js (a React-based framework)</p><ul><li><p><a class="external-link" data-card-appearance="inline" href="https://beta.reactjs.org/learn/thinking-in-react" rel="nofollow">https://beta.reactjs.org/learn/thinking-in-react</a> </p></li><li><p><a class="external-link" data-card-appearance="inline" href="https://nextjs.org/learn/foundations/about-nextjs" rel="nofollow">https://nextjs.org/learn/foundations/about-nextjs</a> </p></li><li><p><a class="external-link" data-card-appearance="inline" href="https://nextjs.org/docs/getting-started" rel="nofollow">https://nextjs.org/docs/getting-started</a> </p></li><li><p><a class="external-link" data-card-appearance="inline" href="https://scrimba.com/learn/learnreact" rel="nofollow">https://scrimba.com/learn/learnreact</a>  </p></li><li><p>We chose Next.js over alternatives such as Vite and Create-React-App because it has:</p><ul><li><p>File-based routing: Paths such as <code>/memories</code> correspond to <code>/pages/memories/index.tsx</code> in the code</p></li><li><p>Static generation of HTML and JavaScript: faster load times</p></li><li><p>Built-in backend server with API routes: monorepo deployment, easier to spin up a development environment and get hot-reloading</p></li><li><p>Google Fonts and images optimization</p></li><li><p>Save time not having to configure routing, backend, fonts ourselves.</p></li></ul></li></ul></li><li><p>UI Library: <a class="external-link" href="https://mantine.dev/core/app-shell/" rel="nofollow">Mantine UI</a>, see additional <a class="external-link" href="https://ui.mantine.dev/" rel="nofollow">component examples</a></p><ul><li><p>Complicated data input components like the DateRangePicker save so much time.</p></li></ul></li></ul><h2 id="TechStack+Architecture-Backend">Backend</h2><ul><li><p>Authentication: Firebase Auth with <a class="external-link" href="https://github.com/gladly-team/next-firebase-auth" rel="nofollow">next-firebase-auth</a></p><ul><li><p>More secure than implementing auth from scratch + saves time</p></li></ul></li><li><p>Frontend-backend type-safe data fetching: <a class="external-link" href="https://trpc.io/" rel="nofollow">tRPC</a></p><ul><li><p>Type-safe backend API queries and mutations, provides autocomplete to the editor.</p></li><li><p>React-query client-side caching and updating data upon refocussing the window or tab, without reloads (very cool!).</p></li><li><p>Easy to globally protect routes using a custom authenticated router, thus improving security.</p></li><li><p>Reduces repetitive code and boilerplate.</p></li><li><p>No need to use JSON.stringify() and JSON.parse</p></li><li><p>Built-in backend validation and transforming e.g. trimming whitespace from the end of a string.</p></li></ul></li><li><p>Image blob storage: Firebase Storage</p><ul><li><p>Secure, private, each photo has a user-specific token which can’t be guessed quickly.</p></li></ul></li><li><p>Metadata database: MongoDB Atlas, using Mongoose</p><ul><li><p>Used by teammates, allows for full-text search without having to use another 3rd party service like Algolia (we would have to do this if we used PostgreSQL, for example). </p></li></ul></li><li><p>Full-text search: MongoDB Atlas Search - <a class="external-link" href="https://github.com/esteininger/atlas-search-guide" rel="nofollow">see practical examples</a></p></li></ul><h2 id="TechStack+Architecture-Testing,CI/CD,deployment">Testing, CI/CD, deployment</h2><ul><li><p>GitHub Actions for automated test-running, building the project, and linting checks.</p><ul><li><p>Free 2000 minutes of CI/CD minutes per month</p></li></ul></li><li><p>DigitalOcean: view deployed demo: <a class="external-link" data-card-appearance="inline" href="https://personal-registry-app-zx936.ondigitalocean.app/" rel="nofollow">https://personal-registry-app-zx936.ondigitalocean.app/</a></p><ul><li><p>Automatically pulls the latest from main.</p></li><li><p>Small monthly fee but its ‘serverful’ implementation is better for our particular use case than using Vercel, which creates serverless functions for the TRPC backend that are more lightweight than a full Node.js server that DigitalOcean uses, with the downside of long cold starts when calling any backend queries. Furthermore, each function invocation (which occurs per user) increases the number of connections, thus Vercel’s way cannot scale to more than ~100 concurrent users, which is the MongoDB Atlas connection limit.</p></li></ul></li></ul><p>Automated tests not done since not required + time limit, but we would have used:</p><ul><li><p>Unit tests: Jest</p></li><li><p>Integration and end-to-end tests: Playwright - <a class="external-link" href="https://github.com/trpc/examples-next-prisma-starter" rel="nofollow">example tutorial</a></p></li><li><p>Frontend Testing: React Testing Library <a class="external-link" href="https://testing-library.com/docs/react-testing-library/intro/" rel="nofollow">Docs</a></p></li></ul><h2 id="TechStack+Architecture-DeveloperExperience">Developer Experience</h2><ul><li><p>EditorConfig for basic styling such as max line length, line ending (using LF, not CRLF), tab size.</p></li><li><p>Prettier for code formatting</p></li><li><p>ESLint for ensuring good code practice &amp; preventing bad code smells, enforcing language-specific conventions e.g. function declarations, <code>const</code> vs <code>let</code>, etc.</p></li><li><p>TypeScript for strict type safety and type-checking</p></li><li><p>Pre-commit hooks to ensure the above actions are run automatically before commit, saving time.</p></li></ul><p /><p><strong><span style="color: rgb(191,38,0);">Note: to view team tools and links to the admin console for backend services and deployment, please go to </span></strong><a href="Team-Tools_66440.html" data-linked-resource-id="66440" data-linked-resource-version="17" data-linked-resource-type="page">Team Tools</a><span style="color: rgb(191,38,0);"> </span></p><p /><p />
-                    </div>
-
-                    
-                                                      
-                </div>             </div> 
-            <div id="footer" role="contentinfo">
-                <section class="footer-body">
-                    <p>Document generated by Confluence on Nov 10, 2022 00:03</p>
-                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-                </section>
-            </div>
-        </div>     </body>
+        <div id="content" class="view">
+          <div class="page-metadata">
+            Created by <span class="author"> Kian DSOUZA</span>, last modified by
+            <span class="editor"> Ian Chen</span> on Nov 09, 2022
+          </div>
+          <div id="main-content" class="wiki-content group">
+            <p>Team 55 will be using the following tech stack:</p>
+            <h2 id="TechStack+Architecture-Frontend">Frontend</h2>
+            <ul>
+              <li>
+                <p>Framework: Next.js (a React-based framework)</p>
+                <ul>
+                  <li>
+                    <p>
+                      <a
+                        class="external-link"
+                        data-card-appearance="inline"
+                        href="https://beta.reactjs.org/learn/thinking-in-react"
+                        rel="nofollow"
+                        >https://beta.reactjs.org/learn/thinking-in-react</a
+                      >
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <a
+                        class="external-link"
+                        data-card-appearance="inline"
+                        href="https://nextjs.org/learn/foundations/about-nextjs"
+                        rel="nofollow"
+                        >https://nextjs.org/learn/foundations/about-nextjs</a
+                      >
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <a
+                        class="external-link"
+                        data-card-appearance="inline"
+                        href="https://nextjs.org/docs/getting-started"
+                        rel="nofollow"
+                        >https://nextjs.org/docs/getting-started</a
+                      >
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <a
+                        class="external-link"
+                        data-card-appearance="inline"
+                        href="https://scrimba.com/learn/learnreact"
+                        rel="nofollow"
+                        >https://scrimba.com/learn/learnreact</a
+                      >
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      We chose Next.js over alternatives such as Vite and Create-React-App because
+                      it has:
+                    </p>
+                    <ul>
+                      <li>
+                        <p>
+                          File-based routing: Paths such as <code>/memories</code> correspond to
+                          <code>/pages/memories/index.tsx</code> in the code
+                        </p>
+                      </li>
+                      <li><p>Static generation of HTML and JavaScript: faster load times</p></li>
+                      <li>
+                        <p>
+                          Built-in backend server with API routes: monorepo deployment, easier to
+                          spin up a development environment and get hot-reloading
+                        </p>
+                      </li>
+                      <li><p>Google Fonts and images optimization</p></li>
+                      <li>
+                        <p>Save time not having to configure routing, backend, fonts ourselves.</p>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  UI Library:
+                  <a class="external-link" href="https://mantine.dev/core/app-shell/" rel="nofollow"
+                    >Mantine UI</a
+                  >, see additional
+                  <a class="external-link" href="https://ui.mantine.dev/" rel="nofollow"
+                    >component examples</a
+                  >
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Complicated data input components like the DateRangePicker save so much time.
+                    </p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <h2 id="TechStack+Architecture-Backend">Backend</h2>
+            <ul>
+              <li>
+                <p>
+                  Authentication: Firebase Auth with
+                  <a
+                    class="external-link"
+                    href="https://github.com/gladly-team/next-firebase-auth"
+                    rel="nofollow"
+                    >next-firebase-auth</a
+                  >
+                </p>
+                <ul>
+                  <li><p>More secure than implementing auth from scratch + saves time</p></li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  Frontend-backend type-safe data fetching:
+                  <a class="external-link" href="https://trpc.io/" rel="nofollow">tRPC</a>
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Type-safe backend API queries and mutations, provides autocomplete to the
+                      editor.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      React-query client-side caching and updating data upon refocussing the window
+                      or tab, without reloads (very cool!).
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Easy to globally protect routes using a custom authenticated router, thus
+                      improving security.
+                    </p>
+                  </li>
+                  <li><p>Reduces repetitive code and boilerplate.</p></li>
+                  <li><p>No need to use JSON.stringify() and JSON.parse</p></li>
+                  <li>
+                    <p>
+                      Built-in backend validation and transforming e.g. trimming whitespace from the
+                      end of a string.
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>Image blob storage: Firebase Storage</p>
+                <ul>
+                  <li>
+                    <p>
+                      Secure, private, each photo has a user-specific token which can’t be guessed
+                      quickly.
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>Metadata database: MongoDB Atlas, using Mongoose</p>
+                <ul>
+                  <li>
+                    <p>
+                      Used by teammates, allows for full-text search without having to use another
+                      3rd party service like Algolia (we would have to do this if we used
+                      PostgreSQL, for example).
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  Full-text search: MongoDB Atlas Search -
+                  <a
+                    class="external-link"
+                    href="https://github.com/esteininger/atlas-search-guide"
+                    rel="nofollow"
+                    >see practical examples</a
+                  >
+                </p>
+              </li>
+            </ul>
+            <h2 id="TechStack+Architecture-Testing,CI/CD,deployment">Testing, CI/CD, deployment</h2>
+            <ul>
+              <li>
+                <p>
+                  GitHub Actions for automated test-running, building the project, and linting
+                  checks.
+                </p>
+                <ul>
+                  <li><p>Free 2000 minutes of CI/CD minutes per month</p></li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  DigitalOcean: view deployed demo:
+                  <a
+                    class="external-link"
+                    data-card-appearance="inline"
+                    href="https://personal-registry-app-zx936.ondigitalocean.app/"
+                    rel="nofollow"
+                    >https://personal-registry-app-zx936.ondigitalocean.app/</a
+                  >
+                </p>
+                <ul>
+                  <li><p>Automatically pulls the latest from main.</p></li>
+                  <li>
+                    <p>
+                      Small monthly fee but its ‘serverful’ implementation is better for our
+                      particular use case than using Vercel, which creates serverless functions for
+                      the TRPC backend that are more lightweight than a full Node.js server that
+                      DigitalOcean uses, with the downside of long cold starts when calling any
+                      backend queries. Furthermore, each function invocation (which occurs per user)
+                      increases the number of connections, thus Vercel’s way cannot scale to more
+                      than ~100 concurrent users, which is the MongoDB Atlas connection limit.
+                    </p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <p>Automated tests not done since not required + time limit, but we would have used:</p>
+            <ul>
+              <li><p>Unit tests: Jest</p></li>
+              <li>
+                <p>
+                  Integration and end-to-end tests: Playwright -
+                  <a
+                    class="external-link"
+                    href="https://github.com/trpc/examples-next-prisma-starter"
+                    rel="nofollow"
+                    >example tutorial</a
+                  >
+                </p>
+              </li>
+              <li>
+                <p>
+                  Frontend Testing: React Testing Library
+                  <a
+                    class="external-link"
+                    href="https://testing-library.com/docs/react-testing-library/intro/"
+                    rel="nofollow"
+                    >Docs</a
+                  >
+                </p>
+              </li>
+            </ul>
+            <h2 id="TechStack+Architecture-DeveloperExperience">Developer Experience</h2>
+            <ul>
+              <li>
+                <p>
+                  EditorConfig for basic styling such as max line length, line ending (using LF, not
+                  CRLF), tab size.
+                </p>
+              </li>
+              <li><p>Prettier for code formatting</p></li>
+              <li>
+                <p>
+                  ESLint for ensuring good code practice &amp; preventing bad code smells, enforcing
+                  language-specific conventions e.g. function declarations, <code>const</code> vs
+                  <code>let</code>, etc.
+                </p>
+              </li>
+              <li><p>TypeScript for strict type safety and type-checking</p></li>
+              <li>
+                <p>
+                  Pre-commit hooks to ensure the above actions are run automatically before commit,
+                  saving time.
+                </p>
+              </li>
+            </ul>
+            <p />
+            <p>
+              <strong
+                ><span style="color: rgb(191, 38, 0)"
+                  >Note: to view team tools and links to the admin console for backend services and
+                  deployment, please go to
+                </span></strong
+              ><a
+                href="Team-Tools_66440.html"
+                data-linked-resource-id="66440"
+                data-linked-resource-version="17"
+                data-linked-resource-type="page"
+                >Team Tools</a
+              ><span style="color: rgb(191, 38, 0)"> </span>
+            </p>
+            <p />
+            <p />
+          </div>
+        </div>
+      </div>
+      <div id="footer" role="contentinfo">
+        <section class="footer-body">
+          <p>Document generated by Confluence on Nov 10, 2022 00:03</p>
+          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>

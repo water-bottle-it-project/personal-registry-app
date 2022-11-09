@@ -1,84 +1,226 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Team 55 IT Project : Sequence Diagrams</title>
-        <link rel="stylesheet" href="styles/site.css" type="text/css" />
-        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
+  <head>
+    <title>Team 55 IT Project : Sequence Diagrams</title>
+    <link rel="stylesheet" href="styles/site.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
 
-    <body class="theme-default aui-theme-default">
-        <div id="page">
-            <div id="main" class="aui-page-panel">
-                <div id="main-header">
-                    <div id="breadcrumb-section">
-                        <ol id="breadcrumbs">
-                            <li class="first">
-                                <span><a href="index.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="229829.html">Tech Stack + Architecture</a></span>
-                            </li>
-                                                </ol>
-                    </div>
-                    <h1 id="title-heading" class="pagetitle">
-                                                <span id="title-text">
-                            Team 55 IT Project : Sequence Diagrams
-                        </span>
-                    </h1>
-                </div>
+  <body class="theme-default aui-theme-default">
+    <div id="page">
+      <div id="main" class="aui-page-panel">
+        <div id="main-header">
+          <div id="breadcrumb-section">
+            <ol id="breadcrumbs">
+              <li class="first">
+                <span><a href="index.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="229829.html">Tech Stack + Architecture</a></span>
+              </li>
+            </ol>
+          </div>
+          <h1 id="title-heading" class="pagetitle">
+            <span id="title-text"> Team 55 IT Project : Sequence Diagrams </span>
+          </h1>
+        </div>
 
-                <div id="content" class="view">
-                    <div class="page-metadata">
-                        
-        
-    
-        
-    
-        
-        
-            Created by <span class='author'> Ian Chen</span>, last modified on Oct 30, 2022
-                        </div>
-                    <div id="main-content" class="wiki-content group">
-                    <p>We use <a class="external-link" href="https://mermaid-js.github.io/mermaid/#/" rel="nofollow">Mermaid</a> to generate these diagrams (alternatives include PlantUML). Source code is located in <code>/mermaid</code> : <a class="external-link" href="https://github.com/water-bottle-it-project/personal-registry-app/tree/main/mermaid" rel="nofollow">https://github.com/water-bottle-it-project/personal-registry-app/tree/main/mermaid</a></p><h1 id="SequenceDiagrams-Viewingtheeditpageforamemory">Viewing the edit page for a memory</h1><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/15565251/17072141.png" data-image-src="attachments/15565251/17072141.png" data-height="1183" data-width="1183" data-unresolved-comment-count="0" data-linked-resource-id="17072141" data-linked-resource-version="3" data-linked-resource-type="attachment" data-linked-resource-default-alias="mermaid-diagram-2022-10-30-105348.png" data-base-url="https://water-bottle.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="15565251" data-linked-resource-container-version="5" data-media-id="fbaa8e49-615c-44ff-a53f-8d578a3b12c6" data-media-type="file"></span><p /><h1 id="SequenceDiagrams-Savinganeditedmemory">Saving an edited memory</h1><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/15565251/16941372.png" data-image-src="attachments/15565251/16941372.png" data-height="2991" data-width="1722" data-unresolved-comment-count="0" data-linked-resource-id="16941372" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="mermaid-diagram-2022-10-30-105624.png" data-base-url="https://water-bottle.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="15565251" data-linked-resource-container-version="5" data-media-id="208d833e-9e7a-4527-a6ac-5315aabf82b5" data-media-type="file"></span><h3 id="SequenceDiagrams-NotesandTradeoffs:">Notes and Tradeoffs:</h3><ul><li><p>Split front-end and back-end editing</p><ul><li><p>Back-end handles updating MongoDB</p><ul><li><p>This is fine by convention - database update tasks should always be handled by the back-end to:</p><ol><li><p>Limit the number of connections to the database (hard limit of 500)</p></li><li><p>Keep database access token secret</p></li><li><p>Minimize client bundle size (keep page fast)</p></li></ol></li><li><p>One tradeoff: we have 4 calls to MongoDB, which are not in a single transaction</p><ul><li><p>Can be inconsistent since this is not a single transaction - if a photo is added to the same memory by the user e.g. on another device concurrently, we could get an error in the middle or end up with a stale photo not being fully deleted.</p><ul><li><p>However, in practice this is not a problem given the access patterns of users and the extremely quick metadata updates to the database</p></li></ul></li><li><p>But this is faster than locking the entire database when scaling up to thousands of users.</p></li></ul></li></ul></li><li><p>Front-end handles upload and delete from Firebase</p><ul><li><p>Multi-part uploads to the back-end first, then to Firebase, would be slower than the current approach</p></li><li><p>The Firebase Admin SDK used on the back-end does not support deleting by download URL (the URL that you see in the browser or in <code>href</code> attributes). One cannot just attempt to use the front-end SDK in the back-end, even though both are written in JavaScript, due to historical differences between the browser and Node.js standard library APIs - they are incompatible. </p></li><li><p>The trade-off is that it relies on the client’s internet connection to not be interrupted while performing the deletion.</p></li></ul></li></ul></li></ul><p />
-                    </div>
+        <div id="content" class="view">
+          <div class="page-metadata">
+            Created by <span class="author"> Ian Chen</span>, last modified on Oct 30, 2022
+          </div>
+          <div id="main-content" class="wiki-content group">
+            <p>
+              We use
+              <a class="external-link" href="https://mermaid-js.github.io/mermaid/#/" rel="nofollow"
+                >Mermaid</a
+              >
+              to generate these diagrams (alternatives include PlantUML). Source code is located in
+              <code>/mermaid</code> :
+              <a
+                class="external-link"
+                href="https://github.com/water-bottle-it-project/personal-registry-app/tree/main/mermaid"
+                rel="nofollow"
+                >https://github.com/water-bottle-it-project/personal-registry-app/tree/main/mermaid</a
+              >
+            </p>
+            <h1 id="SequenceDiagrams-Viewingtheeditpageforamemory">
+              Viewing the edit page for a memory
+            </h1>
+            <span class="confluence-embedded-file-wrapper image-center-wrapper"
+              ><img
+                class="confluence-embedded-image image-center"
+                loading="lazy"
+                src="attachments/15565251/17072141.png"
+                data-image-src="attachments/15565251/17072141.png"
+                data-height="1183"
+                data-width="1183"
+                data-unresolved-comment-count="0"
+                data-linked-resource-id="17072141"
+                data-linked-resource-version="3"
+                data-linked-resource-type="attachment"
+                data-linked-resource-default-alias="mermaid-diagram-2022-10-30-105348.png"
+                data-base-url="https://water-bottle.atlassian.net/wiki"
+                data-linked-resource-content-type="image/png"
+                data-linked-resource-container-id="15565251"
+                data-linked-resource-container-version="5"
+                data-media-id="fbaa8e49-615c-44ff-a53f-8d578a3b12c6"
+                data-media-type="file"
+            /></span>
+            <p />
+            <h1 id="SequenceDiagrams-Savinganeditedmemory">Saving an edited memory</h1>
+            <span class="confluence-embedded-file-wrapper image-center-wrapper"
+              ><img
+                class="confluence-embedded-image image-center"
+                loading="lazy"
+                src="attachments/15565251/16941372.png"
+                data-image-src="attachments/15565251/16941372.png"
+                data-height="2991"
+                data-width="1722"
+                data-unresolved-comment-count="0"
+                data-linked-resource-id="16941372"
+                data-linked-resource-version="1"
+                data-linked-resource-type="attachment"
+                data-linked-resource-default-alias="mermaid-diagram-2022-10-30-105624.png"
+                data-base-url="https://water-bottle.atlassian.net/wiki"
+                data-linked-resource-content-type="image/png"
+                data-linked-resource-container-id="15565251"
+                data-linked-resource-container-version="5"
+                data-media-id="208d833e-9e7a-4527-a6ac-5315aabf82b5"
+                data-media-type="file"
+            /></span>
+            <h3 id="SequenceDiagrams-NotesandTradeoffs:">Notes and Tradeoffs:</h3>
+            <ul>
+              <li>
+                <p>Split front-end and back-end editing</p>
+                <ul>
+                  <li>
+                    <p>Back-end handles updating MongoDB</p>
+                    <ul>
+                      <li>
+                        <p>
+                          This is fine by convention - database update tasks should always be
+                          handled by the back-end to:
+                        </p>
+                        <ol>
+                          <li>
+                            <p>
+                              Limit the number of connections to the database (hard limit of 500)
+                            </p>
+                          </li>
+                          <li><p>Keep database access token secret</p></li>
+                          <li><p>Minimize client bundle size (keep page fast)</p></li>
+                        </ol>
+                      </li>
+                      <li>
+                        <p>
+                          One tradeoff: we have 4 calls to MongoDB, which are not in a single
+                          transaction
+                        </p>
+                        <ul>
+                          <li>
+                            <p>
+                              Can be inconsistent since this is not a single transaction - if a
+                              photo is added to the same memory by the user e.g. on another device
+                              concurrently, we could get an error in the middle or end up with a
+                              stale photo not being fully deleted.
+                            </p>
+                            <ul>
+                              <li>
+                                <p>
+                                  However, in practice this is not a problem given the access
+                                  patterns of users and the extremely quick metadata updates to the
+                                  database
+                                </p>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <p>
+                              But this is faster than locking the entire database when scaling up to
+                              thousands of users.
+                            </p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p>Front-end handles upload and delete from Firebase</p>
+                    <ul>
+                      <li>
+                        <p>
+                          Multi-part uploads to the back-end first, then to Firebase, would be
+                          slower than the current approach
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          The Firebase Admin SDK used on the back-end does not support deleting by
+                          download URL (the URL that you see in the browser or in
+                          <code>href</code> attributes). One cannot just attempt to use the
+                          front-end SDK in the back-end, even though both are written in JavaScript,
+                          due to historical differences between the browser and Node.js standard
+                          library APIs - they are incompatible.
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          The trade-off is that it relies on the client’s internet connection to not
+                          be interrupted while performing the deletion.
+                        </p>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <p />
+          </div>
 
-                                        <div class="pageSection group">
-                        <div class="pageSectionHeader">
-                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
-                        </div>
-
-                        <div class="greybox" align="left">
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/15565251/17104913.png">mermaid-diagram-2022-10-30-105348.png</a> (image/png)
-                                <br/>
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/15565251/17170439.png">mermaid-diagram-2022-10-30-105348.png</a> (image/png)
-                                <br/>
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/15565251/17104928.png">mermaid-diagram-2022-10-30-105428.png</a> (image/png)
-                                <br/>
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/15565251/17072141.png">mermaid-diagram-2022-10-30-105348.png</a> (image/png)
-                                <br/>
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/15565251/17170433.png">mermaid-diagram-2022-10-30-105428.png</a> (image/png)
-                                <br/>
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/15565251/16941372.png">mermaid-diagram-2022-10-30-105624.png</a> (image/png)
-                                <br/>
-                                                    </div>
-                    </div>
-                    
-                                                      
-                </div>             </div> 
-            <div id="footer" role="contentinfo">
-                <section class="footer-body">
-                    <p>Document generated by Confluence on Nov 10, 2022 00:03</p>
-                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-                </section>
+          <div class="pageSection group">
+            <div class="pageSectionHeader">
+              <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
             </div>
-        </div>     </body>
+
+            <div class="greybox" align="left">
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/15565251/17104913.png">mermaid-diagram-2022-10-30-105348.png</a>
+              (image/png)
+              <br />
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/15565251/17170439.png">mermaid-diagram-2022-10-30-105348.png</a>
+              (image/png)
+              <br />
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/15565251/17104928.png">mermaid-diagram-2022-10-30-105428.png</a>
+              (image/png)
+              <br />
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/15565251/17072141.png">mermaid-diagram-2022-10-30-105348.png</a>
+              (image/png)
+              <br />
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/15565251/17170433.png">mermaid-diagram-2022-10-30-105428.png</a>
+              (image/png)
+              <br />
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/15565251/16941372.png">mermaid-diagram-2022-10-30-105624.png</a>
+              (image/png)
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer" role="contentinfo">
+        <section class="footer-body">
+          <p>Document generated by Confluence on Nov 10, 2022 00:03</p>
+          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>

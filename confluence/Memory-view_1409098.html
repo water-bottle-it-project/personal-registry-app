@@ -1,72 +1,186 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Team 55 IT Project : Memory view</title>
-        <link rel="stylesheet" href="styles/site.css" type="text/css" />
-        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
+  <head>
+    <title>Team 55 IT Project : Memory view</title>
+    <link rel="stylesheet" href="styles/site.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
 
-    <body class="theme-default aui-theme-default">
-        <div id="page">
-            <div id="main" class="aui-page-panel">
-                <div id="main-header">
-                    <div id="breadcrumb-section">
-                        <ol id="breadcrumbs">
-                            <li class="first">
-                                <span><a href="index.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Interface-Design_1409060.html">Interface Design</a></span>
-                            </li>
-                                                </ol>
-                    </div>
-                    <h1 id="title-heading" class="pagetitle">
-                                                <span id="title-text">
-                            Team 55 IT Project : Memory view
-                        </span>
-                    </h1>
-                </div>
+  <body class="theme-default aui-theme-default">
+    <div id="page">
+      <div id="main" class="aui-page-panel">
+        <div id="main-header">
+          <div id="breadcrumb-section">
+            <ol id="breadcrumbs">
+              <li class="first">
+                <span><a href="index.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Interface-Design_1409060.html">Interface Design</a></span>
+              </li>
+            </ol>
+          </div>
+          <h1 id="title-heading" class="pagetitle">
+            <span id="title-text"> Team 55 IT Project : Memory view </span>
+          </h1>
+        </div>
 
-                <div id="content" class="view">
-                    <div class="page-metadata">
-                        
-        
-    
-        
-    
-        
-        
-            Created by <span class='author'> Ian Chen</span>, last modified on Oct 23, 2022
-                        </div>
-                    <div id="main-content" class="wiki-content group">
-                    <p>The memory view is for viewing a single memory, which can contain many photos within it.</p><h2 id="Memoryview-Anatomy">Anatomy</h2><ul><li><p>Title</p></li><li><p>Date</p></li><li><p>Description</p></li><li><p>List of tags</p></li><li><p>Counter for the photo number that is currently visible</p></li><li><p>Vertical list of photos</p><ul><li><p>Left: photo</p></li><li><p>Right: info</p><ul><li><p>Position in gallery</p></li><li><p>Caption</p></li><li><p>Timestamp (stored in db, not from reading the file on-demand)</p></li><li><p>Location on map - either static image or static map api</p></li></ul></li></ul></li><li><p>Scroll to top button</p></li><li><p>Image gallery view</p><ul><li><p>On click: opens carousel modal with extra details</p></li></ul></li></ul><h2 id="Memoryview-Nice-to-haves">Nice-to-haves</h2><ul><li><p>Top or bottom of page: a map plotting all locations visited</p><ul><li><p>Perhaps only visible in a drop-down menu</p></li></ul></li></ul><h2 id="Memoryview-Designchanges[EndofSprint2]"><span style="color: rgb(255,86,48);">Design changes [End of Sprint 2]</span></h2><ul><li><p>No gradient</p><ul><li><p>Focus on content</p></li></ul></li><li><p>No persistent title with shrinking animation</p><ul><li><p>Not a high priority</p></li></ul></li><li><p>Combined metadata and photo info into one section</p></li><li><p>No individual tags for photos</p></li><li><p>No download, edit, delete buttons for individual photos, instead, use the unified Edit memory interface for a consistent user experience.</p></li></ul><p><strong>Screenshot: end of sprint 3</strong></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1409098/15532428.png" data-image-src="attachments/1409098/15532428.png" data-height="982" data-width="1512" data-unresolved-comment-count="0" data-linked-resource-id="15532428" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2022-10-23 at 9.25.10 pm.png" data-base-url="https://water-bottle.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1409098" data-linked-resource-container-version="7" data-media-id="f05da5bb-79c7-4adb-8339-16ba0f82750d" data-media-type="file"></span><h2 id="Memoryview-Low-leveldesign">Low-level design</h2><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1409098/3112994.png" data-image-src="attachments/1409098/3112994.png" data-height="757" data-width="1128" data-unresolved-comment-count="0" data-linked-resource-id="3112994" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220813-045858.png" data-base-url="https://water-bottle.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1409098" data-linked-resource-container-version="7" data-media-id="f928ba51-44ee-41fd-bade-3ce1ee03571d" data-media-type="file"></span><p /><h2 id="Memoryview-High-leveldesign">High-level design</h2><p><a class="external-link" data-card-appearance="inline" href="https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801" rel="nofollow">https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801</a> </p>
-                    </div>
+        <div id="content" class="view">
+          <div class="page-metadata">
+            Created by <span class="author"> Ian Chen</span>, last modified on Oct 23, 2022
+          </div>
+          <div id="main-content" class="wiki-content group">
+            <p>
+              The memory view is for viewing a single memory, which can contain many photos within
+              it.
+            </p>
+            <h2 id="Memoryview-Anatomy">Anatomy</h2>
+            <ul>
+              <li><p>Title</p></li>
+              <li><p>Date</p></li>
+              <li><p>Description</p></li>
+              <li><p>List of tags</p></li>
+              <li><p>Counter for the photo number that is currently visible</p></li>
+              <li>
+                <p>Vertical list of photos</p>
+                <ul>
+                  <li><p>Left: photo</p></li>
+                  <li>
+                    <p>Right: info</p>
+                    <ul>
+                      <li><p>Position in gallery</p></li>
+                      <li><p>Caption</p></li>
+                      <li><p>Timestamp (stored in db, not from reading the file on-demand)</p></li>
+                      <li><p>Location on map - either static image or static map api</p></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><p>Scroll to top button</p></li>
+              <li>
+                <p>Image gallery view</p>
+                <ul>
+                  <li><p>On click: opens carousel modal with extra details</p></li>
+                </ul>
+              </li>
+            </ul>
+            <h2 id="Memoryview-Nice-to-haves">Nice-to-haves</h2>
+            <ul>
+              <li>
+                <p>Top or bottom of page: a map plotting all locations visited</p>
+                <ul>
+                  <li><p>Perhaps only visible in a drop-down menu</p></li>
+                </ul>
+              </li>
+            </ul>
+            <h2 id="Memoryview-Designchanges[EndofSprint2]">
+              <span style="color: rgb(255, 86, 48)">Design changes [End of Sprint 2]</span>
+            </h2>
+            <ul>
+              <li>
+                <p>No gradient</p>
+                <ul>
+                  <li><p>Focus on content</p></li>
+                </ul>
+              </li>
+              <li>
+                <p>No persistent title with shrinking animation</p>
+                <ul>
+                  <li><p>Not a high priority</p></li>
+                </ul>
+              </li>
+              <li><p>Combined metadata and photo info into one section</p></li>
+              <li><p>No individual tags for photos</p></li>
+              <li>
+                <p>
+                  No download, edit, delete buttons for individual photos, instead, use the unified
+                  Edit memory interface for a consistent user experience.
+                </p>
+              </li>
+            </ul>
+            <p><strong>Screenshot: end of sprint 3</strong></p>
+            <span class="confluence-embedded-file-wrapper image-center-wrapper"
+              ><img
+                class="confluence-embedded-image image-center"
+                loading="lazy"
+                src="attachments/1409098/15532428.png"
+                data-image-src="attachments/1409098/15532428.png"
+                data-height="982"
+                data-width="1512"
+                data-unresolved-comment-count="0"
+                data-linked-resource-id="15532428"
+                data-linked-resource-version="1"
+                data-linked-resource-type="attachment"
+                data-linked-resource-default-alias="Screen Shot 2022-10-23 at 9.25.10 pm.png"
+                data-base-url="https://water-bottle.atlassian.net/wiki"
+                data-linked-resource-content-type="image/png"
+                data-linked-resource-container-id="1409098"
+                data-linked-resource-container-version="7"
+                data-media-id="f05da5bb-79c7-4adb-8339-16ba0f82750d"
+                data-media-type="file"
+            /></span>
+            <h2 id="Memoryview-Low-leveldesign">Low-level design</h2>
+            <span class="confluence-embedded-file-wrapper image-center-wrapper"
+              ><img
+                class="confluence-embedded-image image-center"
+                loading="lazy"
+                src="attachments/1409098/3112994.png"
+                data-image-src="attachments/1409098/3112994.png"
+                data-height="757"
+                data-width="1128"
+                data-unresolved-comment-count="0"
+                data-linked-resource-id="3112994"
+                data-linked-resource-version="1"
+                data-linked-resource-type="attachment"
+                data-linked-resource-default-alias="image-20220813-045858.png"
+                data-base-url="https://water-bottle.atlassian.net/wiki"
+                data-linked-resource-content-type="image/png"
+                data-linked-resource-container-id="1409098"
+                data-linked-resource-container-version="7"
+                data-media-id="f928ba51-44ee-41fd-bade-3ce1ee03571d"
+                data-media-type="file"
+            /></span>
+            <p />
+            <h2 id="Memoryview-High-leveldesign">High-level design</h2>
+            <p>
+              <a
+                class="external-link"
+                data-card-appearance="inline"
+                href="https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801"
+                rel="nofollow"
+                >https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801</a
+              >
+            </p>
+          </div>
 
-                                        <div class="pageSection group">
-                        <div class="pageSectionHeader">
-                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
-                        </div>
-
-                        <div class="greybox" align="left">
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/1409098/3112994.png">image-20220813-045858.png</a> (image/png)
-                                <br/>
-                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
-                                <a href="attachments/1409098/15532428.png">Screen Shot 2022-10-23 at 9.25.10 pm.png</a> (image/png)
-                                <br/>
-                                                    </div>
-                    </div>
-                    
-                                                      
-                </div>             </div> 
-            <div id="footer" role="contentinfo">
-                <section class="footer-body">
-                    <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-                </section>
+          <div class="pageSection group">
+            <div class="pageSectionHeader">
+              <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
             </div>
-        </div>     </body>
+
+            <div class="greybox" align="left">
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/1409098/3112994.png">image-20220813-045858.png</a> (image/png)
+              <br />
+              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
+              <a href="attachments/1409098/15532428.png"
+                >Screen Shot 2022-10-23 at 9.25.10 pm.png</a
+              >
+              (image/png)
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer" role="contentinfo">
+        <section class="footer-body">
+          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
+          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>

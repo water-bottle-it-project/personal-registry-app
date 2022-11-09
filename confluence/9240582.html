@@ -1,58 +1,329 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Team 55 IT Project : Presentation Outline [old]</title>
-        <link rel="stylesheet" href="styles/site.css" type="text/css" />
-        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
+  <head>
+    <title>Team 55 IT Project : Presentation Outline [old]</title>
+    <link rel="stylesheet" href="styles/site.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
 
-    <body class="theme-default aui-theme-default">
-        <div id="page">
-            <div id="main" class="aui-page-panel">
-                <div id="main-header">
-                    <div id="breadcrumb-section">
-                        <ol id="breadcrumbs">
-                            <li class="first">
-                                <span><a href="index.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-                            </li>
-                                                    <li>
-                                <span><a href="Presentation_9338881.html">Presentation</a></span>
-                            </li>
-                                                </ol>
-                    </div>
-                    <h1 id="title-heading" class="pagetitle">
-                                                <span id="title-text">
-                            Team 55 IT Project : Presentation Outline [old]
-                        </span>
-                    </h1>
-                </div>
+  <body class="theme-default aui-theme-default">
+    <div id="page">
+      <div id="main" class="aui-page-panel">
+        <div id="main-header">
+          <div id="breadcrumb-section">
+            <ol id="breadcrumbs">
+              <li class="first">
+                <span><a href="index.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+              </li>
+              <li>
+                <span><a href="Presentation_9338881.html">Presentation</a></span>
+              </li>
+            </ol>
+          </div>
+          <h1 id="title-heading" class="pagetitle">
+            <span id="title-text"> Team 55 IT Project : Presentation Outline [old] </span>
+          </h1>
+        </div>
 
-                <div id="content" class="view">
-                    <div class="page-metadata">
-                        
-        
-    
-        
-    
-        
-        
-            Created by <span class='author'> Jack Woodman</span>, last modified by <span class='editor'> Ian Chen</span> on Oct 23, 2022
-                        </div>
-                    <div id="main-content" class="wiki-content group">
-                    <ul><li><p>Below are the requirements for the presentation (due October 22), please add dot-points for each as you see fit for things you want to expand/show off in the presentation</p></li></ul><h1 id="PresentationOutline[old]-RequiredAreas">Required Areas</h1><h3 id="PresentationOutline[old]-Teamdetails">Team details</h3><ul><li><p>Dot point</p></li></ul><h3 id="PresentationOutline[old]-OverallRequirements">Overall Requirements</h3><ul><li><p>High level requirement:</p><ul><li><p>a photo storage app with a focus on reminiscing.</p></li><li><p>provides facilities for organising photos into ‘Memories’, providing chronological and spatial context, and ‘Collections’, providing content context</p></li><li><p>needs to be easy to review the stored photos and find a specific one</p></li></ul></li><li><p>Functional requirements:</p><ul><li><p>Need to be able to post photos grouped into a memory, with ability to tag by date, location and content. This is more focused on reminiscing and remembering memories </p></li><li><p>Memories however shouldn’t rely solely on photos, and can exist just as a title and/or description</p></li><li><p>Collections allow photos across memories to be grouped/tagged. This is more focused on finding specific photos or types of photos, regardless of their respective memories</p></li><li><p>Being easy to edit is key, from the Memories (title, description, photos contained) to the collections and to the user’s Profile itself</p></li><li><p>Search is also important, especially when you don’t know specifically what you’re searching for. This means the user needs to be able to use whatever information they <em>do</em> have to find what they want - captions, date, etc.</p></li><li><p>And of course, being a photo storage app the user should be able to easily view their photos in full detail, alongside important metadata that might be useful, and should be able to download photos are they please.</p></li></ul></li></ul><h3 id="PresentationOutline[old]-Design">Design</h3><p>(these need expansion)</p><ul><li><p><strong>Frontend</strong>:<br/><br/>      <strong>Framework</strong></p><ul><li><p>React-based framework in the form of Next.js </p></li><li><p>We used the Mantine UI library to easily create a cohesive and pleasant UI. Everything from font sizes to text colors is standardized across the registry<br/><br/><strong>Responsive Design</strong></p></li><li><p>When designing the frontend, we’ve made sure to keep responsive design in mind. With this approach, we reduced the risk of having to change a certain component after the fact.</p></li><li><p>Our app is fully responsive<br/><br/></p></li></ul></li><li><p><strong>Backend:</strong></p><ul><li><p>Firebase Auth was selected for user authentication for…</p></li><li><p>Image blob storage was done using Firebase Storage for…</p></li><li><p>tRPC was selected for type-safe data fetching for..</p></li><li><p>We used MongoDB Atlas for storing our Metadata DB, and MongoDB Atlas Search for full-text search. This is because..</p></li></ul></li></ul><h3 id="PresentationOutline[old]-TechnologiesUsed">Technologies Used</h3><ul><li><p><strong>User Interface Design</strong></p><ul><li><p>high-level UI was done using Figma. This was chosen because of its excellent collaboration abilities as well as it’s easy integration with Mantine UI library components, giving us a very accurate representation of our site would appear with minimal effort. This made it easy to convey our design decisions to the client without having to build it all first, and meant major design decisions could be made early, before implementation</p></li><li><p>low-level UI was done using Excalidraw. It also allows for easy collaboration, but also doesn’t mess around with unimportant (at this level) decisions such as colours and fonts - instead it allows for quick and dirty prototyping to sketch the vague concepts, which can be agreed upon at this level, before being fleshed out in high-level design.</p></li></ul></li><li><p><strong>Location</strong></p><ul><li><p>Location Integration was achieved by using <a class="external-link" href="https://docs.mapbox.com/mapbox-gl-js/" rel="nofollow">Mapbox GL JS library</a> (built on WebGL), and <a rel="nofollow">Mapbox Geocoding API</a>.<br/></p></li><li><p>Location features implemented in our app are:<br/>1. Displaying an interactive map and a marker based on location data (stored as a string) of an image<br/>2. String-based location search in the interactive map for creating and editing a memory.<br/></p></li><li><p>These features were implemented using two concepts:<br/><br/><strong>Forward Geocoding</strong><br/>Converts location text into geographic coordinates. It enables us to accurately place a marker on the map.<br/><br/><strong>Reverse Geocoding</strong><br/>Converts geographic coordinates into location text (strings). This allows us to store and display meaningful location data represented by text. In our app, this text also allows us to search for the location of a photo and place the marker on the map for display in the metadata section of a photo.</p></li></ul></li></ul><h3 id="PresentationOutline[old]-CommunicationToolsUsed">Communication Tools Used</h3><ul><li><p>Because it is difficult to organise meetings given the busy the schedules of 5 people, the team made use of asynchronous communication in the form of Slack messaging and Github Comments, to still allow for conversations to occur and progress to be made. </p><ul><li><p>This also provides the benefit of documenting conversation and solutions to questions asked for future reference, as well as keeping all team members in the loop</p></li><li><p>Slack also has excellent Jira and Github integration, providing bots that notify the team of deployment, pushes to main, pull requests, Jira ticket updates and changes to our Confluence documentation. This kept us up-to-date without having to log in constantly and potentially missing an important update</p></li></ul></li><li><p>The team also met (outside of workshop) at least once over Zoom, in order to review the weeks work and plan ahead, as well as to ask questions. This allowed for quicker conversation of important topics, as well as demonstrations of certain technologies.</p><ul><li><p>For reference, all Zoom meetings were documented (content covered, plans for future, actionable items etc.)  in the team Confluence</p></li></ul></li><li><p>The team Confluence was used for documentation, so that the team members can communicate their changes and design decisions for easy reference </p></li><li><p>Since our client preferred asynchronous communication, we also supplemented Zoom meetings with documents that provide updates outlining our progress.</p></li></ul><h3 id="PresentationOutline[old]-WhatWasDelivered">What Was Delivered</h3><p /><p /><h3 id="PresentationOutline[old]-KeyChallenges">Key Challenges</h3><ul><li><p>Delegating work efficiently - different levels of experience and competency</p></li><li><p>Maintaining code standards and interoperability of code, across five people with different styles</p></li></ul><p /><h3 id="PresentationOutline[old]-KeyAccomplishments(Thingswewanttoshowoff)">Key Accomplishments (Things we want to show off)</h3><p /><p /><h3 id="PresentationOutline[old]-LiveDemo">Live Demo</h3><ul><li><p>was recommended that we try to tick off our test criteria during the live demo</p></li><li><p>Also recommended to have some sort of ‘story’ play out - e.g. an example of a user trying to do accomplish a specific task, and as they accomplish it they use/show off all the main features of the product</p></li></ul>
-                    </div>
-
-                    
-                                                      
-                </div>             </div> 
-            <div id="footer" role="contentinfo">
-                <section class="footer-body">
-                    <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-                </section>
-            </div>
-        </div>     </body>
+        <div id="content" class="view">
+          <div class="page-metadata">
+            Created by <span class="author"> Jack Woodman</span>, last modified by
+            <span class="editor"> Ian Chen</span> on Oct 23, 2022
+          </div>
+          <div id="main-content" class="wiki-content group">
+            <ul>
+              <li>
+                <p>
+                  Below are the requirements for the presentation (due October 22), please add
+                  dot-points for each as you see fit for things you want to expand/show off in the
+                  presentation
+                </p>
+              </li>
+            </ul>
+            <h1 id="PresentationOutline[old]-RequiredAreas">Required Areas</h1>
+            <h3 id="PresentationOutline[old]-Teamdetails">Team details</h3>
+            <ul>
+              <li><p>Dot point</p></li>
+            </ul>
+            <h3 id="PresentationOutline[old]-OverallRequirements">Overall Requirements</h3>
+            <ul>
+              <li>
+                <p>High level requirement:</p>
+                <ul>
+                  <li><p>a photo storage app with a focus on reminiscing.</p></li>
+                  <li>
+                    <p>
+                      provides facilities for organising photos into ‘Memories’, providing
+                      chronological and spatial context, and ‘Collections’, providing content
+                      context
+                    </p>
+                  </li>
+                  <li>
+                    <p>needs to be easy to review the stored photos and find a specific one</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>Functional requirements:</p>
+                <ul>
+                  <li>
+                    <p>
+                      Need to be able to post photos grouped into a memory, with ability to tag by
+                      date, location and content. This is more focused on reminiscing and
+                      remembering memories
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Memories however shouldn’t rely solely on photos, and can exist just as a
+                      title and/or description
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Collections allow photos across memories to be grouped/tagged. This is more
+                      focused on finding specific photos or types of photos, regardless of their
+                      respective memories
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Being easy to edit is key, from the Memories (title, description, photos
+                      contained) to the collections and to the user’s Profile itself
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Search is also important, especially when you don’t know specifically what
+                      you’re searching for. This means the user needs to be able to use whatever
+                      information they <em>do</em> have to find what they want - captions, date,
+                      etc.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      And of course, being a photo storage app the user should be able to easily
+                      view their photos in full detail, alongside important metadata that might be
+                      useful, and should be able to download photos are they please.
+                    </p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <h3 id="PresentationOutline[old]-Design">Design</h3>
+            <p>(these need expansion)</p>
+            <ul>
+              <li>
+                <p>
+                  <strong>Frontend</strong>:<br /><br />
+                  <strong>Framework</strong>
+                </p>
+                <ul>
+                  <li><p>React-based framework in the form of Next.js</p></li>
+                  <li>
+                    <p>
+                      We used the Mantine UI library to easily create a cohesive and pleasant UI.
+                      Everything from font sizes to text colors is standardized across the
+                      registry<br /><br /><strong>Responsive Design</strong>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      When designing the frontend, we’ve made sure to keep responsive design in
+                      mind. With this approach, we reduced the risk of having to change a certain
+                      component after the fact.
+                    </p>
+                  </li>
+                  <li>
+                    <p>Our app is fully responsive<br /><br /></p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p><strong>Backend:</strong></p>
+                <ul>
+                  <li><p>Firebase Auth was selected for user authentication for…</p></li>
+                  <li><p>Image blob storage was done using Firebase Storage for…</p></li>
+                  <li><p>tRPC was selected for type-safe data fetching for..</p></li>
+                  <li>
+                    <p>
+                      We used MongoDB Atlas for storing our Metadata DB, and MongoDB Atlas Search
+                      for full-text search. This is because..
+                    </p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <h3 id="PresentationOutline[old]-TechnologiesUsed">Technologies Used</h3>
+            <ul>
+              <li>
+                <p><strong>User Interface Design</strong></p>
+                <ul>
+                  <li>
+                    <p>
+                      high-level UI was done using Figma. This was chosen because of its excellent
+                      collaboration abilities as well as it’s easy integration with Mantine UI
+                      library components, giving us a very accurate representation of our site would
+                      appear with minimal effort. This made it easy to convey our design decisions
+                      to the client without having to build it all first, and meant major design
+                      decisions could be made early, before implementation
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      low-level UI was done using Excalidraw. It also allows for easy collaboration,
+                      but also doesn’t mess around with unimportant (at this level) decisions such
+                      as colours and fonts - instead it allows for quick and dirty prototyping to
+                      sketch the vague concepts, which can be agreed upon at this level, before
+                      being fleshed out in high-level design.
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p><strong>Location</strong></p>
+                <ul>
+                  <li>
+                    <p>
+                      Location Integration was achieved by using
+                      <a
+                        class="external-link"
+                        href="https://docs.mapbox.com/mapbox-gl-js/"
+                        rel="nofollow"
+                        >Mapbox GL JS library</a
+                      >
+                      (built on WebGL), and <a rel="nofollow">Mapbox Geocoding API</a>.<br />
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Location features implemented in our app are:<br />1. Displaying an
+                      interactive map and a marker based on location data (stored as a string) of an
+                      image<br />2. String-based location search in the interactive map for creating
+                      and editing a memory.<br />
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      These features were implemented using two concepts:<br /><br /><strong
+                        >Forward Geocoding</strong
+                      ><br />Converts location text into geographic coordinates. It enables us to
+                      accurately place a marker on the map.<br /><br /><strong
+                        >Reverse Geocoding</strong
+                      ><br />Converts geographic coordinates into location text (strings). This
+                      allows us to store and display meaningful location data represented by text.
+                      In our app, this text also allows us to search for the location of a photo and
+                      place the marker on the map for display in the metadata section of a photo.
+                    </p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <h3 id="PresentationOutline[old]-CommunicationToolsUsed">Communication Tools Used</h3>
+            <ul>
+              <li>
+                <p>
+                  Because it is difficult to organise meetings given the busy the schedules of 5
+                  people, the team made use of asynchronous communication in the form of Slack
+                  messaging and Github Comments, to still allow for conversations to occur and
+                  progress to be made.
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      This also provides the benefit of documenting conversation and solutions to
+                      questions asked for future reference, as well as keeping all team members in
+                      the loop
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Slack also has excellent Jira and Github integration, providing bots that
+                      notify the team of deployment, pushes to main, pull requests, Jira ticket
+                      updates and changes to our Confluence documentation. This kept us up-to-date
+                      without having to log in constantly and potentially missing an important
+                      update
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  The team also met (outside of workshop) at least once over Zoom, in order to
+                  review the weeks work and plan ahead, as well as to ask questions. This allowed
+                  for quicker conversation of important topics, as well as demonstrations of certain
+                  technologies.
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      For reference, all Zoom meetings were documented (content covered, plans for
+                      future, actionable items etc.) in the team Confluence
+                    </p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  The team Confluence was used for documentation, so that the team members can
+                  communicate their changes and design decisions for easy reference
+                </p>
+              </li>
+              <li>
+                <p>
+                  Since our client preferred asynchronous communication, we also supplemented Zoom
+                  meetings with documents that provide updates outlining our progress.
+                </p>
+              </li>
+            </ul>
+            <h3 id="PresentationOutline[old]-WhatWasDelivered">What Was Delivered</h3>
+            <p />
+            <p />
+            <h3 id="PresentationOutline[old]-KeyChallenges">Key Challenges</h3>
+            <ul>
+              <li>
+                <p>Delegating work efficiently - different levels of experience and competency</p>
+              </li>
+              <li>
+                <p>
+                  Maintaining code standards and interoperability of code, across five people with
+                  different styles
+                </p>
+              </li>
+            </ul>
+            <p />
+            <h3 id="PresentationOutline[old]-KeyAccomplishments(Thingswewanttoshowoff)">
+              Key Accomplishments (Things we want to show off)
+            </h3>
+            <p />
+            <p />
+            <h3 id="PresentationOutline[old]-LiveDemo">Live Demo</h3>
+            <ul>
+              <li>
+                <p>
+                  was recommended that we try to tick off our test criteria during the live demo
+                </p>
+              </li>
+              <li>
+                <p>
+                  Also recommended to have some sort of ‘story’ play out - e.g. an example of a user
+                  trying to do accomplish a specific task, and as they accomplish it they use/show
+                  off all the main features of the product
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="footer" role="contentinfo">
+        <section class="footer-body">
+          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
+          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>
