@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team 55 IT Project : Client Meeting 2</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Team 55 IT Project</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Client-Correspondence_33168.html">Client Correspondence</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Team 55 IT Project : Client Meeting 2
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jack Woodman</span>, last modified by <span class='editor'> Ian Chen</span> on Sep 02, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Date: <time datetime="2022-08-14" class="date-past">14 Aug 2022</time></p><p>Time: 4pm - 4:30pm AEST</p><p>Location: Online - Zoom</p><h2 id="ClientMeeting2-Agenda:"><strong>Agenda:</strong></h2><ol><li><p>Present design mockup to client</p><ol><li><p><a class="external-link" data-card-appearance="inline" href="https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2488%3A799" rel="nofollow">https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2488%3A799</a> </p></li><li><p>get feedback on design / propose changes</p></li></ol></li><li><p>Review requirements with client</p></li><li><p>Ask whether ‘All Photos’ view is required</p><ol><li><p>if so, ask whether he wants <em>Chronological View</em> (A1, A2, B2, A3, B3) or <em>Posts View</em> (A1, A2, A3, B1, B2, B3)</p></li></ol></li></ol><h2 id="ClientMeeting2-Topicsdiscussed"><strong>Topics discussed</strong></h2><ol><li><p>Design mockup and <strong>new requirements.</strong></p><ol><li><p>Sorting memories and photos by date asc and desc</p></li><li><p>Allow memories with 0 photos, just text</p><ol><li><p>Rich text editor for the description box would be a good approach</p></li><li><p>Note that titles are the bare minimum requirement for a memory</p></li></ol></li><li><p>Deletion of memories and individual photos</p></li><li><p>Search by date and date range (use a DatePicker component)</p></li><li><p>Photos A1 B1 B2 A3 A4 - true chronological order</p></li></ol></li><li><p>Colour</p><ol><li><p>blue, “as long as it looks good”</p></li></ol></li><li><p>Firebase </p><ol><li><p>OK!</p></li><li><p>[Client discussion finished, just devs left]</p></li></ol></li><li><p>Consolidating terminology</p><ol><li><p>Memory</p></li><li><p>Photo</p></li><li><p>Collection (reserved name? should be OK)</p></li></ol></li><li><p>Database design</p><ol><li><p>Memory, Photo, Collection, User collections</p></li><li><p>Each document in the above collections needs a user field</p></li><li><p>Firebase provides a globally unique user IDs, use this as the id for the user instead of ObjectID</p></li><li><p>Memory has an array of references to photo IDs, use <code>populate()</code> to get the referenced photos</p></li><li><p>Each photo keeps a reference to the memory it belongs to (so from the all photos view we can jump to the memory)</p></li><li><p>Index memories and photos on date for fast sorting of memories views and all photos views respectively.</p></li></ol></li></ol><h2 id="ClientMeeting2-Actionstobecompletedbeforenextmeeting"><strong>Actions to be completed before next meeting</strong></h2><ul><li><p>Database design</p></li><li><p>Get started coding!</p></li></ul><p /><h4 id="ClientMeeting2-Quicknotes:">Quick notes:</h4><ul><li><p>sort by date</p></li><li><p>memory w/0 photos</p></li><li><p>title req for all memories, caption/description opt</p></li><li><p>search by date, range</p></li><li><p>deletion</p></li><li><p>blue is fav colour</p></li><li><p>photo by chronological order</p></li></ul><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 10, 2022 00:03</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

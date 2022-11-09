@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team 55 IT Project : Database Design</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Team 55 IT Project</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="229829.html">Tech Stack + Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Team 55 IT Project : Database Design
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Calvin</span>, last modified by <span class='editor'> Ian Chen</span> on Oct 23, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="DatabaseDesign-Overview">Overview</h2><p>Our client wants to store photos in terms of memory (which is similar to a post) and wants to view all memories at once, paginated. We need to be able to upload, edit, delete, and view photos within a memory. Each memory can be part of 0:n collections for example, the collections of “friends”, “family”, “vacation” etc. A collection has a wider theme, and is associated with memories. Note that deleting a collection won’t delete the memories that it’s associated with. Collections are like ‘tags’, essentially.</p><p>For example, a memory could be ‘Street Food Christmas 2022 in NYC’, another memory could be ‘Street Food in Spain', and a collection could be ‘Food’</p><h2 id="DatabaseDesign-High-leveldesign">High-level design</h2><p>According to the requirement, 3 database entities in total are needed:</p><ul><li><p>Collection</p><ul><li><p>related to the tags of memories</p></li><li><p>all memories with a certain tag belong to one collection of that tag</p></li></ul></li><li><p>Memory</p><ul><li><p>the core component of the app, similar to an Instagram post but slightly different</p></li></ul></li><li><p>Photo</p><ul><li><p>basic unit, but must be part of exactly 1 memory.</p></li><li><p>date is optional, since a memory date is already required.</p></li></ul></li></ul><p>There is no need for an explicit User entity in the MongoDB database, since users are managed by Firebase, and Firebase includes all the fields that we need (username, email, created date, avatar). This is also why userIds are Strings, not MongoDB ObjectIDs.</p><h2 id="DatabaseDesign-EntitySchema,includingtheseparately-storedFirebaseUserEntity">Entity Schema, including the separately-stored Firebase User Entity</h2><p>Since we have used MongoDB, a NoSQL database, a regular ER (entity-relationship) diagram is less useful since in MongoDB, the foreign key - primary key pairing order has no prescribed convention: we can have an array of references to other entities (e.g. memories has an array of photo IDs), or a conventional foreign id reference e.g. photo has an associated memory id. Hence, we have decoded to use a UML class diagram to more clearly represent business data classes/objects, as shown below, with multiplicities:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/4227073/15532469.png" data-image-src="attachments/4227073/15532469.png" data-height="480" data-width="949" data-unresolved-comment-count="0" data-linked-resource-id="15532469" data-linked-resource-version="3" data-linked-resource-type="attachment" data-linked-resource-default-alias="mermaid-diagram-2022-10-23-222638.png" data-base-url="https://water-bottle.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="4227073" data-linked-resource-container-version="8" data-media-id="2e2480bc-b50b-4e8b-98a3-e6cd6d94b070" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4227073/5013505.png">image-20220821-074934.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4227073/15565275.png">mermaid-diagram-2022-10-23-222638.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4227073/15532475.png">mermaid-diagram-2022-10-23-222638.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/4227073/15532469.png">mermaid-diagram-2022-10-23-222638.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 10, 2022 00:03</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

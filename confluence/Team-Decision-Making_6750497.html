@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team 55 IT Project : Team Decision Making</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Team 55 IT Project</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Team 55 IT Project : Team Decision Making
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Calvin</span>, last modified by <span class='editor'> Ian Chen</span> on Sep 03, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h3 id="TeamDecisionMaking-Decisionprocess">Decision process</h3><p>Any team member can make proposals for decisions to be made. Since there are topics that each person is unfamiliar with, the proposer should first have done at least a small amount of research for why they wish to implement a feature.</p><p>Once there is a basic proposal, it is presented to everyone, and everyone puts forward ideas on how to implement a feature(e.g. how to deal with missing date metadata in photos; how to write forms quickly with validation). </p><p>Once the whole team has had a chance to contribute, we set a quality benchmark, which is “is this approach suitable for a Minimum Viable Product?”. Once everyone agrees that this benchmark is met, the task is broken down into tasks in different domains (frontend, backend, testing/devops) and the domain leads distribute this among team members. Sometimes tasks are split widely, other times the task requires an extremely high level of detailed coordination, in which case tasks are split among fewer people - with progress being reported to the rest of the team during meetings/stand-ups so that everyone is aware of the progress. This is also done with feedback from the assignees of the tasks, so that everyone feels comfortable with approaching the task they are given.</p><p>If anyone finds their task too hard, they can ask others for help or return it to the backlog - we prioritise tasks to achieve a ‘steel thread’ - meeting baseline objectives/features/requirements first to quickly allow us to add in the smaller details later.</p><p>If there are conflicts, which are rare, the project manager is to be notified and can make a final call that fulfils every team member’s needs and interests. This may involve reducing the priority of a feature/requirement (and contacting the client to make sure they are well aware); simply pushing the feature back for later; scaling back the scope of the requirements (i.e. invent and simplify), or working with teammates to simplify the implementation (which can also improve our architecture and code quality, readability, and design).</p><h3 id="TeamDecisionMaking-TaskSplittingDecisions">Task Splitting Decisions</h3><p>Team leads will make decisions for splitting tasks evenly in that area (e.g. the front-end lead splits front-end tasks for each individual). As mentioned above, if anyone finds their task too hard, they can ask others for help or return it to the backlog - we prioritise tasks to achieve a ‘steel thread’ - meeting baseline objectives/features/requirements first to quickly allow us to add in the smaller details later.</p><h3 id="TeamDecisionMaking-Stack/frameworkdecisions">Stack/framework decisions</h3><p>Any proposer can put forward stack/framework/library suggestions, and these must go through the decision process above. This is because we want to <strong>minimise dependencies and bloat</strong> whilst also making sure we choose dependencies <strong>that let us focus on business logic and reliability.</strong></p><h2 id="TeamDecisionMaking-Examples">Examples</h2><ul><li><p>Next.js - opinionated React + faster to set up than Create-React-App</p></li><li><p><code>react-hook-form</code> with <code>zod</code> - Lets us write complex forms quickly with validation and type-safety, allows us to add features that inspect form state such as a loading indicator for when it is in progress.</p></li><li><p>tRPC - write new APIs in only a few lines of code, abstract away JSON.stringify and JSON.parse so that we don’t have to deal with that.</p></li><li><p>Using the memory date for the sorting of photos because some photos in a memory may not have the EXIF date (e.g. since they were downloaded from a chat app or because the data was intentionally cleared). This simplifies our handling of dates in our database and the sorting process.</p></li></ul>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 10, 2022 00:03</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
