@@ -1,194 +1,194 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Team 55 IT Project : Live/public deployment</title>
-    <link rel="stylesheet" href="styles/site.css" type="text/css" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
+<head>
+  <title>Team 55 IT Project : Live/public deployment</title>
+  <link href='styles/site.css' rel='stylesheet' type='text/css' />
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
 
-  <body class="theme-default aui-theme-default">
-    <div id="page">
-      <div id="main" class="aui-page-panel">
-        <div id="main-header">
-          <div id="breadcrumb-section">
-            <ol id="breadcrumbs">
-              <li class="first">
-                <span><a href="index.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
-                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
+<body class='theme-default aui-theme-default'>
+<div id='page'>
+  <div class='aui-page-panel' id='main'>
+    <div id='main-header'>
+      <div id='breadcrumb-section'>
+        <ol id='breadcrumbs'>
+          <li class='first'>
+            <span><a href='index.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
+            <span><a href='Team-55-IT-Project_65914.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
                 <span
-                  ><a href="Deployment-and-Dev-Standards_7045373.html"
-                    >Deployment and Dev Standards</a
-                  ></span
+                ><a href='Deployment-and-Dev-Standards_7045373.html'
+                >Deployment and Dev Standards</a
+                ></span
                 >
-              </li>
-            </ol>
-          </div>
-          <h1 id="title-heading" class="pagetitle">
-            <span id="title-text"> Team 55 IT Project : Live/public deployment </span>
-          </h1>
-        </div>
-
-        <div id="content" class="view">
-          <div class="page-metadata">
-            Created by <span class="author"> Ian Chen</span>, last modified on Sep 28, 2022
-          </div>
-          <div id="main-content" class="wiki-content group">
-            <p>(Completed Week 6 // End of Sprint 1)</p>
-            <p>
-              We are using DigitalOcean to automatically deploy our site from the
-              <code>main</code> branch.
-            </p>
-            <p>
-              A live version of the site, which is automatically re-built on every push to the
-              <code>main</code> branch in our repo, is available at
-              <a
-                class="external-link"
-                data-card-appearance="inline"
-                href="https://personal-registry-app-zx936.ondigitalocean.app/"
-                rel="nofollow"
-                >https://personal-registry-app-zx936.ondigitalocean.app/</a
-              >
-              .
-            </p>
-            <span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11829249/11829274.png"
-                data-image-src="attachments/11829249/11829274.png"
-                data-height="894"
-                data-width="1546"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11829274"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220902-112739.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11829249"
-                data-linked-resource-container-version="4"
-                data-media-id="01cf44cc-ce4a-49e3-9e9b-d1f81d8b3b53"
-                data-media-type="file"
-            /></span>
-            <p>
-              To get an account, either register an account on the homepage or use
-              <a class="external-link" href="mailto:1u@mailinator.com" rel="nofollow"
-                ><strong>1u@mailinator.com</strong></a
-              >
-              which is a pre-populated account from
-              <a
-                href="Test-User-Accounts_6520892.html"
-                data-linked-resource-id="6520892"
-                data-linked-resource-version="11"
-                data-linked-resource-type="page"
-                >Test User Accounts</a
-              >
-            </p>
-            <p>
-              The link for the DigitalOcean console is in
-              <a
-                href="Team-Tools_66440.html"
-                data-linked-resource-id="66440"
-                data-linked-resource-version="17"
-                data-linked-resource-type="page"
-                >Team Tools</a
-              >.
-            </p>
-            <span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11829249/11829277.png"
-                data-image-src="attachments/11829249/11829277.png"
-                data-height="766"
-                data-width="1289"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11829277"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220902-112712.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11829249"
-                data-linked-resource-container-version="4"
-                data-media-id="15ea6388-c7c5-42f9-b2dd-31e5d5a0b47f"
-                data-media-type="file"
-            /></span>
-            <p>
-              We also use other services - MongoDB and Firebase, to provide other backend services
-              (database, file storage, authentication). The links for their consoles are also in
-              <a
-                href="Team-Tools_66440.html"
-                data-linked-resource-id="66440"
-                data-linked-resource-version="17"
-                data-linked-resource-type="page"
-                >Team Tools</a
-              >. They require a <code>.env.local</code> file, which cannot be stored in our Git
-              repository because they contain private keys.
-            </p>
-            <p>
-              Upon submission, we will send a copy of our <code>.env.local</code> file to the
-              assessor, though in the real-world we would use a secrets manager to even more
-              securely share secret private keys with others.
-            </p>
-            <span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11829249/11829265.png"
-                data-image-src="attachments/11829249/11829265.png"
-                data-height="400"
-                data-width="423"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11829265"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220902-113018.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11829249"
-                data-linked-resource-container-version="4"
-                data-media-id="ce1512c6-6de5-4494-ab4c-ea41ee946003"
-                data-media-type="file"
-            /></span>
-            <p />
-          </div>
-
-          <div class="pageSection group">
-            <div class="pageSectionHeader">
-              <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
-            </div>
-
-            <div class="greybox" align="left">
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11829249/11829265.png">image-20220902-113018.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11829249/11829268.png">image-20220902-112930.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11829249/11829271.png">image-20220902-112907.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11829249/11829274.png">image-20220902-112739.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11829249/11829277.png">image-20220902-112712.png</a> (image/png)
-              <br />
-            </div>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
-      <div id="footer" role="contentinfo">
-        <section class="footer-body">
-          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-        </section>
+      <h1 class='pagetitle' id='title-heading'>
+        <span id='title-text'> Team 55 IT Project : Live/public deployment </span>
+      </h1>
+    </div>
+
+    <div class='view' id='content'>
+      <div class='page-metadata'>
+        Created by <span class='author'> Ian Chen</span>, last modified on Sep 28, 2022
+      </div>
+      <div class='wiki-content group' id='main-content'>
+        <p>(Completed Week 6 // End of Sprint 1)</p>
+        <p>
+          We are using DigitalOcean to automatically deploy our site from the
+          <code>main</code> branch.
+        </p>
+        <p>
+          A live version of the site, which is automatically re-built on every push to the
+          <code>main</code> branch in our repo, is available at
+          <a
+            class='external-link'
+            data-card-appearance='inline'
+            href='https://personal-registry-app-zx936.ondigitalocean.app/'
+            rel='nofollow'
+          >https://personal-registry-app-zx936.ondigitalocean.app/</a
+          >
+          .
+        </p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='894'
+          data-image-src='attachments/11829249/11829274.png'
+          data-linked-resource-container-id='11829249'
+          data-linked-resource-container-version='4'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20220902-112739.png'
+          data-linked-resource-id='11829274'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='01cf44cc-ce4a-49e3-9e9b-d1f81d8b3b53'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1546'
+          loading='lazy'
+          src='attachments/11829249/11829274.png'
+        /></span>
+        <p>
+          To get an account, either register an account on the homepage or use
+          <a class='external-link' href='mailto:1u@mailinator.com' rel='nofollow'
+          ><strong>1u@mailinator.com</strong></a
+          >
+          which is a pre-populated account from
+          <a
+            data-linked-resource-id='6520892'
+            data-linked-resource-type='page'
+            data-linked-resource-version='11'
+            href='Test-User-Accounts_6520892.html'
+          >Test User Accounts</a
+          >
+        </p>
+        <p>
+          The link for the DigitalOcean console is in
+          <a
+            data-linked-resource-id='66440'
+            data-linked-resource-type='page'
+            data-linked-resource-version='17'
+            href='Team-Tools_66440.html'
+          >Team Tools</a
+          >.
+        </p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='766'
+          data-image-src='attachments/11829249/11829277.png'
+          data-linked-resource-container-id='11829249'
+          data-linked-resource-container-version='4'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20220902-112712.png'
+          data-linked-resource-id='11829277'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='15ea6388-c7c5-42f9-b2dd-31e5d5a0b47f'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1289'
+          loading='lazy'
+          src='attachments/11829249/11829277.png'
+        /></span>
+        <p>
+          We also use other services - MongoDB and Firebase, to provide other backend services
+          (database, file storage, authentication). The links for their consoles are also in
+          <a
+            data-linked-resource-id='66440'
+            data-linked-resource-type='page'
+            data-linked-resource-version='17'
+            href='Team-Tools_66440.html'
+          >Team Tools</a
+          >. They require a <code>.env.local</code> file, which cannot be stored in our Git
+          repository because they contain private keys.
+        </p>
+        <p>
+          Upon submission, we will send a copy of our <code>.env.local</code> file to the
+          assessor, though in the real-world we would use a secrets manager to even more
+          securely share secret private keys with others.
+        </p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='400'
+          data-image-src='attachments/11829249/11829265.png'
+          data-linked-resource-container-id='11829249'
+          data-linked-resource-container-version='4'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20220902-113018.png'
+          data-linked-resource-id='11829265'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='ce1512c6-6de5-4494-ab4c-ea41ee946003'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='423'
+          loading='lazy'
+          src='attachments/11829249/11829265.png'
+        /></span>
+        <p />
+      </div>
+
+      <div class='pageSection group'>
+        <div class='pageSectionHeader'>
+          <h2 class='pageSectionTitle' id='attachments'>Attachments:</h2>
+        </div>
+
+        <div align='left' class='greybox'>
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11829249/11829265.png'>image-20220902-113018.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11829249/11829268.png'>image-20220902-112930.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11829249/11829271.png'>image-20220902-112907.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11829249/11829274.png'>image-20220902-112739.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11829249/11829277.png'>image-20220902-112712.png</a> (image/png)
+          <br />
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+  <div id='footer' role='contentinfo'>
+    <section class='footer-body'>
+      <p>Document generated by Confluence on Nov 10, 2022 10:51</p>
+      <div id='footer-logo'><a href='http://www.atlassian.com/'>Atlassian</a></div>
+    </section>
+  </div>
+</div>
+</body>
 </html>

@@ -1,234 +1,288 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Team 55 IT Project : Collections view</title>
-    <link rel="stylesheet" href="styles/site.css" type="text/css" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
+<head>
+  <title>Team 55 IT Project : Collections view</title>
+  <link href='styles/site.css' rel='stylesheet' type='text/css' />
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
 
-  <body class="theme-default aui-theme-default">
-    <div id="page">
-      <div id="main" class="aui-page-panel">
-        <div id="main-header">
-          <div id="breadcrumb-section">
-            <ol id="breadcrumbs">
-              <li class="first">
-                <span><a href="index.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
-                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
-                <span><a href="Interface-Design_1409060.html">Interface Design</a></span>
-              </li>
-            </ol>
-          </div>
-          <h1 id="title-heading" class="pagetitle">
-            <span id="title-text"> Team 55 IT Project : Collections view </span>
-          </h1>
-        </div>
-
-        <div id="content" class="view">
-          <div class="page-metadata">
-            Created by <span class="author"> Ian Chen</span>, last modified on Oct 23, 2022
-          </div>
-          <div id="main-content" class="wiki-content group">
-            <p>Each collection has a</p>
-            <ul>
-              <li><p>name</p></li>
-              <li><p>a description (optional)</p></li>
-              <li><p>a colour (predefined choices) (optional)</p></li>
-            </ul>
-            <p>
-              The collections view lists all the collections that a user has created, and allows
-              creating new collections and editing the name, description, and colour of collections.
-            </p>
-            <h2 id="Collectionsview-Anatomy">Anatomy</h2>
-            <ul>
-              <li>
-                <p>Form with name of new collection, a description box and a colour picker</p>
-                <ul>
-                  <li><p>A clear all button to clear progress</p></li>
-                  <li><p>Unsaved changes alert</p></li>
-                </ul>
-              </li>
-              <li>
-                <p>Vertical list of collections sorted by name</p>
-                <ul>
-                  <li>
-                    <p>Name</p>
-                    <ul>
-                      <li><p>background colour is the chose colour</p></li>
-                    </ul>
-                  </li>
-                  <li><p>Description</p></li>
-                  <li><p>Memories count</p></li>
-                  <li>
-                    <p>
-                      An edit button allows inline editing of collection name, description, and
-                      colour inline, as well as deleting the collection.
-                    </p>
-                    <ul>
-                      <li><p>Confirm button for delete</p></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <h2 id="Collectionsview-Designchanges[EndofSprint2]">
-              <span style="color: rgb(255, 86, 48)">Design changes [End of Sprint 2]</span>
-            </h2>
-            <ul>
-              <li><p>No gradient</p></li>
-              <li><p>New search bar</p></li>
-              <li><p>Removed memories count</p></li>
-            </ul>
-            <p><strong>Screenshot: end of sprint 3</strong></p>
-            <span
-              class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"
-              ><img
-                class="confluence-embedded-image image-center"
-                width="680"
-                loading="lazy"
-                src="attachments/3440641/15630688.png?width=680"
-                data-image-src="attachments/3440641/15630688.png"
-                data-height="982"
-                data-width="1512"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="15630688"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="Screen Shot 2022-10-23 at 9.25.23 pm.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="3440641"
-                data-linked-resource-container-version="7"
-                data-media-id="57c41aef-586c-46bc-bf78-ed6a4e5e7728"
-                data-media-type="file"
-            /></span>
-            <p>Viewing the memories belonging to a single collection:</p>
-            <span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/3440641/15565210.png"
-                data-image-src="attachments/3440641/15565210.png"
-                data-height="982"
-                data-width="1512"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="15565210"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="Screen Shot 2022-10-23 at 9.25.30 pm.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="3440641"
-                data-linked-resource-container-version="7"
-                data-media-id="e4f15ce9-323e-47d9-a429-9e1e6f27885b"
-                data-media-type="file"
-            /></span>
-            <p />
-            <h2 id="Collectionsview-Low-leveldesign">Low-level design</h2>
-            <span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/3440641/3440655.png"
-                data-image-src="attachments/3440641/3440655.png"
-                data-height="799"
-                data-width="1129"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="3440655"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220813-045219.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="3440641"
-                data-linked-resource-container-version="7"
-                data-media-id="d1ca5a38-f512-4cf9-8827-9ec8c15d6e5e"
-                data-media-type="file" /></span
-            ><span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/3440641/3440649.png"
-                data-image-src="attachments/3440641/3440649.png"
-                data-height="799"
-                data-width="1127"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="3440649"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220813-045243.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="3440641"
-                data-linked-resource-container-version="7"
-                data-media-id="09129e9a-763c-46ae-96f2-9980584a3c46"
-                data-media-type="file"
-            /></span>
-            <p />
-            <h2 id="Collectionsview-High-leveldesign">High-level design</h2>
-            <p>
-              <a
-                class="external-link"
-                data-card-appearance="inline"
-                href="https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801"
-                rel="nofollow"
-                >https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801</a
-              >
-            </p>
-            <h2 id="Collectionsview-Nice-to-haves">Nice-to-haves</h2>
-            <ul>
-              <li><p>Pin a collection to the top</p></li>
-              <li><p>Thumbnail preview of contained memories</p></li>
-              <li>
-                <p>Sort collections by last modified (i.e. most recently updated with memories)</p>
-              </li>
-              <li><p>Clone a collection</p></li>
-            </ul>
-            <p />
-            <p />
-          </div>
-
-          <div class="pageSection group">
-            <div class="pageSectionHeader">
-              <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
-            </div>
-
-            <div class="greybox" align="left">
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/3440641/3440649.png">image-20220813-045243.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/3440641/3440652.png">image-20220813-045234.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/3440641/3440655.png">image-20220813-045219.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/3440641/15630688.png"
-                >Screen Shot 2022-10-23 at 9.25.23 pm.png</a
-              >
-              (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/3440641/15565210.png"
-                >Screen Shot 2022-10-23 at 9.25.30 pm.png</a
-              >
-              (image/png)
-              <br />
-            </div>
-          </div>
-        </div>
+<body class='theme-default aui-theme-default'>
+<div id='page'>
+  <div class='aui-page-panel' id='main'>
+    <div id='main-header'>
+      <div id='breadcrumb-section'>
+        <ol id='breadcrumbs'>
+          <li class='first'>
+            <span><a href='index.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
+            <span><a href='Team-55-IT-Project_65914.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
+            <span><a href='Interface-Design_1409060.html'>Interface Design</a></span>
+          </li>
+        </ol>
       </div>
-      <div id="footer" role="contentinfo">
-        <section class="footer-body">
-          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-        </section>
+      <h1 class='pagetitle' id='title-heading'>
+        <span id='title-text'> Team 55 IT Project : Collections view </span>
+      </h1>
+    </div>
+
+    <div class='view' id='content'>
+      <div class='page-metadata'>
+        Created by <span class='author'> Ian Chen</span>, last modified on Nov 10, 2022
+      </div>
+      <div class='wiki-content group' id='main-content'>
+        <p>Each collection has a</p>
+        <ul>
+          <li><p>name</p></li>
+          <li><p>a description (optional)</p></li>
+          <li><p>a colour (predefined choices) (optional)</p></li>
+        </ul>
+        <p>
+          The collections view lists all the collections that a user has created, and allows
+          creating new collections and editing the name, description, and colour of collections.
+        </p>
+        <h2 id='Collectionsview-Anatomy'>Anatomy</h2>
+        <ul>
+          <li>
+            <p>Form with name of new collection, a description box and a colour picker</p>
+            <ul>
+              <li><p>A clear all button to clear progress</p></li>
+              <li><p>Unsaved changes alert</p></li>
+            </ul>
+          </li>
+          <li>
+            <p>Vertical list of collections sorted by name</p>
+            <ul>
+              <li>
+                <p>Name</p>
+                <ul>
+                  <li><p>background colour is the chose colour</p></li>
+                </ul>
+              </li>
+              <li><p>Description</p></li>
+              <li><p>Memories count</p></li>
+              <li>
+                <p>
+                  An edit button allows inline editing of collection name, description, and
+                  colour inline, as well as deleting the collection.
+                </p>
+                <ul>
+                  <li><p>Confirm button for delete</p></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id='Collectionsview-Designchanges[EndofSprint2]'>
+          <span style='color: rgb(255, 86, 48)'>Design changes [End of Sprint 2]</span>
+        </h2>
+        <ul>
+          <li><p>No gradient</p></li>
+          <li><p>New search bar</p></li>
+          <li><p>Removed memories count</p></li>
+        </ul>
+        <p><strong>Screenshot: end of sprint 3</strong></p>
+        <span
+          class='confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='982'
+          data-image-src='attachments/3440641/15630688.png'
+          data-linked-resource-container-id='3440641'
+          data-linked-resource-container-version='9'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='Screen Shot 2022-10-23 at 9.25.23 pm.png'
+          data-linked-resource-id='15630688'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='57c41aef-586c-46bc-bf78-ed6a4e5e7728'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1512'
+          loading='lazy'
+          src='attachments/3440641/15630688.png?width=680'
+          width='680'
+        /></span>
+        <p>Viewing the memories belonging to a single collection:</p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='982'
+          data-image-src='attachments/3440641/15565210.png'
+          data-linked-resource-container-id='3440641'
+          data-linked-resource-container-version='9'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='Screen Shot 2022-10-23 at 9.25.30 pm.png'
+          data-linked-resource-id='15565210'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='e4f15ce9-323e-47d9-a429-9e1e6f27885b'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1512'
+          loading='lazy'
+          src='attachments/3440641/15565210.png'
+        /></span>
+        <p>
+          Attempting to access a collection’s memories when that collection ID doesn’t exist
+          should result in a friendly error:
+        </p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='1056'
+          data-image-src='attachments/3440641/18710562.png'
+          data-linked-resource-container-id='3440641'
+          data-linked-resource-container-version='9'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20221109-232042.png'
+          data-linked-resource-id='18710562'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='ebb3abad-04fd-495a-9b3a-06e7314d010a'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1624'
+          loading='lazy'
+          src='attachments/3440641/18710562.png'
+        /></span>
+        <p />
+        <p>
+          Editing collection name + handling errors when trying to name it with the same title
+          as an existing collection in the current user account:
+        </p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='1056'
+          data-image-src='attachments/3440641/19169289.png'
+          data-linked-resource-container-id='3440641'
+          data-linked-resource-container-version='9'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20221109-231839.png'
+          data-linked-resource-id='19169289'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='9ad7a412-02f5-4db8-9cab-089aefca854c'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1624'
+          loading='lazy'
+          src='attachments/3440641/19169289.png'
+        /></span>
+        <h2 id='Collectionsview-Low-leveldesign'>Low-level design</h2>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='799'
+          data-image-src='attachments/3440641/3440655.png'
+          data-linked-resource-container-id='3440641'
+          data-linked-resource-container-version='9'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20220813-045219.png'
+          data-linked-resource-id='3440655'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='d1ca5a38-f512-4cf9-8827-9ec8c15d6e5e'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1129'
+          loading='lazy'
+          src='attachments/3440641/3440655.png' /></span
+        ><span class='confluence-embedded-file-wrapper image-center-wrapper'
+      ><img
+        class='confluence-embedded-image image-center'
+        data-base-url='https://water-bottle.atlassian.net/wiki'
+        data-height='799'
+        data-image-src='attachments/3440641/3440649.png'
+        data-linked-resource-container-id='3440641'
+        data-linked-resource-container-version='9'
+        data-linked-resource-content-type='image/png'
+        data-linked-resource-default-alias='image-20220813-045243.png'
+        data-linked-resource-id='3440649'
+        data-linked-resource-type='attachment'
+        data-linked-resource-version='1'
+        data-media-id='09129e9a-763c-46ae-96f2-9980584a3c46'
+        data-media-type='file'
+        data-unresolved-comment-count='0'
+        data-width='1127'
+        loading='lazy'
+        src='attachments/3440641/3440649.png'
+      /></span>
+        <p />
+        <h2 id='Collectionsview-High-leveldesign'>High-level design</h2>
+        <p>
+          <a
+            class='external-link'
+            data-card-appearance='inline'
+            href='https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801'
+            rel='nofollow'
+          >https://www.figma.com/file/zd20YyrLI5LXHaKLNYfI3v/Personal-Registry-%5BBootstrap%5D-Team-055?node-id=2493%3A801</a
+          >
+        </p>
+        <h2 id='Collectionsview-Nice-to-haves'>Nice-to-haves</h2>
+        <ul>
+          <li><p>Pin a collection to the top</p></li>
+          <li><p>Thumbnail preview of contained memories</p></li>
+          <li>
+            <p>Sort collections by last modified (i.e. most recently updated with memories)</p>
+          </li>
+          <li><p>Clone a collection</p></li>
+        </ul>
+        <p />
+        <p />
+      </div>
+
+      <div class='pageSection group'>
+        <div class='pageSectionHeader'>
+          <h2 class='pageSectionTitle' id='attachments'>Attachments:</h2>
+        </div>
+
+        <div align='left' class='greybox'>
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/3440641/3440649.png'>image-20220813-045243.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/3440641/3440652.png'>image-20220813-045234.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/3440641/3440655.png'>image-20220813-045219.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/3440641/15630688.png'
+          >Screen Shot 2022-10-23 at 9.25.23 pm.png</a
+          >
+          (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/3440641/15565210.png'
+          >Screen Shot 2022-10-23 at 9.25.30 pm.png</a
+          >
+          (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/3440641/19169289.png'>image-20221109-231839.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/3440641/18710562.png'>image-20221109-232042.png</a> (image/png)
+          <br />
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+  <div id='footer' role='contentinfo'>
+    <section class='footer-body'>
+      <p>Document generated by Confluence on Nov 10, 2022 10:51</p>
+      <div id='footer-logo'><a href='http://www.atlassian.com/'>Atlassian</a></div>
+    </section>
+  </div>
+</div>
+</body>
 </html>

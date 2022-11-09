@@ -1,205 +1,205 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Team 55 IT Project : Git Repo Standards</title>
-    <link rel="stylesheet" href="styles/site.css" type="text/css" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
+<head>
+  <title>Team 55 IT Project : Git Repo Standards</title>
+  <link href='styles/site.css' rel='stylesheet' type='text/css' />
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
 
-  <body class="theme-default aui-theme-default">
-    <div id="page">
-      <div id="main" class="aui-page-panel">
-        <div id="main-header">
-          <div id="breadcrumb-section">
-            <ol id="breadcrumbs">
-              <li class="first">
-                <span><a href="index.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
-                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
+<body class='theme-default aui-theme-default'>
+<div id='page'>
+  <div class='aui-page-panel' id='main'>
+    <div id='main-header'>
+      <div id='breadcrumb-section'>
+        <ol id='breadcrumbs'>
+          <li class='first'>
+            <span><a href='index.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
+            <span><a href='Team-55-IT-Project_65914.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
                 <span
-                  ><a href="Deployment-and-Dev-Standards_7045373.html"
-                    >Deployment and Dev Standards</a
-                  ></span
+                ><a href='Deployment-and-Dev-Standards_7045373.html'
+                >Deployment and Dev Standards</a
+                ></span
                 >
-              </li>
-            </ol>
-          </div>
-          <h1 id="title-heading" class="pagetitle">
-            <span id="title-text"> Team 55 IT Project : Git Repo Standards </span>
-          </h1>
-        </div>
+          </li>
+        </ol>
+      </div>
+      <h1 class='pagetitle' id='title-heading'>
+        <span id='title-text'> Team 55 IT Project : Git Repo Standards </span>
+      </h1>
+    </div>
 
-        <div id="content" class="view">
-          <div class="page-metadata">
-            Created by <span class="author"> Ian Chen</span>, last modified on Sep 28, 2022
-          </div>
-          <div id="main-content" class="wiki-content group">
+    <div class='view' id='content'>
+      <div class='page-metadata'>
+        Created by <span class='author'> Ian Chen</span>, last modified on Sep 28, 2022
+      </div>
+      <div class='wiki-content group' id='main-content'>
+        <p>
+          We’ve split up tasks. Now how do we use <code>git</code> effectively to make sure that
+          tasks can come together cohesively, still build successfully, while keeping the
+          repository clean? <code>git</code> provides many ways to work on code distributively,
+          but we need to follow a standard to ensure fast delivery.
+        </p>
+        <h2 id='GitRepoStandards-CommitMessages'>Commit Messages</h2>
+        <ul>
+          <li>
             <p>
-              We’ve split up tasks. Now how do we use <code>git</code> effectively to make sure that
-              tasks can come together cohesively, still build successfully, while keeping the
-              repository clean? <code>git</code> provides many ways to work on code distributively,
-              but we need to follow a standard to ensure fast delivery.
+              Informative, brief, and clearly describes the feature or small tweak being
+              changed, added, or removed.
             </p>
-            <h2 id="GitRepoStandards-CommitMessages">Commit Messages</h2>
+          </li>
+          <li>
+            <p>
+              If a commit comprises only of small tweak to an old previously-worked-on feature,
+              there is no need to make a new issue on the board, since this introduces too much
+              overhead and is a barrier to moving fast.
+            </p>
+          </li>
+          <li>
+            <p>
+              If a large feature branch, try to include the issue label on every commit. If this
+              is not possible, at least add it on the last commit to the feature branch so that
+              when squash-merging or rebase-merging, there is a marker to track where the
+              commits for this feature are at.
+            </p>
+          </li>
+        </ul>
+        <h2 id='GitRepoStandards-Mergefrequency'>Merge frequency</h2>
+        <ul>
+          <li>
+            <p>
+              We follow philosophy of continuous integration and deployment, which means making
+              <strong>small feature branches</strong> and rebase-merging or squash-merging small
+              working commits into main <strong>as frequently as possible. </strong>
+            </p>
+          </li>
+          <li>
+            <p>
+              We do this to ensure that the code base is continuously evolving to fulfil the
+              requirements and features planned out, and to make sure that we don’t have to deal
+              with the pain of merging in a big feature branch/pull request that has not kept up
+              to date with main for a while.
+            </p>
             <ul>
               <li>
                 <p>
-                  Informative, brief, and clearly describes the feature or small tweak being
-                  changed, added, or removed.
-                </p>
-              </li>
-              <li>
-                <p>
-                  If a commit comprises only of small tweak to an old previously-worked-on feature,
-                  there is no need to make a new issue on the board, since this introduces too much
-                  overhead and is a barrier to moving fast.
-                </p>
-              </li>
-              <li>
-                <p>
-                  If a large feature branch, try to include the issue label on every commit. If this
-                  is not possible, at least add it on the last commit to the feature branch so that
-                  when squash-merging or rebase-merging, there is a marker to track where the
-                  commits for this feature are at.
+                  The biggest kinds of pain points occur when changing prop types of components
+                  or request/response types to the backend API as a result of changing
+                  requirements or simplifying the implementation of a feature
                 </p>
               </li>
             </ul>
-            <h2 id="GitRepoStandards-Mergefrequency">Merge frequency</h2>
+          </li>
+          <li>
+            <p>
+              This requires team members to hone their skills in breaking up tasks into smaller,
+              digestible, and most importantly, successfully-buildable chunks/commits.
+            </p>
+          </li>
+        </ul>
+        <h2 id='GitRepoStandards-Mergetypesandprocedure'>Merge types and procedure</h2>
+        <ul>
+          <li><p>Linear commit history</p></li>
+          <li>
+            <p>Regular <code>Merge commits</code> are <strong>disabled</strong></p>
+          </li>
+          <li>
+            <p>
+              Only <code>Rebase and merge</code> (preferred - keeps your commit history as is)
+              and <code>Squash and merge</code> are enabled.
+            </p>
+          </li>
+          <li>
+            <p>Always treat <code>main</code> as the source of truth</p>
             <ul>
               <li>
-                <p>
-                  We follow philosophy of continuous integration and deployment, which means making
-                  <strong>small feature branches</strong> and rebase-merging or squash-merging small
-                  working commits into main <strong>as frequently as possible. </strong>
-                </p>
-              </li>
-              <li>
-                <p>
-                  We do this to ensure that the code base is continuously evolving to fulfil the
-                  requirements and features planned out, and to make sure that we don’t have to deal
-                  with the pain of merging in a big feature branch/pull request that has not kept up
-                  to date with main for a while.
-                </p>
+                <p>Bring feature branch up to date with <code>main</code>:</p>
                 <ul>
                   <li>
                     <p>
-                      The biggest kinds of pain points occur when changing prop types of components
-                      or request/response types to the backend API as a result of changing
-                      requirements or simplifying the implementation of a feature
+                      Start at main: <code>git pull --rebase</code> to bring your main branch up
+                      to date with main. (The <code>--rebase</code> flag is
+                      <strong>required</strong>)
                     </p>
                   </li>
-                </ul>
-              </li>
-              <li>
-                <p>
-                  This requires team members to hone their skills in breaking up tasks into smaller,
-                  digestible, and most importantly, successfully-buildable chunks/commits.
-                </p>
-              </li>
-            </ul>
-            <h2 id="GitRepoStandards-Mergetypesandprocedure">Merge types and procedure</h2>
-            <ul>
-              <li><p>Linear commit history</p></li>
-              <li>
-                <p>Regular <code>Merge commits</code> are <strong>disabled</strong></p>
-              </li>
-              <li>
-                <p>
-                  Only <code>Rebase and merge</code> (preferred - keeps your commit history as is)
-                  and <code>Squash and merge</code> are enabled.
-                </p>
-              </li>
-              <li>
-                <p>Always treat <code>main</code> as the source of truth</p>
-                <ul>
+                  <li><p>Checkout your feature branch</p></li>
                   <li>
-                    <p>Bring feature branch up to date with <code>main</code>:</p>
-                    <ul>
-                      <li>
-                        <p>
-                          Start at main: <code>git pull --rebase</code> to bring your main branch up
-                          to date with main. (The <code>--rebase</code> flag is
-                          <strong>required</strong>)
-                        </p>
-                      </li>
-                      <li><p>Checkout your feature branch</p></li>
-                      <li>
-                        <p>Rebase your feature branch on top of main and resolve conflicts</p>
-                      </li>
-                      <li>
-                        <p>If you already have a pull request open, you’ll need to force push</p>
-                      </li>
-                    </ul>
+                    <p>Rebase your feature branch on top of main and resolve conflicts</p>
+                  </li>
+                  <li>
+                    <p>If you already have a pull request open, you’ll need to force push</p>
                   </li>
                 </ul>
               </li>
             </ul>
-            <p>Rationale behind these decisions</p>
-            <ul>
-              <li>
-                <p>
-                  Linear commit history makes using <code>git blame</code> and
-                  <code>git bisect</code> easier when debugging when a regression in the quality of
-                  a feature occurred. For example, this was useful in debugging a grid causing the
-                  view to have an additional 80px to the right in
-                  <a
-                    class="external-link"
-                    data-card-appearance="inline"
-                    href="https://github.com/water-bottle-it-project/personal-registry-app/commit/78c2b4374a7fd72ffbb70be6e1f47081d8a12d78"
-                    rel="nofollow"
-                    >https://github.com/water-bottle-it-project/personal-registry-app/commit/78c2b4374a7fd72ffbb70be6e1f47081d8a12d78</a
-                  >
-                  , and was quickly found and fixed in
-                  <a
-                    class="external-link"
-                    data-card-appearance="inline"
-                    href="https://github.com/water-bottle-it-project/personal-registry-app/commit/21a2c56422125adc590bcaeefd47647fd031a86c"
-                    rel="nofollow"
-                    >https://github.com/water-bottle-it-project/personal-registry-app/commit/21a2c56422125adc590bcaeefd47647fd031a86c</a
-                  >
-                </p>
-              </li>
-              <li>
-                <p>
-                  The merge commit, which is added after adding all the commits from the feature
-                  branch, bloats the branch <strong>and hides important diffs </strong>which are
-                  needed to have at a glance look at code changes
-                </p>
-              </li>
-              <li>
-                <p>
-                  Ensures API stability - do not change response types unless there is a business
-                  need or implementing a new requirement
-                </p>
-              </li>
-              <li>
-                <p>
-                  Blind use of merge and ignoring conflicts ends up causing a cobweb on linked
-                  commits that are impossible to merge into main correctly when there are multiple
-                  people working on different tasks at the same time.
-                </p>
-              </li>
-            </ul>
-            <h2 id="GitRepoStandards-House-keeping">House-keeping</h2>
-            <ul>
-              <li>
-                <p>Feature writer should open pull request and merge it <em>after approvals</em></p>
-              </li>
-              <li><p>Regularly delete merged and closed branches on the GitHub remote</p></li>
-            </ul>
-            <p />
-          </div>
-        </div>
-      </div>
-      <div id="footer" role="contentinfo">
-        <section class="footer-body">
-          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-        </section>
+          </li>
+        </ul>
+        <p>Rationale behind these decisions</p>
+        <ul>
+          <li>
+            <p>
+              Linear commit history makes using <code>git blame</code> and
+              <code>git bisect</code> easier when debugging when a regression in the quality of
+              a feature occurred. For example, this was useful in debugging a grid causing the
+              view to have an additional 80px to the right in
+              <a
+                class='external-link'
+                data-card-appearance='inline'
+                href='https://github.com/water-bottle-it-project/personal-registry-app/commit/78c2b4374a7fd72ffbb70be6e1f47081d8a12d78'
+                rel='nofollow'
+              >https://github.com/water-bottle-it-project/personal-registry-app/commit/78c2b4374a7fd72ffbb70be6e1f47081d8a12d78</a
+              >
+              , and was quickly found and fixed in
+              <a
+                class='external-link'
+                data-card-appearance='inline'
+                href='https://github.com/water-bottle-it-project/personal-registry-app/commit/21a2c56422125adc590bcaeefd47647fd031a86c'
+                rel='nofollow'
+              >https://github.com/water-bottle-it-project/personal-registry-app/commit/21a2c56422125adc590bcaeefd47647fd031a86c</a
+              >
+            </p>
+          </li>
+          <li>
+            <p>
+              The merge commit, which is added after adding all the commits from the feature
+              branch, bloats the branch <strong>and hides important diffs </strong>which are
+              needed to have at a glance look at code changes
+            </p>
+          </li>
+          <li>
+            <p>
+              Ensures API stability - do not change response types unless there is a business
+              need or implementing a new requirement
+            </p>
+          </li>
+          <li>
+            <p>
+              Blind use of merge and ignoring conflicts ends up causing a cobweb on linked
+              commits that are impossible to merge into main correctly when there are multiple
+              people working on different tasks at the same time.
+            </p>
+          </li>
+        </ul>
+        <h2 id='GitRepoStandards-House-keeping'>House-keeping</h2>
+        <ul>
+          <li>
+            <p>Feature writer should open pull request and merge it <em>after approvals</em></p>
+          </li>
+          <li><p>Regularly delete merged and closed branches on the GitHub remote</p></li>
+        </ul>
+        <p />
       </div>
     </div>
-  </body>
+  </div>
+  <div id='footer' role='contentinfo'>
+    <section class='footer-body'>
+      <p>Document generated by Confluence on Nov 10, 2022 10:51</p>
+      <div id='footer-logo'><a href='http://www.atlassian.com/'>Atlassian</a></div>
+    </section>
+  </div>
+</div>
+</body>
 </html>

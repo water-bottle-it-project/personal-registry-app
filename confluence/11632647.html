@@ -1,336 +1,336 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Team 55 IT Project : CI/CD using GitHub Actions</title>
-    <link rel="stylesheet" href="styles/site.css" type="text/css" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
+<head>
+  <title>Team 55 IT Project : CI/CD using GitHub Actions</title>
+  <link href='styles/site.css' rel='stylesheet' type='text/css' />
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
 
-  <body class="theme-default aui-theme-default">
-    <div id="page">
-      <div id="main" class="aui-page-panel">
-        <div id="main-header">
-          <div id="breadcrumb-section">
-            <ol id="breadcrumbs">
-              <li class="first">
-                <span><a href="index.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
-                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
+<body class='theme-default aui-theme-default'>
+<div id='page'>
+  <div class='aui-page-panel' id='main'>
+    <div id='main-header'>
+      <div id='breadcrumb-section'>
+        <ol id='breadcrumbs'>
+          <li class='first'>
+            <span><a href='index.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
+            <span><a href='Team-55-IT-Project_65914.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
                 <span
-                  ><a href="Deployment-and-Dev-Standards_7045373.html"
-                    >Deployment and Dev Standards</a
-                  ></span
+                ><a href='Deployment-and-Dev-Standards_7045373.html'
+                >Deployment and Dev Standards</a
+                ></span
                 >
-              </li>
-            </ol>
-          </div>
-          <h1 id="title-heading" class="pagetitle">
-            <span id="title-text"> Team 55 IT Project : CI/CD using GitHub Actions </span>
-          </h1>
-        </div>
-
-        <div id="content" class="view">
-          <div class="page-metadata">
-            Created by <span class="author"> Ian Chen</span>, last modified on Sep 28, 2022
-          </div>
-          <div id="main-content" class="wiki-content group">
-            <p>(Implemented Week 9 // End of Sprint 2)</p>
-            <p>
-              We use GitHub Actions to automatically check if our source code can be built before
-              automatic deployment to DigitalOcean. Our GitHub Actions can be found at
-              <a
-                class="external-link"
-                href="https://github.com/water-bottle-it-project/personal-registry-app/actions"
-                rel="nofollow"
-                >https://github.com/water-bottle-it-project/personal-registry-app/actions</a
-              >
-            </p>
-            <span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11632647/11665431.png"
-                data-image-src="attachments/11632647/11665431.png"
-                data-height="584"
-                data-width="1176"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11665431"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220928-011618.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11632647"
-                data-linked-resource-container-version="5"
-                data-media-id="33ec91e5-8f93-431f-be6f-da2971ed111a"
-                data-media-type="file"
-            /></span>
-            <p>
-              Actions are programatically defined using code and can be found in
-              <a
-                class="external-link"
-                href="https://github.com/water-bottle-it-project/personal-registry-app/tree/main/.github/workflows"
-                rel="nofollow"
-                >https://github.com/water-bottle-it-project/personal-registry-app/tree/main/.github/workflows</a
-              >
-              as YAML files.
-            </p>
-            <p>
-              Overall, Actions allow us to quickly observe at-a-glance whether a particular pull
-              request can be merged into the main branch, and whether commits that are already in
-              the main branch can also be built.
-            </p>
-            <ul>
-              <li><p>Green tick for successful</p></li>
-              <li><p>Red cross for failure</p></li>
-            </ul>
-            <p><strong>Main branch example:</strong></p>
-            <p>
-              <a
-                class="external-link"
-                href="https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127043672"
-                rel="nofollow"
-                >https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127043672</a
-              >
-            </p>
-            <span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11632647/11632679.png"
-                data-image-src="attachments/11632647/11632679.png"
-                data-height="599"
-                data-width="1247"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11632679"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220928-013514.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11632647"
-                data-linked-resource-container-version="5"
-                data-media-id="bad6b265-c20e-4956-a353-76de5aa6b3c8"
-                data-media-type="file" /></span
-            ><span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11632647/11698201.png"
-                data-image-src="attachments/11632647/11698201.png"
-                data-height="641"
-                data-width="1204"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11698201"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220928-013241.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11632647"
-                data-linked-resource-container-version="5"
-                data-media-id="22cbe023-69c8-417f-92ee-b1dbd4ba744b"
-                data-media-type="file"
-            /></span>
-            <p />
-            <p><strong>Feature branch pull request failed example:</strong></p>
-            <p>
-              <a
-                class="external-link"
-                href="https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127580551"
-                rel="nofollow"
-                >https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127580551</a
-              >
-            </p>
-            <span
-              class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"
-              ><img
-                class="confluence-embedded-image image-center"
-                width="680"
-                loading="lazy"
-                src="attachments/11632647/11665448.png?width=680"
-                data-image-src="attachments/11632647/11665448.png"
-                data-height="739"
-                data-width="1173"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11665448"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220928-012325.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11632647"
-                data-linked-resource-container-version="5"
-                data-media-id="d0d2c3e7-3aa6-41a6-bca9-2666edcfab49"
-                data-media-type="file" /></span
-            ><span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11632647/11730979.png"
-                data-image-src="attachments/11632647/11730979.png"
-                data-height="798"
-                data-width="1508"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11730979"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220928-013357.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11632647"
-                data-linked-resource-container-version="5"
-                data-media-id="3dbf6679-4bf1-4e12-b5c1-b0b7a4a0f897"
-                data-media-type="file" /></span
-            ><span class="confluence-embedded-file-wrapper image-center-wrapper"
-              ><img
-                class="confluence-embedded-image image-center"
-                loading="lazy"
-                src="attachments/11632647/11698195.png"
-                data-image-src="attachments/11632647/11698195.png"
-                data-height="782"
-                data-width="1350"
-                data-unresolved-comment-count="0"
-                data-linked-resource-id="11698195"
-                data-linked-resource-version="1"
-                data-linked-resource-type="attachment"
-                data-linked-resource-default-alias="image-20220928-013135.png"
-                data-base-url="https://water-bottle.atlassian.net/wiki"
-                data-linked-resource-content-type="image/png"
-                data-linked-resource-container-id="11632647"
-                data-linked-resource-container-version="5"
-                data-media-id="06d4905f-798a-4005-bbc7-3d8416891ef7"
-                data-media-type="file"
-            /></span>
-            <h1 id="CI/CDusingGitHubActions-buildWorkflow"><code>build</code> Workflow</h1>
-            <h2 id="CI/CDusingGitHubActions-Why?">Why?</h2>
-            <ul>
-              <li>
-                <p>
-                  To minimise time that devs spend pulling other team members' code just to check if
-                  it builds by automatically running the build step in the cloud.
-                </p>
-              </li>
-              <li>
-                <p>
-                  To make sure that DigitalOcean does not attempt to build bad code (in which case,
-                  it will simplify fail and keep the publicly-deployed website
-                  <a
-                    class="external-link"
-                    data-card-appearance="inline"
-                    href="https://personal-registry-app-zx936.ondigitalocean.app/"
-                    rel="nofollow"
-                    >https://personal-registry-app-zx936.ondigitalocean.app/</a
-                  >
-                  on an older version
-                </p>
-              </li>
-              <li>
-                <p>To make build success over time easily observable and traceable</p>
-                <ul>
-                  <li>
-                    <p>
-                      e.g. If people forget to build locally first before opening a pull request
-                    </p>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <h2 id="CI/CDusingGitHubActions-Whenisitrun?">When is it run?</h2>
-            <ul>
-              <li>
-                <p>
-                  On opening a new pull request, and after pushing any follow-up commits to an
-                  already-opened pull request
-                </p>
-              </li>
-              <li>
-                <p>When a new commit is pushed to main</p>
-                <ul>
-                  <li>
-                    <p>
-                      This includes after performing a squash-merge or rebase and merge of an
-                      actions-passing (green tick) pull request. This is important as it ensures
-                      since if multiple pull requests working on different parts of the app are
-                      merged close together in time, it ensures that the final
-                      <code>main</code> branch result/state can still build too.
-                    </p>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <h2 id="CI/CDusingGitHubActions-Whatdoesitdo?">What does it do?</h2>
-            <ul>
-              <li><p>It checks out the target branch</p></li>
-              <li>
-                <p>Installs dependencies using <code>yarn install --frozen-lockfile</code></p>
-                <ul>
-                  <li>
-                    <p>
-                      <code>--frozen-lockfile</code> is important so that the exact versions of all
-                      packages used in the app specified in the <code>yarn.lock</code> lock-file
-                      (whether they are direct dependencies or dependencies of dependencies of
-                      dependencies of...) are installed.
-                    </p>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <p>
-                  Injects the <code>.env.local</code> file stored securely as a repository secret
-                </p>
-              </li>
-              <li>
-                <p>
-                  Runs <code>yarn build</code>, just as we would run locally or on DigitalOcean, to
-                  build it. A <code>0</code> exit status code is, by UNIX convention, considered a
-                  success, and anything else is a failure.
-                </p>
-              </li>
-            </ul>
-            <p />
-          </div>
-
-          <div class="pageSection group">
-            <div class="pageSectionHeader">
-              <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
-            </div>
-
-            <div class="greybox" align="left">
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11632647/11665431.png">image-20220928-011618.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11632647/11632663.png">image-20220928-012107.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11632647/11665448.png">image-20220928-012325.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11632647/11698195.png">image-20220928-013135.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11632647/11698201.png">image-20220928-013241.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11632647/11730979.png">image-20220928-013357.png</a> (image/png)
-              <br />
-              <img src="images/icons/bullet_blue.gif" height="8" width="8" alt="" />
-              <a href="attachments/11632647/11632679.png">image-20220928-013514.png</a> (image/png)
-              <br />
-            </div>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
-      <div id="footer" role="contentinfo">
-        <section class="footer-body">
-          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-        </section>
+      <h1 class='pagetitle' id='title-heading'>
+        <span id='title-text'> Team 55 IT Project : CI/CD using GitHub Actions </span>
+      </h1>
+    </div>
+
+    <div class='view' id='content'>
+      <div class='page-metadata'>
+        Created by <span class='author'> Ian Chen</span>, last modified on Sep 28, 2022
+      </div>
+      <div class='wiki-content group' id='main-content'>
+        <p>(Implemented Week 9 // End of Sprint 2)</p>
+        <p>
+          We use GitHub Actions to automatically check if our source code can be built before
+          automatic deployment to DigitalOcean. Our GitHub Actions can be found at
+          <a
+            class='external-link'
+            href='https://github.com/water-bottle-it-project/personal-registry-app/actions'
+            rel='nofollow'
+          >https://github.com/water-bottle-it-project/personal-registry-app/actions</a
+          >
+        </p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='584'
+          data-image-src='attachments/11632647/11665431.png'
+          data-linked-resource-container-id='11632647'
+          data-linked-resource-container-version='5'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20220928-011618.png'
+          data-linked-resource-id='11665431'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='33ec91e5-8f93-431f-be6f-da2971ed111a'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1176'
+          loading='lazy'
+          src='attachments/11632647/11665431.png'
+        /></span>
+        <p>
+          Actions are programatically defined using code and can be found in
+          <a
+            class='external-link'
+            href='https://github.com/water-bottle-it-project/personal-registry-app/tree/main/.github/workflows'
+            rel='nofollow'
+          >https://github.com/water-bottle-it-project/personal-registry-app/tree/main/.github/workflows</a
+          >
+          as YAML files.
+        </p>
+        <p>
+          Overall, Actions allow us to quickly observe at-a-glance whether a particular pull
+          request can be merged into the main branch, and whether commits that are already in
+          the main branch can also be built.
+        </p>
+        <ul>
+          <li><p>Green tick for successful</p></li>
+          <li><p>Red cross for failure</p></li>
+        </ul>
+        <p><strong>Main branch example:</strong></p>
+        <p>
+          <a
+            class='external-link'
+            href='https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127043672'
+            rel='nofollow'
+          >https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127043672</a
+          >
+        </p>
+        <span class='confluence-embedded-file-wrapper image-center-wrapper'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='599'
+          data-image-src='attachments/11632647/11632679.png'
+          data-linked-resource-container-id='11632647'
+          data-linked-resource-container-version='5'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20220928-013514.png'
+          data-linked-resource-id='11632679'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='bad6b265-c20e-4956-a353-76de5aa6b3c8'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1247'
+          loading='lazy'
+          src='attachments/11632647/11632679.png' /></span
+        ><span class='confluence-embedded-file-wrapper image-center-wrapper'
+      ><img
+        class='confluence-embedded-image image-center'
+        data-base-url='https://water-bottle.atlassian.net/wiki'
+        data-height='641'
+        data-image-src='attachments/11632647/11698201.png'
+        data-linked-resource-container-id='11632647'
+        data-linked-resource-container-version='5'
+        data-linked-resource-content-type='image/png'
+        data-linked-resource-default-alias='image-20220928-013241.png'
+        data-linked-resource-id='11698201'
+        data-linked-resource-type='attachment'
+        data-linked-resource-version='1'
+        data-media-id='22cbe023-69c8-417f-92ee-b1dbd4ba744b'
+        data-media-type='file'
+        data-unresolved-comment-count='0'
+        data-width='1204'
+        loading='lazy'
+        src='attachments/11632647/11698201.png'
+      /></span>
+        <p />
+        <p><strong>Feature branch pull request failed example:</strong></p>
+        <p>
+          <a
+            class='external-link'
+            href='https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127580551'
+            rel='nofollow'
+          >https://github.com/water-bottle-it-project/personal-registry-app/actions/runs/3127580551</a
+          >
+        </p>
+        <span
+          class='confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size'
+        ><img
+          class='confluence-embedded-image image-center'
+          data-base-url='https://water-bottle.atlassian.net/wiki'
+          data-height='739'
+          data-image-src='attachments/11632647/11665448.png'
+          data-linked-resource-container-id='11632647'
+          data-linked-resource-container-version='5'
+          data-linked-resource-content-type='image/png'
+          data-linked-resource-default-alias='image-20220928-012325.png'
+          data-linked-resource-id='11665448'
+          data-linked-resource-type='attachment'
+          data-linked-resource-version='1'
+          data-media-id='d0d2c3e7-3aa6-41a6-bca9-2666edcfab49'
+          data-media-type='file'
+          data-unresolved-comment-count='0'
+          data-width='1173'
+          loading='lazy'
+          src='attachments/11632647/11665448.png?width=680'
+          width='680' /></span
+        ><span class='confluence-embedded-file-wrapper image-center-wrapper'
+      ><img
+        class='confluence-embedded-image image-center'
+        data-base-url='https://water-bottle.atlassian.net/wiki'
+        data-height='798'
+        data-image-src='attachments/11632647/11730979.png'
+        data-linked-resource-container-id='11632647'
+        data-linked-resource-container-version='5'
+        data-linked-resource-content-type='image/png'
+        data-linked-resource-default-alias='image-20220928-013357.png'
+        data-linked-resource-id='11730979'
+        data-linked-resource-type='attachment'
+        data-linked-resource-version='1'
+        data-media-id='3dbf6679-4bf1-4e12-b5c1-b0b7a4a0f897'
+        data-media-type='file'
+        data-unresolved-comment-count='0'
+        data-width='1508'
+        loading='lazy'
+        src='attachments/11632647/11730979.png' /></span
+      ><span class='confluence-embedded-file-wrapper image-center-wrapper'
+      ><img
+        class='confluence-embedded-image image-center'
+        data-base-url='https://water-bottle.atlassian.net/wiki'
+        data-height='782'
+        data-image-src='attachments/11632647/11698195.png'
+        data-linked-resource-container-id='11632647'
+        data-linked-resource-container-version='5'
+        data-linked-resource-content-type='image/png'
+        data-linked-resource-default-alias='image-20220928-013135.png'
+        data-linked-resource-id='11698195'
+        data-linked-resource-type='attachment'
+        data-linked-resource-version='1'
+        data-media-id='06d4905f-798a-4005-bbc7-3d8416891ef7'
+        data-media-type='file'
+        data-unresolved-comment-count='0'
+        data-width='1350'
+        loading='lazy'
+        src='attachments/11632647/11698195.png'
+      /></span>
+        <h1 id='CI/CDusingGitHubActions-buildWorkflow'><code>build</code> Workflow</h1>
+        <h2 id='CI/CDusingGitHubActions-Why?'>Why?</h2>
+        <ul>
+          <li>
+            <p>
+              To minimise time that devs spend pulling other team members' code just to check if
+              it builds by automatically running the build step in the cloud.
+            </p>
+          </li>
+          <li>
+            <p>
+              To make sure that DigitalOcean does not attempt to build bad code (in which case,
+              it will simplify fail and keep the publicly-deployed website
+              <a
+                class='external-link'
+                data-card-appearance='inline'
+                href='https://personal-registry-app-zx936.ondigitalocean.app/'
+                rel='nofollow'
+              >https://personal-registry-app-zx936.ondigitalocean.app/</a
+              >
+              on an older version
+            </p>
+          </li>
+          <li>
+            <p>To make build success over time easily observable and traceable</p>
+            <ul>
+              <li>
+                <p>
+                  e.g. If people forget to build locally first before opening a pull request
+                </p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id='CI/CDusingGitHubActions-Whenisitrun?'>When is it run?</h2>
+        <ul>
+          <li>
+            <p>
+              On opening a new pull request, and after pushing any follow-up commits to an
+              already-opened pull request
+            </p>
+          </li>
+          <li>
+            <p>When a new commit is pushed to main</p>
+            <ul>
+              <li>
+                <p>
+                  This includes after performing a squash-merge or rebase and merge of an
+                  actions-passing (green tick) pull request. This is important as it ensures
+                  since if multiple pull requests working on different parts of the app are
+                  merged close together in time, it ensures that the final
+                  <code>main</code> branch result/state can still build too.
+                </p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id='CI/CDusingGitHubActions-Whatdoesitdo?'>What does it do?</h2>
+        <ul>
+          <li><p>It checks out the target branch</p></li>
+          <li>
+            <p>Installs dependencies using <code>yarn install --frozen-lockfile</code></p>
+            <ul>
+              <li>
+                <p>
+                  <code>--frozen-lockfile</code> is important so that the exact versions of all
+                  packages used in the app specified in the <code>yarn.lock</code> lock-file
+                  (whether they are direct dependencies or dependencies of dependencies of
+                  dependencies of...) are installed.
+                </p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>
+              Injects the <code>.env.local</code> file stored securely as a repository secret
+            </p>
+          </li>
+          <li>
+            <p>
+              Runs <code>yarn build</code>, just as we would run locally or on DigitalOcean, to
+              build it. A <code>0</code> exit status code is, by UNIX convention, considered a
+              success, and anything else is a failure.
+            </p>
+          </li>
+        </ul>
+        <p />
+      </div>
+
+      <div class='pageSection group'>
+        <div class='pageSectionHeader'>
+          <h2 class='pageSectionTitle' id='attachments'>Attachments:</h2>
+        </div>
+
+        <div align='left' class='greybox'>
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11632647/11665431.png'>image-20220928-011618.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11632647/11632663.png'>image-20220928-012107.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11632647/11665448.png'>image-20220928-012325.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11632647/11698195.png'>image-20220928-013135.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11632647/11698201.png'>image-20220928-013241.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11632647/11730979.png'>image-20220928-013357.png</a> (image/png)
+          <br />
+          <img alt='' height='8' src='images/icons/bullet_blue.gif' width='8' />
+          <a href='attachments/11632647/11632679.png'>image-20220928-013514.png</a> (image/png)
+          <br />
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+  <div id='footer' role='contentinfo'>
+    <section class='footer-body'>
+      <p>Document generated by Confluence on Nov 10, 2022 10:51</p>
+      <div id='footer-logo'><a href='http://www.atlassian.com/'>Atlassian</a></div>
+    </section>
+  </div>
+</div>
+</body>
 </html>

@@ -1,194 +1,194 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>
-      Team 55 IT Project : Coding Standards + pre-testing: linting, static analysis, consistent code
-      style, TypeScript static types
-    </title>
-    <link rel="stylesheet" href="styles/site.css" type="text/css" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
+<head>
+  <title>
+    Team 55 IT Project : Coding Standards + pre-testing: linting, static analysis, consistent code
+    style, TypeScript static types
+  </title>
+  <link href='styles/site.css' rel='stylesheet' type='text/css' />
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
 
-  <body class="theme-default aui-theme-default">
-    <div id="page">
-      <div id="main" class="aui-page-panel">
-        <div id="main-header">
-          <div id="breadcrumb-section">
-            <ol id="breadcrumbs">
-              <li class="first">
-                <span><a href="index.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
-                <span><a href="Team-55-IT-Project_65914.html">Team 55 IT Project</a></span>
-              </li>
-              <li>
+<body class='theme-default aui-theme-default'>
+<div id='page'>
+  <div class='aui-page-panel' id='main'>
+    <div id='main-header'>
+      <div id='breadcrumb-section'>
+        <ol id='breadcrumbs'>
+          <li class='first'>
+            <span><a href='index.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
+            <span><a href='Team-55-IT-Project_65914.html'>Team 55 IT Project</a></span>
+          </li>
+          <li>
                 <span
-                  ><a href="Deployment-and-Dev-Standards_7045373.html"
-                    >Deployment and Dev Standards</a
-                  ></span
+                ><a href='Deployment-and-Dev-Standards_7045373.html'
+                >Deployment and Dev Standards</a
+                ></span
                 >
-              </li>
-            </ol>
-          </div>
-          <h1 id="title-heading" class="pagetitle">
-            <span id="title-text">
+          </li>
+        </ol>
+      </div>
+      <h1 class='pagetitle' id='title-heading'>
+            <span id='title-text'>
               Team 55 IT Project : Coding Standards + pre-testing: linting, static analysis,
               consistent code style, TypeScript static types
             </span>
-          </h1>
-        </div>
+      </h1>
+    </div>
 
-        <div id="content" class="view">
-          <div class="page-metadata">
-            Created by <span class="author"> Ian Chen</span>, last modified on Sep 28, 2022
-          </div>
-          <div id="main-content" class="wiki-content group">
-            <h2
-              id="CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Beforeweevenruntests"
-            >
-              Before we even run tests
-            </h2>
-            <p>
-              Our goal is to minimise time spent doing chore tasks, and maximise time spent
-              implementing business logic.
-            </p>
-            <p>
-              We have some tools that automatically perform repetitive tasks for everyone on the
-              team to enforce coding standards.
-            </p>
-            <h2
-              id="CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Sometools"
-            >
-              Some tools
-            </h2>
-            <p><strong>EditorConfig</strong> defines basic code style such as</p>
-            <ul>
-              <li><p>number of spaces for indentation</p></li>
-              <li><p>line length limit</p></li>
-              <li>
-                <p>
-                  line endings e.g. LF, important since team members are working on both macOS (LF
-                  default, preferred) and Windows (CRLF)
-                </p>
-              </li>
-            </ul>
-            <p>
-              These rules are defined in <code>.editorconfig</code>. By itself, EditorConfig doesn’t
-              perform the formatting - it provides basic rules that Prettier and ESLint use.
-            </p>
-            <p>
-              <strong>Prettier</strong> is used to format code to a defined configuration. It does
-              things such as wrap long arrays and JavaScript/TypeScript objects onto new lines,
-              remove extraneous spaces, and add consistent semicolons for us. This reduces
-              bike-shedding over code style and lets us be more productive as a team. It also works
-              on other languages such as JSON and CSS.
-            </p>
-            <p>
-              <strong>ESLint</strong> is a linter that checks for JavaScript/TypeScript code issues
-              of various severities, and enforces consistent code style using knowledge of the
-              language. For example, it sorts imports at the top of the file, checks when variables
-              are undefined, and in combination with the type-safety of TypeScript, helps check,
-              using <strong>tsc</strong>, if we are using the wrong data-type as an input to a
-              function. Since JavaScript has multiple ways to define a function (arrow function,
-              function declaration), we can enforce consistency on this too. It can auto-fix these
-              issues.
-            </p>
-            <h2
-              id="CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Howweenforcecodingstandardsusingtheabovetools"
-            >
-              How we enforce coding standards using the above tools
-            </h2>
-            <p>
-              All of the above tools can be triggered using the auto-format-on-save features of the
-              editor.
-            </p>
-            <p>
-              They can also be triggered using <code>yarn lint-fix</code> in the terminal which both
-              attempts to fix any errors and also list the errors that couldn’t be fixed
-              automatically.
-            </p>
-            <p>
-              These coding standards are
-              <strong>automatically and rigorously enforced</strong> before commit using pre-commit
-              hooks defined using <code>pre-commit</code> inside the
-              <a
-                class="external-link"
-                href="https://github.com/water-bottle-it-project/personal-registry-app/blob/main/package.json#L13-L15"
-                rel="nofollow"
-                >package.json</a
-              >
-              file. In Sprint 3 (Weeks 10-12), we may move to using the <code>husky</code> package
-              which provides even more customisation and control over how pre-commit hooks are
-              enforced.
-            </p>
-            <h2
-              id="CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Checkingcodingstandardsserver-side"
-            >
-              Checking coding standards server-side
-            </h2>
-            <p>
-              When opening a pull request, a <code>build</code> GitHub Action automatically runs
-              which also intentionally fails a build if any ESLint or Prettier rules violated are
-              considered “<span style="color: rgb(191, 38, 0)">errors</span>”. Once merged into
-              main, we have DigitalOcean App Platform automatically deploy from the main branch. See
-              <a
-                href="11632647.html"
-                data-linked-resource-id="11632647"
-                data-linked-resource-version="5"
-                data-linked-resource-type="page"
-                >CI/CD using GitHub Actions</a
-              >
-              for more info about GitHub Actions and
-              <a
-                href="11829249.html"
-                data-linked-resource-id="11829249"
-                data-linked-resource-version="4"
-                data-linked-resource-type="page"
-                >Live/public deployment</a
-              >
-              for Live deployment.
-            </p>
-            <h2
-              id="CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-TypeScriptandtypesafety"
-            >
-              TypeScript and type safety
-            </h2>
-            <p>
-              We made the choice to use TypeScript to ensure type safety in our frontend components
-              and backend APIs. This saves time debugging issues related to missing
-              properties/fields in objects, or handling <code>null | undefined</code> fields.
-            </p>
-            <p>
-              <code>@ts-ignore</code>, which disables TypeScript type-checking for a single
-              statement or file, is <strong>banned except for exceptional cases. </strong>In rare
-              cases, e.g. with
-              <a
-                class="external-link"
-                data-card-appearance="inline"
-                href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2"
-                rel="nofollow"
-                >https://www.npmjs.com/package/mongoose-aggregate-paginate-v2</a
-              >
-              used for pagination, TypeScript support is partial or cumbersome (too much additional
-              boilerplate for adding types). In this case, the result of a function call should be
-              assigned to a variable with a provided type e.g. in <code>GetMemoriesPaginated</code>
-              <a
-                class="external-link"
-                href="https://github.com/water-bottle-it-project/personal-registry-app/blob/main/src/server/routers/memory.ts#L46"
-                rel="nofollow"
-                >https://github.com/water-bottle-it-project/personal-registry-app/blob/main/src/server/routers/memory.ts#L46</a
-              >
-              to ensure that the result has a type for future use.
-            </p>
-          </div>
-        </div>
+    <div class='view' id='content'>
+      <div class='page-metadata'>
+        Created by <span class='author'> Ian Chen</span>, last modified on Sep 28, 2022
       </div>
-      <div id="footer" role="contentinfo">
-        <section class="footer-body">
-          <p>Document generated by Confluence on Nov 10, 2022 00:04</p>
-          <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
-        </section>
+      <div class='wiki-content group' id='main-content'>
+        <h2
+          id='CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Beforeweevenruntests'
+        >
+          Before we even run tests
+        </h2>
+        <p>
+          Our goal is to minimise time spent doing chore tasks, and maximise time spent
+          implementing business logic.
+        </p>
+        <p>
+          We have some tools that automatically perform repetitive tasks for everyone on the
+          team to enforce coding standards.
+        </p>
+        <h2
+          id='CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Sometools'
+        >
+          Some tools
+        </h2>
+        <p><strong>EditorConfig</strong> defines basic code style such as</p>
+        <ul>
+          <li><p>number of spaces for indentation</p></li>
+          <li><p>line length limit</p></li>
+          <li>
+            <p>
+              line endings e.g. LF, important since team members are working on both macOS (LF
+              default, preferred) and Windows (CRLF)
+            </p>
+          </li>
+        </ul>
+        <p>
+          These rules are defined in <code>.editorconfig</code>. By itself, EditorConfig doesn’t
+          perform the formatting - it provides basic rules that Prettier and ESLint use.
+        </p>
+        <p>
+          <strong>Prettier</strong> is used to format code to a defined configuration. It does
+          things such as wrap long arrays and JavaScript/TypeScript objects onto new lines,
+          remove extraneous spaces, and add consistent semicolons for us. This reduces
+          bike-shedding over code style and lets us be more productive as a team. It also works
+          on other languages such as JSON and CSS.
+        </p>
+        <p>
+          <strong>ESLint</strong> is a linter that checks for JavaScript/TypeScript code issues
+          of various severities, and enforces consistent code style using knowledge of the
+          language. For example, it sorts imports at the top of the file, checks when variables
+          are undefined, and in combination with the type-safety of TypeScript, helps check,
+          using <strong>tsc</strong>, if we are using the wrong data-type as an input to a
+          function. Since JavaScript has multiple ways to define a function (arrow function,
+          function declaration), we can enforce consistency on this too. It can auto-fix these
+          issues.
+        </p>
+        <h2
+          id='CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Howweenforcecodingstandardsusingtheabovetools'
+        >
+          How we enforce coding standards using the above tools
+        </h2>
+        <p>
+          All of the above tools can be triggered using the auto-format-on-save features of the
+          editor.
+        </p>
+        <p>
+          They can also be triggered using <code>yarn lint-fix</code> in the terminal which both
+          attempts to fix any errors and also list the errors that couldn’t be fixed
+          automatically.
+        </p>
+        <p>
+          These coding standards are
+          <strong>automatically and rigorously enforced</strong> before commit using pre-commit
+          hooks defined using <code>pre-commit</code> inside the
+          <a
+            class='external-link'
+            href='https://github.com/water-bottle-it-project/personal-registry-app/blob/main/package.json#L13-L15'
+            rel='nofollow'
+          >package.json</a
+          >
+          file. In Sprint 3 (Weeks 10-12), we may move to using the <code>husky</code> package
+          which provides even more customisation and control over how pre-commit hooks are
+          enforced.
+        </p>
+        <h2
+          id='CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-Checkingcodingstandardsserver-side'
+        >
+          Checking coding standards server-side
+        </h2>
+        <p>
+          When opening a pull request, a <code>build</code> GitHub Action automatically runs
+          which also intentionally fails a build if any ESLint or Prettier rules violated are
+          considered “<span style='color: rgb(191, 38, 0)'>errors</span>”. Once merged into
+          main, we have DigitalOcean App Platform automatically deploy from the main branch. See
+          <a
+            data-linked-resource-id='11632647'
+            data-linked-resource-type='page'
+            data-linked-resource-version='5'
+            href='11632647.html'
+          >CI/CD using GitHub Actions</a
+          >
+          for more info about GitHub Actions and
+          <a
+            data-linked-resource-id='11829249'
+            data-linked-resource-type='page'
+            data-linked-resource-version='4'
+            href='11829249.html'
+          >Live/public deployment</a
+          >
+          for Live deployment.
+        </p>
+        <h2
+          id='CodingStandards+pre-testing:linting,staticanalysis,consistentcodestyle,TypeScriptstatictypes-TypeScriptandtypesafety'
+        >
+          TypeScript and type safety
+        </h2>
+        <p>
+          We made the choice to use TypeScript to ensure type safety in our frontend components
+          and backend APIs. This saves time debugging issues related to missing
+          properties/fields in objects, or handling <code>null | undefined</code> fields.
+        </p>
+        <p>
+          <code>@ts-ignore</code>, which disables TypeScript type-checking for a single
+          statement or file, is <strong>banned except for exceptional cases. </strong>In rare
+          cases, e.g. with
+          <a
+            class='external-link'
+            data-card-appearance='inline'
+            href='https://www.npmjs.com/package/mongoose-aggregate-paginate-v2'
+            rel='nofollow'
+          >https://www.npmjs.com/package/mongoose-aggregate-paginate-v2</a
+          >
+          used for pagination, TypeScript support is partial or cumbersome (too much additional
+          boilerplate for adding types). In this case, the result of a function call should be
+          assigned to a variable with a provided type e.g. in <code>GetMemoriesPaginated</code>
+          <a
+            class='external-link'
+            href='https://github.com/water-bottle-it-project/personal-registry-app/blob/main/src/server/routers/memory.ts#L46'
+            rel='nofollow'
+          >https://github.com/water-bottle-it-project/personal-registry-app/blob/main/src/server/routers/memory.ts#L46</a
+          >
+          to ensure that the result has a type for future use.
+        </p>
       </div>
     </div>
-  </body>
+  </div>
+  <div id='footer' role='contentinfo'>
+    <section class='footer-body'>
+      <p>Document generated by Confluence on Nov 10, 2022 10:51</p>
+      <div id='footer-logo'><a href='http://www.atlassian.com/'>Atlassian</a></div>
+    </section>
+  </div>
+</div>
+</body>
 </html>

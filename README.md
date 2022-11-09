@@ -64,9 +64,13 @@ cannot start the app and authentication will not work.**
 6. Copy the provided `.env.local` file into the root folder. You need it or else the app will not 
    build and authentication will not work. Please make sure it is `.env.local`, **not** `env.local`
    or anything else. 
-   
-   Note: if your computer (particularly macOS) complains that it cannot make the filename begin
+
+   **Note:** if your computer (particularly macOS) complains that it cannot make the filename begin
    with a dot, you still rename it through the Terminal.
+
+   **Note 2:** by default, files beginning with `.` are hidden files in the macOS Finder and Linux. 
+   On macOS, press `Cmd` `Shift` `.` in Finder to toggle showing hidden files.
+   In the terminal, the `-a` flag shows all files.
    
    ```
    $ ls -a
