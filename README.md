@@ -108,6 +108,8 @@ cannot start the app and authentication will not work.**
    └── yarn.lock
    ```
 7. Run `yarn`. This will install all the dependencies needed to test the application.
+   **You need to do this in order to not get red squiggles in your editor 
+   (VSCode, IntelliJ, etc) when reading code**.
 8. Run `yarn build && yarn start`. Once this has completed, you should see a link to open the page
    in the browser (by default `localhost:3000`).
 
