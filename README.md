@@ -60,7 +60,7 @@ cannot start the app and authentication will not work.**
    _unlikely_ to occur if you have installed at least version 16.10 of node.js), then first run
    `npm i -g corepack`. After finishing this step, do not use the `npm` command for this project.
 3. Clone this repo. `git clone https://github.com/water-bottle-it-project/personal-registry-app`
-4. Go to the project directory `cd personal-registry-app`
+4. Go to the project directory using `cd personal-registry-app`
 5. Checkout the branch that has been requested to be assessed, or stay on main if none has been
    specified.
 6. Copy the provided `.env.local` file into the root folder. You need it or else the app will not
@@ -70,16 +70,17 @@ cannot start the app and authentication will not work.**
    When downloading the `.env.local` file from Slack or your email, it might get automatically
    renamed to a different name – you will have to rename the file to `.env.local` exactly. If you
    cannot see the file, then it may be because your system is set to hide hidden files (which begin
-   with a `.`). To fix this, see Note 2.
+   with a `.`). To fix this, see Note 1.
 
-   **Note:** if your computer (particularly macOS) complains that it cannot make the filename begin
-   with a dot, you can still rename it through the Terminal.
-
-   **Note 2:** by default, files beginning with `.` are hidden files in the macOS Finder and Linux.
+   **Note 1:** by default, files beginning with `.` are hidden files in the macOS Finder and Linux.
    On macOS, press `Cmd` `Shift` `.` in Finder to toggle showing hidden files. In the terminal, the
    `-a` flag shows all files.
 
+   **Note 2:** if your computer (particularly macOS) complains that it cannot make the filename
+   begin with a dot, you can still rename the file through the Terminal using the `mv` command:
+
    ```
+   # Rename files through the terminal
    $ ls -a
    .		..		env.local
 
@@ -89,42 +90,54 @@ cannot start the app and authentication will not work.**
    .		..		.env.local
    ```
 
-   The root folder should look like this (screenshot of .env.local file location on the left):
+   Check that the root folder looks like this using either the screenshot or the terminal command
+   below.
 
-   <img align='left' width="350" src="help/env_file_location.png" alt="Screenshot of .env.local file location" style="margin-right: 10px">
+   - **screenshot** of folder structure inside VSCode, showing `.env.local` at the top level of the
+     directory:
 
-   ```text
-   $ tree -L 1 -a
-   .
-   ├── .editorconfig
-   ├── .env.local
-   ├── .env.local.example
-   ├── .eslintignore
-   ├── .eslintrc.json
-   ├── .git
-   ├── .gitattributes
-   ├── .github
-   ├── .gitignore
-   ├── .idea
-   ├── .next
-   ├── .prettierignore
-   ├── .prettierrc.json
-   ├── .vscode
-   ├── README.md
-   ├── confluence
-   ├── help
-   ├── mermaid
-   ├── next-env.d.ts
-   ├── next.config.js
-   ├── node_modules
-   ├── package.json
-   ├── public
-   ├── src
-   ├── tsconfig.json
-   └── yarn.lock
-   ```
+      <p align="center">
+        <img width="350" src="help/env_file_location.png" alt="Screenshot of .env.local file location" style="margin-right: 20px; border: 3px solid">
+      </p>
 
-   <br clear='both'>
+   - **terminal command**: output after running `tree -L 1 -a` which shows `.env.local` and the
+     folder structure in the terminal:
+
+     ```
+     # terminal output
+     ~/Users/me/Code/personal-registry-app
+     $ tree -L 1 -a
+     .
+     ├── .DS_Store
+     ├── .editorconfig
+     ├── .env.local
+     ├── .env.local.example
+     ├── .eslintignore
+     ├── .eslintrc.json
+     ├── .git
+     ├── .gitattributes
+     ├── .github
+     ├── .gitignore
+     ├── .idea
+     ├── .next
+     ├── .prettierignore
+     ├── .prettierrc.json
+     ├── .vscode
+     ├── README.md
+     ├── confluence
+     ├── help
+     ├── mermaid
+     ├── next-env.d.ts
+     ├── next.config.js
+     ├── node_modules
+     ├── package.json
+     ├── public
+     ├── src
+     ├── tsconfig.json
+     └── yarn.lock
+
+     11 directories, 16 files
+     ```
 
 7. Run `yarn`. This will install all the dependencies needed to test the application. **You need to
    do this to prevent red squiggles which indicate problems/errors in your editor (VSCode, IntelliJ,
