@@ -21,8 +21,8 @@
 
 ## :star2: About the Project
 
-SnapSave is a web app developed for COMP30022 IT Project Semester 2 2022, which allows
-users to upload memories containing optional textual descriptions and photos, organise memories into
+SnapSave is a web app developed for COMP30022 IT Project Semester 2 2022, which allows users to
+upload memories containing optional textual descriptions and photos, organise memories into
 collections, and search their memories and photos.
 
 [View deployed demo](https://personal-registry-app-zx936.ondigitalocean.app/)
@@ -55,48 +55,65 @@ cannot start the app and authentication will not work.**
    v16.15.1 // just needs to be 16.10 or newer
    ```
 2. We are using yarn, not the regular included npm, as our package manager. Visit
-   https://yarnpkg.com/getting-started/install#install-corepack, using either `corepack enable ` or
+   https://yarnpkg.com/getting-started/install#install-corepack, using `corepack enable` (which is
+   available by default with node.js 16.10+). If reason corepack isn't a recognized command (this is
+   _unlikely_ to occur if you have installed at least version 16.10 of node.js), then first run
    `npm i -g corepack`. After finishing this step, do not use the `npm` command for this project.
 3. Clone this repo. `git clone https://github.com/water-bottle-it-project/personal-registry-app`
 4. Go to the project directory `cd personal-registry-app`
 5. Checkout the branch that has been requested to be assessed, or stay on main if none has been
    specified.
-6. Copy the provided `.env.local` file into the root folder. You need it or else the app will not 
+6. Copy the provided `.env.local` file into the root folder. You need it or else the app will not
    build and authentication will not work. Please make sure it is `.env.local`, **not** `env.local`
-   or anything else. 
+   or anything else.
+
+   When downloading the `.env.local` file from Slack or your email, it might get automatically
+   renamed to a different name – you will have to rename the file to `.env.local` exactly. If you
+   cannot see the file, then it may be because your system is set to hide hidden files (which begin
+   with a `.`). To fix this, see Note 2.
 
    **Note:** if your computer (particularly macOS) complains that it cannot make the filename begin
-   with a dot, you still rename it through the Terminal.
+   with a dot, you can still rename it through the Terminal.
 
-   **Note 2:** by default, files beginning with `.` are hidden files in the macOS Finder and Linux. 
-   On macOS, press `Cmd` `Shift` `.` in Finder to toggle showing hidden files.
-   In the terminal, the `-a` flag shows all files.
-   
+   **Note 2:** by default, files beginning with `.` are hidden files in the macOS Finder and Linux.
+   On macOS, press `Cmd` `Shift` `.` in Finder to toggle showing hidden files. In the terminal, the
+   `-a` flag shows all files.
+
    ```
    $ ls -a
    .		..		env.local
-   
+
    $ mv env.local .env.local
-   
+
    $ ls -a
    .		..		.env.local
    ```
 
-   The root folder should look like this:
+   The root folder should look like this (screenshot of .env.local file location on the left):
+
+   <img align='left' width="350" src="help/env_file_location.png" alt="Screenshot of .env.local file location" style="margin-right: 10px">
+
    ```text
    $ tree -L 1 -a
    .
    ├── .editorconfig
    ├── .env.local
+   ├── .env.local.example
    ├── .eslintignore
    ├── .eslintrc.json
    ├── .git
+   ├── .gitattributes
+   ├── .github
    ├── .gitignore
    ├── .idea
    ├── .next
    ├── .prettierignore
    ├── .prettierrc.json
+   ├── .vscode
    ├── README.md
+   ├── confluence
+   ├── help
+   ├── mermaid
    ├── next-env.d.ts
    ├── next.config.js
    ├── node_modules
@@ -104,57 +121,64 @@ cannot start the app and authentication will not work.**
    ├── public
    ├── src
    ├── tsconfig.json
-   ├── tsconfig.tsbuildinfo
    └── yarn.lock
    ```
-7. Run `yarn`. This will install all the dependencies needed to test the application.
-   **You need to do this to prevent red squiggles which indicate problems/errors
-   in your editor (VSCode, IntelliJ, etc) when reading code**.
+
+   <br clear='both'>
+
+7. Run `yarn`. This will install all the dependencies needed to test the application. **You need to
+   do this to prevent red squiggles which indicate problems/errors in your editor (VSCode, IntelliJ,
+   etc) when reading code**.
 8. Run `yarn build && yarn start`. Once this has completed, you should see a link to open the page
    in the browser (by default `localhost:3000`).
 
    ```
+   info  - SWC minify release candidate enabled. https://nextjs.link/swcmin
+   info  - Linting and checking validity of types
+   info  - Creating an optimized production build
+   info  - Compiled successfully
+   info  - Collecting page data
    info  - Generating static pages (18/18)
-   info  - Finalizing page optimization  
-   
+   info  - Finalizing page optimization
+
    Route (pages)                              Size     First Load JS
-   ┌ ○ /                                      57.5 kB         354 kB
-   ├   /_app                                  0 B             223 kB
-   ├ ○ /404                                   6.6 kB          303 kB
-   ├ ○ /about                                 10.8 kB         233 kB
-   ├ λ /api/auth/signin                       0 B             223 kB
-   ├ λ /api/auth/signout                      0 B             223 kB
-   ├ λ /api/trpc/[trpc]                       0 B             223 kB
-   ├ ○ /collections                           5.26 kB         336 kB
-   ├ ○ /collections/[id]                      3.69 kB         305 kB
-   ├ ○ /collections/create                    2.25 kB         252 kB
-   ├ ○ /collections/edit                      1.25 kB         328 kB
-   ├ ○ /create                                6.49 kB         628 kB
-   ├ ○ /debug/authed                          1.49 kB         224 kB
-   ├ ○ /forgotpassword                        1.1 kB          247 kB
-   ├ ○ /memories                              4.46 kB         246 kB
-   ├ ○ /memories/[id]                         19.4 kB         520 kB
+   ┌ ○ /                                      57.5 kB         357 kB
+   ├   /_app                                  0 B             226 kB
+   ├ ○ /404                                   6.6 kB          306 kB
+   ├ ○ /about                                 10.8 kB         236 kB
+   ├ λ /api/auth/signin                       0 B             226 kB
+   ├ λ /api/auth/signout                      0 B             226 kB
+   ├ λ /api/trpc/[trpc]                       0 B             226 kB
+   ├ ○ /collections                           5.23 kB         336 kB
+   ├ ○ /collections/[id]                      2.96 kB         310 kB
+   ├ ○ /collections/create                    2.25 kB         255 kB
+   ├ ○ /collections/edit                      434 B           331 kB
+   ├ ○ /create                                6.66 kB         631 kB
+   ├ ○ /debug/authed                          1.49 kB         227 kB
+   ├ ○ /forgotpassword                        1.1 kB          250 kB
+   ├ ○ /memories                              3.7 kB          321 kB
+   ├ ○ /memories/[id]                         21.2 kB         598 kB
    ├   └ css/b0d7eac1e0377b2a.css             1.88 kB
-   ├ ○ /memories/[id]/edit                    6.96 kB         629 kB
-   ├ ○ /photos                                23.8 kB         265 kB
+   ├ ○ /memories/[id]/edit                    8.91 kB         707 kB
+   ├ ○ /photos                                25.6 kB         340 kB
    ├   └ css/b68d142d44689e33.css             1.59 kB
-   ├ ○ /profile                               6.21 kB         252 kB
-   ├ ○ /signin                                6.86 kB         253 kB
-   └ ○ /signup                                3.8 kB          250 kB
-   + First Load JS shared by all              223 kB
+   ├ ○ /profile                               6.21 kB         255 kB
+   ├ ○ /signin                                6.86 kB         256 kB
+   └ ○ /signup                                3.8 kB          253 kB
+   + First Load JS shared by all              226 kB
      ├ chunks/framework-9b5d6ec4444c80fa.js   45.7 kB
      ├ chunks/main-3123a443c688934f.js        30.9 kB
-     ├ chunks/pages/_app-9cd80874c36a686d.js  145 kB
+     ├ chunks/pages/_app-8baed015ed77f06b.js  148 kB
      └ chunks/webpack-84209fb2022d3d30.js     1.05 kB
-   
+
    λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
    ○  (Static)  automatically rendered as static HTML (uses no initial props)
-   
-   ✨  Done in 22.32s.
+
+   ✨  Done in 20.76s.
    ```
 
-   **Caution #1:** if you have other projects running, you should close them first, or else the port might
-   not be able to bind:
+   **Caution #1:** if you have other projects running, you should close them first, or else the port
+   might not be able to bind:
 
    ```bash
    Error: listen EADDRINUSE: address already in use 0.0.0.0:3000
@@ -169,14 +193,16 @@ cannot start the app and authentication will not work.**
      port: 3000
    }
    ```
-   
-   **Caution #2:** if you receive the following error, then you forgot to include the .env.local file correctly:
+
+   **Caution #2:** if you receive the following error, then you forgot to include the .env.local
+   file correctly:
+
    ```
    info  - Compiled successfully
    info  - Collecting page data ..node:internal/process/promises:279
                triggerUncaughtException(err, true /* fromPromise */);
                ^
-   
+
    Error: Invalid next-firebase-auth options: The "firebaseClientInitConfig.apiKey" value is required. The "cookies.keys" setting must be set if "cookies.signed" is true.
        at m (/Users/sky/Code/wk12/node_modules/next-firebase-auth/build/index.node.js:2:5278)
        at /Users/sky/Code/wk12/node_modules/next-firebase-auth/build/index.node.js:2:38994
@@ -201,7 +227,7 @@ cannot start the app and authentication will not work.**
 To keep the codebase tidy, please ensure your editor has these extensions installed:
 
 | Extension    | VSCode                                                                                        | Jetbrains IDEs                                   |
-|--------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------|
+| ------------ | --------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 | EditorConfig | [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) | Included (open file and choose "Use code style") |
 | ESLint       | [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)          | ""                                               |
 | Prettier     | [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)        | ""                                               |
